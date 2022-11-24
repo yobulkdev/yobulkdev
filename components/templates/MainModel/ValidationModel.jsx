@@ -55,8 +55,8 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
           obj.key === 'data_type'
             ? { key: 'data_type', value: e.name }
             : obj.key === 'custom_validation'
-            ? customValidationFinder({ obj, e })
-            : obj
+              ? customValidationFinder({ obj, e })
+              : obj
         );
 
         return newArr;
@@ -135,17 +135,15 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                           key={plan.name}
                           value={plan}
                           className={({ active, checked }) =>
-                            `${
-                              active
-                                ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
-                                : ''
+                            `${active
+                              ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
+                              : ''
                             }
-                                                        ${
-                                                          checked
-                                                            ? 'bg-white'
-                                                            : 'bg-white'
-                                                        }
-                                                        relative flex cursor-pointer rounded-lg px-5 py-4 border shadow-sm focus:outline-none`
+                                                      ${checked
+                              ? 'bg-white'
+                              : 'bg-white'
+                            }
+                                                      relative flex cursor-pointer rounded-lg px-5 py-4 border shadow-sm focus:outline-none`
                           }
                         >
                           {({ active, checked }) => (
@@ -154,7 +152,7 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                                 <div className="flex items-center">
                                   <div className="text-sm">
                                     <RadioGroup.Label className="flex justify-between items-center">
-                                      <p className="flex">
+                                      <p className="flex items-center">
                                         {plan.name}{' '}
                                         {customValidationDropdown({
                                           options: plan,
@@ -182,6 +180,15 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                           )}
                         </RadioGroup.Option>
                       ))}
+                      <div className="mt-4 float-right">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                        >
+                          Save
+                        </button>
+                      </div>
                     </div>
                   </RadioGroup>
                 </div>

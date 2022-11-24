@@ -6,9 +6,11 @@ import {
   PencilIcon,
   TrashIcon,
   ArrowDownTrayIcon,
+  ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 import addColumnButton from './addColumnButton';
 import handleEdit from './handleEdit';
+import Link from 'next/link';
 
 const AdminComponent = ({ templateId, type }) => {
   let [isOpen, setIsOpen] = useState(false);
@@ -84,15 +86,21 @@ const AdminComponent = ({ templateId, type }) => {
 
   return (
     <div className="p-4">
-      <div className=" flex align-middle justify-between ">
-        <h1 className="text-2xl font-bold text-gray-500">
-          {templateData &&
-            `${
-              templateData.template_name
+      <div className="flex align-middle justify-between ">
+        <div className='flex align-middle items-center gap-2 '>
+
+          <Link href="/templates">
+            <ArrowLeftIcon className='h-5 cursor-pointer' />
+          </Link>
+
+          <h1 className="text-2xl font-bold text-gray-500">
+            {templateData &&
+              `${templateData.template_name
                 ? templateData.template_name
                 : 'Name your'
-            } template`}
-        </h1>
+              } template`}
+          </h1>
+        </div>
         {type === 'create' && (
           <button
             type="button"
