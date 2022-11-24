@@ -1,0 +1,50 @@
+{
+  "name": "yobulk-v1",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=16.0.0",
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ag-grid-community/infinite-row-model": "^28.2.0",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
+    "ag-grid-community": "^28.2.0",
+    "ag-grid-react": "^28.2.0",
+    "ajv": "^8.11.0",
+    "ajv-errors": "^3.0.0",
+    "ajv-formats": "^2.1.1",
+    "axios": "^0.27.2",
+    "busboy": "^1.6.0",
+    "classnames": "^2.3.2",
+    "cuid": "^2.1.8",
+    "fantasy-name-generator": "^2.0.0",
+    "js-file-download": "^0.4.12",
+    "mongodb": "^4.11.0",
+    "next": "12.3.0",
+    "papaparse": "^5.3.2",
+    "promise-retry": "^2.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.2",
+    "string-similarity": "^4.0.4",
+    "type-analyzer": "^0.4.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "autoprefixer": "^10.4.11",
+    "eslint": "8.23.1",
+    "eslint-config-next": "12.3.0",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
+  }
+}

@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main_container {
+  @apply flex flex-col w-full min-h-screen justify-between;
+}
+
+.dropzone {
+  @apply w-full md:w-3/4 lg:w-2/5 p-6 space-y-3 text-center rounded overflow-hidden shadow-lg;
+}
+
+.drag_drop_wrapper {
+  @apply flex flex-col space-y-3 p-3 text-center items-center rounded border-2 border-dashed border-green-200;
+}
+
+.dropzone_button {
+  @apply hover:bg-blue-500 font-semibold hover:text-white  text-blue-700 border border-blue-300  hover:border-transparent  focus:ring-4 focus:ring-blue-200 py-2 px-4 rounded transition duration-300;
+}
+
+.preview_wrapper {
+  @apply w-full md:w-3/4 lg:w-2/5 rounded p-6 items-center overflow-hidden space-y-3 shadow-lg;
+}
+
+.preview_img_box {
+  @apply w-36 h-36 md:w-56 md:h-56 lg:w-80 lg:h-80 rounded-lg mx-auto relative;
+}
+
+.preview_link_container {
+  @apply flex w-full h-12 justify-between items-center p-1 border mt-4 rounded-lg;
+}
+
+.preview_copy_button {
+  @apply bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 text-white font-thin py-2 px-4 rounded transition duration-300;
+}
+
+.progress_wrapper {
+  @apply w-full lg:w-3/4 rounded overflow-hidden p-6 space-y-2 shadow-lg;
+}
+/* venus */
+.cell-fail {
+  @apply bg-pink-100 text-red-500 font-semibold rounded;
+}
+.cell-pass {
+  @apply bg-white;
+}
+.null-check {
+  @apply bg-red-400;
+}
+.custom-tooltip {
+  width: 250px;
+  height: 70px;
+  border: 1px solid cornflowerblue;
+  overflow: hidden;
+  background-color: yellowgreen;
+}
+
+.custom-tooltip p {
+  margin: 5px;
+  white-space: nowrap;
+}
+
+.custom-tooltip p:first-of-type {
+  font-weight: bold;
+}
+
+/** AG-GRID STYLES **/
+.ag-theme-alpine {
+  --ag-header-foreground-color: #696969;
+  --ag-header-cell-hover-background-color: rgb(80, 40, 140);
+  --ag-header-cell-moving-background-color: rgb(80, 40, 140);
+}
+/*--ag-header-background-color:  white /*#36304a; */
+.ag-header-cell-text {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.saas-load-matcher .ag-theme-alpine {
+  /* disable all borders */
+  --ag-borders: none;
+}
+.ag-row .ag-cell {
+  display: flex;
+  justify-content: flex-start; /* align horizontal */
+  align-items: center;
+}
+/*
+.ag-header-cell-label {
+  justify-content: center;
+} */
+/**********AG-GRID STYLE END********/
+
+/* templates */
+.overlay {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+.overlay .closebtn {
+  font-size: 60px;
+  color: grey;
+}
+
+/* templates */
