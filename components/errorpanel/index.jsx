@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Collapsible from 'react-collapsible';
 
 const Modal = ({ isOpen, setIsOpen, data }) => {
   const [showModal, setShowModal] = useState(false);
