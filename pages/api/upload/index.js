@@ -106,7 +106,7 @@ async function processUpload(req) {
             }
           );
         }
-        busboy.on('finish', function () {
+        busboy.on('close', function () {
           console.log('---- Done parsing form! ----');
           resolve(collectionName);
         });
