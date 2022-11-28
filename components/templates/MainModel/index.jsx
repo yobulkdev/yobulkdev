@@ -166,7 +166,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                           <p className="flex  text-blue-400">
                             {modalData.find((el) => el.key === 'data_type')
                               ? modalData.find((el) => el.key === 'data_type')
-                                  .value
+                                .value
                               : 'Select data type ...'}
                           </p>
 
@@ -175,8 +175,8 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                               (el) => el.key === 'custom_validation'
                             )
                               ? modalData.find(
-                                  (el) => el.key === 'custom_validation'
-                                ).value
+                                (el) => el.key === 'custom_validation'
+                              ).value
                               : ''}
                           </p>
                         </div>
@@ -205,12 +205,13 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       columnData={'custom_message'}
                     />
 
-                    <div className="flex float-right gap-2">
+                    <div className="mt-4 float-right">
                       <button
-                        className="bg-white border-2 hover:bg-blue-500 hover:text-white text-gray-500 py-1 px-4 rounded mt-4"
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={handleSaveMainModalData}
                       >
-                        Save
+                        Add
                       </button>
                     </div>
                   </div>

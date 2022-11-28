@@ -183,7 +183,11 @@ const SassLoadMapper = () => {
             <div className="flex saas-load-matcher">
               <div
                 className="ag-theme-alpine"
-                style={{ height: '80vh', width: '60vw', border: 'none' }}
+                style={{
+                  height: 401,
+                  width: 500,
+                  border: 'none'
+                }}
               >
                 <AgGridReact
                   ref={gridRef}
