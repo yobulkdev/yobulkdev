@@ -2,7 +2,7 @@ import Busboy from 'busboy';
 import Papa from 'papaparse';
 import { nameByRace } from 'fantasy-name-generator';
 import { ObjectId } from 'mongodb';
-import { Transform, pipeline } from 'stream';
+import { Readable, Transform, pipeline } from 'stream';
 import StreamToMongoDB from '../../../lib/mongostream';
 import clientPromise from '../../../lib/mongodb';
 import Ajv from 'ajv';
@@ -51,6 +51,26 @@ const parseStream = Papa.parse(Papa.NODE_STREAM_INPUT, papaOptions);
 const dbURL = process.env.MONGODB_URI;
 const dbName = process.env.DATABASE_NAME;
 
+function openCsvInputStream(fileInputStream) {
+  const csvInputStream = new Readable({ objectMode: true });
+  csvInputStream._read = () => {};
+  Papa.parse(fileInputStream, {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    step: (results) => {
+      csvInputStream.push(results.data);
+    },
+    complete: () => {
+      csvInputStream.push(null);
+    },
+    error: (err) => {
+      csvInputStream.emit('error', err);
+    },
+  });
+  return csvInputStream;
+}
+
 async function processUpload(req) {
   return new Promise(async (resolve) => {
     const busboy = Busboy({
@@ -78,7 +98,7 @@ async function processUpload(req) {
 
               pipeline(
                 file,
-                parseStream,
+                openCsvInputStream,
                 headers_changes,
                 datatype_validate,
                 dbClient.stream,
@@ -138,6 +158,7 @@ async function processUpload(req) {
     );
   });
 }
+
 async function transformer(data, transformArrSchema) {
   let transformedData = { ...data };
   let importingColumns = [];
