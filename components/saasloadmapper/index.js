@@ -126,6 +126,7 @@ const SassLoadMapper = () => {
       editable: true,
       cellStyle: { cursor: 'pointer' },
       cellEditor: 'agSelectCellEditor',
+      singleClickEdit: true,
       cellEditorParams: {
         values: state.saasTemplateColumns
           ? state.saasTemplateColumns.map((el) => el.label)
@@ -186,7 +187,7 @@ const SassLoadMapper = () => {
                 style={{
                   height: 401,
                   width: 500,
-                  border: 'none'
+                  border: 'none',
                 }}
               >
                 <AgGridReact
