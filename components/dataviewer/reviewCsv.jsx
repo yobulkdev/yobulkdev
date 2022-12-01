@@ -38,7 +38,7 @@ const ReviewCsv = ({ collectionName, fileMetaData }) => {
           </span>
         </div>
         <div className="flex-auto w-auto text-gray-500 font-semibold p-2">
-          Valid
+          Valid Rows
           <span className="text-xs ml-2 inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-gray-600 rounded-full">
             {metaData && typeof metaData.validRecords !== 'undefined'
               ? metaData.validRecords
@@ -46,7 +46,7 @@ const ReviewCsv = ({ collectionName, fileMetaData }) => {
           </span>
         </div>{' '}
         <div className="flex-auto w-auto text-red-600 font-semiboldmb-2 p-2">
-          Error
+          Error Rows
           <span className="text-xs ml-2 inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-red-600 text-white rounded-full">
             {metaData && typeof metaData.validRecords !== 'undefined'
               ? metaData.totalRecords - metaData.validRecords

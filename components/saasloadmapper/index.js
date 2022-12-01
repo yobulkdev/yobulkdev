@@ -14,7 +14,6 @@ import axios from 'axios';
 import UploadProgress from '../uploadProgress';
 import { useRouter } from 'next/router';
 import MyModal from '../genericdialog';
-import ImportToggle from './ImportToggle';
 import CheckboxComponent from './CheckboxComponent';
 
 const columnMatcher = ({ saasTemplate, validationTemplate }) => {
