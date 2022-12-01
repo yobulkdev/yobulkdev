@@ -86,6 +86,7 @@ a {
   --ag-header-foreground-color: #696969;
   --ag-header-cell-hover-background-color: rgb(80, 40, 140);
   --ag-header-cell-moving-background-color: rgb(80, 40, 140);
+  --ag-selected-row-background-color: transparent;
 }
 /*--ag-header-background-color:  white /*#36304a; */
 .ag-header-cell-text {

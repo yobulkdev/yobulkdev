@@ -15,6 +15,7 @@ import UploadProgress from '../uploadProgress';
 import { useRouter } from 'next/router';
 import MyModal from '../genericdialog';
 import ImportToggle from './ImportToggle';
+import CheckboxComponent from './CheckboxComponent';
 
 const columnMatcher = ({ saasTemplate, validationTemplate }) => {
   if (!saasTemplate || !validationTemplate) return;
@@ -42,6 +43,12 @@ const SassLoadMapper = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duplicate, setDuplicate] = useState(false);
+
+  useEffect(() => {
+    setInterval(() => {
+      console.log(state.curSaasLoadMapperTemplate);
+    }, 3000);
+  }, []);
 
   useEffect(() => {
     dispatch({
@@ -145,13 +152,18 @@ const SassLoadMapper = () => {
     },
     {
       headerName: '',
-      minWidth: 200,
-      maxWidth: 350,
+      resizable: true,
       field: 'is_imported',
-      cellRenderer: ImportToggle,
-      cellStyle: { cursor: 'pointer' },
+      cellRenderer: 'checkboxRenderer',
+      onCellValueChanged: (e) => {
+        dispatch({ type: 'SAAS_LOAD_MAPPER_TEMPLATE_UPDATE', payload: e.data });
+      },
     },
   ];
+
+  const onFirstDataRendered = useCallback((params) => {
+    gridRef.current.api.forEachNode((node) => node.setSelected(true));
+  }, []);
 
   const onGridReady = useCallback((params) => {
     //params.api.sizeColumnsToFit();
@@ -163,6 +175,8 @@ const SassLoadMapper = () => {
 
     gridRef.current.api.sizeColumnsToFit();
   }, []);
+
+  let frameworkComponents = { checkboxRenderer: CheckboxComponent };
 
   return (
     <>
@@ -185,8 +199,8 @@ const SassLoadMapper = () => {
               <div
                 className="ag-theme-alpine"
                 style={{
-                  height: 401,
-                  width: 500,
+                  height: '60vh',
+                  width: '80vw',
                   border: 'none',
                 }}
               >
@@ -197,6 +211,10 @@ const SassLoadMapper = () => {
                   onGridReady={onGridReady}
                   rowHeight={50}
                   suppressHorizontalScroll={true}
+                  suppressRowClickSelection={true}
+                  rowSelection={'multiple'}
+                  onFirstDataRendered={onFirstDataRendered}
+                  components={frameworkComponents}
                 />
               </div>
             </div>
