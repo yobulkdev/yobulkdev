@@ -16,7 +16,9 @@ export default function ErrorTypeDropDown({ errData }) {
       obj.count = el.count;
       dropDownOptions.push(obj);
     });
-
+    if (dropDownOptions.length === 0) {
+      dropDownOptions.push({ name: 'Loading...' });
+    }
     setOptions(dropDownOptions);
     setSelected(dropDownOptions[0]);
   }, [errData]);

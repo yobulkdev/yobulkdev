@@ -5,11 +5,14 @@ import axios from 'axios';
 import { CloudArrowDownIcon } from '@heroicons/react/24/outline';
 import ErrorTypeDropDown from './errorTypeSelector';
 
-const ReviewCsv = ({ collectionName, fileMetaData }) => {
+const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   useEffect(() => {
     setMetaData(fileMetaData);
+    if (metaData && typeof metaData.validRecords !== 'undefined') {
+      setIsErrorFree(metaData.totalRecords - metaData.validRecords === 0);
+    }
   }, [fileMetaData]);
 
   const onBtnExport = useCallback(() => {

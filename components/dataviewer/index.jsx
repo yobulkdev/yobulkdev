@@ -130,14 +130,6 @@ const GridExample = ({ version }) => {
               setFileMetaData((prev) => {
                 return { ...prev, ...res.data };
               });
-              if (
-                fileMetaData &&
-                typeof fileMetaData.validRecords !== 'undefined'
-              ) {
-                setIsErrorFree(
-                  fileMetaData.totalRecords - fileMetaData.validRecords === 0
-                );
-              }
             })
             .catch((err) => console.log(err));
         })
@@ -254,9 +246,6 @@ const GridExample = ({ version }) => {
               setFileMetaData((prev) => {
                 return { ...prev, ...res.data };
               });
-              setIsErrorFree(
-                fileMetaData.totalRecords - fileMetaData.validRecords === 0
-              );
             });
           })
           .catch((err) => console.log(err));
@@ -277,10 +266,11 @@ const GridExample = ({ version }) => {
     <>
       {version === 'norm' && <Stepper step={4} />}
       {isErrorFree && <Confetti />}
-      <div class="grid grid-cols-1 gap-10">
+      <div className="grid grid-cols-1 gap-10">
         <ReviewCsv
           collectionName={state.collection}
           fileMetaData={fileMetaData}
+          setIsErrorFree={setIsErrorFree}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div

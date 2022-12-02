@@ -46,7 +46,8 @@ export default async function updateRecord(req, res) {
       var data = req.body.data;
       var row_id = new mongo.ObjectId(data._id);
       delete data._id;
-      db.collection(req.body.collection_id)
+      await db
+        .collection(req.body.collection_id)
         .updateOne({ _id: row_id }, { $set: data }, { upsert: false })
         .then((result, err) => {
           res.send(result);
