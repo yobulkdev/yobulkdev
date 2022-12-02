@@ -9,10 +9,17 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   useEffect(() => {
-    setMetaData(fileMetaData);
-    if (metaData && typeof metaData.validRecords !== 'undefined') {
-      setIsErrorFree(metaData.totalRecords - metaData.validRecords === 0);
-    }
+    setMetaData((prev) => {
+      if (fileMetaData && typeof fileMetaData.validRecords !== 'undefined') {
+        setIsErrorFree(
+          fileMetaData.totalRecords - fileMetaData.validRecords === 0
+        );
+        setTimeout(() => {
+          setIsErrorFree(false);
+        }, 10000);
+      }
+      return fileMetaData;
+    });
   }, [fileMetaData]);
 
   const onBtnExport = useCallback(() => {
