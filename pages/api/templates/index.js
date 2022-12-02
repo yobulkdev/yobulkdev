@@ -22,6 +22,7 @@ export default async function fetchTemplateRecords(req, res) {
           res.send(result);
         } catch (err) {
           console.error(err.message);
+          res.status(500).json({ error: 'failed to load data' });
         }
       }
       break;
@@ -36,6 +37,7 @@ export default async function fetchTemplateRecords(req, res) {
         res.send(result);
       } catch (err) {
         console.error(err);
+        res.status(500).json({ error: 'failed to create data' });
       }
       break;
     case 'PUT':
@@ -54,6 +56,7 @@ export default async function fetchTemplateRecords(req, res) {
         res.send(result);
       } catch (err) {
         console.error(err);
+        res.status(500).json({ error: 'failed to put data' });
       }
       break;
     case 'DELETE':
@@ -64,6 +67,7 @@ export default async function fetchTemplateRecords(req, res) {
         res.send(result);
       } catch (err) {
         console.error(err);
+        res.status(500).json({ error: 'failed to delete data' });
       }
       break;
   }

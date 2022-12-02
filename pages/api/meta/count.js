@@ -9,12 +9,13 @@ export default async function recordsCount(req, res) {
       try {
         const recordsCount = await db
           .collection(req.query.collection_name)
-          .count();
+          .countDocuments({});
         res.json({
           totalRecords: recordsCount,
         });
       } catch (err) {
         console.error(err.message);
+        res.status(500).json({ error: 'failed to load data' });
       }
       break;
   }

@@ -34,6 +34,7 @@ export default async function recordsCount(req, res) {
         });
       } catch (err) {
         console.error(err.message);
+        res.status(500).json({ error: 'failed to load data' });
       }
       break;
   }
