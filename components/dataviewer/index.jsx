@@ -188,12 +188,11 @@ const GridExample = ({ version }) => {
 
     return error_flg;
   };
-
+  
   const nullValCheckBySchema = (field, value) => {
     let nullflag = false;
     if (field && !value) {
       let schemaRequired = userSchema.required;
-
       if (schemaRequired.length) {
         if (schemaRequired.includes(field)) nullflag = true;
       }

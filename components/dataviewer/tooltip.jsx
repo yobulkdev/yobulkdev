@@ -1,10 +1,6 @@
 import React, { useMemo } from 'react';
 
 const TooltipComponent = (props) => {
-  const data = useMemo(
-    () => props.api.getDisplayedRowAtIndex(props.rowIndex).data,
-    []
-  );
   var errormsg = '';
   var errorcol = '';
 
@@ -14,19 +10,18 @@ const TooltipComponent = (props) => {
   if (props.data && props.data.validationData.length > 0) {
     validationArr = props.data.validationData;
     if (validationArr.find((x) => x.key === onColOver)) {
-      errorcol = ' Column :' + onColOver;
-
+      errorcol = ' Column: ' + onColOver;
       errormsg =
-        ' Error :' +
+        ' Error: ' +
         validationArr.find((x) => x.key === onColOver).error_message;
     }
   }
   return (
     <>
       {errormsg ? (
-        <div className="custom-tooltip">
-          <p>{errorcol}</p>
-          <p>{errormsg}</p>
+        <div className="w-200 h-30 p-3 bg-yellow-300 rounded-md  text-gray-700">
+          <p className="font-medium break-words">{errorcol}</p>
+          <p className="text-red-500 font-medium break-words">{errormsg}</p>
         </div>
       ) : (
         ''
