@@ -15,25 +15,46 @@ const Home = () => {
             <span className="text-[#5651e5]"> CSV Importer for SaaS</span>
           </h1>
 
-          <div className="flex items-center justify-start gap-6 max-w-[330px] m-auto py-4 bg-blue-100  border rounded-md mb-10">
-            <h1 className="py-2 text-gray-500">Sample CSVs to Download...</h1>
+          <div className="flex items-center justify-start gap-6 w-auto m-auto bg-white shadow-sm  border rounded-xl mb-10">
+            <h1 className="flex py-2 w-30 bg-blue-500 h-full text-white">Sample CSVs to Download...</h1>
+
+            <div className='flex'>
             <a
-              href="https://www.stats.govt.nz/assets/Uploads/Annual-enterprise-survey/Annual-enterprise-survey-2021-financial-year-provisional/Download-data/annual-enterprise-survey-2021-financial-year-provisional-csv.csv"
+              href="https://drive.google.com/uc?id=1pcmwsRo0XqTUAcjMGgYH2tzW8xAl13nd&export=download"
               target="_blank"
               rel="noreferrer"
-              className="text-blue-400 underline-offset-1"
+              className="text-blue-400 underline-offset-1 border-r-2"
             >
-              40000 Rows
+              CSV with 1 million records
             </a>
 
             <a
-              href=" https://excelbianalytics.com/wp/wp-content/uploads/2021/09/50000-HRA-Records.zip"
+              href="https://drive.google.com/uc?id=1wzo1yVtYv9UyZUCNOZ2Fq4QITFDXKHVw&export=download"
               target="_blank"
               rel="noreferrer"
-              className="text-blue-400 underline-offset-1"
+              className="text-blue-400 underline-offset-1 border-r-2"
             >
-              50000 Rows
+              CSV for Datatype validation
             </a>
+            <a
+              href="https://drive.google.com/uc?id=1yP2awQiwHE-gCEScZWTwP5K6XGokvAZ_&export=download"
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-400 underline-offset-1 border-r-2"
+            >
+              CSV for custom mail validation
+            </a>
+            <a
+              href="https://drive.google.com/uc?id=1QbM5GmIGVg_ZJCdcE2etWX55qKj2UU7L&export=download"
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-400 underline-offset-1 "
+            >
+             CSV for custom integer validation
+            </a>
+
+            </div>
+          
           </div>
           <div>
             <button
