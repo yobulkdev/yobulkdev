@@ -7,12 +7,12 @@ const Home = () => {
     <div id="home" className="w-full text-center">
       <div className="max-w-[1240px] mx-auto p-28 flex justify-center items-center">
         <div>
-          <p className="uppercase text-3xl font-bold tracking-widest text-gray-500">
+          <p className="uppercase text-3xl font-bold tracking-widest text-gray-600">
             Welcome to YoBulk!
           </p>
           <h1 className="py-4 text-gray-500 text-lg">
             A scalable opensource{' '}
-            <span className="text-[#5651e5]"> CSV Importer for SaaS</span>
+            <span className="text-blue-500"> CSV Importer for SaaS</span>
           </h1>
 
           <div className="flex items-center justify-start gap-6 w-auto m-auto bg-white shadow-sm  border rounded-xl mb-10">
