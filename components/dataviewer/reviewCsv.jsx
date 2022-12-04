@@ -11,12 +11,12 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
   useEffect(() => {
     setMetaData((prev) => {
       if (fileMetaData && typeof fileMetaData.validRecords !== 'undefined') {
-        setIsErrorFree(
-          fileMetaData.totalRecords - fileMetaData.validRecords === 0
-        );
-        setTimeout(() => {
-          setIsErrorFree(false);
-        }, 10000);
+        if (fileMetaData.totalRecords - fileMetaData.validRecords === 0) {
+          setIsErrorFree(true);
+          setTimeout(() => {
+            setIsErrorFree(false);
+          }, 10000);
+        }
       }
       return fileMetaData;
     });
