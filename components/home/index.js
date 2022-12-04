@@ -20,12 +20,12 @@ const Home = () => {
 
             <div className='flex'>
             <a
-              href="https://drive.google.com/uc?id=1pcmwsRo0XqTUAcjMGgYH2tzW8xAl13nd&export=download"
+              href="https://drive.google.com/uc?id=1N1UMgvM4VO64lOnpkzSPft5Wt-SJokHG&export=download"
               target="_blank"
               rel="noreferrer"
               className="text-blue-400 underline-offset-1 border-r-2"
             >
-              CSV with 1 million records
+              CSV with 50k records
             </a>
 
             <a
