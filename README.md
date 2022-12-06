@@ -12,15 +12,15 @@ YoBulk empowers you to start import and validation of CSV file with a YoButton c
 
 <p align="center">
     <br />
-    <a href="https://doc.yobulk.dev" rel="dofollow"><strong>Explore the docs »</strong></a>
+    <a href="https://doc.yobulk.dev" rel="dofollow" target="_blank"><strong>Explore the docs »</strong></a>
     <br />
 
   <br/>
-    <a href="https://doc.yobulk.dev/GetStarted/Demo">Examples</a>
+    <a href="https://doc.yobulk.dev/GetStarted/Demo" target="_blank">Examples</a>
     ·
-    <a href="https://github.com/yobulkdev/yobulkdev/issues">Report Bug</a>
+    <a href="https://github.com/yobulkdev/yobulkdev/issues" target="_blank">Report Bug</a>
     ·
-    <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg">Community Slack</a>
+    <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg" target="_blank">Community Slack</a>
 </p>
 
 ## ⭐ YoBulk at a glance
@@ -79,6 +79,7 @@ If you do not have mongo db installed, don't worry! We have docker-compose sytem
 
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev
+cd yobulkdev
 docker-compose up -d
 ```
 
@@ -90,12 +91,13 @@ Prerequisite- MongoDB should be installed and running at `http://localhost:27017
 
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev
+cd yobulkdev
 yarn install
 yarn build
 yarn start
 ```
 
-✌️ That's it; you have yobulk running. Let's check it out by browsing [http://localhost:8000/](http://localhost:3000/)
+✌️ That's it; you have yobulk running. Let's check it out by browsing [http://localhost:3000/](http://localhost:3000/)
 
 For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#how-to-embedd-a-csv-import-button-in-your-saas)
 
