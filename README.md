@@ -62,7 +62,7 @@ Let's setup your CSV importer in 3 minutes!
 
 #### Option:1 Through Docker Run
 
-If you are a Docker user, you may try this way!
+If you are a Docker user, you may try this way!<br>
 Prerequisite- MongoDB should be installed and running at `http://localhost:27017`.
 
 ```bash
@@ -82,7 +82,7 @@ git clone https://github.com/yobulkdev/yobulkdev
 docker-compose up -d
 ```
 
-Let's check it out by browsing `http://localhost:8000`
+Let's check it out by browsing [http://localhost:8000/](http://localhost:8000/)
 
 #### Option:3 Through Next.js Application
 
@@ -95,7 +95,7 @@ yarn build
 yarn start
 ```
 
-✌️ That's it; you have yobulk running. Let's check it out by browsing `http://localhost:3000`
+✌️ That's it; you have yobulk running. Let's check it out by browsing [http://localhost:8000/](http://localhost:3000/)
 
 For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#how-to-embedd-a-csv-import-button-in-your-saas)
 
