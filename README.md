@@ -33,12 +33,12 @@ YoBulk Goal
 
 Why YoBulk will be an engineer's choice:
 
--   Uses nodejs streaming,so importing is superfast.
--   Framework is ready for adding your custom validation functions
--   Easy to use and develop built on top of next.js
+-   YoBulk uses nodejs streaming,so importing large CSV is superfast.
+-   Framework is ready for adding your custom validation functions.
+-   Easy to use and develop built on top of next.js.
 -   A real and powerfull framework which uses the real power of opensource CSV libraries.
--   Bulit on top of mongo.We have plans to add support for SQL databases.
--   Both standalone importer and template based importer for SaaS is available.
+-   Bulit on top of mongo.We have plans to add support for SQL databases.😁
+-   Both standalone importer and a template based importer for SaaS is available.
 -   Making sure CSV importing edge cases, so you never again have to worry about importing customer data to your database.
 -   We are adding a ML module for automatching and auto correction of CSV import error.
 
@@ -46,7 +46,7 @@ Why YoBulk will be an engineer's choice:
 ## Advantages
 
 There are closed source solutions in the market,But YoBulk is the single and first open source framework which is developed by developers for developers.
-We have a very strong and agggressive product roadmap.
+We have a very strong and agggressive product roadmap💪💪
 
 ✅ The most significant advantage of having YoBulk is keeping your data on your own servers.As a SaaS,you should not export your customer data to any 
 other 3rd party cloud for processing and think much about webhooks and data exchange complexites.
@@ -59,38 +59,40 @@ other 3rd party cloud for processing and think much about webhooks and data exch
 ## 🚀 Quickstart
 
 Let's setup your CSV importer in 3 minutes!
-#### Prerequisites for running a local next.js application
+#### Option:1 Through Docker Compose
+We provide docker-compose.yml file under yobulkdev.
+```js
+git clone https://github.com/yobulkdev/yobulkdev.git
+cd yobulkdev 
+docker-compose up -d
+```
+The UI is ready to go at [http://localhost:8000/](http://localhost:8000/).
 
-Option:1 Through Docker
+#### Option:2 Through Docker Run
 If you are a Docker user, you may try this way!
 
 ```bash
 docker run -d --name yobulk \
--v "$(pwd)"/yobulk:/usr/app/data/ \
--p 8080:8080 \
+-p 8000:3000 \
 yobulk/yobulk:latest
 ```
+the UI is ready to go at [http://localhost:8000/](http://localhost:8000/).
+You can also run YoBulk backend from Docker container and Mongo on your local system.
+The docker image comes with YoBulk backend image and MongoImage.
 
-Option:2 Through Docker Compose
-Prerequisite- MongoDB should be installed and running.
-We provide different docker-compose.yml files under this directory. Here are some examples.
-```bash
+#### Option:3 Building locally.
+For building locally,you should have installed MongoDB and it should be running locally.  
+YoBulk is a fullstack next.js application which uses MongoDB as Database.
+```js
 git clone https://github.com/yobulkdev/yobulkdev
-docker-compose up -d
-```
-
-
-Option:3 Through Next.js Application
-Prerequisite- MongoDB should be installed and running.
-```bash
-git clone https://github.com/yobulkdev/yobulkdev
+cd yobulkdev
 yarn install
-yarn run dev
+yarn build 
+yarn start
 ```
-
 ✌️ That's it; you have yobulk running. Let's check it out by browsing `http://localhost:3000`
 
-For creating a template for setting the validation rules for your SaaS,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#embeddable-csv-importer-in-saas)
+For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#embeddable-csv-importer-in-saas)
 For Non-SaaS developers,You can try the standalone CSV importer also.
 
 ## Community Links
