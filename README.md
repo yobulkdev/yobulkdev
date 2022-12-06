@@ -28,10 +28,10 @@ YoBulk gives you the power to add a button and start validation and extraction o
 Add the YoBulk react SDK and start importing CSV and validate against any predifined template.
 ![1](https://user-images.githubusercontent.com/18412631/202904050-ace18551-3305-4258-8e9d-46afbbdc9cb7.png)
 
-YoBulk Goal
+## ⭐ YoBulk Goal
 ![1](https://user-images.githubusercontent.com/18412631/202903374-33995143-800b-4fa1-86ed-32803bf1eaf3.png)
 
-Why YoBulk will be an engineer's choice:
+## 💪💪 Why YoBulk will be an engineer's choice:
 
 -   YoBulk uses nodejs streaming,so importing large CSV is superfast.
 -   Framework is ready for adding your custom validation functions.
@@ -93,11 +93,13 @@ yarn start
 ✌️ That's it; you have yobulk running. Let's check it out by browsing `http://localhost:3000`
 
 For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#embeddable-csv-importer-in-saas)
+
 For Non-SaaS developers,You can try the standalone CSV importer also.
 
 ## Community Links
 
 - [Twitter](https://twitter.com/yobulkdev)
+- [Slack](https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg)
 
 ## Support
 
