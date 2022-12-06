@@ -79,6 +79,7 @@ If you do not have mongo db installed, don't worry! We have docker-compose sytem
 
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev
+cd yobulkdev
 docker-compose up -d
 ```
 
@@ -90,12 +91,13 @@ Prerequisite- MongoDB should be installed and running at `http://localhost:27017
 
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev
+cd yobulkdev
 yarn install
 yarn build
 yarn start
 ```
 
-✌️ That's it; you have yobulk running. Let's check it out by browsing [http://localhost:8000/](http://localhost:3000/)
+✌️ That's it; you have yobulk running. Let's check it out by browsing [http://localhost:3000/](http://localhost:3000/)
 
 For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#how-to-embedd-a-csv-import-button-in-your-saas)
 
