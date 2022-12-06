@@ -1,18 +1,20 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import FileDownload from 'js-file-download';
 import axios from 'axios';
-
+import HappyModal from './happyModal';
 import { CloudArrowDownIcon } from '@heroicons/react/24/outline';
 import ErrorTypeDropDown from './errorTypeSelector';
 
 const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     setMetaData((prev) => {
       if (fileMetaData && typeof fileMetaData.validRecords !== 'undefined') {
         if (fileMetaData.totalRecords - fileMetaData.validRecords === 0) {
           setIsErrorFree(true);
+          setIsVisible(true);
           setTimeout(() => {
             setIsErrorFree(false);
           }, 10000);
@@ -91,6 +93,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
           </svg>
         </div>
       )}
+      <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
     </div>
   );
 };
