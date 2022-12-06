@@ -60,9 +60,7 @@ other 3rd party cloud for processing and think much about webhooks and data exch
 
 Let's setup your CSV importer in 3 minutes!
 
-#### Prerequisites for running a local next.js application
-
-#### Option:2 Through Docker Run
+#### Option:1 Through Docker Run
 
 If you are a Docker user, you may try this way!
 Prerequisite- MongoDB should be installed and running at `http://localhost:27017`.
@@ -74,15 +72,10 @@ yobulk/yobulk:latest
 ```
 
 the UI is ready to go at [http://localhost:8000/](http://localhost:8000/).
-You can also run YoBulk backend from Docker container and Mongo on your local system.
-The docker image comes with YoBulk backend image and MongoImage.
 
-Let's check it out by browsing `http://localhost:8000`
+If you do not have mongo db installed, don't worry! We have docker-compose sytem which will install both mongo and yobulk in docker containers.
 
-If you do not have mongo db installed, don't worry! We have docker-compose sytem which will do the job for you.
-
-Option:2 Through Docker Compose
-We provide different docker-compose.yml files under this directory. Here are some examples.
+#### Option:2 Through Docker Compose
 
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev
@@ -91,7 +84,8 @@ docker-compose up -d
 
 Let's check it out by browsing `http://localhost:8000`
 
-Option:3 Through Next.js Application
+#### Option:3 Through Next.js Application
+
 Prerequisite- MongoDB should be installed and running at `http://localhost:27017`.
 
 ```bash
