@@ -2,8 +2,7 @@ import { YoButton } from 'yoembed';
 
 function App({ templateId }) {
   return (
-    <div className="flex justify-center items-center mt-3">
-      <br />
+    <div className="flex flex-col justify-center items-center mt-3">
       <YoButton
         btnText="Import CSV"
         templateId={templateId}
