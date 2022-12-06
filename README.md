@@ -12,7 +12,7 @@ YoBulk empowers you to start import and validation of CSV file with a YoButton c
 
 <p align="center">
     <br />
-    <a href="https://doc.yobulk.dev" rel="dofollow"><strong>Explore the docs »</strong></a>
+    <a href="https://doc.yobulk.dev" rel="dofollow" target="_blank"><strong>Explore the docs »</strong></a>
     <br />
 
   <br/>
