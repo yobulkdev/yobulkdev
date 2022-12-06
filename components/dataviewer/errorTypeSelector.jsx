@@ -17,7 +17,7 @@ export default function ErrorTypeDropDown({ errData }) {
       dropDownOptions.push(obj);
     });
     if (dropDownOptions.length === 0) {
-      dropDownOptions.push({ name: 'Loading...' });
+      dropDownOptions.push({ name: 'No errors yet...' });
     }
     setOptions(dropDownOptions);
     setSelected(dropDownOptions[0]);
