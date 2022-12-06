@@ -9,9 +9,8 @@ export default async function recordsCount(req, res) {
       try {
         const validData = await db
           .collection(req.query.collection_name)
-          .find({ $where: 'this.validationData.length == 0' })
+          .find({ 'validationData.0': { $exists: false } })
           .count();
-
         const errorCount = await db
           .collection(req.query.collection_name)
           .aggregate([
