@@ -16,11 +16,11 @@ YoBulk empowers you to start import and validation of CSV file with a YoButton c
     <br />
 
   <br/>
-    <a href="https://doc.yobulk.dev/GetStarted/Demo">Examples</a>
+    <a href="https://doc.yobulk.dev/GetStarted/Demo" target="_blank">Examples</a>
     ·
-    <a href="https://github.com/yobulkdev/yobulkdev/issues">Report Bug</a>
+    <a href="https://github.com/yobulkdev/yobulkdev/issues" target="_blank">Report Bug</a>
     ·
-    <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg">Community Slack</a>
+    <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg" target="_blank">Community Slack</a>
 </p>
 
 ## ⭐ YoBulk at a glance
