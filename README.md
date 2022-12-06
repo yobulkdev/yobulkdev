@@ -92,7 +92,7 @@ yarn start
 ```
 ✌️ That's it; you have yobulk running. Let's check it out by browsing `http://localhost:3000`
 
-For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#embeddable-csv-importer-in-saas)
+For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#how-to-embedd-a-csv-import-button-in-your-saas)
 
 For Non-SaaS developers,You can try the standalone CSV importer also.
 
