@@ -2,7 +2,8 @@ volumes:
   docker:
 services:
   database:
-    image: mongo
+    build: .
+    #image: mongo
     ports:
       - 27017:27017
     volumes:

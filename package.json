@@ -38,7 +38,8 @@
     "react-dropzone": "^14.2.2",
     "react-use": "^17.4.0",
     "string-similarity": "^4.0.4",
-    "type-analyzer": "^0.4.0"
+    "type-analyzer": "^0.4.0",
+    "yoembed": "^1.2.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",

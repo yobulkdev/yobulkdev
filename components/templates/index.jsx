@@ -33,10 +33,17 @@ const MainBar = () => {
           >
             <div className="flex flex-col">
               <h2 className="text-lg text-blue-500">{obj.template_name}</h2>
-              <p className="text-stone-500">No imports</p>
             </div>
 
             <div>
+              <Link href={`/templates/testtemplate/${obj._id}`}>
+                <button
+                  type="button"
+                  className="rounded-md bg-white mr-2 px-4 py-2 text-sm font-medium text-[#2c71b2] border-2 border-[#2c71b2] items-center"
+                >
+                  Test
+                </button>
+              </Link>
               <Link href={`/templates/${obj._id}`}>
                 <button
                   type="button"
