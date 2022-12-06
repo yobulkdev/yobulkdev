@@ -72,7 +72,7 @@ function openCsvInputStream(fileInputStream) {
 }
 
 async function processUpload(req) {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     const busboy = Busboy({
       headers: req.headers,
       limits: {
@@ -82,7 +82,7 @@ async function processUpload(req) {
 
     const collectionName = nameByRace('elf', { gender: 'female' });
     const client = await clientPromise;
-    const dbConfig = { dbURL, collectionName, dbName, client };
+    const dbConfig = { dbURL, collectionName, dbName, client, resolve, reject };
     const dbClient = new StreamToMongoDB(dbConfig);
     const db = client.db(process.env.DATABASE_NAME | 'yobulk');
 
@@ -120,15 +120,19 @@ async function processUpload(req) {
                   )
                   .then((result, err) => {
                     console.log('---- collection name updateded ----');
+                    //resolve(collectionName);
                   })
-                  .catch((err) => console.log(err));
+                  .catch((err) => {
+                    console.log(err);
+                    reject(collectionName);
+                  });
               });
             }
           );
         }
         busboy.on('close', function () {
           console.log('---- Done parsing form! ----');
-          resolve(collectionName);
+          // resolve(collectionName);
         });
 
         var headers_changes = new Transform({
