@@ -50,9 +50,17 @@ const Home = () => {
                 href="https://drive.google.com/uc?id=1QbM5GmIGVg_ZJCdcE2etWX55qKj2UU7L&export=download"
                 target="_blank"
                 rel="noreferrer"
-                className="text-blue-400 underline-offset-1 "
+                className="text-blue-400 underline-offset-1  border-r-2"
               >
                 CSV for custom integer validation
+              </a>
+              <a
+                href="https://drive.google.com/uc?id=1pcmwsRo0XqTUAcjMGgYH2tzW8xAl13nd&export=download"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-400 underline-offset-1 "
+              >
+                CSV with 1 million records
               </a>
             </div>
           </div>
