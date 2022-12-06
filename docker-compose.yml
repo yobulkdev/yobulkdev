@@ -1,7 +1,5 @@
-version: '3'
 volumes:
   docker:
-
 services:
   database:
     image: mongo
@@ -11,11 +9,9 @@ services:
       - docker:/data/db
 
   yobulk:
-    build: .
+    image: yobulk/yobulk
     ports:
       - 3006:3000
-    volumes:
-      - .:/usr/src/app
     environment:
       MONGODB_URI: mongodb://database:27017/yobulk
     depends_on:
