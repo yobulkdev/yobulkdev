@@ -47,6 +47,7 @@ const GridExample = ({ version }) => {
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
 
+  //Move this into mongodb
   const ajv = new Ajv({ allErrors: false });
   addFormats(ajv, ['date', 'email']);
   ajv.addFormat(DATE_TIME_FORMAT, customDateTime);
@@ -188,7 +189,7 @@ const GridExample = ({ version }) => {
 
     return error_flg;
   };
-  
+
   const nullValCheckBySchema = (field, value) => {
     let nullflag = false;
     if (field && !value) {

@@ -30,6 +30,7 @@ export default async function fetchTemplateRecords(req, res) {
       try {
         let columns = req.body.columns;
         let body = req.body;
+        //Make this mongo db based
         let generatedSchema = generateSchema(columns);
         body.schema = generatedSchema;
 
