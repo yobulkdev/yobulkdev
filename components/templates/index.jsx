@@ -32,14 +32,18 @@ const MainBar = () => {
             key={idx}
           >
             <div className="flex flex-col">
-              <h2 className="text-lg text-blue-500">{obj.template_name}</h2>
+              <Link href={`/templates/${obj._id}`}>
+                <h2 className="text-lg text-blue-500 cursor-pointer">
+                  {obj.template_name}
+                </h2>
+              </Link>
             </div>
 
             <div>
               <Link href={`/templates/testtemplate/${obj._id}`}>
                 <button
                   type="button"
-                  className="rounded-md bg-white mr-2 px-4 py-2 text-sm font-medium text-[#2c71b2] border-2 border-[#2c71b2] items-center"
+                  className="text-white bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-1.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Test
                 </button>
@@ -47,7 +51,7 @@ const MainBar = () => {
               <Link href={`/templates/${obj._id}`}>
                 <button
                   type="button"
-                  className="rounded-md bg-white px-4 py-2 text-sm font-medium text-[#2c71b2] border-2 border-[#2c71b2] items-center"
+                  className="text-gray-100 bg-orange-500 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-1.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                 >
                   View
                 </button>
