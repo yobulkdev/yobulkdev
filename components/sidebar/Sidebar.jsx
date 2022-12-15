@@ -8,8 +8,13 @@ import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
 
 const menuItems = [
-  { id: 1, label: 'Importer', icon: HomeIcon, link: '/' },
-  { id: 2, label: 'Manage Templates', icon: ArticleIcon, link: '/templates' },
+  /*   { id: 1, label: 'Importer', icon: HomeIcon, link: '/' },
+   */ {
+    id: 2,
+    label: 'Manage Templates',
+    icon: ArticleIcon,
+    link: '/templates',
+  },
 ];
 
 const Sidebar = () => {
