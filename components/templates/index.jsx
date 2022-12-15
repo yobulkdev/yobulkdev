@@ -28,7 +28,7 @@ const MainBar = () => {
       {templates &&
         templates.map((obj, idx) => (
           <div
-            className="mt-14 border-2 rounded-md p-4 flex align-middle justify-between"
+            className="mt-4 border-2 rounded-md py-1 px-2 flex align-middle justify-between"
             key={idx}
           >
             <div className="flex flex-col">
@@ -39,7 +39,7 @@ const MainBar = () => {
               </Link>
             </div>
 
-            <div>
+            <div className="mt-1">
               <Link href={`/templates/testtemplate/${obj._id}`}>
                 <button
                   type="button"
