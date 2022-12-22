@@ -2,19 +2,32 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useMemo } from 'react';
-import { ArticleIcon, CollapsIcon, HomeIcon, VideosIcon } from './icons';
+import { ArticleIcon, CollapsIcon, HomeIcon, ConfigIcon } from './icons';
 
 import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
 
 const menuItems = [
   /*   { id: 1, label: 'Importer', icon: HomeIcon, link: '/' },
-   */ {
-    id: 2,
+  */
+  {
+    id: 1,
     label: 'Manage Templates',
     icon: ArticleIcon,
     link: '/templates',
   },
+  {
+    id: 2,
+    label: 'Imports',
+    icon: HomeIcon,
+    link: '/imports',
+  },
+  {
+    id: 3,
+    label: 'Configuration',
+    icon: ConfigIcon,
+    link: '/configuration',
+  }
 ];
 
 const Sidebar = () => {
@@ -104,9 +117,8 @@ const Sidebar = () => {
                 </div>
 
                 <hr
-                  className={`${
-                    toggleCollapse ? 'w-8 ml-4' : 'w-40  ml-6'
-                  } bg-slate-300 my-2 justify-center`}
+                  className={`${toggleCollapse ? 'w-8 ml-4' : 'w-40  ml-6'
+                    } bg-slate-300 my-2 justify-center`}
                 />
               </div>
             );
