@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@ag-grid-community/infinite-row-model": "^28.2.0",
-    "@headlessui/react": "^1.7.4",
+    "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "ag-grid-community": "^28.2.0",
     "ag-grid-react": "^28.2.0",
@@ -31,6 +31,7 @@
     "mongodb": "^4.11.0",
     "next": "12.3.0",
     "next-transpile-modules": "^10.0.0",
+    "npm": "^9.2.0",
     "papaparse": "^5.3.2",
     "promise-retry": "^2.0.1",
     "react": "18.2.0",
