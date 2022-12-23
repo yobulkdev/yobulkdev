@@ -5760,6 +5760,13 @@ react-router@6.4.4:
   dependencies:
     "@remix-run/router" "1.0.4"
 
+react-tailwindcss-select@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-tailwindcss-select/-/react-tailwindcss-select-1.6.0.tgz#ae7795cca2fefc63ec0774d7b1c72f1c2195df66"
+  integrity sha512-+1x3C0aQHrK6A4g5sQ6cpUdF459E1xwHMrMgqjy9o0tqYzyvd1vmSdc9ssjbdMnUPEGclUKUygeFy7+blNZ3hQ==
+  dependencies:
+    eslint-plugin-import "^2.26.0"
+
 react-universal-interface@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"

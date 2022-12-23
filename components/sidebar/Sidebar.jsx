@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useMemo } from 'react';
 import { ArticleIcon, CollapsIcon, HomeIcon, ConfigIcon } from './icons';
+import { UsersIcon } from '@heroicons/react/24/outline/';
 
 import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
@@ -27,6 +28,12 @@ const menuItems = [
     label: 'Configuration',
     icon: ConfigIcon,
     link: '/configuration',
+  },
+  {
+    id: 4,
+    label: 'Collaborate',
+    icon: UsersIcon,
+    link: '/collaborate',
   }
 ];
 
@@ -80,7 +87,7 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative ">
           <div className="flex items-center pl-2 gap-4">
-            <Image src={Logo} width={'170vw'} height={'50vw'} />
+            <Image src={Logo} width={'170vw'} height={'50vw'} alt="" />
           </div>
           {isCollapsible && (
             <button
@@ -100,7 +107,7 @@ const Sidebar = () => {
                 <div className={classes}>
                   <Link href={menu.link}>
                     <a className="flex py-4 px-3 items-center w-full h-full">
-                      <div style={{ width: '2.5rem' }}>
+                      <div style={{ width: '1.5rem' }}>
                         <Icon />
                       </div>
                       {!toggleCollapse && (
