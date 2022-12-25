@@ -32,7 +32,6 @@ import {
 } from '../../constants';
 import ReviewCsv from './reviewCsv';
 import Confetti from '../confetti';
-import SubmitModal from './submitModal';
 
 ModuleRegistry.registerModules([InfiniteRowModelModule]);
 
@@ -47,7 +46,6 @@ const GridExample = ({ version }) => {
   ]);
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
-  const [isSubmitModalVisible, setSubmitModalVisible] = useState(false);
 
   //Move this into mongodb
   const ajv = new Ajv({ allErrors: false });
@@ -302,14 +300,7 @@ const GridExample = ({ version }) => {
               }
             ></AgGridReact>
           </div>
-        </div>
-        <button
-          onClick={() => {setSubmitModalVisible(true)}}
-          className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
-        >
-          Submit
-        </button>
-        <SubmitModal isVisible={isSubmitModalVisible} setIsVisible={setSubmitModalVisible} metaData={fileMetaData}/>
+        </div>        
       </div>
     </>
   );

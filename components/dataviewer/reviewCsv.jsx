@@ -4,16 +4,21 @@ import axios from 'axios';
 import HappyModal from './happyModal';
 import { CloudArrowDownIcon } from '@heroicons/react/24/outline';
 import ErrorTypeDropDown from './errorTypeSelector';
+import WarningModal from './warningModal';
 
 const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isWarningModalVisible, setWarningModalVisible] = useState(false);
+  const [showWarning, setShowWarning] = useState(true);
+
   useEffect(() => {
     setMetaData((prev) => {
       if (fileMetaData && typeof fileMetaData.validRecords !== 'undefined') {
         if (fileMetaData.totalRecords - fileMetaData.validRecords === 0) {
           setIsErrorFree(true);
+          setShowWarning(false);
           setIsVisible(true);
           setTimeout(() => {
             setIsErrorFree(false);
@@ -24,7 +29,12 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
     });
   }, [fileMetaData]);
 
-  const onBtnExport = useCallback(() => {
+  const onBtnExport = useCallback((forceDownload) => {
+    if (showWarning && !forceDownload) {
+      setWarningModalVisible(true);
+      return;
+    }
+    setWarningModalVisible(false);
     setDownloadig(true);
     var options = {
       method: 'GET',
@@ -38,7 +48,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
       FileDownload(response.data, `${collectionName}.csv`);
       setDownloadig(false);
     });
-  }, []);
+  }, [showWarning]);
 
   return (
     <div className="flex flex-nowrap justify-between">
@@ -72,7 +82,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
 
       {!downloadig ? (
         <button
-          onClick={onBtnExport}
+          onClick={() => onBtnExport(false)}
           className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
         >
           <CloudArrowDownIcon className="w-5 mr-1" />
@@ -94,6 +104,12 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
         </div>
       )}
       <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
+      <WarningModal
+        isVisible={isWarningModalVisible}
+        setIsVisible={setWarningModalVisible}
+        submit={onBtnExport}
+        metaData={fileMetaData}
+      />
     </div>
   );
 };

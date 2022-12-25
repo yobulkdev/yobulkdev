@@ -16,7 +16,7 @@ export default async function downloadFile(req, res) {
         console.log('---- collection ----', req.headers.collection_name);
         let collection = await db.collection(req.headers.collection_name);
         var stream = await collection
-          .find({})
+          .find({ 'validationData.0': { $exists: false } })
           .project({ _id: 0, validationData: 0 })
           .stream();
         let headerFlog = true;
