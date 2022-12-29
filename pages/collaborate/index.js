@@ -1,6 +1,5 @@
 import Layout from '../../layouts/Layout';
 import CollaborateComponent from '../../components/Collaborate/CollaborateComponent';
-import MultiSelectComponent from '../../components/Collaborate/MultiSelectComponent';
 
 const Collaborate = () => {
     return (
@@ -9,7 +8,6 @@ const Collaborate = () => {
                 <div className="p-6 ">
 
                     <CollaborateComponent />
-                    <MultiSelectComponent />
                 </div>
             </div>
         </Layout>
