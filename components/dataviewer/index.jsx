@@ -300,7 +300,7 @@ const GridExample = ({ version }) => {
               }
             ></AgGridReact>
           </div>
-        </div>
+        </div>        
       </div>
     </>
   );
