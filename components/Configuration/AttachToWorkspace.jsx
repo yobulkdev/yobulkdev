@@ -3,7 +3,7 @@ import Select from 'react-tailwindcss-select';
 
 const AttachToWorkspace = ({ attachToWorkspace, setAttachToWorkspace, workspaces }) => {
     return (
-        <div className="flex mt-7 align-middle items-center">
+        <div className="flex p-4 align-middle items-center">
             <div className="flex flex-col w-5/12">
                 <h2 className="text-lg font-bold text-gray-500">Attach the template to the Workspace.</h2>
                 <p className="text-gray-400">

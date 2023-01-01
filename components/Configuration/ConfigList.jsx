@@ -93,121 +93,75 @@ const ConfigList = () => {
     }, [attachThemeJSONObj, attachToImporters, attachToOrganizations, attachToWorkspace, attachWebHookURL]);
 
     return (
-        <div className='flex mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+        <div className='flex mt-4 py-1 px-2 align-middle justify-between'>
 
             <form className='p-5 w-7/12'>
 
-                <AttachToImporter
-                    attachToImporters={attachToImporters}
-                    setAttachToImporters={setAttachToImporters}
-                    importers={importers}
-                />
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <AttachToImporter
+                        attachToImporters={attachToImporters}
+                        setAttachToImporters={setAttachToImporters}
+                        importers={importers}
+                    />
 
+                    <AttachToOrganizations
+                        attachToOrganizations={attachToOrganizations}
+                        setAttachToOrganizations={setAttachToOrganizations}
+                        organizations={organizations}
+                    />
 
-                <AttachToOrganizations
-                    attachToOrganizations={attachToOrganizations}
-                    setAttachToOrganizations={setAttachToOrganizations}
-                    organizations={organizations}
-                />
+                    <AttachToWorkspace
+                        attachToWorkspace={attachToWorkspace}
+                        setAttachToWorkspace={setAttachToWorkspace}
+                        workspaces={workspaces}
+                    />
+                </div>
 
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <AttachToJSONOBJ
+                        attachThemeJSONObj={attachThemeJSONObj}
+                        setAttachThemeJSONObj={setAttachThemeJSONObj}
+                        jsonOBJ={jsonOBJ}
+                    />
+                </div>
 
-                <AttachToJSONOBJ
-                    attachThemeJSONObj={attachThemeJSONObj}
-                    setAttachThemeJSONObj={setAttachThemeJSONObj}
-                    jsonOBJ={jsonOBJ}
-                />
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <AttachWebHookURL
+                        attachWebHookURL={attachWebHookURL}
+                        setAttachWebHookURL={setAttachWebHookURL}
+                    />
 
-                <AttachToWorkspace
-                    attachToWorkspace={attachToWorkspace}
-                    setAttachToWorkspace={setAttachToWorkspace}
-                    workspaces={workspaces}
-                />
+                    <div className="flex p-4 align-middle items-center">
+                        <div className="flex flex-col w-5/12">
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+                        </div>
 
-
-                <AttachWebHookURL
-                    attachWebHookURL={attachWebHookURL}
-                    setAttachWebHookURL={setAttachWebHookURL}
-                />
-
-                <div className="flex mt-7 align-middle items-center">
-                    <div className="flex flex-col w-5/12">
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-                    </div>
-
-                    <div className="flex flex-col justify-center">
-                        <button
-                            type="submit"
-                            className="py-2.5 px-5 flex
+                        <div className="justify-center ml-auto">
+                            <button
+                                type="submit"
+                                className="py-2.5 px-5 flex
                                 text-sm font-medium text-gray-900
                                 bg-white rounded-md
                                 border border-gray-200 hover:bg-gray-100 hover:text-blue-700
                                 focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-200
                                 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 "
-                            onClick={handleClick}
-                        >
-                            NEXT
-                        </button>
+                                onClick={handleClick}
+                            >
+                                NEXT
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-            </form>
+            </form >
 
-            <div className="w-5/12 m-1 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-5 w-5/12 border-gray-200">
+                <div className='mt-4 border-2 h-full rounded-md py-1 px-2 align-middle justify-between'>
 
-                {configurationData &&
-                    <div className="p-5">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-200">Configuration</h3>
-
-                        <div className="mt-4 flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-200">Attach to Importer</span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">{configurationData.attachToImporters.value}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-200">Attach to Organizations</span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">{configurationData.attachToOrganizations.value}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-200">Attach Theme JSON Object</span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">{configurationData.attachThemeJSONObj.value}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-200">Attach To Workspace</span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">{configurationData.attachToWorkspace.value}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-200">Attach Webhook URL</span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">{configurationData.attachWebHookURL}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                }
+                </div>
             </div>
 
-        </div>
+        </div >
     );
 };
 

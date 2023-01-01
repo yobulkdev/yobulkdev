@@ -1,6 +1,6 @@
 const AttachWebHookURL = ({ setAttachWebHookURL }) => {
     return (
-        <div className="flex mt-7 align-middle items-center">
+        <div className="flex p-4 align-middle items-center">
             <div className="flex flex-col w-5/12">
                 <h2 className="text-lg font-bold text-gray-500">Webhook URL</h2>
                 <p className="text-gray-400">URL where imported data is sent to</p>
