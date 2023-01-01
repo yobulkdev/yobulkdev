@@ -42,6 +42,7 @@ const GridExample = ({ version }) => {
     {
       headerName: 'Row',
       valueGetter: 'node.rowIndex + 1',
+      maxWidth: 100
     },
   ]);
   const [fileMetaData, setFileMetaData] = useState();
@@ -96,7 +97,7 @@ const GridExample = ({ version }) => {
           .then((response) => {
             template = response.columns;
             userSchema = response.schema;
-            setColumnDefs(
+            setColumnDefs(prev => prev.concat(
               template.map((x) => {
                 return {
                   headerName: x.label,
@@ -113,7 +114,7 @@ const GridExample = ({ version }) => {
                     }
                   },
                 };
-              })
+              }))
             );
           });
       };
