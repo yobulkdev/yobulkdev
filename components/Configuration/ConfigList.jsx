@@ -1,155 +1,167 @@
-import RenderComponent from './RenderComponent';
+import { useEffect, useState } from 'react';
+import {
+    AttachToImporter,
+    AttachToOrganizations,
+    AttachToJSONOBJ,
+    AttachToWorkspace,
+    AttachWebHookURL
+} from './index';
 
 const importers = [
-    {
-        id: 1,
-        name: 'Wade Cooper',
-        avatar:
-            'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 2,
-        name: 'Arlene Mccoy',
-        avatar:
-            'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 3,
-        name: 'Devon Webb',
-        avatar:
-            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
-    },
-    {
-        id: 4,
-        name: 'Tom Cook',
-        avatar:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 5,
-        name: 'Tanya Fox',
-        avatar:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 6,
-        name: 'Hellen Schmidt',
-        avatar:
-            'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 7,
-        name: 'Caroline Schultz',
-        avatar:
-            'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 8,
-        name: 'Mason Heaney',
-        avatar:
-            'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 9,
-        name: 'Claudie Smitham',
-        avatar:
-            'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        id: 10,
-        name: 'Emil Schaefer',
-        avatar:
-            'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
+    { value: "Importer #1", label: "Importer #1" },
+    { value: "Importer #2", label: "Importer #2" },
+    { value: "Importer #3", label: "Importer #3" },
+    { value: "Importer #4", label: "Importer #4" },
+    { value: "Importer #5", label: "Importer #5" },
 ];
 
 const organizations = [
     {
-        id: 1,
-        name: 'Company A',
+        value: 'Company A',
+        label: 'Company A',
     },
     {
-        id: 2,
-        name: 'Company B',
+        value: 'Company B',
+        label: 'Company B',
     },
     {
-        id: 3,
-        name: 'Company C',
+        value: 'Company C',
+        label: 'Company C',
     },
     {
-        id: 4,
-        name: 'Company D',
+        value: 'Company D',
+        label: 'Company D',
+    },
+];
+
+const jsonOBJ = [
+    {
+        value: 'Object A',
+        label: 'Object A',
     },
     {
-        id: 5,
-        name: 'Company E',
+        value: 'Object B',
+        label: 'Object B',
     },
     {
-        id: 6,
-        name: 'Company F',
+        value: 'Object C',
+        label: 'Object C',
+    },
+];
+
+const workspaces = [
+    {
+        value: 'Workspace #A',
+        label: 'Workspace #A',
     },
     {
-        id: 7,
-        name: 'Company G',
+        value: 'Workspace #B',
+        label: 'Workspace #B',
+    },
+    {
+        value: 'Workspace #C',
+        label: 'Workspace #C',
     },
 ];
 
 const ConfigList = () => {
-    const list = [
-        {
-            id: 1,
-            title: 'Attach The Importer to a Template',
-            itemsList: importers,
-        },
-        {
-            id: 2,
-            title: 'Attach it to an Organization',
-            itemsList: organizations,
-        },
-        {
-            id: 3,
-            title: 'Attach a theme JSON Object',
-            itemsList: importers,
-        },
-        {
-            id: 4,
-            title: 'Attach it to a workspace',
-            itemsList: organizations,
+    const [attachToImporters, setAttachToImporters] = useState(null);
+    const [attachToOrganizations, setAttachToOrganizations] = useState(null);
+    const [attachThemeJSONObj, setAttachThemeJSONObj] = useState(null);
+    const [attachToWorkspace, setAttachToWorkspace] = useState(null);
+    const [attachWebHookURL, setAttachWebHookURL] = useState(null);
+
+    const [configurationData, setConfigurationData] = useState(null);
+    const [error, setError] = useState(null);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        if (!attachToImporters || !attachToOrganizations || !attachThemeJSONObj || !attachToWorkspace || !attachWebHookURL) {
+            setError('*Please fill all the fields');
+            return;
         }
-    ];
+
+        setConfigurationData({
+            attachToImporters, attachToOrganizations, attachThemeJSONObj, attachToWorkspace, attachWebHookURL
+        });
+    };
+
+    useEffect(() => {
+        if (attachToImporters && attachToOrganizations && attachThemeJSONObj && attachToWorkspace && attachWebHookURL) {
+            setError('');
+        }
+    }, [attachThemeJSONObj, attachToImporters, attachToOrganizations, attachToWorkspace, attachWebHookURL]);
 
     return (
-        <div className="p-6">
+        <div className='flex mt-4 py-1 px-2 align-middle justify-between'>
 
-            {list.map((item) => (
-                <RenderComponent
-                    title={item.title}
-                    itemsList={item.itemsList}
-                    key={item.id}
-                />
-            ))}
+            <form className='p-5 w-7/12'>
 
-            <div className="flex my-4 align-middle items-center">
-                <div className='w-1/2'>
-                    <h1 className="text-md font-bold text-gray-500">Attach a Webhook URL</h1>
-                </div>
-                <div className="mt-2 w-1/2">
-                    <input
-                        type="text"
-                        className="bg-gray-50
-                        border border-gray-300 rounded-lg
-                        text-gray-900 text-sm
-                        focus:ring-blue-500 focus:border-blue-500 
-                        block w-full
-                        p-2.5
-                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder='E.g. https://api.myapp.com/myendpoint'
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <AttachToImporter
+                        attachToImporters={attachToImporters}
+                        setAttachToImporters={setAttachToImporters}
+                        importers={importers}
                     />
+
+                    <AttachToOrganizations
+                        attachToOrganizations={attachToOrganizations}
+                        setAttachToOrganizations={setAttachToOrganizations}
+                        organizations={organizations}
+                    />
+
+                    <AttachToWorkspace
+                        attachToWorkspace={attachToWorkspace}
+                        setAttachToWorkspace={setAttachToWorkspace}
+                        workspaces={workspaces}
+                    />
+                </div>
+
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <AttachToJSONOBJ
+                        attachThemeJSONObj={attachThemeJSONObj}
+                        setAttachThemeJSONObj={setAttachThemeJSONObj}
+                        jsonOBJ={jsonOBJ}
+                    />
+                </div>
+
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <AttachWebHookURL
+                        attachWebHookURL={attachWebHookURL}
+                        setAttachWebHookURL={setAttachWebHookURL}
+                    />
+
+                    <div className="flex p-4 align-middle items-center">
+                        <div className="flex flex-col w-5/12">
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+                        </div>
+
+                        <div className="justify-center ml-auto">
+                            <button
+                                type="submit"
+                                className="py-2.5 px-5 flex
+                                text-sm font-medium text-gray-900
+                                bg-white rounded-md
+                                border border-gray-200 hover:bg-gray-100 hover:text-blue-700
+                                focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-200
+                                dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 "
+                                onClick={handleClick}
+                            >
+                                NEXT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form >
+
+            <div className="p-5 w-5/12 border-gray-200">
+                <div className='mt-4 border-2 h-full rounded-md py-1 px-2 align-middle justify-between'>
+
                 </div>
             </div>
 
-
-        </div>
+        </div >
     );
 };
 
