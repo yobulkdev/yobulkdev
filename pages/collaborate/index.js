@@ -1,15 +1,15 @@
 import Layout from '../../layouts/Layout';
 import CollaborateComponent from '../../components/Collaborate/CollaborateComponent';
-import MultiSelectComponent from '../../components/Collaborate/MultiSelectComponent';
 
 const Collaborate = () => {
     return (
         <Layout>
             <div className="overflow-x-auto mx-4 mt-10 h-full">
                 <div className="p-6 ">
-
+                    <div className="flex align-middle justify-between">
+                        <h1 className="text-2xl font-bold text-gray-500">Collaborate</h1>
+                    </div>
                     <CollaborateComponent />
-                    <MultiSelectComponent />
                 </div>
             </div>
         </Layout>
