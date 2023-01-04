@@ -47,6 +47,7 @@ const GridExample = ({ version }) => {
   ]);
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
+  const [originalDataSource, setOriginalDataSource] = useState();
 
   //Move this into mongodb
   const ajv = new Ajv({ allErrors: false });
@@ -83,6 +84,7 @@ const GridExample = ({ version }) => {
     gridRef.current.api.hideOverlay();
   }, []);
 
+  console.log(fileMetaData)
   const onGridReady = useCallback(
     async (params) => {
       let countOfRecords = 0;
@@ -154,9 +156,35 @@ const GridExample = ({ version }) => {
         },
       };
       params.api.setDatasource(dataSource);
+      setOriginalDataSource(dataSource)
     },
     [state.collection]
   );
+
+  const showOnlyErrors = useCallback((enabled) => {
+      if (enabled){
+        const dataSource = {
+          rowCount: undefined,
+          getRows: async (params) => {
+            let url = `/api/meta?collection=${state.collection}&`;
+            url += `_start=${params.startRow}&_end=${params.endRow}`;
+            url += '&only_errors=true'
+            fetch(url)
+              .then((httpResponse) => httpResponse.json())
+              .then((response) => {
+                params.successCallback(response.data, (fileMetaData?.totalRecords - fileMetaData?.validRecords));
+              })
+              .catch((error) => {
+                console.error(error);
+                params.failCallback();
+              });
+          },
+        };
+        gridRef.current.api.setDatasource(dataSource)
+      } else{
+        gridRef.current.api.setDatasource(originalDataSource)
+      }
+  }, [fileMetaData]);
 
   const cellPassRules = {
     'cell-fail': (params) =>
@@ -272,6 +300,7 @@ const GridExample = ({ version }) => {
           collectionName={state.collection}
           fileMetaData={fileMetaData}
           setIsErrorFree={setIsErrorFree}
+          showOnlyErrors = {showOnlyErrors}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div
