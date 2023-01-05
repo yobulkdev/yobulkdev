@@ -5,13 +5,15 @@ import HappyModal from './happyModal';
 import { CloudArrowDownIcon } from '@heroicons/react/24/outline';
 import ErrorTypeDropDown from './errorTypeSelector';
 import WarningModal from './warningModal';
+import { Switch } from '@headlessui/react';
 
-const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
+const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyErrors }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [showWarning, setShowWarning] = useState(true);
+  const [onlyError, setOnlyError] = useState(false);
 
   useEffect(() => {
     setMetaData((prev) => {
@@ -29,26 +31,34 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
     });
   }, [fileMetaData]);
 
-  const onBtnExport = useCallback((forceDownload) => {
-    if (showWarning && !forceDownload) {
-      setWarningModalVisible(true);
-      return;
-    }
-    setWarningModalVisible(false);
-    setDownloadig(true);
-    var options = {
-      method: 'GET',
-      url: '/api/downloads',
-      responseType: 'blob',
-      headers: {
-        collection_name: collectionName,
-      },
-    };
-    axios(options).then((response) => {
-      FileDownload(response.data, `${collectionName}.csv`);
-      setDownloadig(false);
-    });
-  }, [showWarning]);
+  const onBtnExport = useCallback(
+    (forceDownload) => {
+      if (showWarning && !forceDownload) {
+        setWarningModalVisible(true);
+        return;
+      }
+      setWarningModalVisible(false);
+      setDownloadig(true);
+      var options = {
+        method: 'GET',
+        url: '/api/downloads',
+        responseType: 'blob',
+        headers: {
+          collection_name: collectionName,
+        },
+      };
+      axios(options).then((response) => {
+        FileDownload(response.data, `${collectionName}.csv`);
+        setDownloadig(false);
+      });
+    },
+    [showWarning]
+  );
+  
+  const handleSwitch = () =>{
+    setOnlyError(!onlyError);
+    showOnlyErrors(!onlyError);
+  }
 
   return (
     <div className="flex flex-nowrap justify-between">
@@ -74,6 +84,14 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree }) => {
               ? metaData.totalRecords - metaData.validRecords
               : 'Loading...'}
           </span>
+        </div>{' '}
+        <div className="flex items-center w-auto text-gray-500 font-semibold mb-1">
+          Only Errors
+          <Switch checked={onlyError} onChange={handleSwitch} className="ml-2 mt-1">
+            <button className={`${onlyError ? 'bg-blue-500' : 'bg-gray-200'} relative inline-flex items-center h-6 w-11 items-center rounded-full`}>
+              <span className={`${onlyError ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition`}/>
+            </button>
+          </Switch>
         </div>{' '}
         <div className="flex-auto w-auto font-semibold">
           <ErrorTypeDropDown errData={metaData} />
