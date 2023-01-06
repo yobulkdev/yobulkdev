@@ -4,6 +4,7 @@ import React, {
   useMemo,
   useState,
   useRef,
+  useEffect,
 } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { InfiniteRowModelModule } from '@ag-grid-community/infinite-row-model';
@@ -48,6 +49,8 @@ const GridExample = ({ version }) => {
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
   const [originalDataSource, setOriginalDataSource] = useState();
+  const [selectedErrorType, setSelectedErrorType] = useState();
+  const [errorFilter, setErrorFilter] = useState(false);
 
   //Move this into mongodb
   const ajv = new Ajv({ allErrors: false });
@@ -67,6 +70,24 @@ const GridExample = ({ version }) => {
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
   let errorCountUri = `/api/meta/errorcount?collection_name=${state.collection}`;
 
+  useEffect(()=>{
+    if (!selectedErrorType) return;
+    let currentColumnDefs = gridRef?.current?.api?.getColumnDefs();
+    if (Array.isArray(currentColumnDefs)){
+      let newColumnDefs = currentColumnDefs.map((elem)=> {
+        if (selectedErrorType === 'No selection' || elem.headerName === 'Row'){
+          elem.hide = false
+        } else{
+          elem.hide = (elem.headerName === selectedErrorType) ? false : true;
+        }
+        return elem;
+      })
+      setColumnDefs(newColumnDefs)
+      showOnlyErrors(errorFilter)
+    }
+
+  },[selectedErrorType, showOnlyErrors, errorFilter])
+
   const defaultColDef = useMemo(() => {
     return {
       flex: 1,
@@ -84,7 +105,6 @@ const GridExample = ({ version }) => {
     gridRef.current.api.hideOverlay();
   }, []);
 
-  console.log(fileMetaData)
   const onGridReady = useCallback(
     async (params) => {
       let countOfRecords = 0;
@@ -107,6 +127,7 @@ const GridExample = ({ version }) => {
                   editable: true,
                   cellClassRules: cellPassRules,
                   tooltipField: x.label,
+                  hide: false,
                   cellRenderer: (props) => {
                     if (props.value !== undefined) {
                       onLoadingHide();
@@ -158,21 +179,25 @@ const GridExample = ({ version }) => {
       params.api.setDatasource(dataSource);
       setOriginalDataSource(dataSource)
     },
-    [state.collection]
+    [state.collection, selectedErrorType]
   );
-
+  
   const showOnlyErrors = useCallback((enabled) => {
+      setErrorFilter(enabled)
       if (enabled){
         const dataSource = {
           rowCount: undefined,
           getRows: async (params) => {
             let url = `/api/meta?collection=${state.collection}&`;
             url += `_start=${params.startRow}&_end=${params.endRow}`;
-            url += '&only_errors=true'
+            url += '&only_errors=true';
+            if (selectedErrorType && selectedErrorType != 'No selection'){
+              url += `&column_name=${selectedErrorType}`
+            }
             fetch(url)
               .then((httpResponse) => httpResponse.json())
               .then((response) => {
-                params.successCallback(response.data, (fileMetaData?.totalRecords - fileMetaData?.validRecords));
+                params.successCallback(response.data, response.data.length);
               })
               .catch((error) => {
                 console.error(error);
@@ -184,7 +209,7 @@ const GridExample = ({ version }) => {
       } else{
         gridRef.current.api.setDatasource(originalDataSource)
       }
-  }, [fileMetaData]);
+  }, [originalDataSource, selectedErrorType, state.collection]);
 
   const cellPassRules = {
     'cell-fail': (params) =>
@@ -301,6 +326,7 @@ const GridExample = ({ version }) => {
           fileMetaData={fileMetaData}
           setIsErrorFree={setIsErrorFree}
           showOnlyErrors = {showOnlyErrors}
+          selectErrorType={setSelectedErrorType}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div
