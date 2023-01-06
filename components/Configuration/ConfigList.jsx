@@ -6,6 +6,7 @@ import {
     AttachToWorkspace,
     AttachWebHookURL
 } from './index';
+import { CopyBlock, monoBlue } from "react-code-blocks";
 
 const importers = [
     { value: "Importer #1", label: "Importer #1" },
@@ -73,6 +74,25 @@ const ConfigList = () => {
 
     const [configurationData, setConfigurationData] = useState(null);
     const [error, setError] = useState(null);
+
+    const [code, setCode] = useState(`import { YoButton } from "yoembed";
+import "./App.css";
+
+function App() {
+    return (
+    <div className="App">
+        <h2>This is my SAAS</h2>
+        <hr />
+        <br />
+        <YoButton
+        templateId={"63a28875cbc26427b0bc390e"}
+        yoHostUrl={"http://localhost:3000"}
+        />
+    </div>
+    );
+}
+
+export default App;`);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -156,8 +176,14 @@ const ConfigList = () => {
             </form >
 
             <div className="p-5 w-5/12 border-gray-200">
-                <div className='mt-4 border-2 h-full rounded-md py-1 px-2 align-middle justify-between'>
-
+                <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
+                    <CopyBlock
+                        language="go"
+                        text={code}
+                        codeBlock
+                        theme={monoBlue}
+                        showLineNumbers={false}
+                    />
                 </div>
             </div>
 
