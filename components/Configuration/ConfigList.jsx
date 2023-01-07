@@ -6,7 +6,12 @@ import {
     AttachToWorkspace,
     AttachWebHookURL
 } from './index';
-import { CopyBlock, monoBlue } from "react-code-blocks";
+
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { googlecode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
 const importers = [
     { value: "63a28875cvc26427b0bc320e", label: "63a28875cvc26427b0bc320e" },
@@ -85,8 +90,8 @@ function App() {
         <hr />
         <br />
         <YoButton
-        templateId="63a28875cbc26427b0bc390e"
-        yoHostUrl={"http://localhost:3000"}
+            templateId="63a28875cbc26427b0bc390e"
+            yoHostUrl={"http://localhost:3000"}
         />
     </div>
     );
@@ -118,8 +123,8 @@ function App() {
         <hr />
         <br />
         <YoButton
-        templateId="${configurationData.attachToImporters.value}"
-        yoHostUrl={"http://localhost:3000"}
+            templateId="${configurationData.attachToImporters.value}"
+            yoHostUrl={"http://localhost:3000"}
         />
     </div>
     );
@@ -202,13 +207,26 @@ export default App;`
 
             <div className="p-5 w-5/12 border-gray-200">
                 <div className='mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between'>
-                    <CopyBlock
-                        language="go"
+                    <SyntaxHighlighter
+                        language="javascript"
+                        showLineNumbers={true}
+                        wrapLongLines={true}
+                        style={googlecode}
+                    >
+                        {code}
+                    </SyntaxHighlighter>
+
+                    <CopyToClipboard
                         text={code}
-                        codeBlock
-                        theme={monoBlue}
-                        showLineNumbers={false}
-                    />
+                        onCopy={() => alert("Copied")}
+                    >
+                        <div className='mt-4 flex items-center justify-center border-2 rounded-md py-1 px-2 text-center cursor-pointer border-blue-300'>
+                            <DocumentDuplicateIcon
+                                className="h-5 w-5"
+                                aria-hidden="true" />
+                            {" "} COPY
+                        </div>
+                    </CopyToClipboard>
                 </div>
             </div>
 
