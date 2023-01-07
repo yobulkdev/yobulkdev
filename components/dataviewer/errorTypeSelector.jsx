@@ -2,30 +2,39 @@ import { Fragment, useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-export default function ErrorTypeDropDown({ errData }) {
+export default function ErrorTypeDropDown({ errData, selectErrorType }) {
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState();
 
   useEffect(() => {
     if (!errData || !errData.errorCountbyColumn) return;
     let dropDownOptions = [];
-
+    let defaultSelection;
+    let totalErrorCount = 0
     errData.errorCountbyColumn.forEach((el) => {
       let obj = {};
       obj.name = el._id;
       obj.count = el.count;
+      totalErrorCount += el.count;
       dropDownOptions.push(obj);
     });
     if (dropDownOptions.length === 0) {
-      dropDownOptions.push({ name: 'No errors yet...' });
+      defaultSelection = { name: 'No errors yet', count: 0 }
+    } else{
+      defaultSelection = {name: 'No selection', count: totalErrorCount}
     }
+    dropDownOptions.push(defaultSelection)
     setOptions(dropDownOptions);
-    setSelected(dropDownOptions[0]);
-  }, [errData]);
+    setSelected(defaultSelection);
+  }, [errData, selectErrorType]);
 
+  const handleSelect = (selectedOption) =>{
+    selectErrorType(selectedOption.name)
+    setSelected(selectedOption)
+  }
   return (
     <div className="fixed top-18 w-48 z-40">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={handleSelect}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default  bg-white py-2 pl-3 pr-10 text-left  border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate text-gray-500">
