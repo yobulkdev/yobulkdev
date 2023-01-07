@@ -9,11 +9,11 @@ import {
 import { CopyBlock, monoBlue } from "react-code-blocks";
 
 const importers = [
-    { value: "Importer #1", label: "Importer #1" },
-    { value: "Importer #2", label: "Importer #2" },
-    { value: "Importer #3", label: "Importer #3" },
-    { value: "Importer #4", label: "Importer #4" },
-    { value: "Importer #5", label: "Importer #5" },
+    { value: "63a28875cvc26427b0bc320e", label: "63a28875cvc26427b0bc320e" },
+    { value: "43a26875cdc26427b0bc370e", label: "43a26875cdc26427b0bc370e" },
+    { value: "63a29875c2c26427b0b1390e", label: "63a29875c2c26427b0b1390e" },
+    { value: "61a28075cbc2642750bc910e", label: "61a28075cbc2642750bc910e" },
+    { value: "46a28875ccc26427b0bc360e", label: "46a28875ccc26427b0bc360e" },
 ];
 
 const organizations = [
@@ -85,7 +85,7 @@ function App() {
         <hr />
         <br />
         <YoButton
-        templateId={"63a28875cbc26427b0bc390e"}
+        templateId="63a28875cbc26427b0bc390e"
         yoHostUrl={"http://localhost:3000"}
         />
     </div>
@@ -105,6 +105,31 @@ export default App;`);
             attachToImporters, attachToOrganizations, attachThemeJSONObj, attachToWorkspace, attachWebHookURL
         });
     };
+
+    useEffect(() => {
+        if (configurationData) {
+            setCode(`import { YoButton } from "yoembed";
+import "./App.css";
+
+function App() {
+    return (
+    <div className="App">
+        <h2>This is my SAAS</h2>
+        <hr />
+        <br />
+        <YoButton
+        templateId="${configurationData.attachToImporters.value}"
+        yoHostUrl={"http://localhost:3000"}
+        />
+    </div>
+    );
+}
+
+export default App;`
+            );
+        }
+    }, [configurationData]);
+
 
     useEffect(() => {
         if (attachToImporters && attachToOrganizations && attachThemeJSONObj && attachToWorkspace && attachWebHookURL) {
