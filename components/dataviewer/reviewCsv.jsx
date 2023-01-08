@@ -7,7 +7,7 @@ import ErrorTypeDropDown from './errorTypeSelector';
 import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 
-const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyErrors }) => {
+const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyErrors, selectErrorType }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -94,7 +94,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
           </Switch>
         </div>{' '}
         <div className="flex-auto w-auto font-semibold">
-          <ErrorTypeDropDown errData={metaData} />
+          <ErrorTypeDropDown errData={metaData} selectErrorType={selectErrorType}/>
         </div>
       </div>
 
