@@ -8,7 +8,7 @@ const Configuration = () => {
             <div className="overflow-x-auto mx-4 mt-10">
                 <div className="p-6 ">
                     <div className="flex align-middle justify-between">
-                        <h1 className="text-2xl font-bold text-gray-500">Configuration</h1>
+                        <h1 className="text-2xl font-bold text-gray-500">Importer Configuration</h1>
                     </div>
                     <ConfigList />
                 </div>

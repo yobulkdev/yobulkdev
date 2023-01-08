@@ -90,7 +90,7 @@ function App() {
         <hr />
         <br />
         <YoButton
-            templateId="63a28875cbc26427b0bc390e"
+            importId="63a28875cbc26427b0bc390e"
             yoHostUrl={"http://localhost:3000"}
         />
     </div>
@@ -123,7 +123,7 @@ function App() {
         <hr />
         <br />
         <YoButton
-            templateId="${configurationData.attachToImporters.value}"
+            importId="${configurationData.attachToImporters.value}"
             yoHostUrl={"http://localhost:3000"}
         />
     </div>
@@ -197,7 +197,7 @@ export default App;`
                                 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 "
                                 onClick={handleClick}
                             >
-                                NEXT
+                                SAVE
                             </button>
                         </div>
                     </div>
