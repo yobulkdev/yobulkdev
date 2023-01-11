@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import { TrashIcon } from '@heroicons/react/24/solid';
+import axios from 'axios';
+import SuccessModal from './SuccessModal';
+import WarningModal from './WarningModal';
 
 const CollaborateComponent = () => {
-
     const [orgName, setOrgName] = useState(null);
     const [workspaceName, setWorkspaceName] = useState(null);
     const [collaborators, setCollaborators] = useState([]);
     const [name, setName] = useState('');
-
-    const [collaborateData, setCollaborateData] = useState();
+    const [isVisible, setVisible] = useState(false);
+    const [warning, setWarning] = useState(false);
+    // const [collaborateData, setCollaborateData] = useState();
 
     function validateEmail(email) {
         const re = /\S+@\S+\.\S+/;
@@ -27,12 +30,28 @@ const CollaborateComponent = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        setCollaborateData({ orgName, workspaceName, collaborators });
-    };
+        if (!orgName || !workspaceName || !collaborators){
+            setWarning(true);
+            return;
+        }
+        axios
+          .post('/api/collaborate', {
+            orgName,
+            workspaceName,
+            collaborators,
+          })
+          .then( (response) => {
+            setVisible(true);
+          })
+          .catch( (error) => console.log(error));
+      };
 
-    useEffect(() => {
-        console.log(collaborateData);
-    }, [collaborateData]);
+    const acknowledgeModal = () =>{
+        setVisible(false);
+        setOrgName('');
+        setWorkspaceName('');
+        setCollaborators([]);
+    }
 
     const handleDelete = value => {
         const newCollaborators = collaborators.filter(item => item !== value);
@@ -41,6 +60,8 @@ const CollaborateComponent = () => {
 
     return (
         <div className=''>
+            {isVisible && <SuccessModal submit={acknowledgeModal}/>}
+            {warning && <WarningModal setWarning={setWarning}/>}
             <div className='flex mt-4 w-full border-2 rounded-md py-1 px-2 align-middle justify-between'>
 
                 <form className='p-5 w-full'>
@@ -62,6 +83,7 @@ const CollaborateComponent = () => {
                                     p-2.5
                                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder='Enter Organization Name Here ...'
+                                value={orgName}
                                 onChange={(evt) => setOrgName(evt.target.value)}
                                 required
                             />
@@ -86,6 +108,7 @@ const CollaborateComponent = () => {
                                     p-2.5
                                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder='Enter Workspace Name Here ...'
+                                value={workspaceName}
                                 onChange={(evt) => setWorkspaceName(evt.target.value)}
                                 required
                             />

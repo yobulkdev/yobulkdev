@@ -14,33 +14,34 @@ import { googlecode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
 
-const importers = [
-    { value: "63a28875cvc26427b0bc320e", label: "63a28875cvc26427b0bc320e" },
-    { value: "43a26875cdc26427b0bc370e", label: "43a26875cdc26427b0bc370e" },
-    { value: "63a29875c2c26427b0b1390e", label: "63a29875c2c26427b0b1390e" },
-    { value: "61a28075cbc2642750bc910e", label: "61a28075cbc2642750bc910e" },
-    { value: "46a28875ccc26427b0bc360e", label: "46a28875ccc26427b0bc360e" },
-];
+// const importers = [
+//     { value: "63a28875cvc26427b0bc320e", label: "63a28875cvc26427b0bc320e" },
+//     { value: "43a26875cdc26427b0bc370e", label: "43a26875cdc26427b0bc370e" },
+//     { value: "63a29875c2c26427b0b1390e", label: "63a29875c2c26427b0b1390e" },
+//     { value: "61a28075cbc2642750bc910e", label: "61a28075cbc2642750bc910e" },
+//     { value: "46a28875ccc26427b0bc360e", label: "46a28875ccc26427b0bc360e" },
+// ];
 
-const organizations = [
-    {
-        value: 'Company A',
-        label: 'Company A',
-    },
-    {
-        value: 'Company B',
-        label: 'Company B',
-    },
-    {
-        value: 'Company C',
-        label: 'Company C',
-    },
-    {
-        value: 'Company D',
-        label: 'Company D',
-    },
-];
+// const organizations = [
+//     {
+//         value: 'Company A',
+//         label: 'Company A',
+//     },
+//     {
+//         value: 'Company B',
+//         label: 'Company B',
+//     },
+//     {
+//         value: 'Company C',
+//         label: 'Company C',
+//     },
+//     {
+//         value: 'Company D',
+//         label: 'Company D',
+//     },
+// ];
 
 const jsonOBJ = [
     {
@@ -57,22 +58,25 @@ const jsonOBJ = [
     },
 ];
 
-const workspaces = [
-    {
-        value: 'Workspace #A',
-        label: 'Workspace #A',
-    },
-    {
-        value: 'Workspace #B',
-        label: 'Workspace #B',
-    },
-    {
-        value: 'Workspace #C',
-        label: 'Workspace #C',
-    },
-];
+// const workspaces = [
+//     {
+//         value: 'Workspace #A',
+//         label: 'Workspace #A',
+//     },
+//     {
+//         value: 'Workspace #B',
+//         label: 'Workspace #B',
+//     },
+//     {
+//         value: 'Workspace #C',
+//         label: 'Workspace #C',
+//     },
+// ];
 
 const ConfigList = () => {
+    const [organizations, setOrganizations] = useState([]);
+    const [workspaces, setWorkspaces] = useState([]);
+    const [importers, setImporters] = useState([]);
     const [attachToImporters, setAttachToImporters] = useState(null);
     const [attachToOrganizations, setAttachToOrganizations] = useState(null);
     const [attachThemeJSONObj, setAttachThemeJSONObj] = useState(null);
@@ -137,6 +141,33 @@ export default App;`
         }
     }, [configurationData]);
 
+
+    useEffect(()=>{
+        // fetch and set templates
+        axios
+        .get('/api/templates')
+        .then((res) => {
+            let listOfTemplates = res.data.filter((el) => el['template_name']).map((el) => {return {value: el._id, label: el.template_name}})
+            setImporters(listOfTemplates);
+        })
+        .catch((e) => console.log(e));
+
+        // fetch and set organizations
+        axios
+        .get('/api/organizations')
+        .then((res) => {
+            setOrganizations(res.data.map((el) => {return {value: el.orgName, label: el.orgName}}));
+        })
+        .catch((e) => console.log(e));
+
+        // fetch and set workspaces
+        axios
+        .get('/api/organizations')
+        .then((res) => {
+            setWorkspaces(res.data.map((el) => {return {value: el.workspaces[0].workspaceName, label: el.workspaces[0].workspaceName}}))
+        })
+        .catch((e) => console.log(e));
+    },[]);
 
     useEffect(() => {
         if (attachToImporters && attachToOrganizations && attachThemeJSONObj && attachToWorkspace && attachWebHookURL) {
