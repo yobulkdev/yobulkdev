@@ -55,7 +55,16 @@ const Configuration = () => {
                                             Preview
                                         </button>
                                     </Link>
+                                    <Link href={`/configuration/${obj._id}`}>
+                                        <button
+                                            type="button"
+                                            className="text-gray-100 bg-orange-500 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-1.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                                        >
+                                            View
+                                        </button>
+                                    </Link>
                                 </div>
+
                             </div>
                         ))}
 
