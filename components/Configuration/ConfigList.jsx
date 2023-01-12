@@ -73,6 +73,7 @@ const workspaces = [
 ];
 
 const ConfigList = () => {
+    const [importerName, setImporterName] = useState('');
     const [attachToImporters, setAttachToImporters] = useState(null);
     const [attachToOrganizations, setAttachToOrganizations] = useState(null);
     const [attachThemeJSONObj, setAttachThemeJSONObj] = useState(null);
@@ -154,6 +155,32 @@ export default App;`
                     </button>
                 </Link>
                 <h1 className="text-2xl font-bold text-gray-500">Create a Importer Configuration</h1>
+            </div>
+
+
+            <div className="mt-4 mx-4 border-2 rounded-md p-5">
+                <div className="flex justify-between">
+                    <div className="flex flex-col">
+                        <h2 className="text-lg font-bold text-gray-500">Name</h2>
+                        <p className="text-gray-400">Name of the importer</p>
+                    </div>
+                    <div className="ml-10 flex flex-col justify-center ">
+                        <div className="mb-2">
+                            <input
+                                type="text"
+                                id="default-input"
+                                className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block w-[900px] 
+                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                                value={importerName}
+                                placeholder={'Enter Your Importer Name'}
+                                onChange={(e) => setImporterName(e.target.value)}
+                            />
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="flex">

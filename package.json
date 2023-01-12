@@ -17,6 +17,7 @@
     "@ag-grid-community/infinite-row-model": "^28.2.0",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
+    "@monaco-editor/react": "^4.4.6",
     "ag-grid-community": "^28.2.0",
     "ag-grid-react": "^28.2.0",
     "ajv": "^8.11.0",
