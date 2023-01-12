@@ -43,7 +43,7 @@ const GridExample = ({ version }) => {
     {
       headerName: 'Row',
       valueGetter: 'node.rowIndex + 1',
-      maxWidth: 100
+      maxWidth: 100,
     },
   ]);
   const [fileMetaData, setFileMetaData] = useState();
@@ -70,23 +70,54 @@ const GridExample = ({ version }) => {
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
   let errorCountUri = `/api/meta/errorcount?collection_name=${state.collection}`;
 
-  useEffect(()=>{
+  const showOnlyErrors = useCallback(
+    (enabled) => {
+      setErrorFilter(enabled);
+      if (enabled) {
+        const dataSource = {
+          rowCount: undefined,
+          getRows: async (params) => {
+            let url = `/api/meta?collection=${state.collection}&`;
+            url += `_start=${params.startRow}&_end=${params.endRow}`;
+            url += '&only_errors=true';
+            if (selectedErrorType && selectedErrorType != 'No selection') {
+              url += `&column_name=${selectedErrorType}`;
+            }
+            fetch(url)
+              .then((httpResponse) => httpResponse.json())
+              .then((response) => {
+                params.successCallback(response.data, response.data.length);
+              })
+              .catch((error) => {
+                console.error(error);
+                params.failCallback();
+              });
+          },
+        };
+        gridRef.current.api.setDatasource(dataSource);
+      } else {
+        gridRef.current.api.setDatasource(originalDataSource);
+      }
+    },
+    [originalDataSource, selectedErrorType, state.collection]
+  );
+
+  useEffect(() => {
     if (!selectedErrorType) return;
     let currentColumnDefs = gridRef?.current?.api?.getColumnDefs();
-    if (Array.isArray(currentColumnDefs)){
-      let newColumnDefs = currentColumnDefs.map((elem)=> {
-        if (selectedErrorType === 'No selection' || elem.headerName === 'Row'){
-          elem.hide = false
-        } else{
-          elem.hide = (elem.headerName === selectedErrorType) ? false : true;
+    if (Array.isArray(currentColumnDefs)) {
+      let newColumnDefs = currentColumnDefs.map((elem) => {
+        if (selectedErrorType === 'No selection' || elem.headerName === 'Row') {
+          elem.hide = false;
+        } else {
+          elem.hide = elem.headerName === selectedErrorType ? false : true;
         }
         return elem;
-      })
-      setColumnDefs(newColumnDefs)
-      showOnlyErrors(errorFilter)
+      });
+      setColumnDefs(newColumnDefs);
+      showOnlyErrors(errorFilter);
     }
-
-  },[selectedErrorType, showOnlyErrors, errorFilter])
+  }, [selectedErrorType, showOnlyErrors, errorFilter]);
 
   const defaultColDef = useMemo(() => {
     return {
@@ -119,25 +150,27 @@ const GridExample = ({ version }) => {
           .then((response) => {
             template = response.columns;
             userSchema = response.schema;
-            setColumnDefs(prev => prev.concat(
-              template.map((x) => {
-                return {
-                  headerName: x.label,
-                  field: x.label,
-                  editable: true,
-                  cellClassRules: cellPassRules,
-                  tooltipField: x.label,
-                  hide: false,
-                  cellRenderer: (props) => {
-                    if (props.value !== undefined) {
-                      onLoadingHide();
-                      return props.value;
-                    } else {
-                      return onShowLoading();
-                    }
-                  },
-                };
-              }))
+            setColumnDefs((prev) =>
+              prev.concat(
+                template.map((x) => {
+                  return {
+                    headerName: x.label,
+                    field: x.label,
+                    editable: true,
+                    cellClassRules: cellPassRules,
+                    tooltipField: x.label,
+                    hide: false,
+                    cellRenderer: (props) => {
+                      if (props.value !== undefined) {
+                        onLoadingHide();
+                        return props.value;
+                      } else {
+                        return onShowLoading();
+                      }
+                    },
+                  };
+                })
+              )
             );
           });
       };
@@ -177,39 +210,10 @@ const GridExample = ({ version }) => {
         },
       };
       params.api.setDatasource(dataSource);
-      setOriginalDataSource(dataSource)
+      setOriginalDataSource(dataSource);
     },
     [state.collection, selectedErrorType]
   );
-  
-  const showOnlyErrors = useCallback((enabled) => {
-      setErrorFilter(enabled)
-      if (enabled){
-        const dataSource = {
-          rowCount: undefined,
-          getRows: async (params) => {
-            let url = `/api/meta?collection=${state.collection}&`;
-            url += `_start=${params.startRow}&_end=${params.endRow}`;
-            url += '&only_errors=true';
-            if (selectedErrorType && selectedErrorType != 'No selection'){
-              url += `&column_name=${selectedErrorType}`
-            }
-            fetch(url)
-              .then((httpResponse) => httpResponse.json())
-              .then((response) => {
-                params.successCallback(response.data, response.data.length);
-              })
-              .catch((error) => {
-                console.error(error);
-                params.failCallback();
-              });
-          },
-        };
-        gridRef.current.api.setDatasource(dataSource)
-      } else{
-        gridRef.current.api.setDatasource(originalDataSource)
-      }
-  }, [originalDataSource, selectedErrorType, state.collection]);
 
   const cellPassRules = {
     'cell-fail': (params) =>
@@ -325,7 +329,7 @@ const GridExample = ({ version }) => {
           collectionName={state.collection}
           fileMetaData={fileMetaData}
           setIsErrorFree={setIsErrorFree}
-          showOnlyErrors = {showOnlyErrors}
+          showOnlyErrors={showOnlyErrors}
           selectErrorType={setSelectedErrorType}
         />
         <div className="flex flex-col flex-nowrap m-2">
@@ -356,7 +360,7 @@ const GridExample = ({ version }) => {
               }
             ></AgGridReact>
           </div>
-        </div>        
+        </div>
       </div>
     </>
   );
