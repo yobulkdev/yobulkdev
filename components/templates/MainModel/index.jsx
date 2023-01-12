@@ -136,6 +136,14 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       columnData={'label'}
                     />
 
+                    <InputField
+                      name="Example"
+                      colKey="label"
+                      desc="Enter the example of the data like 'John Doe' or 123456 "
+                      setModalData={setModalData}
+                      columnData={'example'}
+                    />
+
                     <div className="flex py-4">
                       <label className="inline-flex relative items-center mr-5 cursor-pointer">
                         <input
