@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 const menuItems = [
   /*   { id: 1, label: 'Importer', icon: HomeIcon, link: '/' },
-  */
+   */
   {
     id: 1,
     label: 'Manage Templates',
@@ -34,7 +34,7 @@ const menuItems = [
     label: 'Collaborate',
     icon: UsersIcon,
     link: '/collaborate',
-  }
+  },
 ];
 
 const Sidebar = () => {
@@ -87,7 +87,15 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative ">
           <div className="flex items-center pl-2 gap-4">
-            <Image src={Logo} width={'170vw'} height={'50vw'} alt="" />
+            <Link href="/">
+              <Image
+                src={Logo}
+                width={'170vw'}
+                height={'50vw'}
+                alt=""
+                className="cursor-pointer"
+              />
+            </Link>
           </div>
           {isCollapsible && (
             <button
@@ -124,8 +132,9 @@ const Sidebar = () => {
                 </div>
 
                 <hr
-                  className={`${toggleCollapse ? 'w-8 ml-4' : 'w-40  ml-6'
-                    } bg-slate-300 my-2 justify-center`}
+                  className={`${
+                    toggleCollapse ? 'w-8 ml-4' : 'w-40  ml-6'
+                  } bg-slate-300 my-2 justify-center`}
                 />
               </div>
             );

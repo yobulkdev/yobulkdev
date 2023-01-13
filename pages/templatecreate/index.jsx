@@ -1,20 +1,15 @@
 import React from 'react';
 import Layout from '../../layouts/Layout';
-import { Tab } from "@headlessui/react";
+import { Tab } from '@headlessui/react';
 
 import TemplateConfig from '../../components/templates/TemplateConfig';
 import JSON_Template from '../../components/templates/JSON_Template.jsx';
-import CSV_Template from '../../components/templates/CSV_Template';
+import CsvUploader from '../../components/csvuploader';
 
-const tabList = [
-  'No Code Template',
-  'JSON Template',
-  'CSV Template'
-];
-
+const tabList = ['No Code Template', 'JSON Template', 'CSV Template'];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 const Templates = () => {
@@ -29,10 +24,10 @@ const Templates = () => {
                   key={category}
                   className={({ selected }) =>
                     classNames(
-                      "w-full  py-2.5 text-sm font-medium leading-5 dark:text-white",
+                      'w-full  py-2.5 text-sm font-medium leading-5 dark:text-white',
                       selected
-                        ? "bg-white border-b-2 text-black outline-none border-blue-900"
-                        : "text-blue-400 hover:bg-white/[0.12] hover:text-blue-500"
+                        ? 'bg-white border-b-2 text-black outline-none border-blue-900'
+                        : 'text-blue-400 hover:bg-white/[0.12] hover:text-blue-500'
                     )
                   }
                 >
@@ -48,7 +43,10 @@ const Templates = () => {
                 <JSON_Template />
               </Tab.Panel>
               <Tab.Panel>
-                <CSV_Template />
+                <CsvUploader
+                  isStepperVisible={false}
+                  nextPageRoute={'/snapshotviewer'}
+                />
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
