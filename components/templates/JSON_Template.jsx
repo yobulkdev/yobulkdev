@@ -96,7 +96,7 @@ const JSON_Template = () => {
         <button
           type="button"
           onClick={saveTemplate}
-          className="flex rounded-sm bg-blue-500 px-2 py-1 text-sm font-medium border-2 items-center hover:bg-blue-700 text-lime-50"
+          className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
         >
           <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
         </button>
