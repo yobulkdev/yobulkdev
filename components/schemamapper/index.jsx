@@ -20,7 +20,7 @@ import {
   EMAIL_DATA_TYPE,
   DROPDOWN_SELECT_TEXT,
 } from '../../constants';
-import Stepper from '../stepper';
+// import Stepper from '../stepper';
 
 const SchemaMapper = () => {
   const gridRef = useRef();
@@ -53,14 +53,6 @@ const SchemaMapper = () => {
       cellStyle: { backgroundColor: '	#E0E0E0' },
     },
     {
-      headerName: 'Destination Column',
-      field: 'label',
-      editable: true,
-      cellStyle: { cursor: 'pointer' },
-      onCellValueChanged: (e) =>
-        dispatch({ type: 'CURRENT_FILE_TEMPLATE_UPDATE', payload: e.data }),
-    },
-    {
       headerName: 'Data Type',
       field: 'data_type',
       editable: true,
@@ -82,22 +74,6 @@ const SchemaMapper = () => {
       field: 'is_required',
       cellRenderer: ToggleValueRenderer,
       cellStyle: { cursor: 'pointer' },
-    },
-    {
-      headerName: 'Check',
-      field: 'custom_validation',
-      editable: true,
-      cellEditor: 'agSelectCellEditor',
-      cellEditorParams: {
-        values: checkTypes,
-      },
-      cellStyle: {
-        cursor: 'pointer',
-        boxShadow: '2px 2px #D3D3D3',
-        borderRadius: '5px',
-      },
-      onCellValueChanged: (e) =>
-        dispatch({ type: 'CURRENT_FILE_TEMPLATE_UPDATE', payload: e.data }),
     },
   ];
 
@@ -147,6 +123,7 @@ const SchemaMapper = () => {
         });
       })
       .catch((err) => console.log(err));
+    router.push({ pathname: '/templates' });
   };
 
   const onGridReady = useCallback((params) => {
@@ -162,7 +139,7 @@ const SchemaMapper = () => {
 
   return (
     <>
-      <Stepper step={3} />
+      {/* <Stepper step={3} /> */}
       {!loading && (
         <>
           <div className="w-full sm:flex sm:space-x-8 sm:p-4">

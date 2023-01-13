@@ -39,7 +39,7 @@ const SnapshotViewer = () => {
 
   return (
     <>
-      <Stepper step={2} />
+      {/* <Stepper step={2} /> */}
       <div className="w-full sm:flex sm:space-x-8 sm:p-4">
         <button
           onClick={() =>
@@ -49,7 +49,7 @@ const SnapshotViewer = () => {
           }
           className="bg-transparent h-8 px-4 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
         >
-          Schema Mapper
+          Create Template
         </button>
       </div>
       <div className="ag-theme-alpine" style={{ height: 500, width: 'auto' }}>
