@@ -7,12 +7,12 @@ export default function addColumnButton({
   setTemplateData,
 }) {
   return (
-    <div className="rounded-md mt-4 flex align-middle justify-between">
+    <div className="rounded-md mt-10 flex align-middle justify-between">
       <h1 className="text-xl font-bold text-gray-500">Columns</h1>
       <button
         type="button"
         onClick={openModal}
-        className="flex rounded-sm bg-blue-500 px-2 py-1 text-sm font-medium border-2 items-center hover:bg-blue-700 text-lime-50"
+        className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
       >
         <PlusCircleIcon className="h-5 mr-1" /> Add Column
       </button>

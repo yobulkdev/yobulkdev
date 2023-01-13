@@ -9,15 +9,9 @@ const ImportsComponent = () => {
         <div className="overflow-x-auto mx-4 relative mt-10">
             <button
                 type="button"
-                className="py-2.5 px-5 mr-2 mb-2 flex
-                text-sm font-medium text-gray-900
-                bg-white rounded-md
-                border border-gray-200 hover:bg-gray-100 hover:text-blue-700
-                focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-200
-                dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 
-                float-right"
+                className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center mb-2 float-right"
             >
-                Download File
+                Download Imported CSV
                 <DocumentArrowDownIcon
                     className="h-5 w-5 ml-2"
                     aria-hidden="true" />
@@ -30,7 +24,7 @@ const ImportsComponent = () => {
                             OrgID
                         </th>
                         <th scope="col" className="py-3">
-                            TID
+                            ImportID
                         </th>
                         <th scope="col" className="py-3 ">
                             File Name

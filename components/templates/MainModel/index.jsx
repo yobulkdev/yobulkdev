@@ -154,7 +154,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                         />
                         <div
                           onClick={handleRequired}
-                          className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-blue-400  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-400"
+                          className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-blue-400  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
                         ></div>
                         <span className="ml-2 text-sm font-medium text-gray-900">
                           Is Required
@@ -174,7 +174,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                           <p className="flex  text-blue-400">
                             {modalData.find((el) => el.key === 'data_type')
                               ? modalData.find((el) => el.key === 'data_type')
-                                .value
+                                  .value
                               : 'Select data type ...'}
                           </p>
 
@@ -183,8 +183,8 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                               (el) => el.key === 'custom_validation'
                             )
                               ? modalData.find(
-                                (el) => el.key === 'custom_validation'
-                              ).value
+                                  (el) => el.key === 'custom_validation'
+                                ).value
                               : ''}
                           </p>
                         </div>
@@ -216,7 +216,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                     <div className="mt-4 float-right">
                       <button
                         type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
                         onClick={handleSaveMainModalData}
                       >
                         Add

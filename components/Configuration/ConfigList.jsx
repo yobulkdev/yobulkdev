@@ -182,7 +182,7 @@ export default App;`);
         </h1>
       </div>
 
-      <div className="mt-4 mx-4 border-2 rounded-md p-5">
+      <div className="mt-4 mx-4 border-2 rounded-md p-5 border-[#64B6EB]">
         <div className="flex justify-between">
           <div className="flex flex-col">
             <h2 className="text-lg font-bold text-gray-500">Name</h2>
@@ -193,7 +193,7 @@ export default App;`);
               <input
                 type="text"
                 id="default-input"
-                className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                className={`border border-[#64B6EB] text-gray-400  text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-[900px] 
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
@@ -208,7 +208,7 @@ export default App;`);
 
       <div className="flex">
         <form className="p-5 w-7/12">
-          <div className=" border-2 rounded-md py-1 px-2 align-middle justify-between">
+          <div className=" border-2 border-[#64B6EB] rounded-md py-1 px-2 align-middle justify-between">
             <AttachToImporter
               attachToImporters={attachToImporters}
               setAttachToImporters={setAttachToImporters}
@@ -228,18 +228,20 @@ export default App;`);
             />
           </div>
 
-          <div className="mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between">
+          <div className="mt-4 rounded-md align-middle justify-between">
             <AttachToJSONOBJ
               attachThemeJSONObj={attachThemeJSONObj}
               setAttachThemeJSONObj={setAttachThemeJSONObj}
               jsonOBJ={jsonOBJ}
+              availiable={false}
             />
           </div>
 
-          <div className="mt-4 border-2 rounded-md py-1 px-2 align-middle justify-between">
+          <div className="mt-4 rounded-md align-middle justify-between">
             <AttachWebHookURL
               attachWebHookURL={attachWebHookURL}
               setAttachWebHookURL={setAttachWebHookURL}
+              availiable={false}
             />
 
             <div className="flex p-4 align-middle items-center">
@@ -266,7 +268,7 @@ export default App;`);
         </form>
 
         <div className="p-5 w-5/12 border-gray-200">
-          <div className="border-2 rounded-md py-1 px-2 align-middle justify-between">
+          <div className="border-2 border-[#64B6EB] rounded-md py-1 px-2 align-middle justify-between">
             <SyntaxHighlighter
               language="javascript"
               showLineNumbers={true}
@@ -277,7 +279,7 @@ export default App;`);
             </SyntaxHighlighter>
 
             <CopyToClipboard text={code} onCopy={() => alert('Copied')}>
-              <div className="mt-4 flex items-center justify-center border-2 rounded-md py-1 px-2 text-center cursor-pointer border-blue-300">
+              <div className="mt-4 mb-2 flex items-center justify-center border-2 rounded-md py-1 px-2 text-center cursor-pointer border-blue-300">
                 <DocumentDuplicateIcon className="h-5 w-5" aria-hidden="true" />{' '}
                 COPY
               </div>

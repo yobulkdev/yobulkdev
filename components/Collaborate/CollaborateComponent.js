@@ -60,12 +60,12 @@ const CollaborateComponent = () => {
     <div className="">
       {isVisible && <SuccessModal submit={acknowledgeModal} />}
       {warning && <WarningModal setWarning={setWarning} />}
-      <div className="flex mt-4 w-full border-2 rounded-md py-1 px-2 align-middle justify-between">
+      <div className="flex mt-4 w-full border-2 border-[#64B6EB] rounded-md py-1 px-2 align-middle justify-between">
         <form className="p-5 w-full">
           <div className="flex mt-7 align-middle items-center">
             <div className="flex flex-col w-5/12">
               <h2 className="text-lg font-bold text-gray-500">
-                Create a Organization{' '}
+                Create an Organization{' '}
               </h2>
               <p className="text-gray-400">
                 The Organization Name to identify your organization
@@ -75,7 +75,7 @@ const CollaborateComponent = () => {
               <input
                 type="text"
                 className="bg-gray-50
-                                    border border-gray-300 rounded-lg
+                                    border border-[#64B6EB] rounded-lg
                                     text-gray-900 text-sm
                                     focus:ring-blue-500 focus:border-blue-500 
                                     block w-full
@@ -102,7 +102,7 @@ const CollaborateComponent = () => {
               <input
                 type="text"
                 className="bg-gray-50
-                                    border border-gray-300 rounded-lg
+                                    border border-[#64B6EB] rounded-lg
                                     text-gray-900 text-sm
                                     focus:ring-blue-500 focus:border-blue-500 
                                     block w-full
@@ -116,12 +116,12 @@ const CollaborateComponent = () => {
             </div>
           </div>
 
-          <hr className="my-7 align-middle items-center" />
+          <hr className="my-7 align-middle items-center border-[#64B6EB]" />
 
           <div className="flex">
             <div className="flex flex-col w-5/12">
               <h2 className="text-lg font-bold text-gray-500">
-                Add Colaborators
+                Add Collaborators
               </h2>
               <p className="text-gray-400">
                 The Collaborators to add to your workspace
@@ -133,7 +133,7 @@ const CollaborateComponent = () => {
                   type="email"
                   value={name}
                   className="bg-gray-50
-                                border border-gray-300 rounded-lg
+                                border border-[#64B6EB] rounded-lg
                                 text-gray-900 text-sm
                                 focus:ring-blue-500 focus:border-blue-500 
                                 block w-full
@@ -144,7 +144,7 @@ const CollaborateComponent = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-white border border-gray-300  hover:bg-blue-500 hover:text-white text-black py-1 px-2 rounded shadow-sm"
+                  className="bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center"
                   onClick={handleAdd}
                 >
                   ADD
@@ -155,7 +155,7 @@ const CollaborateComponent = () => {
 
           <button
             type="submit"
-            className="bg-white float-right mt-10 border-2 hover:bg-blue-500 hover:text-white text-black py-1 px-2 rounded shadow-sm"
+            className="mt-10 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center mb-2 float-right"
             onClick={handleClick}
           >
             SUBMIT
@@ -163,12 +163,12 @@ const CollaborateComponent = () => {
         </form>
       </div>
 
-      <div className="flex w-1/3 flex-col mt-4 border-2 rounded-md py-1 px-2 ">
+      <div className="flex w-1/3 flex-col mt-4 border-2 border-[#64B6EB] rounded-md py-1 px-2 ">
         <h1 className="text-lg text-center font-bold text-gray-500">
           Collaborators
         </h1>
 
-        <ul className="flex flex-col gap-2 mt-2 pt-2">
+        <ul className="flex flex-col gap-2 my-2 p-2">
           {collaborators.length === 0 && (
             <li className="text-slate-500">No Collaborators Added</li>
           )}

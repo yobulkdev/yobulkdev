@@ -13,27 +13,27 @@ const menuItems = [
    */
   {
     id: 1,
-    label: 'Manage Templates',
+    label: 'Template Configuration',
     icon: ArticleIcon,
     link: '/templates',
   },
   {
     id: 2,
-    label: 'Imports',
-    icon: HomeIcon,
-    link: '/imports',
+    label: 'Collaborate',
+    icon: UsersIcon,
+    link: '/collaborate',
   },
   {
     id: 3,
-    label: 'Configuration',
+    label: 'Importer Configuration',
     icon: ConfigIcon,
     link: '/configuration',
   },
   {
     id: 4,
-    label: 'Collaborate',
-    icon: UsersIcon,
-    link: '/collaborate',
+    label: 'Imports',
+    icon: HomeIcon,
+    link: '/imports',
   },
 ];
 
@@ -51,7 +51,7 @@ const Sidebar = () => {
   const wrapperClasses = classNames(
     'h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200 mr-2',
     {
-      ['w-52']: !toggleCollapse,
+      ['w-60']: !toggleCollapse,
       ['w-16']: toggleCollapse,
     }
   );
