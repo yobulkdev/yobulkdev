@@ -4,17 +4,13 @@ import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 const ConfigurationConfig = ({ configID }) => {
-  const [templateData, setTemplateData] = useState({});
+  const [importerData, setImporterData] = useState({});
 
   useEffect(() => {
-    const headers = {
-      template_id: configID,
-    };
-
     axios
-      .get('/api/templates', { headers }) // to be changed: to /api/...
+      .get(`/api/importer/${configID}`) 
       .then((res) => {
-        setTemplateData(res.data);
+        setImporterData(res.data);
       })
       .catch((err) => console.log(err));
   }, [configID]);
@@ -28,10 +24,7 @@ const ConfigurationConfig = ({ configID }) => {
           </Link>
 
           <h1 className="text-2xl font-bold text-gray-500">
-            {templateData &&
-              `${
-                templateData.template_name && templateData.template_name
-              } Importer`}
+            {importerData.name}
           </h1>
         </div>
       </div>
@@ -45,7 +38,7 @@ const ConfigurationConfig = ({ configID }) => {
           </div>
           <div className="ml-10 flex flex-col justify-center w-72">
             <div className="mb-2">
-              <span className="text-blue-500">{templateData._id}</span>
+              <span className="text-blue-500">{importerData._id}</span>
             </div>
           </div>
         </div>
@@ -57,7 +50,7 @@ const ConfigurationConfig = ({ configID }) => {
           </div>
           <div className="ml-10 flex flex-col justify-center w-72">
             <div className="mb-2">
-              <span> {templateData.template_name}</span>
+              <span> {importerData.name}</span>
             </div>
           </div>
         </div>
@@ -77,16 +70,18 @@ const ConfigurationConfig = ({ configID }) => {
               <th scope="col" className="py-3 ">
                 Date Created
               </th>
+              <th scope="col" className="py-3">
+                Attached Template 
+              </th>
             </tr>
           </thead>
-          {templateData.columns ? (
-            templateData.columns.map((col, idx) => (
-              <tr key={idx} className="h-10 text-center">
-                <td>{col.label}</td>
-                <td>{col.data_type}</td>
-                <td>{col.data_type}</td>
+          {importerData ? (
+              <tr key={importerData._id} className="h-10 text-center">
+                <td>{importerData.name}</td>
+                <td>{importerData._id}</td>
+                <td>{importerData.date ? importerData.date.split('T')[0] : 'NA'}</td>
+                <td>{importerData.templateName}</td>
               </tr>
-            ))
           ) : (
             <></>
           )}

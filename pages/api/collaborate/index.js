@@ -1,7 +1,7 @@
 import clientPromise from '../../../lib/mongodb';
 let ObjectId = require('mongodb').ObjectId;
 
-export default async function recordsCount(req, res) {
+export default async function organization(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.DATABASE_NAME | 'yobulk');
 
@@ -10,7 +10,6 @@ export default async function recordsCount(req, res) {
       try {
         let {orgName, workspaceName, collaborators } = req.body;
         let newOrg = {
-            orgId : new ObjectId(),
             orgName : orgName,
             workspaces:[
                 {

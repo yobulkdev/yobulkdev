@@ -10,9 +10,9 @@ const Configuration = () => {
 
     useEffect(() => {
         axios
-            .get('/api/templates') //to be changed to /api/config
+            .get('/api/importer') //to be changed to /api/config
             .then((res) => {
-                setConfigList(res.data.filter((el) => el['template_name'])); // to be changed to config_name
+                setConfigList(res.data); // to be changed to config_name
             })
             .catch((e) => console.log(e));
     }, []);
@@ -45,13 +45,13 @@ const Configuration = () => {
                                     <div className="flex flex-col">
                                         <Link href={`/configuration/${obj._id}`}>
                                             <h2 className="text-lg text-blue-500 cursor-pointer">
-                                                {obj.template_name}
+                                                {obj.name}
                                             </h2>
                                         </Link>
                                     </div>
 
                                     <div className="mt-4">
-                                        <Link href={`/configuration/testconfig/${obj._id}`}>
+                                        <Link href={`/configuration/testconfig/${obj.templateId}`}>
                                             <button
                                                 type="button"
                                                 className="text-white bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-6 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
