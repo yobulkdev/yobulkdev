@@ -178,7 +178,7 @@ const AdminComponent = ({ templateId, type }) => {
               </th>
 
               <th scope="col" className="py-3 ">
-                Custom Validation
+                Example
               </th>
               <th scope="col" className="py-3">
                 <span>Required</span>
@@ -196,7 +196,7 @@ const AdminComponent = ({ templateId, type }) => {
                 {/*   <td className="w-8">{col.key}</td> */}
                 <td>{col.label}</td>
                 <td>{col.data_type}</td>
-                <td>{col.custom_validation}</td>
+                <td>{col.example}</td>
                 <td>{col.is_required ? col.is_required.toString() : ''}</td>
                 {type === 'create' && (
                   <td className="flex justify-center">

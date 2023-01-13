@@ -2,8 +2,8 @@ import { Dialog, RadioGroup, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import {
   DROPDOWN_SELECT_TEXT,
-  NO_GMAIL_CHECK_TYPE,
-  THREE_DIGIT_CHECK_TYPE,
+  // NO_GMAIL_CHECK_TYPE,
+  // THREE_DIGIT_CHECK_TYPE,
 } from '../../../constants';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
@@ -13,7 +13,7 @@ const formats = [
   {
     name: 'Number',
     Description: 'Numbers with , and . characters allowed',
-    custom_validations: [DROPDOWN_SELECT_TEXT, THREE_DIGIT_CHECK_TYPE],
+    // custom_validations: [DROPDOWN_SELECT_TEXT, THREE_DIGIT_CHECK_TYPE],
   },
   {
     name: 'Text',
@@ -30,7 +30,7 @@ const formats = [
   {
     name: 'Email',
     Description: 'Valid Email Address',
-    custom_validations: [DROPDOWN_SELECT_TEXT, NO_GMAIL_CHECK_TYPE],
+    // custom_validations: [DROPDOWN_SELECT_TEXT, NO_GMAIL_CHECK_TYPE],
   },
 ];
 
@@ -180,6 +180,27 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                           )}
                         </RadioGroup.Option>
                       ))}
+
+                      <div className="mb-2">
+                        <div className='ring-2 ring-white ring-opacity-60 ring-offset-2'>
+                          <label
+                            htmlFor="regexVal"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >
+                            Custom Regular Expression
+                          </label>
+                          <input
+                            type="text"
+                            id="regexVal"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="^[a-zA-Z]*$"
+                          />
+
+                        </div>
+
+                      </div>
+
+
                       <div className="mt-4 float-right">
                         <button
                           type="button"
@@ -195,9 +216,9 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
               </Dialog.Panel>
             </Transition.Child>
           </div>
-        </div>
-      </Dialog>
-    </Transition>
+        </div >
+      </Dialog >
+    </Transition >
   );
 };
 
