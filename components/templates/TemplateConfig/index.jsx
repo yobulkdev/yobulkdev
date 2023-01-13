@@ -6,7 +6,7 @@ import {
   PencilIcon,
   TrashIcon,
   ArrowDownTrayIcon,
-  ArrowLeftIcon
+  ArrowLeftIcon,
 } from '@heroicons/react/24/outline';
 import addColumnButton from './addColumnButton';
 import handleEdit from './handleEdit';
@@ -87,17 +87,17 @@ const AdminComponent = ({ templateId, type }) => {
   return (
     <div className="p-4">
       <div className="flex align-middle justify-between ">
-        <div className='flex align-middle items-center gap-2 '>
-
+        <div className="flex align-middle items-center gap-2 ">
           <Link href="/templates">
-            <ArrowLeftIcon className='h-5 cursor-pointer' />
+            <ArrowLeftIcon className="h-5 cursor-pointer" />
           </Link>
 
           <h1 className="text-2xl font-bold text-gray-500">
             {templateData &&
-              `${templateData.template_name
-                ? templateData.template_name
-                : 'Name your'
+              `${
+                templateData.template_name
+                  ? templateData.template_name
+                  : 'Name your'
               } template`}
           </h1>
         </div>
@@ -112,7 +112,7 @@ const AdminComponent = ({ templateId, type }) => {
         )}
       </div>
 
-      <div className="mt-4 border-2 rounded-md p-4 flex flex-col align-middle bg-blue-50">
+      <div className="mt-4 border-2 rounded-md p-4 flex flex-col align-middle">
         <div className="flex">
           <div className="flex flex-col w-5/12">
             <h2 className="text-lg font-bold text-gray-500">Key</h2>
