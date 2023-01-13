@@ -34,6 +34,7 @@ const JSON_Template = () => {
   const [code, setCode] = useState(`{
 
 }`);
+  const [templateName, setTemplateName] = useState('');
 
   const [value, setValue] = useState(code);
 
@@ -60,17 +61,41 @@ const JSON_Template = () => {
 
   return (
     <div>
-      <div className="flex align-middle items-center gap-1 my-2 p-2">
+      <div className="flex px-2">
         <Link href="/templates">
-          <ArrowLeftIcon className="h-5 cursor-pointer" />
+          <div className="flex items-center gap-1">
+            <ArrowLeftIcon className="h-5 cursor-pointer" />
+            <p className="text-lg font-medium">Back To Templates</p>
+          </div>
         </Link>
-        <h1 className="text-2xl font-bold text-gray-500">
-          Create Your Template Using JSON
-        </h1>
+      </div>
+      <div className="flex items-center justify-center gap-10">
+        <div className="my-4 border-2 rounded-md p-4 flex flex-col align-middle justify-center w-2/3">
+          <div className="flex">
+            <div className="flex flex-col w-5/12">
+              <h2 className="text-lg font-bold text-gray-500">Name</h2>
+              <p className="text-gray-400">Name of the template</p>
+            </div>
+            <div className="ml-10 flex flex-col justify-center w-72">
+              <div className="mb-2">
+                <input
+                  type="text"
+                  id="default-input"
+                  className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block w-[400px] 
+                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                  value={templateName}
+                  onChange={(e) => setTemplateName(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="flex">
-        <div className="flex flex-col gap-5 items-center">
+        <div className="flex flex-col gap-2 items-center">
           <Editor
             height="70vh"
             width={`50vw`}

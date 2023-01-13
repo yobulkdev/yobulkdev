@@ -4,6 +4,8 @@ import React, { useCallback, useContext, useState } from 'react';
 import { Context } from '../../context';
 import Papa from 'papaparse';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 // import Stepper from '../stepper';
 
 const CsvUploader = ({ nextPageRoute }) => {
@@ -62,6 +64,14 @@ const CsvUploader = ({ nextPageRoute }) => {
 
   return (
     <div className="mt-3">
+      <div className="flex px-2">
+        <Link href="/templates">
+          <div className="flex items-center gap-1">
+            <ArrowLeftIcon className="h-5 cursor-pointer" />
+            <p className="text-lg font-medium">Back To Templates</p>
+          </div>
+        </Link>
+      </div>
       <div className="my-4 border-2 rounded-md p-4 flex flex-col align-middle justify-center mx-20">
         <div className="flex">
           <div className="flex flex-col w-5/12">
