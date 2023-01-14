@@ -140,7 +140,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       name="Example"
                       colKey="label"
                       desc="Enter the example of the data like 'John Doe' or 123456 "
-                      setModalData={setModalData}
+                      setModalData={()=> {}} // setModalData was saving exmaple as column name in template -> fix this
                       columnData={'example'}
                     />
 

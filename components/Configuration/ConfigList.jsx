@@ -7,6 +7,7 @@ import {
   AttachWebHookURL,
 } from './index';
 import Link from 'next/link';
+import SuccessModal from '../Common/SuccessModal';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { googlecode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
@@ -43,6 +44,7 @@ const ConfigList = () => {
   const [attachWebHookURL, setAttachWebHookURL] = useState(null);
   const [configurationData, setConfigurationData] = useState(null);
   const [error, setError] = useState(null);
+  const [isVisible, setVisible] = useState(false);
 
   const [code, setCode] = useState(`import { YoButton } from "yoembed";
 import "./App.css";
@@ -66,23 +68,29 @@ export default App;`);
   const handleClick = (e) => {
     e.preventDefault();
     if (
+      !importerName ||
       !attachToImporters ||
       !attachToOrganizations ||
-      !attachThemeJSONObj ||
-      !attachToWorkspace ||
-      !attachWebHookURL
+      // !attachThemeJSONObj ||
+      !attachToWorkspace 
+      // !attachWebHookURL
     ) {
       setError('*Please fill all the fields');
       return;
     }
 
-    setConfigurationData({
-      attachToImporters,
-      attachToOrganizations,
-      attachThemeJSONObj,
-      attachToWorkspace,
-      attachWebHookURL,
-    });
+    axios
+      .post('/api/importer', {
+        importerName: importerName,
+        templateId: attachToImporters.value, 
+        organizationId: attachToOrganizations.value, 
+        workspaceId: attachToWorkspace.value,
+        templateName: attachToImporters.label
+      })
+      .then((response) => {
+        setVisible(true);
+      })
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -128,7 +136,7 @@ export default App;`);
       .then((res) => {
         setOrganizations(
           res.data.map((el) => {
-            return { value: el.orgName, label: el.orgName };
+            return { value: el._id, label: el.orgName };
           })
         );
       })
@@ -141,7 +149,7 @@ export default App;`);
         setWorkspaces(
           res.data.map((el) => {
             return {
-              value: el.workspaces[0].workspaceName,
+              value: el.workspaces[0].workspaceId,
               label: el.workspaces[0].workspaceName,
             };
           })
@@ -149,6 +157,14 @@ export default App;`);
       })
       .catch((e) => console.log(e));
   }, []);
+
+  const acknowledgeModal = () =>{
+    setVisible(false);
+    setImporterName('');
+    setAttachToWorkspace(null);
+    setAttachToOrganizations(null);
+    setAttachToImporters(null);
+  }
 
   useEffect(() => {
     if (
@@ -170,6 +186,7 @@ export default App;`);
 
   return (
     <div className="py-1 px-2 align-middle justify-between">
+      {isVisible && <SuccessModal submit={acknowledgeModal} message={'Successfully added the importer !'}/>}
       <div className="flex flex-col px-6 gap-2 align-middle justify-between">
         <Link href="/configuration">
           <button className="flex items-center gap-1 rounded-full text-blue-500 font-medium hover:bg-blue-50 px-2 w-fit">

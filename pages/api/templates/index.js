@@ -33,6 +33,7 @@ export default async function fetchTemplateRecords(req, res) {
         //Make this mongo db based
         let generatedSchema = generateSchema(columns);
         body.schema = generatedSchema;
+        body.created_date = new Date();
 
         let result = await db.collection('templates').insertOne(body);
         res.send(result);

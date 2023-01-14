@@ -1,6 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-export default function SuccessModal({ submit }) {
+export default function SuccessModal({ submit, message }) {
   return (
         <>
           <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none">
@@ -9,7 +8,7 @@ export default function SuccessModal({ submit }) {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-full bg-white outline-none focus:outline-none">
                 <div className="flex flex-col p-5">
                     <div className="flex h-20 justify-center text-lg text-green-700">
-                      Successfully added the workspace !
+                      {message}
                     </div>
                     <button
                       onClick={submit}
