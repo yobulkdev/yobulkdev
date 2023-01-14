@@ -34,7 +34,7 @@ const MainBar = () => {
         {templates &&
           templates.map((obj, idx) => (
             <div
-              className="mt-4 border-2 border-[#64B6EB] rounded-md flex flex-col align-middle justify-between p-4 mx-2"
+              className="mt-4 bg-white rounded-md flex flex-col align-middle justify-between p-4 mx-2 shadow-sm"
               key={idx}
             >
               <div className="flex flex-col">

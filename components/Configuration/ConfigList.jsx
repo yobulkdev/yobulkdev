@@ -72,7 +72,7 @@ export default App;`);
       !attachToImporters ||
       !attachToOrganizations ||
       // !attachThemeJSONObj ||
-      !attachToWorkspace 
+      !attachToWorkspace
       // !attachWebHookURL
     ) {
       setError('*Please fill all the fields');
@@ -82,10 +82,10 @@ export default App;`);
     axios
       .post('/api/importer', {
         importerName: importerName,
-        templateId: attachToImporters.value, 
-        organizationId: attachToOrganizations.value, 
+        templateId: attachToImporters.value,
+        organizationId: attachToOrganizations.value,
         workspaceId: attachToWorkspace.value,
-        templateName: attachToImporters.label
+        templateName: attachToImporters.label,
       })
       .then((response) => {
         setVisible(true);
@@ -158,13 +158,13 @@ export default App;`);
       .catch((e) => console.log(e));
   }, []);
 
-  const acknowledgeModal = () =>{
+  const acknowledgeModal = () => {
     setVisible(false);
     setImporterName('');
     setAttachToWorkspace(null);
     setAttachToOrganizations(null);
     setAttachToImporters(null);
-  }
+  };
 
   useEffect(() => {
     if (
@@ -186,7 +186,12 @@ export default App;`);
 
   return (
     <div className="py-1 px-2 align-middle justify-between">
-      {isVisible && <SuccessModal submit={acknowledgeModal} message={'Successfully added the importer !'}/>}
+      {isVisible && (
+        <SuccessModal
+          submit={acknowledgeModal}
+          message={'Successfully added the importer !'}
+        />
+      )}
       <div className="flex flex-col px-6 gap-2 align-middle justify-between">
         <Link href="/configuration">
           <button className="flex items-center gap-1 rounded-full text-blue-500 font-medium hover:bg-blue-50 px-2 w-fit">
@@ -199,7 +204,7 @@ export default App;`);
         </h1>
       </div>
 
-      <div className="mt-4 mx-4 border-2 rounded-md p-5 border-[#64B6EB]">
+      <div className="mt-4 mx-4 bg-white rounded-md p-5 shadow-sm">
         <div className="flex justify-between">
           <div className="flex flex-col">
             <h2 className="text-lg font-bold text-gray-500">Name</h2>
@@ -210,7 +215,7 @@ export default App;`);
               <input
                 type="text"
                 id="default-input"
-                className={`border border-[#64B6EB] text-gray-400  text-sm rounded-lg
+                className={`border-2 border-gray-200 text-gray-400  text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-[900px] 
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
@@ -225,7 +230,7 @@ export default App;`);
 
       <div className="flex">
         <form className="p-5 w-7/12">
-          <div className=" border-2 border-[#64B6EB] rounded-md py-1 px-2 align-middle justify-between">
+          <div className="bg-white shadow-sm rounded-md py-1 px-2 align-middle justify-between">
             <AttachToImporter
               attachToImporters={attachToImporters}
               setAttachToImporters={setAttachToImporters}
@@ -269,12 +274,7 @@ export default App;`);
               <div className="justify-center ml-auto">
                 <button
                   type="submit"
-                  className="py-2.5 px-5 flex
-                                text-sm font-medium text-gray-900
-                                bg-white rounded-md
-                                border border-gray-200 hover:bg-gray-100 hover:text-blue-700
-                                focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-200
-                                dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 "
+                  className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center mb-2"
                   onClick={handleClick}
                 >
                   SAVE
@@ -284,8 +284,8 @@ export default App;`);
           </div>
         </form>
 
-        <div className="p-5 w-5/12 border-gray-200">
-          <div className="border-2 border-[#64B6EB] rounded-md py-1 px-2 align-middle justify-between">
+        <div className="p-5 w-5/12">
+          <div className="bg-white shadow-sm rounded-md p-2 align-middle justify-between">
             <SyntaxHighlighter
               language="javascript"
               showLineNumbers={true}
@@ -296,7 +296,7 @@ export default App;`);
             </SyntaxHighlighter>
 
             <CopyToClipboard text={code} onCopy={() => alert('Copied')}>
-              <div className="mt-4 mb-2 flex items-center justify-center border-2 rounded-md py-1 px-2 text-center cursor-pointer border-blue-300">
+              <div className="mt-4 flex items-center bg-white justify-center rounded-md p-2 text-center cursor-pointer shadow-sm border-[0.4px]">
                 <DocumentDuplicateIcon className="h-5 w-5" aria-hidden="true" />{' '}
                 COPY
               </div>
