@@ -14,11 +14,10 @@ export default function SuccessModal({ submit, message }) {
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-full bg-white outline-none focus:outline-none">
             {isloading ? (
-              <div class="flex justify-center items-center">
-                <div
-                  class="spinner-border animate-spin inline-block w-8 h-16 border-4 rounded-full"
-                  role="status"
-                >
+              <div class="grid h-20 place-content-center">
+                <div class="flex items-center gap-2 text-gray-500">
+                  <span class="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
+                  Importing...
                 </div>
               </div>
             ) : (
@@ -38,7 +37,9 @@ export default function SuccessModal({ submit, message }) {
                       d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
                     />
                   </svg>
-                    <div className='text-sm font-normal leading-tight text-gray-800 mb-10'>You have successfully imported the records</div>
+                  <div className="text-sm font-normal leading-tight text-gray-800 mb-10">
+                    You have successfully imported the records
+                  </div>
                   <div className="flex gap-10 justify-center mb-10">
                     <h6 class="text-base flex flex-col gap-3 items-center justify-center font-medium leading-tight text-gray-800">
                       Submitted
