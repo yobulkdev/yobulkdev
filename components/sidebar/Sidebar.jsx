@@ -49,7 +49,7 @@ const Sidebar = () => {
   );
 
   const wrapperClasses = classNames(
-    'h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200 mr-2',
+    'h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200',
     {
       ['w-60']: !toggleCollapse,
       ['w-16']: toggleCollapse,

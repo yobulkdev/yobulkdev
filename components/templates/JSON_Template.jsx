@@ -102,7 +102,7 @@ const JSON_Template = () => {
         </button>
       </div>
 
-      <div className="my-4 border-2 rounded-md p-4 flex flex-col align-middle mx-5">
+      <div className="my-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
         <div className="flex">
           <div className="flex flex-col w-5/12">
             <h2 className="text-lg font-bold text-gray-500">Name</h2>
@@ -114,7 +114,7 @@ const JSON_Template = () => {
                 type="text"
                 id="default-input"
                 className={`border border-gray-300 text-gray-400  text-sm rounded-lg
-                   focus:ring-blue-500 focus:border-blue-500 block w-[400px] 
+                   focus:ring-blue-500 focus:border-blue-500 block w-[700px] 
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                 value={templateName}
@@ -125,8 +125,8 @@ const JSON_Template = () => {
         </div>
       </div>
 
-      <div className="flex">
-        <div className="flex flex-col gap-2 items-center">
+      <div className="flex gap-4">
+        <div>
           <Editor
             height="70vh"
             width={`50vw`}
@@ -144,6 +144,9 @@ const JSON_Template = () => {
         </div>
 
         <div className="flex flex-col text-sm">
+          <h1 className="text-xl flex items-center justify-center mt-2 mb-5 text-gray-600">
+            Sample Import Config Code Snippet
+          </h1>
           <SyntaxHighlighter
             language="json"
             wrapLongLines={true}
@@ -152,7 +155,7 @@ const JSON_Template = () => {
             {defaultCode}
           </SyntaxHighlighter>
           <div
-            className="mt-4 flex items-center justify-center border-2 rounded-md py-1 px-2 text-center cursor-pointer border-blue-300"
+            className="mt-4 flex items-center bg-white justify-center rounded-md px-2 py-4 text-center cursor-pointer shadow-sm"
             onClick={() => setValue(defaultCode)}
           >
             COPY TO THE EDITOR

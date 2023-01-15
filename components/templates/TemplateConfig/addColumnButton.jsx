@@ -7,8 +7,8 @@ export default function addColumnButton({
   setTemplateData,
 }) {
   return (
-    <div className="rounded-md mt-10 flex align-middle justify-between">
-      <h1 className="text-xl font-bold text-gray-500">Columns</h1>
+    <div className="rounded-md mt-10 flex align-middle items-center justify-between">
+      <h1 className="text-xl font-bold items-center  text-gray-500">Columns</h1>
       <button
         type="button"
         onClick={openModal}
