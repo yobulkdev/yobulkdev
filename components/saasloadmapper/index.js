@@ -104,6 +104,8 @@ const SassLoadMapper = () => {
     setLoading(true);
     let data = {
       columns: state.curSaasLoadMapperTemplate.filter((el) => el.is_imported),
+      baseTemplateId: state.baseTemplateId,
+      fileName: state.curFile.name
     };
     axios
       .post('/api/templates', data)

@@ -60,18 +60,18 @@ const ImportsComponent = () => {
           <DocumentArrowDownIcon className="h-5 w-5 ml-2" aria-hidden="true" />
         </button>
       </div>
-      {showWarning && (<span className='text-red-700'>Please select a file to download</span>)}
+      {showWarning && (
+        <span className="text-red-700">Please select a file to download</span>
+      )}
       <table className="w-full bg-white rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-20 border-2">
         <thead className="text-xs text-white uppercase h-10 bg-blue-500">
           <tr>
-            <th>
-              Select
+            <th>Select</th>
+            <th scope="col" className="py-3">
+              Organization Id
             </th>
             <th scope="col" className="py-3">
-              ID
-            </th>
-            <th scope="col" className="py-3">
-              ImportID
+              Import ID
             </th>
             <th scope="col" className="py-3 ">
               File Name
@@ -91,16 +91,26 @@ const ImportsComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {(Array.isArray(importData) && importData.length > 0) ? (
+          {Array.isArray(importData) && importData.length > 0 ? (
             importData.map((col, idx) => (
               <tr key={idx} className="h-10 text-center">
-                <td><input checked={col.collection_name === downloadCollectionName} onClick={() => handleCheckBoxSelect(col.collection_name)} type='checkbox' /></td>
-                <td>{col.orgId}</td>
-                <td>{col._id}</td>
-                <td>{col.collection_name + '.csv'}</td>
+                <td>
+                  <input
+                    checked={col.collection_name === downloadCollectionName}
+                    onClick={() => handleCheckBoxSelect(col.collection_name)}
+                    type="checkbox"
+                  />
+                </td>
+                <td>{col.orgId || 'NA'}</td>
+                <td>{col.importerId || 'NA'}</td>
+                <td>{col.fileName || 'NA'}</td>
                 <td>{col.rows}</td>
-                <td>{col.created_date ? col.created_date.split('T')[0] : 'NA'}</td>
-                <td>{col.created_date ? col.created_date.split('T')[0] : 'NA'}</td>
+                <td>
+                  {col.created_date ? col.created_date.split('T')[0] : 'NA'}
+                </td>
+                <td>
+                  {col.created_date ? col.created_date.split('T')[0] : 'NA'}
+                </td>
                 <td>
                   {col.status === 'Complete' ? (
                     <span className="text-green-700">Complete</span>
@@ -111,7 +121,7 @@ const ImportsComponent = () => {
               </tr>
             ))
           ) : (
-            <tr key={1} className="h-10 text-center" >
+            <tr key={1} className="h-10 text-center">
               <td>{loading ? 'Loading...' : 'No Data'}</td>
             </tr>
           )}

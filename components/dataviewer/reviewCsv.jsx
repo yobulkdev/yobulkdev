@@ -6,6 +6,7 @@ import { CloudArrowDownIcon } from '@heroicons/react/24/outline';
 import ErrorTypeDropDown from './errorTypeSelector';
 import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
+import SuccessModal from './SuccessModal';
 
 const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyErrors, selectErrorType }) => {
   const [metaData, setMetaData] = useState();
@@ -14,7 +15,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [showWarning, setShowWarning] = useState(true);
   const [onlyError, setOnlyError] = useState(false);
-
+  const [showResultModal, setShowResultModal] = useState(false);
   useEffect(() => {
     setMetaData((prev) => {
       if (fileMetaData && typeof fileMetaData.validRecords !== 'undefined') {
@@ -54,6 +55,15 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
     },
     [showWarning]
   );
+
+  const submitFirstModal = () => {
+    setWarningModalVisible(false);
+    setShowResultModal(true);
+  }
+
+  const onFinalSubmit = () =>{
+    setShowResultModal(false);
+  }
   
   const handleSwitch = () =>{
     setOnlyError(!onlyError);
@@ -103,8 +113,8 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
           onClick={() => onBtnExport(false)}
           className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
         >
-          <CloudArrowDownIcon className="w-5 mr-1" />
-          Download CSV
+          {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
+          Submit
         </button>
       ) : (
         <div class="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mr-3">
@@ -121,11 +131,12 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
           </svg>
         </div>
       )}
+      {showResultModal && <SuccessModal submit={onFinalSubmit} message={fileMetaData}/>}
       <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
       <WarningModal
         isVisible={isWarningModalVisible}
         setIsVisible={setWarningModalVisible}
-        submit={onBtnExport}
+        submit={submitFirstModal}
         metaData={fileMetaData}
       />
     </div>
