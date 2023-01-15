@@ -2,38 +2,11 @@ import Busboy from 'busboy';
 import Papa from 'papaparse';
 import { nameByRace } from 'fantasy-name-generator';
 import { ObjectId } from 'mongodb';
-import { Readable, Transform, pipeline } from 'stream';
+import { Transform, pipeline } from 'stream';
 import StreamToMongoDB from '../../../lib/mongostream';
 import clientPromise from '../../../lib/mongodb';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import {
-  customDateTime,
-  customBoolean,
-  customThreeDigitNumber,
-  customNoGmailDomain,
-  validInternationalPhoneNumber,
-} from '../../../lib/validation-engine';
-import {
-  BOOLEAN_DATA_TYPE,
-  BOOLEAN_FORMAT,
-  DATE_TIME_FORMAT,
-  NO_GMAIL_FORMAT,
-  PHONE_NUMBER_FORMAT,
-  THREE_DIGIT_NUMBER_FORMAT,
-} from '../../../constants';
-
-const ajv = new Ajv({ allErrors: true });
-require('ajv-errors')(ajv);
-addFormats(ajv, ['date', 'email']);
-ajv.addFormat(DATE_TIME_FORMAT, customDateTime);
-ajv.addFormat(BOOLEAN_FORMAT, customBoolean);
-ajv.addFormat(THREE_DIGIT_NUMBER_FORMAT, {
-  type: 'number',
-  validate: customThreeDigitNumber,
-});
-ajv.addFormat(NO_GMAIL_FORMAT, customNoGmailDomain);
-ajv.addFormat(PHONE_NUMBER_FORMAT, validInternationalPhoneNumber);
+import { dataValidate, transformer } from './dataValidate';
+import { openCsvInputStream } from './papaStream';
 
 export const config = {
   api: {
@@ -50,26 +23,6 @@ const parseStream = Papa.parse(Papa.NODE_STREAM_INPUT, papaOptions);
 
 const dbURL = process.env.MONGODB_URI;
 const dbName = process.env.DATABASE_NAME;
-
-function openCsvInputStream(fileInputStream) {
-  const csvInputStream = new Readable({ objectMode: true });
-  csvInputStream._read = () => {};
-  Papa.parse(fileInputStream, {
-    header: true,
-    dynamicTyping: true,
-    skipEmptyLines: true,
-    step: (results) => {
-      csvInputStream.push(results.data);
-    },
-    complete: () => {
-      csvInputStream.push(null);
-    },
-    error: (err) => {
-      csvInputStream.emit('error', err);
-    },
-  });
-  return csvInputStream;
-}
 
 async function processUpload(req) {
   return new Promise(async (resolve, reject) => {
@@ -162,55 +115,6 @@ async function processUpload(req) {
     );
   });
 }
-
-async function transformer(data, transformArrSchema) {
-  let transformedData = { ...data };
-  let importingColumns = [];
-  transformArrSchema.map((eachTransform) => {
-    importingColumns.push(eachTransform.label);
-    if (eachTransform.label != eachTransform.key) {
-      transformedData[eachTransform.label] = transformedData[eachTransform.key];
-      delete transformedData[eachTransform.key];
-    }
-    if (eachTransform.data_type.toUpperCase() === BOOLEAN_DATA_TYPE) {
-      if (
-        transformedData[eachTransform.label] === true ||
-        transformedData[eachTransform.label] === false ||
-        transformedData[eachTransform.label] === 1 ||
-        transformedData[eachTransform.label] === 0
-      ) {
-        transformedData[eachTransform.label] = String(
-          transformedData[eachTransform.label]
-        );
-      }
-    }
-  });
-
-  let returnObj = {};
-  importingColumns.forEach((el) => {
-    returnObj[el] = transformedData[el];
-  });
-  return returnObj;
-}
-
-const dataValidate = (data, colSchema) => {
-  const result = ajv.validate(colSchema, data);
-  if (result) {
-    data.validationData = [];
-    return data;
-  } else {
-    var errorData = ajv.errors;
-    var outArray = [];
-    for (var i = 0; i < errorData.length; i++) {
-      var obj = {};
-      obj.key = errorData[i].instancePath.replace('/', '');
-      obj.error_message = errorData[i].message;
-      outArray.push(obj);
-    }
-    data.validationData = outArray;
-    return data;
-  }
-};
 
 export default async function csvUploadHandler(req, res) {
   if (req.method !== 'POST') {

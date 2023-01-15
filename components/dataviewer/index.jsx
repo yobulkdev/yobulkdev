@@ -53,7 +53,7 @@ const GridExample = ({ version }) => {
   const [errorFilter, setErrorFilter] = useState(false);
 
   //Move this into mongodb
-  const ajv = new Ajv({ allErrors: false });
+  const ajv = new Ajv({ allErrors: false, coerceTypes: true });
   addFormats(ajv, ['date', 'email']);
   ajv.addFormat(DATE_TIME_FORMAT, customDateTime);
   ajv.addFormat(BOOLEAN_FORMAT, customBoolean);
