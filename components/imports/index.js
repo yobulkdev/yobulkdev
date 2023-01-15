@@ -63,10 +63,10 @@ const ImportsComponent = () => {
               Select
             </th>
             <th scope="col" className="py-3">
-              ID
+              Organization Id
             </th>
             <th scope="col" className="py-3">
-              ImportID
+              Import ID
             </th>
             <th scope="col" className="py-3 ">
               File Name
@@ -90,9 +90,9 @@ const ImportsComponent = () => {
           importData.map((col, idx) => (
             <tr key={idx} className="h-10 text-center">
               <td><input checked={col.collection_name === downloadCollectionName} onClick={()=>handleCheckBoxSelect(col.collection_name)}type='checkbox' /></td>
-              <td>{col.orgId}</td>
-              <td>{col._id}</td>
-              <td>{col.collection_name + '.csv'}</td>
+              <td>{col.orgId || 'NA'}</td>
+              <td>{col.importerId || 'NA'}</td>
+              <td>{col.fileName || 'NA'}</td>
               <td>{col.rows}</td>
               <td>{col.created_date ? col.created_date.split('T')[0] : 'NA'}</td>
               <td>{col.created_date ? col.created_date.split('T')[0] : 'NA'}</td>
