@@ -4,7 +4,7 @@ import CollaborateComponent from '../../components/Collaborate/CollaborateCompon
 const Collaborate = () => {
     return (
         <Layout>
-            <div className="overflow-x-auto mx-4 mt-10 h-full">
+            <div className="overflow-x-auto mx-4 mt-10">
                 <div className="p-6 ">
                     <div className="flex align-middle justify-between">
                         <h1 className="text-2xl font-bold text-gray-500">Collaborate</h1>

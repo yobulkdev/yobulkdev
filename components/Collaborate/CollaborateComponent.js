@@ -58,9 +58,9 @@ const CollaborateComponent = () => {
 
   return (
     <div className="">
-      {isVisible && <SuccessModal submit={acknowledgeModal} message={'Successfully added the workspace !'}/>}
-      {warning && <WarningModal setWarning={setWarning} message={'Please fill all required fields !'}/>}
-      <div className="flex mt-4 w-full border-2 border-[#64B6EB] rounded-md py-1 px-2 align-middle justify-between">
+      {isVisible && <SuccessModal submit={acknowledgeModal} message={'Successfully added the workspace !'} />}
+      {warning && <WarningModal setWarning={setWarning} message={'Please fill all required fields !'} />}
+      <div className="flex mt-4 w-full bg-white shadow-sm rounded-md py-1 px-2 align-middle justify-between">
         <form className="p-5 w-full">
           <div className="flex mt-7 align-middle items-center">
             <div className="flex flex-col w-5/12">
@@ -74,13 +74,10 @@ const CollaborateComponent = () => {
             <div className="flex flex-col justify-center w-1/2">
               <input
                 type="text"
-                className="bg-gray-50
-                                    border border-[#64B6EB] rounded-lg
-                                    text-gray-900 text-sm
-                                    focus:ring-blue-500 focus:border-blue-500 
-                                    block w-full
-                                    p-2.5
-                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block
+                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                 placeholder="Enter Organization Name Here ..."
                 value={orgName}
                 onChange={(evt) => setOrgName(evt.target.value)}
@@ -101,13 +98,10 @@ const CollaborateComponent = () => {
             <div className="flex flex-col justify-center w-1/2">
               <input
                 type="text"
-                className="bg-gray-50
-                                    border border-[#64B6EB] rounded-lg
-                                    text-gray-900 text-sm
-                                    focus:ring-blue-500 focus:border-blue-500 
-                                    block w-full
-                                    p-2.5
-                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                focus:ring-blue-500 focus:border-blue-500 block
+                p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                 placeholder="Enter Workspace Name Here ..."
                 value={workspaceName}
                 onChange={(evt) => setWorkspaceName(evt.target.value)}
@@ -116,7 +110,7 @@ const CollaborateComponent = () => {
             </div>
           </div>
 
-          <hr className="my-7 align-middle items-center border-[#64B6EB]" />
+          <hr className="my-7 align-middle items-center border-black" />
 
           <div className="flex">
             <div className="flex flex-col w-5/12">
@@ -132,13 +126,10 @@ const CollaborateComponent = () => {
                 <input
                   type="email"
                   value={name}
-                  className="bg-gray-50
-                                border border-[#64B6EB] rounded-lg
-                                text-gray-900 text-sm
-                                focus:ring-blue-500 focus:border-blue-500 
-                                block w-full
-                                p-2.5
-                                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block w-full
+                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   placeholder="Enter Collaborator Email Here ..."
                   onChange={(evt) => setName(evt.target.value)}
                 />
@@ -163,12 +154,12 @@ const CollaborateComponent = () => {
         </form>
       </div>
 
-      <div className="flex w-1/3 flex-col mt-4 border-2 border-[#64B6EB] rounded-md py-1 px-2 ">
+      <div className="flex w-1/3 flex-col mt-4 bg-white shadow-sm rounded-md py-1 px-2 ">
         <h1 className="text-lg text-center font-bold text-gray-500">
           Collaborators
         </h1>
 
-        <ul className="flex flex-col gap-2 my-2 p-2">
+        <ul className="flex flex-col gap-2 mt-4 my-2 p-2">
           {collaborators.length === 0 && (
             <li className="text-slate-500">No Collaborators Added</li>
           )}

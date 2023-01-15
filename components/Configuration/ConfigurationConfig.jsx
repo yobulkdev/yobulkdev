@@ -8,7 +8,7 @@ const ConfigurationConfig = ({ configID }) => {
 
   useEffect(() => {
     axios
-      .get(`/api/importer/${configID}`) 
+      .get(`/api/importer/${configID}`)
       .then((res) => {
         setImporterData(res.data);
       })
@@ -28,7 +28,7 @@ const ConfigurationConfig = ({ configID }) => {
           </h1>
         </div>
       </div>
-      <div className="mt-4 border-2 border-[#64B6EB] rounded-md p-4 flex flex-col align-middle">
+      <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
         <div className="flex">
           <div className="flex flex-col w-5/12">
             <h2 className="text-lg font-bold text-gray-500">Key</h2>
@@ -57,8 +57,8 @@ const ConfigurationConfig = ({ configID }) => {
       </div>
 
       <div className="overflow-x-auto relative mt-3">
-        <table className="w-full text-sm text-gray-500 dark:text-gray-400 table">
-          <thead className="text-xs text-gray-500 uppercase dark:bg-gray-700 dark:text-gray-400 h-10 bg-blue-50">
+        <table className="w-full bg-white  text-sm text-gray-500 dark:text-gray-400 table shadow-md border-2">
+          <thead className="text-xs text-white uppercase h-10 bg-blue-500">
             <tr>
               <th scope="col" className="py-3">
                 Importer Name
@@ -71,17 +71,19 @@ const ConfigurationConfig = ({ configID }) => {
                 Date Created
               </th>
               <th scope="col" className="py-3">
-                Attached Template 
+                Attached Template
               </th>
             </tr>
           </thead>
           {importerData ? (
-              <tr key={importerData._id} className="h-10 text-center">
-                <td>{importerData.name}</td>
-                <td>{importerData._id}</td>
-                <td>{importerData.date ? importerData.date.split('T')[0] : 'NA'}</td>
-                <td>{importerData.templateName}</td>
-              </tr>
+            <tr key={importerData._id} className="h-10 text-center border-b-2">
+              <td>{importerData.name}</td>
+              <td>{importerData._id}</td>
+              <td>
+                {importerData.date ? importerData.date.split('T')[0] : 'NA'}
+              </td>
+              <td>{importerData.templateName}</td>
+            </tr>
           ) : (
             <></>
           )}

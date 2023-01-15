@@ -31,7 +31,7 @@ const Templates = () => {
   return (
     <>
       <Layout>
-        <div className="p-2">
+        <div className="p-2 ">
           <Tab.Group>
             <Tab.List className="flex space-x-1 rounded-xl p-1">
               {tabList.map((category) => (
@@ -41,8 +41,8 @@ const Templates = () => {
                     classNames(
                       'w-full  py-2.5 text-sm font-medium leading-5 dark:text-white',
                       selected
-                        ? 'bg-white border-b-2 text-black outline-none border-blue-900'
-                        : 'text-blue-400 hover:bg-white/[0.12] hover:text-blue-500'
+                        ? 'border-b-2 text-blue-900 outline-none border-blue-900'
+                        : 'text-black hover:bg-white/[0.12] hover:text-blue-500'
                     )
                   }
                 >
@@ -58,49 +58,51 @@ const Templates = () => {
                 <JSON_Template />
               </Tab.Panel>
               <Tab.Panel>
-                <div className="p-4">
-                  <div className="flex align-middle justify-between ">
-                    <div className="flex align-middle items-center gap-2 ">
-                      <Link href="/templates">
-                        <ArrowLeftIcon className="h-5 cursor-pointer" />
-                      </Link>
+                <div className="p-4 flex flex-col gap-10">
+                  <div>
+                    <div className="flex align-middle justify-between ">
+                      <div className="flex align-middle items-center gap-2 ">
+                        <Link href="/templates">
+                          <ArrowLeftIcon className="h-5 cursor-pointer" />
+                        </Link>
 
-                      <h1 className="text-2xl font-bold text-gray-500">
-                        {`${
-                          templateName ? templateName : 'Name your'
-                        } template`}
-                      </h1>
+                        <h1 className="text-2xl font-bold text-gray-500">
+                          {`${
+                            templateName ? templateName : 'Name your'
+                          } template`}
+                        </h1>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={saveTemplate}
+                        className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
+                      >
+                        <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
+                      </button>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={saveTemplate}
-                      className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
-                    >
-                      <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
-                    </button>
-                  </div>
-
-                  <div className="my-4 border-2 rounded-md p-4 flex flex-col align-middle mx-5">
-                    <div className="flex">
-                      <div className="flex flex-col w-5/12">
-                        <h2 className="text-lg font-bold text-gray-500">
-                          Name
-                        </h2>
-                        <p className="text-gray-400">Name of the template</p>
-                      </div>
-                      <div className="ml-10 flex flex-col justify-center w-72">
-                        <div className="mb-2">
-                          <input
-                            type="text"
-                            id="default-input"
-                            className={`border border-gray-300 text-gray-400  text-sm rounded-lg
-                   focus:ring-blue-500 focus:border-blue-500 block w-[400px] 
+                    <div className="my-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
+                      <div className="flex">
+                        <div className="flex flex-col w-5/12">
+                          <h2 className="text-lg font-bold text-gray-500">
+                            Name
+                          </h2>
+                          <p className="text-gray-400">Name of the template</p>
+                        </div>
+                        <div className="ml-10 flex flex-col justify-center w-72">
+                          <div className="mb-2">
+                            <input
+                              type="text"
+                              id="default-input"
+                              className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block w-[700px] 
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-                            value={templateName}
-                            onChange={(e) => setTemplateName(e.target.value)}
-                          />
+                              value={templateName}
+                              onChange={(e) => setTemplateName(e.target.value)}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
