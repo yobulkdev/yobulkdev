@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react';
 export default function SuccessModal({ submit, message }) {
   const [isloading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, Math.random() * 1000 + 500); // some random loading delay :)
-  }, []);
+    const interval = (message.validRecords < 5000) ? 1 : (Math.round(message.validRecords / 10000)); // reduced interval for large files
+    const intervalId = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= Number(message.validRecords)) {
+          clearInterval(intervalId);
+          setLoading(false);
+          return Number(message.validRecords);
+        } else {
+          return prev + interval;
+        }
+      });
+    }, 1);
+    return () => clearInterval(intervalId);
+  }, [message.validRecords]);
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none">
@@ -17,7 +29,7 @@ export default function SuccessModal({ submit, message }) {
               <div class="grid h-20 place-content-center">
                 <div class="flex items-center gap-2 text-gray-500">
                   <span class="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
-                  Importing...
+                  Imported {progress} out of {message.validRecords} rows
                 </div>
               </div>
             ) : (
