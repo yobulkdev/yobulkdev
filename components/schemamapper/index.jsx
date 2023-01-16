@@ -103,7 +103,7 @@ const SchemaMapper = () => {
           payload: res.data.collection_name,
         });
 
-        router.push({ pathname: '/dataviewer/norm' }, undefined, {
+        router.push({ pathname: '/templates' }, undefined, {
           shallow: true,
         });
       })

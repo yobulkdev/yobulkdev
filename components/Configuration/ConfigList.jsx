@@ -69,10 +69,10 @@ export default App;`);
     e.preventDefault();
     if (
       !importerName ||
-      !attachToImporters ||
-      !attachToOrganizations ||
+      !attachToImporters
+      // !attachToOrganizations ||
       // !attachThemeJSONObj ||
-      !attachToWorkspace
+      // !attachToWorkspace
       // !attachWebHookURL
     ) {
       setError('*Please fill all the fields');
@@ -83,8 +83,8 @@ export default App;`);
       .post('/api/importer', {
         importerName: importerName,
         templateId: attachToImporters.value,
-        organizationId: attachToOrganizations.value,
-        workspaceId: attachToWorkspace.value,
+        organizationId: attachToOrganizations?.value,
+        workspaceId: attachToWorkspace?.value,
         templateName: attachToImporters.label,
       })
       .then((response) => {
