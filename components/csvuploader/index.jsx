@@ -62,8 +62,8 @@ const CsvUploader = ({ isStepperVisible, nextPageRoute }) => {
   return (
     <div className="mt-3">
       {isStepperVisible && <Stepper step={1} />}
-      <div className="flex justify-center">
-        <div className="dropzone">
+      <div className="flex justify-center ">
+        <div className="dropzone bg-white">
           <p className="font-bold text-gray-500">Upload your CSV</p>
           <p className="text-sm text-gray-400">File should be .csv</p>
           <div {...getRootProps()} className="drag_drop_wrapper">

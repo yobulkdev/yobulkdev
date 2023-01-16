@@ -11,7 +11,6 @@ export default async function fetchTemplateRecords(req, res) {
           .collection('templates')
           .find({ template_name: { $exists: false } })
           .toArray();
-        let i = 1;
         for (const item of results) {
           const recordsCount = await db
             .collection(item.collection_name)
@@ -20,10 +19,13 @@ export default async function fetchTemplateRecords(req, res) {
             .collection(item.collection_name)
             .find({ 'validationData.0': { $exists: false } })
             .count();
+          let importerDetails = await db
+            .collection('importers')
+            .findOne({templateId: item.baseTemplateId})
+          item.importerId = importerDetails?._id
+          item.orgId = importerDetails?.organizationId
           item.rows = validData;
           item.status = (recordsCount === validData) ? 'Complete' : 'Incomplete'; 
-          item.orgId = i;
-          i+=1;
         }
         res.send(results);
       } catch (err) {

@@ -55,6 +55,9 @@ export function fileDetails(state, action) {
 
     case 'SET_SASS_TEMPLATE_COLUMNS':
       return { ...state, saasTemplateColumns: action.payload };
+    
+    case 'SET_SASS_BASE_TEMPLATE_ID':
+      return {...state, baseTemplateId: action.payload}
 
     case 'SAAS_LOAD_MAPPER_TEMPLATE_UPDATE':
       let rowKey = action.payload.key;

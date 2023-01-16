@@ -112,7 +112,7 @@ const AdminComponent = ({ templateId, type }) => {
         )}
       </div>
 
-      <div className="mt-4 border-2 border-[#64B6EB] rounded-md p-4 flex flex-col align-middle">
+      <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
         {type === 'view' && (
           <div className="flex">
             <div className="flex flex-col w-5/12">
@@ -143,7 +143,7 @@ const AdminComponent = ({ templateId, type }) => {
                   type="text"
                   id="default-input"
                   className={`border border-gray-300 text-gray-400  text-sm rounded-lg
-                   focus:ring-blue-500 focus:border-blue-500 block w-[400px] 
+                   focus:ring-blue-500 focus:border-blue-500 block w-[700px] 
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   value={templateData.template_name}
@@ -162,8 +162,8 @@ const AdminComponent = ({ templateId, type }) => {
         addColumnButton({ openModal, isOpen, closeModal, setTemplateData })}
 
       <div className="overflow-x-auto relative mt-3">
-        <table className="w-full text-sm text-gray-500 dark:text-gray-400 table">
-          <thead className="text-xs text-gray-500 uppercase dark:bg-gray-700 dark:text-gray-400 h-10 bg-blue-50">
+        <table className="w-full bg-white  text-sm text-gray-500 dark:text-gray-400 table shadow-md border-2">
+          <thead className="text-xs text-white uppercase h-10 bg-blue-500">
             <tr>
               {/*  <th scope="col" className="py-3">
                 Column Key
@@ -190,14 +190,14 @@ const AdminComponent = ({ templateId, type }) => {
           </thead>
           {templateData.columns ? (
             templateData.columns.map((col, idx) => (
-              <tr key={idx} className="h-10 text-center">
+              <tr key={idx} className="h-10 text-center border-b-2">
                 {/*   <td className="w-8">{col.key}</td> */}
                 <td>{col.label}</td>
                 <td>{col.data_type}</td>
                 <td>{col.example}</td>
                 <td>{col.is_required ? col.is_required.toString() : ''}</td>
                 {type === 'create' && (
-                  <td className="flex justify-center">
+                  <td className="flex my-2 justify-center">
                     <PencilIcon
                       className="h-4 cursor-pointer mr-2 mt-1"
                       onClick={() =>

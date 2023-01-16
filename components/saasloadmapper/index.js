@@ -98,6 +98,8 @@ const SassLoadMapper = () => {
     setLoading(true);
     let data = {
       columns: state.curSaasLoadMapperTemplate.filter((el) => el.is_imported),
+      baseTemplateId: state.baseTemplateId,
+      fileName: state.curFile.name
     };
 
     console.log('The tempalte save post body:', data);

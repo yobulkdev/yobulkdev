@@ -19,6 +19,10 @@ const SaasLoader = ({ templateId }) => {
             type: 'SET_SASS_TEMPLATE_COLUMNS',
             payload: result.data.columns,
           });
+          dispatch({
+            type: 'SET_SASS_BASE_TEMPLATE_ID',
+            payload: templateId,
+          });
         }
       })
       .catch((err) => console.log(err));
