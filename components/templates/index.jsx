@@ -16,7 +16,7 @@ const MainBar = () => {
   }, []);
 
   return (
-    <div className="p-12">
+    <div>
       <div className="flex align-middle justify-between">
         <h1 className="text-2xl font-bold text-gray-500">Templates</h1>
         <Link href={`/templatecreate`}>
@@ -49,7 +49,7 @@ const MainBar = () => {
                 <Link href={`/templates/testtemplate/${obj._id}`}>
                   <button
                     type="button"
-                    className="text-white bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-6 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white border-2 border-blue-500 bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     Preview
                   </button>
@@ -57,7 +57,7 @@ const MainBar = () => {
                 <Link href={`/templates/${obj._id}`}>
                   <button
                     type="button"
-                    className="bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-full text-sm px-6 py-2 text-center mb-2"
+                    className="bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-full text-sm px-3 py-1 text-center mr-2"
                   >
                     View
                   </button>

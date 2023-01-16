@@ -48,7 +48,7 @@ const SchemaMapper = () => {
 
   const columnDefs = [
     {
-      headerName: 'Source Column',
+      headerName: 'CSV Column',
       field: 'key',
       cellStyle: { backgroundColor: '	#E0E0E0' },
     },
@@ -147,7 +147,7 @@ const SchemaMapper = () => {
               onClick={saveTemplate}
               className="bg-transparent h-8 px-4 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
             >
-              Validate & Save
+              Create Template
             </button>
           </div>
           <div
