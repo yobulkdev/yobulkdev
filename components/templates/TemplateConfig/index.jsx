@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Fragment } from 'react';
 import axios from 'axios';
 import { Context } from '../../../context';
 import { useRouter } from 'next/router';
@@ -7,16 +7,27 @@ import {
   TrashIcon,
   ArrowDownTrayIcon,
   ArrowLeftIcon,
+  PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 import addColumnButton from './addColumnButton';
 import handleEdit from './handleEdit';
 import Link from 'next/link';
+import { Dialog, Transition } from '@headlessui/react';
 
 const AdminComponent = ({ templateId, type }) => {
   let [isOpen, setIsOpen] = useState(false);
   const [templateData, setTemplateData] = useState({});
   const router = useRouter();
   const { dispatch } = useContext(Context);
+  const [isRegexMenuOpen, setIsRegexMenuOpen] = useState(false);
+
+  function closeREGEXModal() {
+    setIsRegexMenuOpen(false);
+  }
+
+  function openREGEXModal() {
+    setIsRegexMenuOpen(true);
+  }
 
   useEffect(() => {
     const headers = {
@@ -181,6 +192,9 @@ const AdminComponent = ({ templateId, type }) => {
               <th scope="col" className="py-3">
                 <span>Required</span>
               </th>
+              <th scope="col" className="py-3">
+                <span>Validator</span>
+              </th>
               {type === 'create' && (
                 <th scope="col" className="py-3">
                   <span>Action</span>
@@ -196,6 +210,72 @@ const AdminComponent = ({ templateId, type }) => {
                 <td>{col.data_type}</td>
                 <td>{col.example}</td>
                 <td>{col.is_required ? col.is_required.toString() : ''}</td>
+                <td className="justify-center items-center">
+                  <button
+                    className="flex mx-auto items-center gap-1"
+                    onClick={openREGEXModal}
+                  >
+                    <span className="text-blue-500">Custom Validator</span>
+                    <PencilSquareIcon className="w-4 h-4" />
+                  </button>
+                  <Transition appear show={isRegexMenuOpen} as={Fragment}>
+                    <Dialog
+                      as="div"
+                      className="relative z-10"
+                      onClose={closeREGEXModal}
+                    >
+                      <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                      </Transition.Child>
+
+                      <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                          <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                          >
+                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                              <Dialog.Title
+                                as="h3"
+                                className="text-lg font-medium leading-6 text-gray-900"
+                              >
+                                REGULAR EXPRESSION
+                              </Dialog.Title>
+                              <div className="mt-2">
+                                <p className="text-sm text-gray-500">
+                                  {' [a-z0-9]+@[a-z0-9].[a-z] '}
+                                </p>
+                              </div>
+
+                              <div className="mt-4">
+                                <button
+                                  type="button"
+                                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                  onClick={closeREGEXModal}
+                                >
+                                  Got it, thanks!
+                                </button>
+                              </div>
+                            </Dialog.Panel>
+                          </Transition.Child>
+                        </div>
+                      </div>
+                    </Dialog>
+                  </Transition>
+                </td>
                 {type === 'create' && (
                   <td className="flex my-2 justify-center">
                     <PencilIcon

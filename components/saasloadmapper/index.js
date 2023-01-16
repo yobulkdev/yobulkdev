@@ -117,14 +117,14 @@ const SassLoadMapper = () => {
 
   const columnDefs = [
     {
-      headerName: 'Header From File',
+      headerName: 'CSV Column',
       resizable: true,
       field: 'key',
       type: 'nonEditableColumn',
       cellStyle: { backgroundColor: '	#F5F5F5' },
     },
     {
-      headerName: 'Template fields',
+      headerName: 'Template Column',
       resizable: true,
       field: 'label',
       editable: true,
@@ -148,7 +148,7 @@ const SassLoadMapper = () => {
       },
     },
     {
-      headerName: '',
+      headerName: 'Select Columns',
       resizable: true,
       field: 'is_imported',
       cellRenderer: 'checkboxRenderer',
@@ -197,7 +197,7 @@ const SassLoadMapper = () => {
                 className="ag-theme-alpine"
                 style={{
                   height: '60vh',
-                  width: '80vw',
+                  width: '90vw',
                   border: 'none',
                 }}
               >

@@ -13,6 +13,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
   const [downloadig, setDownloadig] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
+  const [isDownloadWarningModalVisible, setDownloadWarningModalVisible] = useState(false);
   const [showWarning, setShowWarning] = useState(true);
   const [onlyError, setOnlyError] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
@@ -35,10 +36,10 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
   const onBtnExport = useCallback(
     (forceDownload) => {
       if (showWarning && !forceDownload) {
-        setWarningModalVisible(true);
+        setDownloadWarningModalVisible(true);
         return;
       }
-      setWarningModalVisible(false);
+      setDownloadWarningModalVisible(false);
       setDownloadig(true);
       var options = {
         method: 'GET',
@@ -52,6 +53,19 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
         FileDownload(response.data, `${collectionName}.csv`);
         setDownloadig(false);
       });
+    },
+    [showWarning]
+  );
+
+  const onBtnSubmit = useCallback(
+    () => {
+      if (showWarning) {
+        setWarningModalVisible(true);
+        return;
+      } else{
+        setShowResultModal(true);
+        return;
+      }
     },
     [showWarning]
   );
@@ -107,16 +121,14 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
           <ErrorTypeDropDown errData={metaData} selectErrorType={selectErrorType}/>
         </div>
       </div>
-
-      {!downloadig ? (
-        <button
+      <div className='flex justify-flex-end gap-3'>
+      {!downloadig ? (<button
           onClick={() => onBtnExport(false)}
           className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
         >
-          {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
-          Submit
-        </button>
-      ) : (
+          <CloudArrowDownIcon className="w-5 mr-1" />
+          Download
+      </button>) : (
         <div class="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mr-3">
           <svg
             class="w-6 h-6 text-violet-500"
@@ -131,13 +143,31 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
           </svg>
         </div>
       )}
+        <button
+          onClick={() => onBtnSubmit()}
+          className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
+        >
+          {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
+          Submit
+        </button>
+      
+      </div>
+
       {showResultModal && <SuccessModal submit={onFinalSubmit} message={fileMetaData}/>}
       <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
+      <WarningModal
+        isVisible={isDownloadWarningModalVisible}
+        setIsVisible={setDownloadWarningModalVisible}
+        submit={()=> onBtnExport(true)}
+        metaData={fileMetaData}
+        type='Download'
+      />
       <WarningModal
         isVisible={isWarningModalVisible}
         setIsVisible={setWarningModalVisible}
         submit={submitFirstModal}
         metaData={fileMetaData}
+        type='Submit'
       />
     </div>
   );
