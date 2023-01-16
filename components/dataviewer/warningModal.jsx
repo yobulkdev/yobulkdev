@@ -5,6 +5,7 @@ export default function WarningModal({
   setIsVisible,
   submit,
   metaData,
+  type
 }) {
   return (
     <>
@@ -37,13 +38,13 @@ export default function WarningModal({
                   <div className="flex flex-col mx-2 my-4 w-1/2">
                     <div className="flex h-20 text-center text-sm">
                       Discard {metaData.totalRecords - metaData.validRecords}{' '}
-                      rows with issues. Submit the rest.
+                      rows with issues. {type} the rest.
                     </div>
                     <button
                       onClick={() => submit(true)}
                       className="bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded mx-auto"
                     >
-                      Submit
+                      {type}
                     </button>
                   </div>
                 </div>
