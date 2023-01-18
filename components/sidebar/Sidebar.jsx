@@ -49,7 +49,7 @@ const Sidebar = () => {
   );
 
   const wrapperClasses = classNames(
-    'h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200',
+    'min-h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200',
     {
       ['w-60']: !toggleCollapse,
       ['w-16']: toggleCollapse,
@@ -84,7 +84,7 @@ const Sidebar = () => {
       onMouseLeave={onMouseOver}
       style={{ transition: 'width 300ms cubic-bezier(0.2, 0, 0, 1) 0s' }}
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col fixed">
         <div className="flex items-center justify-between relative ">
           <div className="flex items-center pl-2 gap-4">
             <Link href="/">
