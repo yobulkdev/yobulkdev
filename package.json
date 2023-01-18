@@ -11,7 +11,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predev": "node lib/seeder.js",
+    "prestart": "node lib/seeder.js"
   },
   "dependencies": {
     "@ag-grid-community/infinite-row-model": "^28.2.0",
@@ -27,6 +29,7 @@
     "busboy": "^1.6.0",
     "classnames": "^2.3.2",
     "cuid": "^2.1.8",
+    "dotenv": "^16.0.3",
     "fantasy-name-generator": "^2.0.0",
     "js-file-download": "^0.4.12",
     "mongodb": "^4.11.0",
