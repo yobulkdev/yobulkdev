@@ -1,112 +1,104 @@
-<div align="center">
-  
-  ![YoBulklogo](https://user-images.githubusercontent.com/118799976/205481338-370fb73e-d266-499a-bd49-a9c7d54e514a.png)
-
-</div>
-
-<h1 align="center">The fast & flexible way to Import CSV data into your SaaS</h1>
-
-<div align="center">
-YoBulk empowers you to start import and validation of CSV file with a YoButton customized for your SaaS application.
-</div>
+<h1 align="center" style="border-bottom: none">
+    <b>
+        <a href="https://www.YoBulk.dev">YoBulk.dev</a><br>
+    </b>
+    ⭐️  The Open Source Alternative To Flatfile.com ⭐️ <br>
+</h1>
 
 <p align="center">
-    <br />
-    <a href="https://doc.yobulk.dev" rel="dofollow" target="_blank"><strong>Explore the docs »</strong></a>
-    <br />
-
-  <br/>
-    <a href="https://doc.yobulk.dev/GetStarted/Demo" target="_blank">Examples</a>
-    ·
-    <a href="https://github.com/yobulkdev/yobulkdev/issues" target="_blank">Report Bug</a>
-    ·
-    <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg" target="_blank">Community Slack</a>
+Fastest & Simplest way to Import CSV data into your application DB.<br>
+Import flow is powered by adding validation templates to import button.
 </p>
 
-## ⭐ YoBulk at a glance
+<p align="center">
+    <a href="http://www.yobulk.dev"><b>Website</b></a> •
+    <a href="https://twitter.com/yobulkdev"><b>Twitter</b></a>  •
+    <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg" target="_blank"><b>Slack</b></a>
+</p>
 
-Add the YoBulk react SDK and start importing CSV and validate against any predifined template.
-![1](https://user-images.githubusercontent.com/18412631/202904050-ace18551-3305-4258-8e9d-46afbbdc9cb7.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/118799976/214280161-3bf6dea8-955b-43fe-bbd5-f6ace09a6e1b.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/118799976/214279676-d2904d57-5305-4491-9695-cbdcaab1bdf6.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/118799976/214277179-4be09db9-b61b-494f-a003-9b9736ac3e36.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/118799976/214282360-3ec13ab4-852b-4649-bc5c-b5a09d52b0d3.png"" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
 
-## ⭐ YoBulk Goal
+## User Installation
 
-![1](https://user-images.githubusercontent.com/18412631/202903374-33995143-800b-4fa1-86ed-32803bf1eaf3.png)
+* [Docker](https://doc.yobulk.dev/GetStarted/Installation#yobulk-installation)
 
-## 💪💪 Why YoBulk will be an developer's choice:
+## Next.js Application
 
-- YoBulk uses nodejs streaming,so importing large CSV is superfast.
-- Framework is ready for adding your custom validation functions.
-- Easy to use and develop built on top of next.js.
-- A real and powerfull framework which uses the real power of opensource CSV libraries.
-- Bulit on top of mongo.We have plans to add support for SQL databases.😁
-- Both standalone importer and a template based importer for SaaS is available.
-- Making sure CSV importing edge cases, so you never again have to worry about importing customer data to your database.
-- We are adding a ML module for automatching and auto correction of CSV import error.
+We provide a simple Next JS Application for getting started.
 
-## Advantages
+```bash
+git clone https://github.com/yobulkdev/yobulkdev
+cd yobulkdev
+yarn install
+yarn build 
+yarn start
+```
 
-There are closed source solutions in the market. But, YoBulk is the only and first open source system which is developed by developers for developers.
-
-We have a very strong and agggressive product roadmap encompassing the inclusion of Bigdata & AI/ML
-
-✅ The most significant advantage of having YoBulk is keeping your data on your own servers.As a SaaS application, you should not export your customer data to any
-other 3rd party cloud for processing and think much about webhooks and data exchange complexites.
-
-🤓 As an open-source software, together, we will be building YoBulk with various feebacks and suggestions.
-
-💙 No vendor lock-in. We strongly believe that CSV and any other flatfile importing should be a open source project and YoBulk is creating an OSS standard for data onboarding.
-
-## 🚀 Quickstart
-
-Let's setup your CSV importer in 3 minutes!
-
-#### Option:1 Through Docker Run
-
-If you are a Docker user, you may try this way!<br>
-Prerequisite- MongoDB should be installed and running at `http://localhost:27017`.
+## Docker 
 
 ```bash
 docker run -d --name yobulk \
 -p 8000:3000 \
 yobulk/yobulk:latest
 ```
+## Built With
 
-the UI is ready to go at [http://localhost:8000/](http://localhost:8000/).
+* [Next.js](https://nextjs.org/)
 
-If you do not have mongo db installed, don't worry! We have docker-compose sytem which will install both mongo and yobulk in docker containers.
 
-#### Option:2 Through Docker Compose
+## Getting a quick start
+Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) create import buttons and try data importing.
 
-```bash
-git clone https://github.com/yobulkdev/yobulkdev
-cd yobulkdev
-docker-compose up -d
-```
+## Roadmap
 
-Let's check it out by browsing [http://localhost:8000/](http://localhost:8000/)
+- [YoBulk Roadmap ReadMe](https://doc.yobulk.dev/RoadMap/ProductVision)
 
-#### Option:3 Through Next.js Application
+# Features
 
-Prerequisite- MongoDB should be installed and running at `http://localhost:27017`.
+### Template 
 
-```bash
-git clone https://github.com/yobulkdev/yobulkdev
-cd yobulkdev
-yarn install
-yarn build
-yarn start
-```
+- ⚡ &nbsp;Importer dashboard to check the Import status to your local DB
+- ⚡ &nbsp;No code Template and Import button creation
+- ⚡ &nbsp;Smart auto matching between the CSV column and Template column
+- ⚡ &nbsp;Custom validation rule setting against a field
+- ⚡ &nbsp;Delightful Data review experience
+- ⚡ &nbsp;Scalable through streaming.You can import a CSV with size of 1GB
+- ⚡ &nbsp;and more ...
 
-✌️ That's it; you have yobulk running. Let's check it out by browsing [http://localhost:3000/](http://localhost:3000/)
+### Import Workflow Automations
 
-For creating a template to set the validation rules for your CSV ,please refer to this section [Embeddable SaaS](https://doc.yobulk.dev/GetStarted/Installation#how-to-embedd-a-csv-import-button-in-your-saas)
 
-For Non-SaaS developers,You can try the standalone CSV importer also.
+- ⚡ &nbsp;Attach a Workspace and Organization to a Import Button : Receive a CSV from a specific organization
+- ⚡ &nbsp;Webhook : Coming Soon..
 
-## Community Links
+  
 
-- [Twitter](https://twitter.com/yobulkdev)
-- [Slack](https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg)
+## Why are we building this?
+
+More than 70% of the business data shared, is in the form of CSVs and Excel files.Less than 10% have truly adopted API integrations for data exchange.
+
+As a developer and product manager, we have gone through the pain of building a scalable CSV importer and maintaining it in-house.Everyday thousand of developers go through the same pain and hundreds of companies have to get spreadsheet and CSV data into a database.
+YoBulk is building an OSS standard for CSV and flatfile data onboarding where it can help you to build a data importing solution in-house.
+
+Enterprises like Flatfile.com are addressing the problem but it has constraints like weak data security and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that it is not very possible to come up with a one-size fits all solution in such a fragmented market and sector.
+
+All these restrictions necessitate our mission - to make it possible for anyone to create an data import solution that suit their needs well.
+
+To Developers, we would like to offer a bring your own validation rule and bring your own database experience. You can design and modify validations rules on your own way using YoBulk.
+
+To enterprises , YoBulk is dedicated to bring data security. Moreover, you have 100% control of your data armed with long-term maintainability.
+
+To be honest, we do not claim to outperform flatfile.com in terms of functionality and design, at least for now. Besides, our priority is to add more functionality at the moment. we would like to cultivate a community to democratise the knowledge and bring all CSV and flatfile open source projects under a single framework.
+
+Read more[Open vs Closed Data Onboarding](https://doc.yobulk.dev/#yobulk-positioning-open-source-vs-closed-source-data-onboarding-platforms)
+
+# Our Mission
+Our mission is to provide the most powerful flatfile(CSV,Spreadsheet)importer which is open source to every single internet business in the world. 
+An AI first data exchange for businesses to share flatfiles where you are in-charge of your customer’s data onboarding, validation & transformation.
+
 
 ## Support
 
@@ -117,3 +109,5 @@ If you have any questions or problems, please visit our GitHub discussions page,
 ## License
 
 YoBulk is an open-source software with the [AGPL 3.0 license](https://github.com/yobulkdev/yobulkdev/blob/main/LICENSE.md).
+
+
