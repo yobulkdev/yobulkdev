@@ -36,6 +36,7 @@ yarn install
 yarn build 
 yarn start
 ```
+The dashboard is ready to experiment at http://localhost:3000/.
 
 ## Docker 
 
@@ -44,6 +45,7 @@ docker run -d --name yobulk \
 -p 8000:3000 \
 yobulk/yobulk:latest
 ```
+YoBulk dashboard is ready to go at http://localhost:8000/.
 ## Built With
 
 * [Next.js](https://nextjs.org/)
