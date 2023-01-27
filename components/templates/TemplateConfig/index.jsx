@@ -145,7 +145,7 @@ const AdminComponent = ({ templateId, type }) => {
             <h2 className="text-lg font-bold text-gray-500">Name</h2>
             <p className="text-gray-400">Name of the template</p>
           </div>
-          <div className="ml-10 flex flex-col justify-center w-72">
+          <div className="ml-10 flex flex-col justify-center w-full">
             <div className="mb-2">
               {type === 'view' && templateData ? (
                 <span> {templateData.template_name}</span>
@@ -154,7 +154,7 @@ const AdminComponent = ({ templateId, type }) => {
                   type="text"
                   id="default-input"
                   className={`border border-gray-300 text-gray-400  text-sm rounded-lg
-                   focus:ring-blue-500 focus:border-blue-500 block w-[700px] 
+                   focus:ring-blue-500 focus:border-blue-500 block w-full
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   value={templateData.template_name}

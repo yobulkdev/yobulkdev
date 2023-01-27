@@ -2,7 +2,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 
 const Layout = ({ children }) => {
   return (
-    <div className="h-screen flex flex-nowrap">
+    <div className="min-h-screen flex flex-nowrap">
       <Sidebar />
       <div className="flex-1 bg-gray-100">
         {children}{' '}
