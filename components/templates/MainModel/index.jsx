@@ -205,6 +205,16 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       </div>
                     </div>
 
+                    <div className="mb-4">
+                      <InputField
+                        name="Validation through Regex"
+                        colKey="regex"
+                        placeholder="^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+                        setModalData={setModalData}
+                        columnData={'regex'}
+                      />
+                    </div>
+
                     <InputField
                       name="Custom Validation Error Message"
                       colKey="custom_message"

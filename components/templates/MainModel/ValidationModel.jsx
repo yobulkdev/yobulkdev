@@ -55,8 +55,8 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
           obj.key === 'data_type'
             ? { key: 'data_type', value: e.name }
             : obj.key === 'custom_validation'
-              ? customValidationFinder({ obj, e })
-              : obj
+            ? customValidationFinder({ obj, e })
+            : obj
         );
 
         return newArr;
@@ -135,14 +135,16 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                           key={plan.name}
                           value={plan}
                           className={({ active, checked }) =>
-                            `${active
-                              ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
-                              : ''
+                            `${
+                              active
+                                ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
+                                : ''
                             }
-                                                      ${checked
-                              ? 'bg-white'
-                              : 'bg-white'
-                            }
+                                                      ${
+                                                        checked
+                                                          ? 'bg-white'
+                                                          : 'bg-white'
+                                                      }
                                                       relative flex cursor-pointer rounded-lg px-5 py-4 border shadow-sm focus:outline-none`
                           }
                         >
@@ -181,26 +183,6 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                         </RadioGroup.Option>
                       ))}
 
-                      <div className="mb-2">
-                        <div className='ring-2 ring-white ring-opacity-60 ring-offset-2'>
-                          <label
-                            htmlFor="regexVal"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                          >
-                            Custom Regular Expression
-                          </label>
-                          <input
-                            type="text"
-                            id="regexVal"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="^[a-zA-Z]*$"
-                          />
-
-                        </div>
-
-                      </div>
-
-
                       <div className="mt-4 float-right">
                         <button
                           type="button"
@@ -216,9 +198,9 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
               </Dialog.Panel>
             </Transition.Child>
           </div>
-        </div >
-      </Dialog >
-    </Transition >
+        </div>
+      </Dialog>
+    </Transition>
   );
 };
 

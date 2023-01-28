@@ -5,6 +5,14 @@ const withTM = require('next-transpile-modules')(['yoembed']); // pass the modul
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  }
 };
 
 module.exports = withTM(nextConfig);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../layouts/Layout';
 import { Tab } from '@headlessui/react';
 
@@ -16,6 +16,7 @@ function classNames(...classes) {
 
 const Templates = () => {
   const [templateName, setTemplateName] = useState('');
+  const [defaultTab, setDefaultTab] = useState(0);
 
   const saveTemplate = () => {
     axios
@@ -28,11 +29,19 @@ const Templates = () => {
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    setDefaultTab(window.location.href.slice(-1));
+  }, []);
+
   return (
     <>
       <Layout>
         <div className="p-2 ">
-          <Tab.Group>
+          <Tab.Group
+            defaultIndex={defaultTab}
+            selectedIndex={defaultTab}
+            onChange={setDefaultTab}
+          >
             <Tab.List className="flex space-x-1 rounded-xl p-1">
               {tabList.map((category) => (
                 <Tab

@@ -44,6 +44,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",
+    "react-icons": "^4.7.1",
     "react-syntax-highlighter": "^15.5.0",
     "react-tailwindcss-select": "^1.6.0",
     "react-use": "^17.4.0",
