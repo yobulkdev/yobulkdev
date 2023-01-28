@@ -2,7 +2,13 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useMemo } from 'react';
-import { ArticleIcon, CollapsIcon, HomeIcon, ConfigIcon } from './icons';
+import {
+  ArticleIcon,
+  CollapsIcon,
+  HomeIcon,
+  ConfigIcon,
+  CsvIcon,
+} from './icons';
 import { UsersIcon } from '@heroicons/react/24/outline/';
 
 import Logo from '../../public/yobulk_logo.png';
@@ -34,6 +40,12 @@ const menuItems = [
     label: 'Imports',
     icon: HomeIcon,
     link: '/imports',
+  },
+  {
+    id: 5,
+    label: 'CSV Libraries',
+    icon: CsvIcon,
+    link: '/csvlibraries',
   },
 ];
 

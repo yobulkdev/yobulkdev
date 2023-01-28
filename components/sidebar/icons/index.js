@@ -6,3 +6,4 @@ export { default as CollapsIcon } from "./CollapsIcon";
 export { default as LogoIcon } from "./Logo";
 export { default as LogoutIcon } from "./LogoutIcon";
 export { default as ConfigIcon } from "./ConfigIcon";
+export { default as CsvIcon } from "./CsvIcon";
