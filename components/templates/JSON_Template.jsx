@@ -19,7 +19,7 @@ const JSON_Template = () => {
         "type": "string",
         "maxlength": 3,
         "format": "first-name-validation",
-        "validate": "(x) => (x.startsWith('chinm') ? true : false)"
+        "validate": (x) => (x.startsWith('chinm') ? true : false)
         },
         "email": { "type": "string", "format": "email" },
         "dob": { "type": "string", "format": "date" },
@@ -32,9 +32,7 @@ const JSON_Template = () => {
 }    
 `;
 
-  const [code, setCode] = useState(`{
-
-}`);
+  const [code, setCode] = useState(`{}`);
   const [templateName, setTemplateName] = useState('');
 
   const [value, setValue] = useState(code);
@@ -47,10 +45,9 @@ const JSON_Template = () => {
         return code;
       }
     });
-    console.log(templateData);
 
     axios
-      .post('/api/templates', templateData)
+      .post('/api/templates/json', templateData)
       .then((result) => {
         router.push({ pathname: '/templates' }, undefined, {
           shallow: true,
@@ -88,9 +85,9 @@ const JSON_Template = () => {
             <ArrowLeftIcon className="h-5 cursor-pointer" />
           </Link>
 
-          <h1 className="text-2xl font-bold text-gray-500">
+          {/*      <h1 className="text-2xl font-bold text-gray-500">
             {`${templateName ? templateName : 'Name your'} template`}
-          </h1>
+          </h1> */}
         </div>
 
         <button
@@ -102,37 +99,38 @@ const JSON_Template = () => {
         </button>
       </div>
 
-      <div className="my-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
-        <div className="flex">
-          <div className="flex flex-col w-5/12">
-            <h2 className="text-lg font-bold text-gray-500">Name</h2>
-            <p className="text-gray-400">Name of the template</p>
-          </div>
-          <div className="ml-10 flex flex-col justify-center w-full">
-            <div className="mb-2">
-              <input
-                type="text"
-                id="default-input"
-                className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+      <div className="flex gap-4">
+        <div>
+          <div className="bg-white rounded-md p-2 my-1 shadow-sm">
+            <div className="flex">
+              <div className="flex flex-col w-5/12">
+                <h2 className="m-2 text-md font-bold text-gray-500">
+                  Template Name:
+                </h2>
+              </div>
+              <div className="flex flex-col justify-center w-full">
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    id="default-input"
+                    className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-full
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-                value={templateName}
-                onChange={(e) => setTemplateName(e.target.value)}
-              />
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="flex gap-4">
-        <div>
           <Editor
             height="70vh"
             width={`50vw`}
             language="json"
             value={value}
             defaultValue={code}
+            theme="vs-dark"
             onChange={handleEditorChange}
             options={{
               minimap: { enabled: false },
