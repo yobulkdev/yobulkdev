@@ -147,9 +147,12 @@ const SassLoadMapper = () => {
         return state.curSaasLoadMapperTemplate.filter(
           (el) => el.is_imported && el.label === params.value
         ).length > 1
-          ? 'text-red-400'
-          : '';
+          ? 'text-red-400 editable-grid-cell'
+          : 'editable-grid-cell';
       },
+      cellRenderer: function (params) {
+        return params.value;
+      }
     },
     {
       headerName: 'Select Columns',

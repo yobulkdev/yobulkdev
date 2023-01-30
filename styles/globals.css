@@ -123,3 +123,13 @@ a {
 }
 
 /* templates */
+.editable-grid-cell::after {
+  content: '▼';
+  font-family: 'Font Awesome 5 Free';
+  position: absolute;
+  top: 25%;
+  right: 0;
+  font-size: 15px;
+  font-weight: 900;
+  z-index: -1; /* this will set it in background so when user click onit you will get cell-click event as if user would normally click on cell */
+}
