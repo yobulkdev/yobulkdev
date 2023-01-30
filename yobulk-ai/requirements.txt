@@ -1,0 +1,8 @@
+fastapi
+starlette
+uvicorn
+# tensorflow
+# sklearn
+# tensorflow_hub
+# numpy
+# transformers
