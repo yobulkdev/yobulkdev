@@ -15,6 +15,8 @@ import UploadProgress from '../uploadProgress';
 import { useRouter } from 'next/router';
 import MyModal from '../genericdialog';
 import CheckboxComponent from './CheckboxComponent';
+import { Tab } from '@headlessui/react';
+import classNames from 'classnames';
 
 const columnMatcher = ({ saasTemplate, validationTemplate }) => {
   if (!saasTemplate || !validationTemplate) return;
@@ -200,29 +202,96 @@ const SassLoadMapper = () => {
               </button>
             </div>
 
-            <div className="flex saas-load-matcher">
-              <div
-                className="ag-theme-alpine"
-                style={{
-                  height: (state.curSaasLoadMapperTemplate?.length + 1) * 50,
-                  width: '90vw',
-                  border: 'none',
-                }}
-              >
-                <AgGridReact
-                  ref={gridRef}
-                  columnDefs={columnDefs}
-                  rowData={state.curSaasLoadMapperTemplate}
-                  onGridReady={onGridReady}
-                  rowHeight={50}
-                  suppressHorizontalScroll={true}
-                  suppressRowClickSelection={true}
-                  rowSelection={'multiple'}
-                  onFirstDataRendered={onFirstDataRendered}
-                  components={frameworkComponents}
-                />
-              </div>
-            </div>
+            <Tab.Group>
+              <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                <Tab
+                  className={({ selected }) =>
+                    classNames(
+                      'w-full rounded-lg py-2.5 text-sm font-medium leading-5 ',
+                      selected
+                        ? 'bg-white shadow'
+                        : 'text-black hover:bg-white/[0.12] hover:text-white'
+                    )
+                  }
+                >
+                  With OpenAI
+                </Tab>
+                <Tab
+                  className={({ selected }) =>
+                    classNames(
+                      'w-full rounded-lg py-2.5 text-sm font-medium leading-5 ',
+                      selected
+                        ? 'bg-white shadow'
+                        : 'text-black hover:bg-white/[0.12] hover:text-white'
+                    )
+                  }
+                >
+                  Without OpenAI
+                </Tab>
+              </Tab.List>
+              <Tab.Panels className="mt-2">
+                <Tab.Panel
+                  className={classNames(
+                    'rounded-xl bg-white p-3',
+                  )}
+                >
+                  <div className="flex saas-load-matcher">
+                    <div
+                      className="ag-theme-alpine"
+                      style={{
+                        height: (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                        width: '90vw',
+                        border: 'none',
+                      }}
+                    >
+                      <AgGridReact
+                        ref={gridRef}
+                        columnDefs={columnDefs}
+                        rowData={state.curSaasLoadMapperTemplate} // with openai prompt
+                        onGridReady={onGridReady}
+                        rowHeight={50}
+                        suppressHorizontalScroll={true}
+                        suppressRowClickSelection={true}
+                        rowSelection={'multiple'}
+                        onFirstDataRendered={onFirstDataRendered}
+                        components={frameworkComponents}
+                      />
+                    </div>
+                  </div>
+                </Tab.Panel>
+                <Tab.Panel
+                  className={classNames(
+                    'rounded-xl bg-white p-3',
+                  )}
+                >
+                  <div className="flex saas-load-matcher">
+                    <div
+                      className="ag-theme-alpine"
+                      style={{
+                        height: (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                        width: '90vw',
+                        border: 'none',
+                      }}
+                    >
+                      <AgGridReact
+                        ref={gridRef}
+                        columnDefs={columnDefs}
+                        rowData={state.curSaasLoadMapperTemplate} // from csv
+                        onGridReady={onGridReady}
+                        rowHeight={50}
+                        suppressHorizontalScroll={true}
+                        suppressRowClickSelection={true}
+                        rowSelection={'multiple'}
+                        onFirstDataRendered={onFirstDataRendered}
+                        components={frameworkComponents}
+                      />
+                    </div>
+                  </div>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+
+
           </div>
           {/*  <div className="gap-1">
         <span className="break-all">{JSON.stringify(state)}</span>
