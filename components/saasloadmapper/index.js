@@ -147,14 +147,18 @@ const SassLoadMapper = () => {
         return state.curSaasLoadMapperTemplate.filter(
           (el) => el.is_imported && el.label === params.value
         ).length > 1
-          ? 'text-red-400'
-          : '';
+          ? 'text-red-400 editable-grid-cell'
+          : 'editable-grid-cell';
       },
+      cellRenderer: function (params) {
+        return params.value;
+      }
     },
     {
       headerName: 'Select Columns',
       resizable: true,
       field: 'is_imported',
+      cellStyle: { 'direction': 'rtl' },
       cellRenderer: 'checkboxRenderer',
       onCellValueChanged: (e) => {
         dispatch({ type: 'SAAS_LOAD_MAPPER_TEMPLATE_UPDATE', payload: e.data });
@@ -200,7 +204,7 @@ const SassLoadMapper = () => {
               <div
                 className="ag-theme-alpine"
                 style={{
-                  height: '60vh',
+                  height: (state.curSaasLoadMapperTemplate?.length + 1) * 50,
                   width: '90vw',
                   border: 'none',
                 }}
