@@ -24,7 +24,7 @@ const JSON_Template = () => {
         "type": "string",
         "maxlength": 3,
         "format": "first-name-validation",
-        "validate": (x) => (x.startsWith('chinm') ? true : false)
+        "validate": "(x) => (x.startsWith('yo') ? true : false)"
         },
         "email": { "type": "string", "format": "email" },
         "dob": { "type": "string", "format": "date" },
@@ -39,24 +39,15 @@ const JSON_Template = () => {
 
   const [code, setCode] = useState(`{}`);
   const [templateName, setTemplateName] = useState('');
-
   const [value, setValue] = useState(code);
 
   const saveTemplate = () => {
-    var templateData = JSON.stringify(code, function (key, code) {
-      if (typeof code === 'function') {
-        return code.toString();
-      } else {
-        return code;
-      }
-    });
-
     axios
-      .post('/api/templates/json', templateData)
+      .post('/api/templates/json', { data: code })
       .then((result) => {
-        router.push({ pathname: '/templates' }, undefined, {
+        /*      router.push({ pathname: '/templates' }, undefined, {
           shallow: true,
-        });
+        }); */
       })
       .catch((err) => console.log(err));
   };
@@ -65,22 +56,6 @@ const JSON_Template = () => {
     setValue(value);
     setCode(value);
   };
-
-  // const handleClick = () => {
-  //   var json = JSON.stringify(code, function (key, code) {
-  //     if (typeof code === 'function') {
-  //       return code.toString();
-  //     } else {
-  //       return code;
-  //     }
-  //   });
-
-  //   console.log(json);
-
-  //   // router.push({ pathname: '/templates' }, undefined, {
-  //   //     shallow: true,
-  //   // });
-  // };
 
   return (
     <div className="p-4">
