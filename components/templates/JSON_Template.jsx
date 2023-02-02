@@ -8,6 +8,11 @@ import { googlecode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Link from 'next/link';
 import { ArrowDownTrayIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
+import { Tab } from '@headlessui/react';
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
 
 const JSON_Template = () => {
   const router = useRouter();
@@ -128,7 +133,7 @@ const JSON_Template = () => {
       <div className="flex gap-4">
         <div>
           <Editor
-            height="70vh"
+            height="65vh"
             width={`50vw`}
             language="json"
             value={value}
@@ -143,23 +148,76 @@ const JSON_Template = () => {
           />
         </div>
 
-        <div className="flex flex-col text-sm">
-          <h1 className="text-xl flex items-center justify-center mt-2 mb-5 text-gray-600">
-            Sample Import Config Code Snippet
-          </h1>
-          <SyntaxHighlighter
-            language="json"
-            wrapLongLines={true}
-            style={googlecode}
-          >
-            {defaultCode}
-          </SyntaxHighlighter>
-          <div
-            className="mt-4 flex items-center bg-white justify-center rounded-md px-2 py-4 text-center cursor-pointer shadow-sm"
-            onClick={() => setValue(defaultCode)}
-          >
-            COPY TO THE EDITOR
-          </div>
+        <div className="w-full px-2 py-3 sm:px-0">
+          <Tab.Group>
+            <Tab.List className="flex space-x-1 justify-between rounded-xl bg-blue-900/20 p-3">
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                    selected
+                      ? 'bg-white shadow'
+                      : 'text-black hover:bg-white/[0.12] hover:text-white'
+                  )
+                }
+              >
+                With OpenAI
+              </Tab>
+
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                    selected
+                      ? 'bg-white shadow'
+                      : 'text-black hover:bg-white/[0.12] hover:text-white'
+                  )
+                }
+              >
+                Without OpenAI
+              </Tab>
+            </Tab.List>
+            <Tab.Panels className="mt-2">
+              <Tab.Panel
+                className={classNames(
+                  'flex flex-col rounded-xl bg-white min-h-fit p-3'
+                )}
+              >
+                <textarea
+                  rows="20"
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Enter your prompt here for OpenAI"
+                />
+
+                <button
+                  type="button"
+                  className="flex mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
+                >
+                  Generate
+                </button>
+              </Tab.Panel>
+              <Tab.Panel>
+                <div className="flex flex-col text-sm">
+                  <h1 className="text-md flex items-center justify-center my-2 text-gray-600">
+                    Sample Import Config Code Snippet
+                  </h1>
+                  <SyntaxHighlighter
+                    language="json"
+                    wrapLongLines={true}
+                    style={googlecode}
+                  >
+                    {defaultCode}
+                  </SyntaxHighlighter>
+                  <div
+                    className="mt-4 flex items-center bg-white justify-center rounded-md px-2 py-4 text-center cursor-pointer shadow-sm"
+                    onClick={() => setValue(defaultCode)}
+                  >
+                    COPY TO THE EDITOR
+                  </div>
+                </div>
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
       </div>
     </div>
