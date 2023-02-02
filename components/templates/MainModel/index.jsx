@@ -1,15 +1,20 @@
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, RadioGroup, Transition } from '@headlessui/react';
 import { Fragment, useState, useContext, useEffect } from 'react';
 import ValidationModel from './ValidationModel';
 import InputField from './InputField';
 import { Context } from '../../../context';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import cuid from 'cuid';
+
 const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   let [isOpenValidation, setIsOpenValidation] = useState(false);
   const [modalData, setModalData] = useState([]);
   const [enabled, setEnabled] = useState(true);
   const { state, dispatch } = useContext(Context);
+
+  const [regexModal, setRegexModal] = useState(false);
+
+  const [regex, setRegex] = useState('');
 
   useEffect(() => {
     if (state.isTemplateEditing) {
@@ -27,6 +32,14 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
   function openSubModal() {
     setIsOpenValidation(true);
+  }
+
+  function openRegexModal() {
+    setRegexModal(true);
+  }
+
+  function closeRegexModal() {
+    setRegexModal(false);
   }
 
   const handleCloseMainModal = (e) => {
@@ -206,13 +219,102 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                     </div>
 
                     <div className="mb-4">
-                      <InputField
-                        name="Validation through Regex"
-                        colKey="regex"
-                        placeholder="^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
-                        setModalData={setModalData}
-                        columnData={'regex'}
-                      />
+                      <button
+                        type="button"
+                        onClick={openRegexModal}
+                        className="rounded-md w-full border bg-white px-4 py-2 text-sm font-medium text-[#2c71b2] items-center"
+                      >
+                        GENERATE REGEX
+                      </button>
+
+                      <Transition appear show={regexModal} as={Fragment}>
+                        <Dialog
+                          as="div"
+                          className="relative z-10"
+                          onClose={closeRegexModal}
+                        >
+                          <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <div className="fixed inset-0 bg-black bg-opacity-25" />
+                          </Transition.Child>
+
+                          <div className="fixed inset-0 overflow-y-auto">
+                            <div className="flex min-h-fit my-16 justify-center p-4 text-center">
+                              <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                              >
+                                <Dialog.Panel className="w-full max-w-md transform  rounded-md bg-white p-6 text-left align-middle transition-all">
+                                  <Dialog.Title
+                                    as="h2"
+                                    className="text-lg flex items-center font-medium leading-6 text-gray-900"
+                                  >
+                                    Generate Regex
+                                    <button
+                                      type="button"
+                                      className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                      data-modal-toggle="defaultModal"
+                                      onClick={closeRegexModal}
+                                    >
+                                      <XMarkIcon className="h-6" />
+                                      <span className="sr-only">
+                                        Close modal
+                                      </span>
+                                    </button>
+                                  </Dialog.Title>
+                                  <p className="my-2 font-semibold text-center">
+                                    Using OpenAI
+                                  </p>
+
+                                  <textarea
+                                    rows="10"
+                                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter your prompt here for OpenAI"
+                                  />
+
+                                  <button
+                                    type="button"
+                                    className="flex float-right mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
+                                    onClick={() => {
+                                      setRegex(
+                                        '^(0[1-9]|[12][0-9]|3[01])[- /.] (0[1-9]|1[012])[- /.] (19|20)dd^(0[1-9]|[12][0-9]|3[01])[- /.] (0[1-9]|1[012])[- /.] (19|20)dd^(0[1-9]|[12][0-9]|3[01])[- /.] (0[1-9]|1[012])[- /.] (19|20)dd'
+                                      );
+                                    }}
+                                  >
+                                    Generate
+                                  </button>
+
+                                  <textarea
+                                    className="w-full mt-2 rounded-md text-xs"
+                                    placeholder="GENERATED REGEX / Enter your own Regex"
+                                    value={regex}
+                                    onChange={(e) => setRegex(e.target.value)}
+                                  />
+                                  <button
+                                    type="button"
+                                    className="flex mt-4 w-full bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center justify-center mb-2"
+                                    onClick={closeRegexModal}
+                                  >
+                                    DONE
+                                  </button>
+                                </Dialog.Panel>
+                              </Transition.Child>
+                            </div>
+                          </div>
+                        </Dialog>
+                      </Transition>
                     </div>
 
                     <InputField
