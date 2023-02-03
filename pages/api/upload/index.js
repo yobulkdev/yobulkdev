@@ -94,7 +94,10 @@ async function processUpload(req) {
         });
 
         headers_changes._transform = async function (data, enc, cb) {
-          var newdata = await transformer(data, results.columns);
+          var newdata = await transformer({
+            data,
+            transformArrSchema: results.columns,
+          });
           headers_changes.push(newdata);
           cb();
         };
@@ -105,7 +108,7 @@ async function processUpload(req) {
         });
 
         datatype_validate._transform = function (data, enc, cb) {
-          var newdata = dataValidate(data, results.schema);
+          var newdata = dataValidate({ data, colSchema: results });
           datatype_validate.push(newdata);
           cb();
         };

@@ -1,4 +1,5 @@
 import clientPromise from '../../../../lib/mongodb';
+import { schemaToColumn } from '../../../../lib/validation_util/schemaColumn';
 import { schemaGenerator } from '../../../../lib/validation_util/yovalidator';
 
 export default async function handler(req, res) {
@@ -12,10 +13,16 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        let codeBody = req.body.data;
-        let template = schemaGenerator({ clonedSchema: JSON.parse(codeBody) });
+        let { schema, templateName } = req.body;
+        if (!schema || !templateName || templateName.length === 0) {
+          res.status(400).json({ error: 'Bad Request' });
+          break;
+        }
+        let template = schemaGenerator({ clonedSchema: JSON.parse(schema) });
+        template['template_name'] = templateName;
+        template['columns'] = schemaToColumn({ schema: JSON.parse(schema) });
         let result = await db.collection('templates').insertOne(template);
-        res.status(201).json({});
+        res.status(201).json(result);
       } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'failed to create data' });

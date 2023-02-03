@@ -43,7 +43,7 @@ const JSON_Template = () => {
 
   const saveTemplate = () => {
     axios
-      .post('/api/templates/json', { data: code })
+      .post('/api/templates/json', { templateName, schema: code })
       .then((result) => {
         /*      router.push({ pathname: '/templates' }, undefined, {
           shallow: true,
