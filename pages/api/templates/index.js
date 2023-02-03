@@ -28,14 +28,19 @@ export default async function fetchTemplateRecords(req, res) {
       break;
     case 'POST':
       try {
-        let columns = req.body.columns;
-        let body = req.body;
-        //Make this mongo db based
-        let generatedSchema = generateSchema(columns);
-        body.schema = generatedSchema;
-        body.created_date = new Date();
-
-        let result = await db.collection('templates').insertOne(body);
+        let templateBody = req.body;
+        if (templateBody.baseTemplateId) {
+          let baseTemplate = await db
+            .collection('templates')
+            .findOne({ _id: ObjectId(templateBody.baseTemplateId) });
+          templateBody.schema = baseTemplate.schema;
+          templateBody.validators = baseTemplate.validators;
+        } else {
+          let generatedSchema = generateSchema(templateBody.columns);
+          templateBody.schema = generatedSchema;
+        }
+        templateBody.created_date = new Date();
+        let result = await db.collection('templates').insertOne(templateBody);
         res.send(result);
       } catch (err) {
         console.error(err);

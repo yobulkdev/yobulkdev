@@ -33,6 +33,7 @@ import {
 } from '../../constants';
 import ReviewCsv from './reviewCsv';
 import Confetti from '../confetti';
+import { ajvCompileCustomValidator } from '../../lib/validation_util/yovalidator';
 
 ModuleRegistry.registerModules([InfiniteRowModelModule]);
 
@@ -52,19 +53,8 @@ const GridExample = ({ version }) => {
   const [selectedErrorType, setSelectedErrorType] = useState();
   const [errorFilter, setErrorFilter] = useState(false);
 
-  //Move this into mongodb
-  const ajv = new Ajv({ allErrors: false, coerceTypes: true });
-  addFormats(ajv, ['date', 'email']);
-  ajv.addFormat(DATE_TIME_FORMAT, customDateTime);
-  ajv.addFormat(BOOLEAN_FORMAT, customBoolean);
-  ajv.addFormat(THREE_DIGIT_NUMBER_FORMAT, {
-    type: 'number',
-    validate: customThreeDigitNumber,
-  });
-  ajv.addFormat(NO_GMAIL_FORMAT, customNoGmailDomain);
-  ajv.addFormat(PHONE_NUMBER_FORMAT, validInternationalPhoneNumber);
-
-  let template = [];
+  let templateColumns = [];
+  let template = {};
   let userSchema = {};
 
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
@@ -148,11 +138,12 @@ const GridExample = ({ version }) => {
         fetch(schemaUrl, { headers })
           .then((httpResponse) => httpResponse.json())
           .then((response) => {
-            template = response.columns;
+            templateColumns = response.columns;
+            template = response;
             userSchema = response.schema;
             setColumnDefs((prev) =>
               prev.concat(
-                template.map((x) => {
+                templateColumns.map((x) => {
                   return {
                     headerName: x.label,
                     field: x.label,
@@ -238,6 +229,7 @@ const GridExample = ({ version }) => {
 
       if (field in schemaProps) {
         let fieldSchema = schemaProps[field];
+        let ajv = ajvCompileCustomValidator({ template });
         let valid = ajv.validate(fieldSchema, data);
         if (!valid) {
           error_flg = true;
