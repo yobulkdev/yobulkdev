@@ -22,7 +22,7 @@ const JSON_Template = () => {
     "properties": {
         "firstName": {
         "type": "string",
-        "maxlength": 3,
+        "maxLength": 5,
         "format": "first-name-validation",
         "validate": "(x) => (x.startsWith('yo') ? true : false)"
         },
@@ -45,9 +45,9 @@ const JSON_Template = () => {
     axios
       .post('/api/templates/json', { templateName, schema: code })
       .then((result) => {
-        /*      router.push({ pathname: '/templates' }, undefined, {
+        router.push({ pathname: '/templates' }, undefined, {
           shallow: true,
-        }); */
+        });
       })
       .catch((err) => console.log(err));
   };
