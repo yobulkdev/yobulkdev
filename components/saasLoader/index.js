@@ -11,7 +11,6 @@ const SaasLoader = ({ templateId }) => {
   };
 
   useEffect(() => {
-    console.log('Template ID:', templateId);
     axios
       .get('/api/templates', { headers })
       .then((result) => {

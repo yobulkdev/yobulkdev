@@ -46,12 +46,6 @@ const SassLoadMapper = () => {
   const [duplicate, setDuplicate] = useState(false);
 
   useEffect(() => {
-    setInterval(() => {
-      console.log(state.curSaasLoadMapperTemplate);
-    }, 3000);
-  }, []);
-
-  useEffect(() => {
     dispatch({
       type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
       payload: columnMatcher({
@@ -109,6 +103,8 @@ const SassLoadMapper = () => {
       baseTemplateId: state.baseTemplateId,
       fileName: state.curFile.name
     };
+
+    console.log('The tempalte save post body:', data);
     axios
       .post('/api/templates', data)
       .then((result) => {
