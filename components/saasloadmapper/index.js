@@ -32,7 +32,34 @@ const columnMatcher = ({ saasTemplate, validationTemplate }) => {
     );
     return { ...saasTemplateObj, key: el.key, is_imported: true };
   });
+  return columnMatcherTemplate;
+};
 
+const columnMatcherAi = async ({ saasTemplate, validationTemplate }) => {
+  if (!saasTemplate || !validationTemplate) return;
+  let saasTemplateLabels = saasTemplate.map((e) => e.label);
+  let validationTemplateLabels = validationTemplate.map((e) => e.label);
+  let resp = await fetch('/api/yobulk-ai/match', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      validationTemplateColumns: validationTemplateLabels,
+      saasTemplateColumns: saasTemplateLabels.slice(
+        0,
+        validationTemplateLabels.length
+      ),
+    }),
+  });
+  let parsedResp = await resp.json();
+  let matchedColumns = parsedResp?.data || {};
+  let columnMatcherTemplate = validationTemplate.map((el) => {
+    let saasTemplateObj = saasTemplate.find(
+      (e) => e.label === matchedColumns[el.key]
+    );
+    return { ...saasTemplateObj, key: el.key, is_imported: true };
+  });
   return columnMatcherTemplate;
 };
 
@@ -40,20 +67,31 @@ const SassLoadMapper = () => {
   const gridRef = useRef();
   const router = useRouter();
 
+  const [selectedTab, setSelectedTab] = useState(0);
   const { state, dispatch } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duplicate, setDuplicate] = useState(false);
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-      payload: columnMatcher({
-        saasTemplate: state.saasTemplateColumns,
-        validationTemplate: state.validationTemplate,
-      }),
-    });
-  }, []);
+    selectedTab === 0
+      ? columnMatcherAi({
+          saasTemplate: state.saasTemplateColumns,
+          validationTemplate: state.validationTemplate,
+        }).then((payload) => {
+          dispatch({
+            type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+            payload,
+          });
+        })
+      : dispatch({
+          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+          payload: columnMatcher({
+            saasTemplate: state.saasTemplateColumns,
+            validationTemplate: state.validationTemplate,
+          }),
+        });
+  }, [selectedTab]);
 
   const uploadFile = ({ target, template_id }) => {
     let data = new FormData();
@@ -101,7 +139,7 @@ const SassLoadMapper = () => {
     let data = {
       columns: state.curSaasLoadMapperTemplate.filter((el) => el.is_imported),
       baseTemplateId: state.baseTemplateId,
-      fileName: state.curFile.name
+      fileName: state.curFile.name,
     };
 
     console.log('The tempalte save post body:', data);
@@ -150,13 +188,13 @@ const SassLoadMapper = () => {
       },
       cellRenderer: function (params) {
         return params.value;
-      }
+      },
     },
     {
       headerName: 'Select Columns',
       resizable: true,
       field: 'is_imported',
-      cellStyle: { 'direction': 'rtl' },
+      cellStyle: { direction: 'rtl' },
       cellRenderer: 'checkboxRenderer',
       onCellValueChanged: (e) => {
         dispatch({ type: 'SAAS_LOAD_MAPPER_TEMPLATE_UPDATE', payload: e.data });
@@ -198,7 +236,11 @@ const SassLoadMapper = () => {
               </button>
             </div>
 
-            <Tab.Group>
+            <Tab.Group
+              onChange={(index) => {
+                setSelectedTab(index);
+              }}
+            >
               <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
                 <Tab
                   className={({ selected }) =>
@@ -226,16 +268,13 @@ const SassLoadMapper = () => {
                 </Tab>
               </Tab.List>
               <Tab.Panels className="mt-2">
-                <Tab.Panel
-                  className={classNames(
-                    'rounded-xl bg-white p-3',
-                  )}
-                >
+                <Tab.Panel className={classNames('rounded-xl bg-white p-3')}>
                   <div className="flex saas-load-matcher">
                     <div
                       className="ag-theme-alpine"
                       style={{
-                        height: (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                        height:
+                          (state.curSaasLoadMapperTemplate?.length + 1) * 50,
                         width: '90vw',
                         border: 'none',
                       }}
@@ -255,16 +294,13 @@ const SassLoadMapper = () => {
                     </div>
                   </div>
                 </Tab.Panel>
-                <Tab.Panel
-                  className={classNames(
-                    'rounded-xl bg-white p-3',
-                  )}
-                >
+                <Tab.Panel className={classNames('rounded-xl bg-white p-3')}>
                   <div className="flex saas-load-matcher">
                     <div
                       className="ag-theme-alpine"
                       style={{
-                        height: (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                        height:
+                          (state.curSaasLoadMapperTemplate?.length + 1) * 50,
                         width: '90vw',
                         border: 'none',
                       }}
@@ -286,8 +322,6 @@ const SassLoadMapper = () => {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-
-
           </div>
           {/*  <div className="gap-1">
         <span className="break-all">{JSON.stringify(state)}</span>

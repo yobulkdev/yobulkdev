@@ -11,7 +11,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   const [modalData, setModalData] = useState([]);
   const [enabled, setEnabled] = useState(true);
   const { state, dispatch } = useContext(Context);
-
+  const [prompt, setPrompt] = useState("");
   const [regexModal, setRegexModal] = useState(false);
 
   const [regex, setRegex] = useState('');
@@ -108,6 +108,23 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
     setEnabled(!enabled);
   };
+
+  const generateRegex = () => {
+    console.log(prompt)
+    setRegex("Generating...")
+    fetch('/api/yobulk-ai/regex', {
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: prompt
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => setRegex(data.data))
+    .catch((e) => console.log(e))
+  }
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -282,16 +299,13 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                     rows="10"
                                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter your prompt here for OpenAI"
+                                    onChange={(e)=> setPrompt(e.target.value)}
                                   />
 
                                   <button
                                     type="button"
                                     className="flex float-right mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
-                                    onClick={() => {
-                                      setRegex(
-                                        '^(0[1-9]|[12][0-9]|3[01])[- /.] (0[1-9]|1[012])[- /.] (19|20)dd^(0[1-9]|[12][0-9]|3[01])[- /.] (0[1-9]|1[012])[- /.] (19|20)dd^(0[1-9]|[12][0-9]|3[01])[- /.] (0[1-9]|1[012])[- /.] (19|20)dd'
-                                      );
-                                    }}
+                                    onClick={generateRegex}
                                   >
                                     Generate
                                   </button>
