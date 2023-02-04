@@ -11,12 +11,13 @@ export default async function matchColumns(req, res) {
       let actualPrompt = `You are a column matcher. Match two lists with the following values.
       List1: ${validationTemplateColumns}
       List2: ${saasTemplateColumns}
-      Return the value as a javascript object`;
+      Return the value as a json object`;
       let resp = await getGPTResponse(actualPrompt, 100, 0, 0);
       let matchedColumns = {} ;
       try {
         matchedColumns = JSON.parse(resp);
       } catch(e){
+        console.log(error)
         for(let i in saasTemplateColumns){
           matchedColumns[validationTemplateColumns[i]] = saasTemplateColumns[i]
         }

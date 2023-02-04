@@ -110,7 +110,6 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   };
 
   const generateRegex = () => {
-    console.log(prompt)
     setRegex("Generating...")
     fetch('/api/yobulk-ai/regex', {
       method: 'POST',
