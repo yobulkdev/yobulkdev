@@ -5,7 +5,7 @@ export default async function matchColumns(req, res) {
     case 'POST':
       let validationTemplateColumns = req.body.validationTemplateColumns;
       let saasTemplateColumns = req.body.saasTemplateColumns;
-      if (!Array.isArray(validationTemplateColumns) || !Array.isArray(saasTemplateColumns) || saasTemplateColumns.length != validationTemplateColumns.length){
+      if (!Array.isArray(validationTemplateColumns) || !Array.isArray(saasTemplateColumns)){
         return res.json({status: 400, data: "Please send correct input lists"})
       }
       let actualPrompt = `You are a column matcher. Match two lists with the following values.

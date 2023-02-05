@@ -58,7 +58,7 @@ const columnMatcherAi = async ({ saasTemplate, validationTemplate }) => {
     let saasTemplateObj = saasTemplate.find(
       (e) => e.label === matchedColumns[el.key]
     );
-    return { ...saasTemplateObj, key: el.key, is_imported: true };
+    return { ...saasTemplateObj, key: el.key, is_imported: (matchedColumns[el.key] ? true : false) };
   });
   return columnMatcherTemplate;
 };
