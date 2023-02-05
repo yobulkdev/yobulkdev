@@ -11,7 +11,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   const [modalData, setModalData] = useState([]);
   const [enabled, setEnabled] = useState(true);
   const { state, dispatch } = useContext(Context);
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState('');
   const [regexModal, setRegexModal] = useState(false);
 
   const [regex, setRegex] = useState('');
@@ -110,20 +110,20 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   };
 
   const generateRegex = () => {
-    setRegex("Generating...")
+    setRegex('Generating...');
     fetch('/api/yobulk-ai/regex', {
       method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
+      headers: {
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        prompt: prompt
-      })
+        prompt: prompt,
+      }),
     })
-    .then((res) => res.json())
-    .then((data) => setRegex(data.data))
-    .catch((e) => console.log(e))
-  }
+      .then((res) => res.json())
+      .then((data) => setRegex(data.data))
+      .catch((e) => console.log(e));
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -291,14 +291,14 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                     </button>
                                   </Dialog.Title>
                                   <p className="my-2 font-semibold text-center">
-                                    Using OpenAI
+                                    Using YoBulkAI
                                   </p>
 
                                   <textarea
                                     rows="10"
                                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Enter your prompt here for OpenAI"
-                                    onChange={(e)=> setPrompt(e.target.value)}
+                                    placeholder="Enter your prompt here for YoBulkAI"
+                                    onChange={(e) => setPrompt(e.target.value)}
                                   />
 
                                   <button

@@ -240,6 +240,7 @@ const SassLoadMapper = () => {
               onChange={(index) => {
                 setSelectedTab(index);
               }}
+              defaultIndex={1}
             >
               <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
                 <Tab
@@ -252,7 +253,7 @@ const SassLoadMapper = () => {
                     )
                   }
                 >
-                  With OpenAI
+                  With YoBulkAI
                 </Tab>
                 <Tab
                   className={({ selected }) =>
@@ -264,7 +265,7 @@ const SassLoadMapper = () => {
                     )
                   }
                 >
-                  Without OpenAI
+                  Without YoBulkAI
                 </Tab>
               </Tab.List>
               <Tab.Panels className="mt-2">
@@ -282,7 +283,7 @@ const SassLoadMapper = () => {
                       <AgGridReact
                         ref={gridRef}
                         columnDefs={columnDefs}
-                        rowData={state.curSaasLoadMapperTemplate} // with openai prompt
+                        rowData={state.curSaasLoadMapperTemplate} // with yobulkAI prompt
                         onGridReady={onGridReady}
                         rowHeight={70}
                         suppressHorizontalScroll={true}
