@@ -65,7 +65,12 @@ const JSON_Template = () => {
   };
 
   const handleEditorChange = (value) => {
-    setIsValidJson(true)
+    try {
+      JSON.parse(value)
+      setIsValidJson(true)
+    } catch{
+      setIsValidJson(false)
+    }
     setValue(value);
     setCode(value);
   };
@@ -134,7 +139,7 @@ const JSON_Template = () => {
           </div>
           { !isValidJson && <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative" role="alert">
                   <strong class="font-bold">Error: </strong>
-                  <span class="block sm:inline">This is not a valid json. Please fix it and save again.</span>
+                  <span class="block sm:inline">This is not a valid json. Please fix it to save.</span>
                   <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                   </span>
           </div>}

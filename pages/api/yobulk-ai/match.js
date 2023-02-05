@@ -17,9 +17,10 @@ export default async function matchColumns(req, res) {
       try {
         matchedColumns = JSON.parse(resp);
       } catch(e){
-        console.log(e)
         for(let i in saasTemplateColumns){
-          matchedColumns[validationTemplateColumns[i]] = saasTemplateColumns[i]
+          try{
+            matchedColumns[validationTemplateColumns[i]] = saasTemplateColumns[i]
+          } catch(e){}
         }
       }
       res.json({ status: 200, data: matchedColumns });
