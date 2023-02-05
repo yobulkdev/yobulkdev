@@ -139,7 +139,11 @@ const JSON_Template = () => {
           </div>
           { !isValidJson && <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative" role="alert">
                   <strong class="font-bold">Error: </strong>
-                  <span class="block sm:inline">This is not a valid json. Please fix it to save.</span>
+                  <ol class="block sm:inline">
+                      <li> 1. Please check if the JSON formatting is proper using <a href="https://jsonformatter.curiousconcept.com/" class="underline" target="_blank" rel="noreferrer">https://jsonformatter.curiousconcept.com/</a>.</li>
+                      <li> 2. There might be an issue with your Regex. Please get it verfied by using <a href="https://regex101.com/" class="underline" target="_blank" rel="noreferrer">https://regex101.com/</a>.</li>
+                      <li> 3. Please make the regex JSON escaped. You can use <a href="https://www.freeformatter.com/json-escape.html#before-output" class="underline" target="_blank" rel="noreferrer">https://www.freeformatter.com/json-escape.html#before-output</a>.</li>
+                    </ol>
                   <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                   </span>
           </div>}
