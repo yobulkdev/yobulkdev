@@ -46,10 +46,7 @@ const columnMatcherAi = async ({ saasTemplate, validationTemplate }) => {
     },
     body: JSON.stringify({
       validationTemplateColumns: validationTemplateLabels,
-      saasTemplateColumns: saasTemplateLabels.slice(
-        0,
-        validationTemplateLabels.length
-      ),
+      saasTemplateColumns: saasTemplateLabels,
     }),
   });
   let parsedResp = await resp.json();
@@ -58,7 +55,7 @@ const columnMatcherAi = async ({ saasTemplate, validationTemplate }) => {
     let saasTemplateObj = saasTemplate.find(
       (e) => e.label === matchedColumns[el.key]
     );
-    return { ...saasTemplateObj, key: el.key, is_imported: true };
+    return { ...saasTemplateObj, key: el.key, is_imported: (matchedColumns[el.key] ? true : false) };
   });
   return columnMatcherTemplate;
 };
@@ -152,7 +149,10 @@ const SassLoadMapper = () => {
           template_id: result.data.insertedId,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        
+      });
   };
 
   const columnDefs = [

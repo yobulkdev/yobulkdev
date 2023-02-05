@@ -17,7 +17,7 @@ function classNames(...classes) {
 const JSON_Template = () => {
   const router = useRouter();
   const [prompt, setPrompt] = useState();
-
+  const editorRef = useRef();
   const defaultCode = `{
     "type": "object",
     "properties": {
@@ -37,14 +37,25 @@ const JSON_Template = () => {
     "required": ["firstName", "email", "dob", "countryCode"]    
 }    
 `;
-
+  const [isValidJson, setIsValidJson ] = useState(true);
   const [code, setCode] = useState(`{}`);
   const [templateName, setTemplateName] = useState('');
   const [value, setValue] = useState(code);
 
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor; 
+  }
+
   const saveTemplate = () => {
+    try {
+      JSON.parse(value)
+    } catch (e) {
+      setIsValidJson(false)
+      return;
+    }
+    editorRef.current.trigger("editor", "editor.action.formatDocument");
     axios
-      .post('/api/templates/json', { templateName, schema: code })
+      .post('/api/templates/json', { templateName, schema: value })
       .then((result) => {
         router.push({ pathname: '/templates' }, undefined, {
           shallow: true,
@@ -54,6 +65,12 @@ const JSON_Template = () => {
   };
 
   const handleEditorChange = (value) => {
+    try {
+      JSON.parse(value)
+      setIsValidJson(true)
+    } catch{
+      setIsValidJson(false)
+    }
     setValue(value);
     setCode(value);
   };
@@ -120,6 +137,12 @@ const JSON_Template = () => {
               </div>
             </div>
           </div>
+          { !isValidJson && <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative" role="alert">
+                  <strong class="font-bold">Error: </strong>
+                  <span class="block sm:inline">This is not a valid json. Please fix it to save.</span>
+                  <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                  </span>
+          </div>}
           <Editor
             height="65vh"
             width={`50vw`}
@@ -128,6 +151,7 @@ const JSON_Template = () => {
             defaultValue={code}
             theme="vs-dark"
             onChange={handleEditorChange}
+            onMount={handleEditorDidMount}
             options={{
               minimap: { enabled: false },
               fontSize: 13,
