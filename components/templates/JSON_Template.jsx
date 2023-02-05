@@ -16,6 +16,7 @@ function classNames(...classes) {
 
 const JSON_Template = () => {
   const router = useRouter();
+  const [prompt, setPrompt] = useState();
 
   const defaultCode = `{
     "type": "object",
@@ -57,6 +58,21 @@ const JSON_Template = () => {
     setCode(value);
   };
 
+  const generateAJV = () => {
+    setValue('Generating schema...')
+    fetch('/api/yobulk-ai/ajvschema', {
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: prompt
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => setValue(data.data))
+    .catch((e) => console.log(e))
+  }
   return (
     <div className="p-4">
       <div className="flex align-middle justify-between ">
@@ -160,11 +176,13 @@ const JSON_Template = () => {
                   rows="20"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter your prompt here for OpenAI"
+                  onChange={(e)=> setPrompt(e.target.value)}
                 />
 
                 <button
                   type="button"
                   className="flex mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
+                  onClick = {generateAJV}
                 >
                   Generate
                 </button>
