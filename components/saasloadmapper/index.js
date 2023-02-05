@@ -46,10 +46,7 @@ const columnMatcherAi = async ({ saasTemplate, validationTemplate }) => {
     },
     body: JSON.stringify({
       validationTemplateColumns: validationTemplateLabels,
-      saasTemplateColumns: saasTemplateLabels.slice(
-        0,
-        validationTemplateLabels.length
-      ),
+      saasTemplateColumns: saasTemplateLabels,
     }),
   });
   let parsedResp = await resp.json();
@@ -152,7 +149,10 @@ const SassLoadMapper = () => {
           template_id: result.data.insertedId,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        
+      });
   };
 
   const columnDefs = [

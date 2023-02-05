@@ -17,7 +17,7 @@ export default async function matchColumns(req, res) {
       try {
         matchedColumns = JSON.parse(resp);
       } catch(e){
-        console.log(error)
+        console.log(e)
         for(let i in saasTemplateColumns){
           matchedColumns[validationTemplateColumns[i]] = saasTemplateColumns[i]
         }
