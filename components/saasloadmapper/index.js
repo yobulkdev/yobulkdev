@@ -76,21 +76,21 @@ const SassLoadMapper = () => {
   useEffect(() => {
     selectedTab === 0
       ? columnMatcherAi({
+        saasTemplate: state.saasTemplateColumns,
+        validationTemplate: state.validationTemplate,
+      }).then((payload) => {
+        dispatch({
+          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+          payload,
+        });
+      })
+      : dispatch({
+        type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+        payload: columnMatcher({
           saasTemplate: state.saasTemplateColumns,
           validationTemplate: state.validationTemplate,
-        }).then((payload) => {
-          dispatch({
-            type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-            payload,
-          });
-        })
-      : dispatch({
-          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-          payload: columnMatcher({
-            saasTemplate: state.saasTemplateColumns,
-            validationTemplate: state.validationTemplate,
-          }),
-        });
+        }),
+      });
   }, [selectedTab]);
 
   const uploadFile = ({ target, template_id }) => {
@@ -274,7 +274,7 @@ const SassLoadMapper = () => {
                       className="ag-theme-alpine"
                       style={{
                         height:
-                          (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                          (state.curSaasLoadMapperTemplate?.length + 1) * 67,
                         width: '90vw',
                         border: 'none',
                       }}
@@ -284,7 +284,7 @@ const SassLoadMapper = () => {
                         columnDefs={columnDefs}
                         rowData={state.curSaasLoadMapperTemplate} // with openai prompt
                         onGridReady={onGridReady}
-                        rowHeight={50}
+                        rowHeight={70}
                         suppressHorizontalScroll={true}
                         suppressRowClickSelection={true}
                         rowSelection={'multiple'}
@@ -300,7 +300,7 @@ const SassLoadMapper = () => {
                       className="ag-theme-alpine"
                       style={{
                         height:
-                          (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                          (state.curSaasLoadMapperTemplate?.length + 1) * 67,
                         width: '90vw',
                         border: 'none',
                       }}
@@ -310,7 +310,7 @@ const SassLoadMapper = () => {
                         columnDefs={columnDefs}
                         rowData={state.curSaasLoadMapperTemplate} // from csv
                         onGridReady={onGridReady}
-                        rowHeight={50}
+                        rowHeight={70}
                         suppressHorizontalScroll={true}
                         suppressRowClickSelection={true}
                         rowSelection={'multiple'}
