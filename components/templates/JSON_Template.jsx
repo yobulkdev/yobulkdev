@@ -37,23 +37,23 @@ const JSON_Template = () => {
     "required": ["firstName", "email", "dob", "countryCode"]    
 }    
 `;
-  const [isValidJson, setIsValidJson ] = useState(true);
+  const [isValidJson, setIsValidJson] = useState(true);
   const [code, setCode] = useState(`{}`);
   const [templateName, setTemplateName] = useState('');
   const [value, setValue] = useState(code);
 
   function handleEditorDidMount(editor, monaco) {
-    editorRef.current = editor; 
+    editorRef.current = editor;
   }
 
   const saveTemplate = () => {
     try {
-      JSON.parse(value)
+      JSON.parse(value);
     } catch (e) {
-      setIsValidJson(false)
+      setIsValidJson(false);
       return;
     }
-    editorRef.current.trigger("editor", "editor.action.formatDocument");
+    editorRef.current.trigger('editor', 'editor.action.formatDocument');
     axios
       .post('/api/templates/json', { templateName, schema: value })
       .then((result) => {
@@ -66,30 +66,30 @@ const JSON_Template = () => {
 
   const handleEditorChange = (value) => {
     try {
-      JSON.parse(value)
-      setIsValidJson(true)
-    } catch{
-      setIsValidJson(false)
+      JSON.parse(value);
+      setIsValidJson(true);
+    } catch {
+      setIsValidJson(false);
     }
     setValue(value);
     setCode(value);
   };
 
   const generateAJV = () => {
-    setValue('Generating schema...')
+    setValue('Generating schema...');
     fetch('/api/yobulk-ai/ajvschema', {
       method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
+      headers: {
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        prompt: prompt
-      })
+        prompt: prompt,
+      }),
     })
-    .then((res) => res.json())
-    .then((data) => setValue(data.data))
-    .catch((e) => console.log(e))
-  }
+      .then((res) => res.json())
+      .then((data) => setValue(data.data))
+      .catch((e) => console.log(e));
+  };
   return (
     <div className="p-4">
       <div className="flex align-middle justify-between ">
@@ -137,16 +137,57 @@ const JSON_Template = () => {
               </div>
             </div>
           </div>
-          { !isValidJson && <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative" role="alert">
-                  <strong class="font-bold">Error: </strong>
-                  <ol class="block sm:inline">
-                      <li> 1. Please check if the JSON formatting is proper using <a href="https://jsonformatter.curiousconcept.com/" class="underline" target="_blank" rel="noreferrer">https://jsonformatter.curiousconcept.com/</a>.</li>
-                      <li> 2. There might be an issue with your Regex. Please get it verfied by using <a href="https://regex101.com/" class="underline" target="_blank" rel="noreferrer">https://regex101.com/</a>.</li>
-                      <li> 3. Please make the regex JSON escaped. You can use <a href="https://www.freeformatter.com/json-escape.html#before-output" class="underline" target="_blank" rel="noreferrer">https://www.freeformatter.com/json-escape.html#before-output</a>.</li>
-                    </ol>
-                  <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  </span>
-          </div>}
+          {!isValidJson && (
+            <div
+              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative"
+              role="alert"
+            >
+              <strong class="font-bold">Error: </strong>
+              <ol class="block sm:inline">
+                <li>
+                  {' '}
+                  1. Please check if the JSON formatting is proper using{' '}
+                  <a
+                    href="https://jsonformatter.curiousconcept.com/"
+                    class="underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    https://jsonformatter.curiousconcept.com/
+                  </a>
+                  .
+                </li>
+                <li>
+                  {' '}
+                  2. There might be an issue with your Regex. Please get it
+                  verfied by using{' '}
+                  <a
+                    href="https://regex101.com/"
+                    class="underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    https://regex101.com/
+                  </a>
+                  .
+                </li>
+                <li>
+                  {' '}
+                  3. Please make the regex JSON escaped. You can use{' '}
+                  <a
+                    href="https://www.freeformatter.com/json-escape.html#before-output"
+                    class="underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    https://www.freeformatter.com/json-escape.html#before-output
+                  </a>
+                  .
+                </li>
+              </ol>
+              <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+            </div>
+          )}
           <Editor
             height="65vh"
             width={`50vw`}
@@ -178,7 +219,7 @@ const JSON_Template = () => {
                   )
                 }
               >
-                With OpenAI
+                With YoBulkAI
               </Tab>
 
               <Tab
@@ -191,7 +232,7 @@ const JSON_Template = () => {
                   )
                 }
               >
-                Without OpenAI
+                Without YoBulkAI
               </Tab>
             </Tab.List>
             <Tab.Panels className="mt-2">
@@ -203,14 +244,14 @@ const JSON_Template = () => {
                 <textarea
                   rows="20"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Enter your prompt here for OpenAI"
-                  onChange={(e)=> setPrompt(e.target.value)}
+                  placeholder="Enter your prompt here for YoBulkAI"
+                  onChange={(e) => setPrompt(e.target.value)}
                 />
 
                 <button
                   type="button"
                   className="flex mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
-                  onClick = {generateAJV}
+                  onClick={generateAJV}
                 >
                   Generate
                 </button>

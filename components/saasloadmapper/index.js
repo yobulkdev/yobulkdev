@@ -73,21 +73,21 @@ const SassLoadMapper = () => {
   useEffect(() => {
     selectedTab === 0
       ? columnMatcherAi({
+        saasTemplate: state.saasTemplateColumns,
+        validationTemplate: state.validationTemplate,
+      }).then((payload) => {
+        dispatch({
+          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+          payload,
+        });
+      })
+      : dispatch({
+        type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+        payload: columnMatcher({
           saasTemplate: state.saasTemplateColumns,
           validationTemplate: state.validationTemplate,
-        }).then((payload) => {
-          dispatch({
-            type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-            payload,
-          });
-        })
-      : dispatch({
-          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-          payload: columnMatcher({
-            saasTemplate: state.saasTemplateColumns,
-            validationTemplate: state.validationTemplate,
-          }),
-        });
+        }),
+      });
   }, [selectedTab]);
 
   const uploadFile = ({ target, template_id }) => {
@@ -240,6 +240,7 @@ const SassLoadMapper = () => {
               onChange={(index) => {
                 setSelectedTab(index);
               }}
+              defaultIndex={1}
             >
               <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
                 <Tab
@@ -252,7 +253,7 @@ const SassLoadMapper = () => {
                     )
                   }
                 >
-                  With OpenAI
+                  With YoBulkAI
                 </Tab>
                 <Tab
                   className={({ selected }) =>
@@ -264,7 +265,7 @@ const SassLoadMapper = () => {
                     )
                   }
                 >
-                  Without OpenAI
+                  Without YoBulkAI
                 </Tab>
               </Tab.List>
               <Tab.Panels className="mt-2">
@@ -274,7 +275,7 @@ const SassLoadMapper = () => {
                       className="ag-theme-alpine"
                       style={{
                         height:
-                          (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                          (state.curSaasLoadMapperTemplate?.length + 1) * 67,
                         width: '90vw',
                         border: 'none',
                       }}
@@ -282,9 +283,9 @@ const SassLoadMapper = () => {
                       <AgGridReact
                         ref={gridRef}
                         columnDefs={columnDefs}
-                        rowData={state.curSaasLoadMapperTemplate} // with openai prompt
+                        rowData={state.curSaasLoadMapperTemplate} // with yobulkAI prompt
                         onGridReady={onGridReady}
-                        rowHeight={50}
+                        rowHeight={70}
                         suppressHorizontalScroll={true}
                         suppressRowClickSelection={true}
                         rowSelection={'multiple'}
@@ -300,7 +301,7 @@ const SassLoadMapper = () => {
                       className="ag-theme-alpine"
                       style={{
                         height:
-                          (state.curSaasLoadMapperTemplate?.length + 1) * 50,
+                          (state.curSaasLoadMapperTemplate?.length + 1) * 67,
                         width: '90vw',
                         border: 'none',
                       }}
@@ -310,7 +311,7 @@ const SassLoadMapper = () => {
                         columnDefs={columnDefs}
                         rowData={state.curSaasLoadMapperTemplate} // from csv
                         onGridReady={onGridReady}
-                        rowHeight={50}
+                        rowHeight={70}
                         suppressHorizontalScroll={true}
                         suppressRowClickSelection={true}
                         rowSelection={'multiple'}
