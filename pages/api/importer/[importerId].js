@@ -8,8 +8,10 @@ export default async function importer(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        let {importerId} = req.query;
-        let result = await db.collection('importers').findOne({ _id: ObjectId(importerId)});
+        let { importerId } = req.query;
+        let result = await db
+          .collection('importers')
+          .findOne({ _id: ObjectId(importerId) });
         res.status(200).send(result);
       } catch (err) {
         console.error(err.message);
