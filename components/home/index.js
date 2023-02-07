@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 const Home = () => {
   const router = useRouter();
+  const [defaultTemplateId, setDefaultTemplateId] = useState();
+
+  useEffect(()=>{
+    axios
+      .get('/api/templates')
+      .then((res) => {
+        const defaultTemplate = res.data.filter((el) => { return(el['template_name'] === 'YoBulk')})[0]
+        setDefaultTemplateId(defaultTemplate?._id);
+      })
+      .catch((e) => console.log(e));
+  }, [])
+  
   return (
     <div id="home" className="w-full text-center">
       <div className="max-w-[1240px] mx-auto px-28 py-20 flex flex-col justify-center items-center">
@@ -43,7 +56,7 @@ const Home = () => {
               <h1 className='text-xl'>Step 2 </h1>
               <div className='flex justify-between text-center items-center'>
                 <p className='text-md text-gray-700'>Start the Import Flow and make the corrections.</p>
-                <Link href='/templates/testtemplate/63ba9d3d045f129d55e27be1'>
+                <Link href={`/templates/testtemplate/${defaultTemplateId}`}>
                   <button className='bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md'>Import CSV</button>
                 </Link>
               </div>
