@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import SaasLoader from '../../components/saasLoader';
 
@@ -11,9 +12,13 @@ export default function ImporterPage({ templateId }) {
 
 export async function getServerSideProps({ params }) {
   const importerId = params.importerId.replace(/\-/g, '+');
-  let data = await fetch(
-    `http://localhost:3000/api/importer/${importerId}`
-  ).then((res) => res.json());
+  let data = await axios
+    .get(`${process.env.BACKEND_SERVER_HOST}/api/importer/${importerId}`)
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch((err) => console.log('Error fetching importer document', err));
   return {
     props: {
       templateId: data.templateId,
