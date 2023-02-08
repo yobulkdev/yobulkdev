@@ -88,6 +88,7 @@ export default App;`);
         templateName: attachToImporters.label,
       })
       .then((response) => {
+        if (response.status = 201) setConfigurationData({importerId: response.data.insertedId})
         setVisible(true);
       })
       .catch((error) => console.log(error));
@@ -105,7 +106,7 @@ function App() {
         <hr />
         <br />
         <YoButton
-            importId="${configurationData.attachToImporters.value}"
+            importId="${configurationData.importerId}"
             yoHostUrl={"http://localhost:3000"}
         />
     </div>
