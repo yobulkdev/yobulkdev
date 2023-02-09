@@ -28,7 +28,7 @@ const SchemaMapper = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [recordsUploaded, setRecordsUploaded] = useState(0);
-
+  const [templateName, setTemplateName] = useState();
   const router = useRouter();
 
   const schemaDataTypes = [
@@ -62,7 +62,7 @@ const SchemaMapper = () => {
       },
       cellStyle: {
         cursor: 'pointer',
-        boxShadow: '2px 2px #D3D3D3',
+        // boxShadow: '2px 2px #D3D3D3',
         borderRadius: '5px',
       },
       onCellValueChanged: (e) =>
@@ -111,16 +111,18 @@ const SchemaMapper = () => {
   };
 
   const saveTemplate = () => {
+    if (!templateName) return
     setLoading(true);
-    let data = { columns: state.validationTemplate };
+    let data = { columns: state.validationTemplate.map((e) => { return {...e, custom_message: `${e.label} should be of type ${e.data_type}`}}), template_name: templateName };
+    delete data.collection_name
     axios
       .post('/api/templates', data)
       .then((result) => {
-        dispatch({ type: 'SET_CUR_TEMPLATE', payload: result.data.insertedId });
-        uploadFile({
-          target: state.curFile,
-          template_id: result.data.insertedId,
-        });
+        // dispatch({ type: 'SET_CUR_TEMPLATE', payload: result.data.insertedId });
+        // uploadFile({
+        //   target: state.curFile,
+        //   template_id: result.data.insertedId,
+        // });
       })
       .catch((err) => console.log(err));
     router.push({ pathname: '/templates' });
@@ -151,9 +153,33 @@ const SchemaMapper = () => {
             </button>
           </div>
           <div
-            className="ag-theme-alpine"
+            className="ag-theme-alpine p-4"
             style={{ height: '420px', width: 'auto' }}
           >
+            <div className="my-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
+              <div className="flex">
+                <div className="flex flex-col w-5/12">
+                  <h2 className="text-lg font-bold text-gray-500">Name</h2>
+                  <p className="text-gray-400">Name of the template</p>
+                </div>
+                <div className="ml-10 flex flex-col justify-center w-full">
+                  <div className="mb-2">
+                    <input
+                      type="text"
+                      id="default-input"
+                      className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 w-full
+                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+                    `}
+                      value={templateName}
+                      onChange={(e) => setTemplateName(e.target.value)}
+                    />
+                    {!templateName && <span className='text-red-500' >Template name cannot be empty</span>}
+                  </div>
+                </div>
+              </div>
+            </div>
             <AgGridReact
               ref={gridRef}
               columnDefs={columnDefs}

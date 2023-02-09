@@ -52,7 +52,7 @@ const SnapshotViewer = () => {
           Create Template
         </button>
       </div>
-      <div className="ag-theme-alpine" style={{ height: 500, width: 'auto' }}>
+      <div className="ag-theme-alpine p-4" style={{ height: '70vh', width: 'auto' }}>
         <AgGridReact
           ref={gridRef}
           columnDefs={getColumns(state.sourceFileHeaders)}
