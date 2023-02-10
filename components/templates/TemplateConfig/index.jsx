@@ -256,7 +256,9 @@ const AdminComponent = ({ templateId, type }) => {
                               </Dialog.Title>
                               <div className="mt-2">
                                 <p className="text-sm text-gray-500">
-                                  {' [a-z0-9]+@[a-z0-9].[a-z] '}
+                                  {col.pattern
+                                    ? col.pattern
+                                    : 'Uhh! No Regex...'}
                                 </p>
                               </div>
 
