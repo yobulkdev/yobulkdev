@@ -1,5 +1,6 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Context } from '../../../context';
+
 const InputField = ({ colKey, name, desc, setModalData, placeholder }) => {
   const [inputValue, setInputValue] = useState();
   const { state, dispatch } = useContext(Context);

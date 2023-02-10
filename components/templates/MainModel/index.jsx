@@ -93,6 +93,16 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
     }
   };
 
+  const handleBlur = ({ key, value }) => {
+    setModalData((prev) => {
+      if (prev.find((el) => el.key === key)) {
+        return prev.map((obj) => (obj.key === key ? { key, value } : obj));
+      } else {
+        return [...prev, { key, value }];
+      }
+    });
+  };
+
   const handleRequired = () => {
     setModalData((prev) => {
       if (prev.find((el) => el.key === 'is_required')) {
@@ -121,7 +131,10 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setRegex(data.data))
+      .then((data) => {
+        handleBlur({ key: 'pattern', value: data.data });
+        setRegex(data.data);
+      })
       .catch((e) => console.log(e));
   };
 
@@ -313,7 +326,13 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                     className="w-full mt-2 rounded-md text-xs"
                                     placeholder="GENERATED REGEX / Enter your own Regex"
                                     value={regex}
-                                    onChange={(e) => setRegex(e.target.value)}
+                                    onChange={(e) => {
+                                      handleBlur({
+                                        key: 'pattern',
+                                        value: e.target.value,
+                                      });
+                                      setRegex(e.target.value);
+                                    }}
                                   />
                                   <button
                                     type="button"
