@@ -1,7 +1,6 @@
 import { ajvCompileCustomValidator } from '../../../lib/validation_util/yovalidator';
 
-const dataValidate = ({ data, colSchema }) => {
-  let ajv = ajvCompileCustomValidator({ template: colSchema });
+const dataValidate = ({ data, colSchema, ajv }) => {
   const result = ajv.validate(colSchema.schema, data);
   if (result) {
     data.validationData = [];

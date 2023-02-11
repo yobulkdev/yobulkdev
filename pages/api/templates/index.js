@@ -33,7 +33,13 @@ export default async function fetchTemplateRecords(req, res) {
           let baseTemplate = await db
             .collection('templates')
             .findOne({ _id: ObjectId(templateBody.baseTemplateId) });
-          templateBody.schema = baseTemplate.schema;
+          let columnLabels = templateBody.columns.map((el) => el.label);
+          let baseTemplateSchema = baseTemplate.schema;
+          let requiredCols = baseTemplateSchema.required?.filter((el) =>
+            columnLabels.includes(el)
+          );
+          baseTemplateSchema.required = requiredCols;
+          templateBody.schema = baseTemplateSchema;
           templateBody.validators = baseTemplate.validators;
         } else {
           let generatedSchema = generateSchema(templateBody.columns);

@@ -7,6 +7,7 @@ import StreamToMongoDB from '../../../lib/mongostream';
 import clientPromise from '../../../lib/mongodb';
 import { dataValidate, transformer } from './dataValidate';
 import { openCsvInputStream } from './papaStream';
+import { ajvCompileCustomValidator } from '../../../lib/validation_util/yovalidator';
 
 export const config = {
   api: {
@@ -107,8 +108,9 @@ async function processUpload(req) {
           writableObjectMode: true,
         });
 
+        let ajv = ajvCompileCustomValidator({ template: results });
         datatype_validate._transform = function (data, enc, cb) {
-          var newdata = dataValidate({ data, colSchema: results });
+          var newdata = dataValidate({ data, colSchema: results, ajv });
           datatype_validate.push(newdata);
           cb();
         };
