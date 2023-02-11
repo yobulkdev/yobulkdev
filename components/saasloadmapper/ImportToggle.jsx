@@ -5,7 +5,6 @@ export default function Toggle(props) {
   const [enabled, setEnabled] = useState(true);
   const { state, dispatch } = useContext(Context);
 
-  console.log('I am toggle', state.curSaasLoadMapperTemplate);
   return (
     <div className="flex">
       <label className="inline-flex relative items-center mr-5 cursor-pointer">

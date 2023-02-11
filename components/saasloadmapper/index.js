@@ -55,7 +55,11 @@ const columnMatcherAi = async ({ saasTemplate, validationTemplate }) => {
     let saasTemplateObj = saasTemplate.find(
       (e) => e.label === matchedColumns[el.key]
     );
-    return { ...saasTemplateObj, key: el.key, is_imported: (matchedColumns[el.key] ? true : false) };
+    return {
+      ...saasTemplateObj,
+      key: el.key,
+      is_imported: matchedColumns[el.key] ? true : false,
+    };
   });
   return columnMatcherTemplate;
 };
@@ -64,7 +68,7 @@ const SassLoadMapper = () => {
   const gridRef = useRef();
   const router = useRouter();
 
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(1);
   const { state, dispatch } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -73,21 +77,21 @@ const SassLoadMapper = () => {
   useEffect(() => {
     selectedTab === 0
       ? columnMatcherAi({
-        saasTemplate: state.saasTemplateColumns,
-        validationTemplate: state.validationTemplate,
-      }).then((payload) => {
-        dispatch({
-          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-          payload,
-        });
-      })
-      : dispatch({
-        type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-        payload: columnMatcher({
           saasTemplate: state.saasTemplateColumns,
           validationTemplate: state.validationTemplate,
-        }),
-      });
+        }).then((payload) => {
+          dispatch({
+            type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+            payload,
+          });
+        })
+      : dispatch({
+          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+          payload: columnMatcher({
+            saasTemplate: state.saasTemplateColumns,
+            validationTemplate: state.validationTemplate,
+          }),
+        });
   }, [selectedTab]);
 
   const uploadFile = ({ target, template_id }) => {
@@ -138,8 +142,6 @@ const SassLoadMapper = () => {
       baseTemplateId: state.baseTemplateId,
       fileName: state.curFile.name,
     };
-
-    console.log('The tempalte save post body:', data);
     axios
       .post('/api/templates', data)
       .then((result) => {
@@ -150,8 +152,7 @@ const SassLoadMapper = () => {
         });
       })
       .catch((err) => {
-        console.log(err)
-        
+        console.log(err);
       });
   };
 
