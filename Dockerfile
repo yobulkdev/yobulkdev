@@ -13,6 +13,8 @@ WORKDIR /app
 
 ENV MONGODB_URI=mongodb://host.docker.internal:27017/yobulk
 ENV DATABASE_NAME=yobulk
+ENV OPENAI_SECRET_KEY=YOUR_OPENAI_SECRET_KEY
+ENV BACKEND_SERVER_HOST="http://localhost:3000"
 
 COPY --from=BUILD_IMAGE /app/package.json ./package.json
 COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
