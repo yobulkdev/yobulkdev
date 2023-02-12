@@ -13,6 +13,7 @@ import addColumnButton from './addColumnButton';
 import handleEdit from './handleEdit';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
+import Editor from '@monaco-editor/react';
 
 const AdminComponent = ({ templateId, type }) => {
   let [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ const AdminComponent = ({ templateId, type }) => {
   const router = useRouter();
   const { dispatch } = useContext(Context);
   const [isRegexMenuOpen, setIsRegexMenuOpen] = useState(false);
+  const [isSchemaMenuOpen, setIsSchemaMenuOpen] = useState(false);
 
   function closeREGEXModal() {
     setIsRegexMenuOpen(false);
@@ -125,47 +127,105 @@ const AdminComponent = ({ templateId, type }) => {
 
       <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
         {type === 'view' && (
-          <div className="flex">
-            <div className="flex flex-col w-5/12">
-              <h2 className="text-lg font-bold text-gray-500">Key</h2>
-              <p className="text-gray-400">
-                The unique key used to identify this Template
-              </p>
-            </div>
-            <div className="ml-10 flex flex-col justify-center w-72">
-              <div className="mb-2">
-                <span className="text-blue-500">{templateData._id}</span>
+          <div class="grid grid-cols-3 gap-4">
+              <div>
+                <h2 className="text-lg w-full font-bold text-gray-500">Key</h2>
+                <p className="text-gray-400 text-sm">The unique key used to identify this Template</p>
               </div>
-            </div>
+              <span className="text-blue-500 w-full">{templateData._id}</span>
+              <div className='inline-flex justify-end'>
+                <button type="button"
+                  className="w-2/5 h-8 rounded-md border border-transparent bg-blue-100 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={()=>setIsSchemaMenuOpen(true)}
+                >
+                  View Schema
+                </button>
+              </div>
           </div>
         )}
+        <Transition appear show={isSchemaMenuOpen} as={Fragment}>
+          <Dialog
+            as="div"
+            className="relative z-10"
+            onClose={()=>setIsSchemaMenuOpen(false)}
+          >
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-black bg-opacity-25" />
+            </Transition.Child>
 
-        <div className={`flex ${type === 'view' && 'mt-4'}`}>
-          <div className="flex flex-col w-5/12">
-            <h2 className="text-lg font-bold text-gray-500">Name</h2>
-            <p className="text-gray-400">Name of the template</p>
-          </div>
-          <div className="ml-10 flex flex-col justify-center w-full">
-            <div className="mb-2">
-              {type === 'view' && templateData ? (
-                <span> {templateData.template_name}</span>
-              ) : (
-                <input
-                  type="text"
-                  id="default-input"
-                  className={`border border-gray-300 text-gray-400  text-sm rounded-lg
-                   focus:ring-blue-500 focus:border-blue-500 block w-full
-                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-                  value={templateData.template_name}
-                  disabled={type === 'view'}
-                  onChange={(e) => handleTemplateName(e)}
-                />
-              )}
+            <div className="fixed inset-0 overflow-y-auto">
+              <div className="flex min-h-full items-center justify-center p-4 text-center">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                  <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-lg font-medium leading-6 text-gray-900"
+                    >
+                      Template Schema
+                    </Dialog.Title>
+                    <div className="mt-2">
+                      <Editor
+                        height="65vh"
+                        width="100%"
+                        language="json"
+                        defaultValue={JSON.stringify(templateData.schema, null, "  ")}
+                      />
+                    </div>
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={()=>setIsSchemaMenuOpen(false)}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
             </div>
+          </Dialog>
+        </Transition>
+          <div class="grid grid-cols-3 gap-4 mt-4">
+            <div>
+              <h2 className="text-lg w-full font-bold text-gray-500">Name</h2>
+              <p className="text-gray-400 text-sm">Name of the template</p>
+            </div>
+            { <div>
+              {type === 'view' && templateData ? (
+                  <span> {templateData.template_name}</span>
+                ) : (
+                  <input
+                    type="text"
+                    id="default-input"
+                    className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                      focus:ring-blue-500 focus:border-blue-500 block w-full
+                      p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                      dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                    value={templateData.template_name}
+                    disabled={type === 'view'}
+                    onChange={(e) => handleTemplateName(e)}
+                  />
+                )}
+            </div> }
           </div>
         </div>
-      </div>
 
       {/*       <div className="p-4">{JSON.stringify(templateData)}</div>
        */}
