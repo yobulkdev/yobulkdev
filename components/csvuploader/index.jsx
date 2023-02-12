@@ -49,10 +49,14 @@ const CsvUploader = ({ isStepperVisible, nextPageRoute }) => {
     [dispatch, router]
   );
 
+  /*  accept: [
+    '.csv, text/csv, application/csv, text/x-csv, application/x-csv, text/comma-separated-values, text/x-comma-separated-values',
+  ], */
+
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
-    accept: [
-      '.csv, text/csv, application/vnd.ms-excel, application/csv, text/x-csv, application/x-csv, text/comma-separated-values, text/x-comma-separated-values',
-    ],
+    accept: {
+      'text/csv': ['.csv'],
+    },
     maxFiles: 1,
     noClick: true,
     noKeyboard: true,
@@ -64,8 +68,12 @@ const CsvUploader = ({ isStepperVisible, nextPageRoute }) => {
       {isStepperVisible && <Stepper step={1} />}
       <div className="flex justify-center ">
         <div className="dropzone bg-white">
-          <p className="font-bold text-gray-500">Upload your CSV</p>
-          <p className="text-sm text-gray-400">File should be .csv</p>
+          <p className="text-lg font-bold text-gray-500">Upload your CSV</p>
+          <p className="text-md text-gray-500">
+            The file should be in{' '}
+            <span className="text-red-500 text-lg font-semibold">.csv</span>{' '}
+            format
+          </p>
           <div {...getRootProps()} className="drag_drop_wrapper">
             <input hidden {...getInputProps()} />
             <CloudArrowUpIcon className="w-16 h-16 text-blue-200" />
