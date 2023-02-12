@@ -72,7 +72,7 @@ const CsvUploader = ({ isStepperVisible, nextPageRoute }) => {
           <p className="text-md text-gray-500">
             The file should be in{' '}
             <span className="text-red-500 text-lg font-semibold">.csv</span>{' '}
-            format
+            format. First row should be the headers.
           </p>
           <div {...getRootProps()} className="drag_drop_wrapper">
             <input hidden {...getInputProps()} />
