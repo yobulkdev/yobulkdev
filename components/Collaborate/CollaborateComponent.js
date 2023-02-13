@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { TrashIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
-import SuccessModal from '../Common/SuccessModal';
-import WarningModal from '../Common/WarningModal';
+import SuccessModal from '../common/SuccessModal';
+import WarningModal from '../common/WarningModal';
 
 const CollaborateComponent = () => {
   const [orgName, setOrgName] = useState(undefined);
@@ -58,8 +58,18 @@ const CollaborateComponent = () => {
 
   return (
     <div className="">
-      {isVisible && <SuccessModal submit={acknowledgeModal} message={'Successfully added the workspace !'} />}
-      {warning && <WarningModal setWarning={setWarning} message={'Please fill all required fields !'} />}
+      {isVisible && (
+        <SuccessModal
+          submit={acknowledgeModal}
+          message={'Successfully added the workspace !'}
+        />
+      )}
+      {warning && (
+        <WarningModal
+          setWarning={setWarning}
+          message={'Please fill all required fields !'}
+        />
+      )}
       <div className="flex mt-4 w-full bg-white shadow-sm rounded-md py-1 px-2 align-middle justify-between">
         <form className="p-5 w-full">
           <div className="flex mt-7 align-middle items-center">

@@ -3,17 +3,17 @@ import axios from 'axios';
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
-const ConfigurationConfig = ({ configID }) => {
+const ConfigurationConfig = ({ configId }) => {
   const [importerData, setImporterData] = useState({});
 
   useEffect(() => {
     axios
-      .get(`/api/importer/${configID}`)
+      .get(`/api/importer/${configId}`)
       .then((res) => {
         setImporterData(res.data);
       })
       .catch((err) => console.log(err));
-  }, [configID]);
+  }, [configId]);
 
   return (
     <div className="p-4">

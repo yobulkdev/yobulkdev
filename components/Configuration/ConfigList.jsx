@@ -7,7 +7,7 @@ import {
   AttachWebHookURL,
 } from './index';
 import Link from 'next/link';
-import SuccessModal from '../Common/SuccessModal';
+import SuccessModal from '../common/SuccessModal';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { googlecode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
@@ -88,7 +88,8 @@ export default App;`);
         templateName: attachToImporters.label,
       })
       .then((response) => {
-        if (response.status = 201) setConfigurationData({importerId: response.data.insertedId})
+        if ((response.status = 201))
+          setConfigurationData({ importerId: response.data.insertedId });
         setVisible(true);
       })
       .catch((error) => console.log(error));

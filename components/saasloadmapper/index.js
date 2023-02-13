@@ -138,7 +138,9 @@ const SassLoadMapper = () => {
 
     setLoading(true);
     let data = {
-      columns: state.curSaasLoadMapperTemplate.filter((el) => el.is_imported),
+      columns: state.curSaasLoadMapperTemplate.filter(
+        (el) => el.is_imported && el.label
+      ),
       baseTemplateId: state.baseTemplateId,
       fileName: state.curFile.name,
     };
