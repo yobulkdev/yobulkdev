@@ -6,7 +6,7 @@ import FileDownload from 'js-file-download';
 const ImportsComponent = () => {
   const [importData, setImportData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [downloadCollectionName, setDownloadCollectionName] = useState();
+  const [downloadCollection, setDownloadCollection] = useState({});
   const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const ImportsComponent = () => {
   }, []);
 
   const onBtnExport = () => {
-    if (!downloadCollectionName) {
+    if (!downloadCollection.fileName) {
       setShowWarning(true);
       return;
     }
@@ -33,16 +33,16 @@ const ImportsComponent = () => {
       url: '/api/downloads',
       responseType: 'blob',
       headers: {
-        collection_name: downloadCollectionName,
+        collection_name: downloadCollection.collection_name,
       },
     };
     axios(options).then((response) => {
-      FileDownload(response.data, `${downloadCollectionName}.csv`);
+      FileDownload(response.data, downloadCollection.fileName);
     });
   };
 
-  const handleCheckBoxSelect = (name) => {
-    setDownloadCollectionName(name);
+  const handleCheckBoxSelect = (col) => {
+    setDownloadCollection(col);
     setShowWarning(false);
   };
   return (
@@ -96,8 +96,8 @@ const ImportsComponent = () => {
               <tr key={idx} className="h-10 text-center">
                 <td>
                   <input
-                    checked={col.collection_name === downloadCollectionName}
-                    onClick={() => handleCheckBoxSelect(col.collection_name)}
+                    checked={col._id === downloadCollection._id}
+                    onClick={() => handleCheckBoxSelect(col)}
                     type="checkbox"
                   />
                 </td>

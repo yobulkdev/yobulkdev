@@ -8,7 +8,7 @@ import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 import SuccessModal from './SuccessModal';
 
-const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyErrors, selectErrorType }) => {
+const ReviewCsv = ({ collectionName, fileName, fileMetaData, setIsErrorFree, showOnlyErrors, selectErrorType }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +50,7 @@ const ReviewCsv = ({ collectionName, fileMetaData, setIsErrorFree, showOnlyError
         },
       };
       axios(options).then((response) => {
-        FileDownload(response.data, `${collectionName}.csv`);
+        FileDownload(response.data, fileName);
         setDownloadig(false);
       });
     },
