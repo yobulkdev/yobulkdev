@@ -319,6 +319,7 @@ const GridExample = ({ version }) => {
       <div className="grid grid-cols-1 gap-10">
         <ReviewCsv
           collectionName={state.collection}
+          fileName={state?.curFile?.path}
           fileMetaData={fileMetaData}
           setIsErrorFree={setIsErrorFree}
           showOnlyErrors={showOnlyErrors}
