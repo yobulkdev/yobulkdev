@@ -20,5 +20,8 @@ COPY --from=BUILD_IMAGE /app/package.json ./package.json
 COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
 COPY --from=BUILD_IMAGE /app/.next ./.next
 COPY --from=BUILD_IMAGE /app/public ./public
+COPY --from=BUILD_IMAGE /app/lib/seeder.js ./lib/seeder.js
 EXPOSE 3000
 CMD ["yarn", "start"]
+
+#docker run --rm -it -p 3000:3000/tcp  --env="OPENAI_SECRET_KEY=zyudofadsfkj" yobulkdev:latest 
