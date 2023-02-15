@@ -1,4 +1,5 @@
 export const STRING_DATA_TYPE = 'STRING';
+export const TEXT_DATA_TYPE = 'TEXT';
 export const BOOLEAN_DATA_TYPE = 'BOOLEAN';
 export const NUMBER_DATA_TYPE = 'NUMBER';
 export const EMAIL_DATA_TYPE = 'EMAIL';
