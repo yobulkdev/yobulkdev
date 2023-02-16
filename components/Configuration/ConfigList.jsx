@@ -190,7 +190,7 @@ export default App;`);
     <div className="py-1 px-2 align-middle justify-between">
       {isVisible && (
         <SuccessModal
-          submit={acknowledgeModal}
+          submit={() => (window.location.href = '/configuration')}
           message={'Successfully added the importer !'}
         />
       )}
