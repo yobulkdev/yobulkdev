@@ -2,12 +2,13 @@
     <b>
         <a href="https://www.YoBulk.dev">YoBulk.dev</a><br>
     </b>
-    ⭐️  The Open Source Alternative To https://flatfile.com/ ⭐️ <br>
+    ⭐️ Data exchange platform for all businesses that run on CSV files <br>
+        The Open Source Alternative To https://flatfile.com/ ⭐️ <br>
 </h1>
 
 <p align="center">
-Fastest & Simplest way to Import CSV data into your application DB.<br>
-Import flow is powered by adding validation templates to import button.
+Fastest & Simplest way to Import CSV data into your application through a smart spreadsheet<br>
+Create YoBulk CSV Import button and make CSV importing <b>10x</b> faster.
 </p>
 
 <p align="center">
@@ -15,6 +16,21 @@ Import flow is powered by adding validation templates to import button.
     <a href="https://twitter.com/yobulkdev"><b>Twitter</b></a>  •
     <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg" target="_blank"><b>Slack</b></a>
 </p>
+
+<h4 align="center">
+  <a href="https://github.com/uptrainai/uptrain/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-AGPL-blue" alt="YoBulk is released under the AGPL license." />
+  </a>
+  <a href="https://doc.yobulk.dev/">
+    <img src="https://img.shields.io/badge/Read-Docs-blue" alt="Docs" />
+  </a>
+  <a href="https://join.slack.com/t/yobulkdev/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg">
+    <img src="https://img.shields.io/badge/community%20-slack-yellow" alt="Community" />
+  </a>
+  <a href="https://yobulk.dev/">
+    <img src="https://img.shields.io/badge/website-yobulk-brightgreen" alt="Website" />
+  </a>
+</h4>
 
 <p align="center"><img src="https://user-images.githubusercontent.com/118799976/214280161-3bf6dea8-955b-43fe-bbd5-f6ace09a6e1b.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
 <p align="center"><img src="https://user-images.githubusercontent.com/118799976/214279676-d2904d57-5305-4491-9695-cbdcaab1bdf6.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
