@@ -49,7 +49,7 @@ const menuItems = [
   },
   {
     id: 7,
-    label: 'Regex Libraries',
+    label: 'Regex Library',
     icon: FolderIcon,
     link: '/regexlibraries',
   },

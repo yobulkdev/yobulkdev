@@ -59,9 +59,7 @@ const MainBar = () => {
   return (
     <div>
       <div className="flex align-middle justify-between">
-        <h1 className="text-2xl font-bold mb-2 text-gray-500">
-          Regex Libraries
-        </h1>
+        <h1 className="text-2xl font-bold mb-2 text-gray-500">Regex Library</h1>
       </div>
 
       <div className="p-4">
