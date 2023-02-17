@@ -37,21 +37,9 @@ const menuItems = [
   },
   {
     id: 5,
-    label: 'CSV Libraries',
+    label: 'Libraries',
     icon: FolderIcon,
-    link: '/csvlibraries',
-  },
-  {
-    id: 6,
-    label: 'Template Libraries',
-    icon: FolderIcon,
-    link: '/templatelibraries',
-  },
-  {
-    id: 7,
-    label: 'Regex Library',
-    icon: FolderIcon,
-    link: '/regexlibraries',
+    link: '/libraries',
   },
 ];
 
