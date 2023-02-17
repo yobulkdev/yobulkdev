@@ -5,6 +5,7 @@ import InputField from './InputField';
 import { Context } from '../../../context';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import cuid from 'cuid';
+import Select from 'react-tailwindcss-select';
 
 const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   let [isOpenValidation, setIsOpenValidation] = useState(false);
@@ -13,6 +14,8 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   const { state, dispatch } = useContext(Context);
   const [prompt, setPrompt] = useState('');
   const [regexModal, setRegexModal] = useState(false);
+  const [isCustomRegex, setIsCustomRegex] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(false);
 
   const [regex, setRegex] = useState('');
 
@@ -118,7 +121,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
     setEnabled(!enabled);
   };
-
+  
   const generateRegex = () => {
     setRegex('Generating...');
     fetch('/api/yobulk-ai/regex', {
@@ -137,6 +140,28 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
       })
       .catch((e) => console.log(e));
   };
+
+  const handleRegexSelect = (e) => {
+    setSelectedOption(e)
+    console.log(e.value)
+    if(e.value === 'custom'){
+      setRegex('')
+      handleBlur({ key: 'pattern', value: undefined });
+      setIsCustomRegex(true);
+    } else{
+      setIsCustomRegex(false);
+      handleBlur({ key: 'pattern', value: e.value });
+      setRegex(e.value)
+    }
+  }
+
+  const regexOptions = [
+    {value:"custom", label:"Enter Custom Regex"},
+    {value:'^\\d{5}(?:[-\\s]\\d{4})?$', label:"US Zip Code"},
+    {value:'^\\+?[1-9][0-9]{7,14}$', label:"US Phone Number"},
+    {value:'/^4([0-9]{3})\\s?([0-9]{4})\\s?([0-9]{4})\\s?([0-9]{4})$/', label:"Card (MasterCard)"},
+    {value: '/^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/', label:"Ip Address"},
+  ]
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -288,7 +313,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                 <Dialog.Panel className="w-full max-w-md transform  rounded-md bg-white p-6 text-left align-middle transition-all">
                                   <Dialog.Title
                                     as="h2"
-                                    className="text-lg flex items-center font-medium leading-6 text-gray-900"
+                                    className="text-lg flex items-center font-medium leading-6 text-gray-900 mb-6"
                                   >
                                     Generate Regex
                                     <button
@@ -303,37 +328,51 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                       </span>
                                     </button>
                                   </Dialog.Title>
-                                  <p className="my-2 font-semibold text-center">
-                                    Using YoBulkAI
-                                  </p>
-
-                                  <textarea
-                                    rows="10"
-                                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Enter your prompt here for YoBulkAI"
-                                    onChange={(e) => setPrompt(e.target.value)}
+                                  <Select
+                                        value={selectedOption}
+                                        onChange={(e) =>
+                                          handleRegexSelect(e)
+                                        }
+                                        options={regexOptions}
                                   />
+                                  {isCustomRegex && (
+                                    <>
+                                      <p className="my-2 font-semibold text-center">
+                                        Using YoBulkAI
+                                      </p>
 
-                                  <button
-                                    type="button"
-                                    className="flex float-right mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
-                                    onClick={generateRegex}
-                                  >
-                                    Generate
-                                  </button>
+                                      <textarea
+                                        rows="10"
+                                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Enter your prompt here for YoBulkAI"
+                                        onChange={(e) =>
+                                          setPrompt(e.target.value)
+                                        }
+                                      />
 
-                                  <textarea
-                                    className="w-full mt-2 rounded-md text-xs"
-                                    placeholder="GENERATED REGEX / Enter your own Regex"
-                                    value={regex}
-                                    onChange={(e) => {
-                                      handleBlur({
-                                        key: 'pattern',
-                                        value: e.target.value,
-                                      });
-                                      setRegex(e.target.value);
-                                    }}
-                                  />
+                                      <button
+                                        type="button"
+                                        className="flex float-right mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
+                                        onClick={generateRegex}
+                                      >
+                                        Generate
+                                      </button>
+
+                                      <textarea
+                                        className="w-full mt-2 rounded-md text-xs"
+                                        placeholder="GENERATED REGEX / Enter your own Regex"
+                                        value={regex}
+                                        onChange={(e) => {
+                                          handleBlur({
+                                            key: 'pattern',
+                                            value: e.target.value,
+                                          });
+                                          setRegex(e.target.value);
+                                        }}
+                                      />
+                                    </>
+                                  )}
+
                                   <button
                                     type="button"
                                     className="flex mt-4 w-full bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center justify-center mb-2"
