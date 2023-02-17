@@ -99,11 +99,6 @@ const Home = () => {
           </h1>
 
           <div className="p-4 flex  flex-wrap justify-between">
-            <Link href="https://drive.google.com/uc?id=1N1UMgvM4VO64lOnpkzSPft5Wt-SJokHG&export=download">
-              <button className="bg-[#5EB4EA] text-sm text-white p-2 rounded-md m-1">
-                CSV With 50k Rows
-              </button>
-            </Link>
             <Link href="https://drive.google.com/uc?id=1pcmwsRo0XqTUAcjMGgYH2tzW8xAl13nd&export=download">
               <button className="bg-[#5EB4EA] text-sm text-white p-2 rounded-md m-1">
                 CSV with 1 million records

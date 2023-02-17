@@ -47,6 +47,12 @@ const menuItems = [
     icon: FolderIcon,
     link: '/templatelibraries',
   },
+  {
+    id: 7,
+    label: 'Regex Libraries',
+    icon: FolderIcon,
+    link: '/regexlibraries',
+  },
 ];
 
 const Sidebar = () => {
