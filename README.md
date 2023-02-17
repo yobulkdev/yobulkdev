@@ -39,8 +39,12 @@ Create YoBulk CSV Import button and make CSV importing <b>10x</b> faster.
 
 <div align="center">
 
-[<img src="https://img.shields.io/badge/中文-Chinese-orange">](markdown/languages/chinese.md)
-[<img src="https://img.shields.io/badge/日本語-Japanese-blue">](markdown/languages/japanese.md)
+[<img height="38" src="https://user-images.githubusercontent.com/61551451/135263434-75fe793d-42af-49e4-b964-d70920e41655.png">](markdown/languages/chinese.md)
+[<img height="38" src="https://user-images.githubusercontent.com/61551451/135263770-38e3e79d-11d4-472e-ac27-ae0f17cf65c4.png">](markdown/languages/japanese.md)
+[<img height="38" src="https://user-images.githubusercontent.com/61551451/135263531-fae58600-6616-4b43-95a0-5891019dd35d.png">](markdown/languages/german.md)
+[<img height="38" src="https://user-images.githubusercontent.com/61551451/135263888-151d4ad1-7084-4943-97c9-56f28cd40b80.png">](markdown/languages/russian.md)
+
+<p align="center"><a href="markdown/languages"><b>See other languages »</b></a></p>
 
 </div>
 
