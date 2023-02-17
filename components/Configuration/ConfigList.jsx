@@ -190,7 +190,7 @@ export default App;`);
     <div className="py-1 px-2 align-middle justify-between">
       {isVisible && (
         <SuccessModal
-          submit={() => (window.location.href = '/configuration')}
+          submit={acknowledgeModal}
           message={'Successfully added the importer !'}
         />
       )}
@@ -272,16 +272,6 @@ export default App;`);
               <div className="flex flex-col w-5/12">
                 {error && <p className="text-red-500 text-sm">{error}</p>}
               </div>
-
-              <div className="justify-center ml-auto">
-                <button
-                  type="submit"
-                  className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center mb-2"
-                  onClick={handleClick}
-                >
-                  SAVE
-                </button>
-              </div>
             </div>
           </div>
         </form>
@@ -303,6 +293,16 @@ export default App;`);
                 COPY
               </div>
             </CopyToClipboard>
+          </div>
+
+          <div className=" items-center flex justify-center ml-auto mt-5">
+            <button
+              type="submit"
+              className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center mb-2"
+              onClick={handleClick}
+            >
+              Save & Generate
+            </button>
           </div>
         </div>
       </div>
