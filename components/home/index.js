@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { Popover, Transition } from '@headlessui/react';
 
 const Home = () => {
   const router = useRouter();
@@ -62,7 +64,25 @@ const Home = () => {
             </div>
 
             <div className="w-full flex flex-col gap-1 mt-2 shadow-md rounded-md text-left py-2 px-4 bg-white">
-              <h1 className="text-xl">Step 2 </h1>
+              <div className='flex justify-between items-center'>
+                <h1 className="text-xl flex items-center gap-2">
+                  Step 2
+                </h1>
+                <Popover className="z-10">
+                  <Popover.Button>
+                    <InformationCircleIcon className="h-5 w-5 text-gray-400" />
+                  </Popover.Button>
+
+                  <Popover.Panel className="absolute z-10 bg-white rounded border-2 p-2 -translate-x-1/2 ">
+                    <p>
+                      Create a template with the same schema as the CSV. You can
+                    </p>
+
+                    <img src="/solutions.jpg" alt="" />
+                  </Popover.Panel>
+                </Popover>
+              </div>
+
               <div className="flex justify-between text-center items-center">
                 <p className="text-md text-gray-700">
                   Start the Import Flow and make the corrections.
@@ -121,7 +141,7 @@ const Home = () => {
       <footer className="p-4 justify-center">
         <p className="text-center text-gray-700">Made With ❤️ by YoBulk Team</p>
       </footer>
-    </div>
+    </div >
   );
 };
 
