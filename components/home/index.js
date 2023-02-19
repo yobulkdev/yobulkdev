@@ -44,8 +44,7 @@ const Home = () => {
             <br />
           </h1>
           <p className="mt-1 text-gray-500 text-center">
-            This demo walks a user through importing an CSV into a pre-defined
-            template.
+            Demo of importing and validating a CSV with a pre-configured template.
           </p>
 
           <div className="p-4">
@@ -53,7 +52,7 @@ const Home = () => {
               <h1 className="text-xl">Step 1 </h1>
               <div className="flex justify-between text-center items-center">
                 <p className="text-md text-gray-700">
-                  Download a sample CSV with some errors.
+                  The template is pre-configured with the field values:id,name,email,date,status.
                 </p>
                 <Link href="https://drive.google.com/uc?export=download&id=1iYSU8CswQz8e_3wRCMpWARz8fXnAzBJR">
                   <button className="bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md">
