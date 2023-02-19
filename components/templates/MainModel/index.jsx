@@ -6,6 +6,7 @@ import { Context } from '../../../context';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import cuid from 'cuid';
 import Select from 'react-tailwindcss-select';
+import Link from 'next/link';
 
 const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   let [isOpenValidation, setIsOpenValidation] = useState(false);
@@ -121,7 +122,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
     setEnabled(!enabled);
   };
-  
+
   const generateRegex = () => {
     setRegex('Generating...');
     fetch('/api/yobulk-ai/regex', {
@@ -142,26 +143,33 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   };
 
   const handleRegexSelect = (e) => {
-    setSelectedOption(e)
-    console.log(e.value)
-    if(e.value === 'custom'){
-      setRegex('')
+    setSelectedOption(e);
+    console.log(e.value);
+    if (e.value === 'custom') {
+      setRegex('');
       handleBlur({ key: 'pattern', value: undefined });
       setIsCustomRegex(true);
-    } else{
+    } else {
       setIsCustomRegex(false);
       handleBlur({ key: 'pattern', value: e.value });
-      setRegex(e.value)
+      setRegex(e.value);
     }
-  }
+  };
 
   const regexOptions = [
-    {value:"custom", label:"Enter Custom Regex"},
-    {value:'^\\d{5}(?:[-\\s]\\d{4})?$', label:"US Zip Code"},
-    {value:'^\\+?[1-9][0-9]{7,14}$', label:"US Phone Number"},
-    {value:'/^4([0-9]{3})\\s?([0-9]{4})\\s?([0-9]{4})\\s?([0-9]{4})$/', label:"Card (MasterCard)"},
-    {value: '/^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/', label:"Ip Address"},
-  ]
+    { value: 'custom', label: 'Enter Custom Regex' },
+    { value: '^\\d{5}(?:[-\\s]\\d{4})?$', label: 'US Zip Code' },
+    { value: '^\\+?[1-9][0-9]{7,14}$', label: 'US Phone Number' },
+    {
+      value: '/^4([0-9]{3})\\s?([0-9]{4})\\s?([0-9]{4})\\s?([0-9]{4})$/',
+      label: 'Card (MasterCard)',
+    },
+    {
+      value:
+        '/^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/',
+      label: 'Ip Address',
+    },
+  ];
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -329,17 +337,30 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                     </button>
                                   </Dialog.Title>
                                   <Select
-                                        value={selectedOption}
-                                        onChange={(e) =>
-                                          handleRegexSelect(e)
-                                        }
-                                        options={regexOptions}
+                                    value={selectedOption}
+                                    onChange={(e) => handleRegexSelect(e)}
+                                    options={regexOptions}
                                   />
                                   {isCustomRegex && (
                                     <>
                                       <p className="my-2 font-semibold text-center">
                                         Using YoBulkAI
+                                        <div class="ml-2 inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full dark:border-gray-900">
+                                          BETA
+                                        </div>
                                       </p>
+                                      <h1 className="text-md flex text-sm items-center justify-center  text-gray-600">
+                                        Ensure to add OpenAI Secret Key in .env
+                                        file.
+                                      </h1>
+                                      <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600">
+                                        Please Refer to{' '}
+                                        <span className="ml-1 text-blue-700">
+                                          <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
+                                            Documentation
+                                          </Link>
+                                        </span>
+                                      </h1>
 
                                       <textarea
                                         rows="10"

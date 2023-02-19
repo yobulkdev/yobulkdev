@@ -246,13 +246,23 @@ const JSON_Template = () => {
                   'flex flex-col rounded-xl bg-white min-h-fit p-3'
                 )}
               >
+                <h1 className="text-md flex text-sm items-center justify-center  text-gray-600">
+                  Ensure to add OpenAI Secret Key in .env file.
+                </h1>
+                <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600">
+                  Please Refer to{' '}
+                  <span className="ml-1 text-blue-700">
+                    <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
+                      Documentation
+                    </Link>
+                  </span>
+                </h1>
                 <textarea
                   rows="20"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter your prompt here for YoBulkAI"
                   onChange={(e) => setPrompt(e.target.value)}
                 />
-
                 <button
                   type="button"
                   className="flex mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
