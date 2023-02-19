@@ -55,7 +55,7 @@ const Home = () => {
                 <p className="text-md text-gray-700">
                   Download a sample CSV with some errors.
                 </p>
-                <Link href="https://drive.google.com/uc?id=1wzo1yVtYv9UyZUCNOZ2Fq4QITFDXKHVw&export=download">
+                <Link href="https://drive.google.com/uc?export=download&id=1iYSU8CswQz8e_3wRCMpWARz8fXnAzBJR">
                   <button className="bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md">
                     Download CSV
                   </button>
@@ -119,17 +119,17 @@ const Home = () => {
           </h1>
 
           <div className="p-4 flex  flex-wrap justify-between">
-            <Link href="https://drive.google.com/uc?id=1pcmwsRo0XqTUAcjMGgYH2tzW8xAl13nd&export=download">
+            <Link href="https://drive.google.com/uc?export=download&id=1lTgaCFkY-x91NXwltO9oAQ3NnEiwZstk">
               <button className="bg-[#5EB4EA] text-sm text-white p-2 rounded-md m-1">
                 CSV with 1 million records
               </button>
             </Link>
-            <Link href="https://drive.google.com/uc?id=1yP2awQiwHE-gCEScZWTwP5K6XGokvAZ_&export=download">
+            <Link href="https://drive.google.com/uc?export=download&id=1ox_bREP5eTVzbntJ1eCPuTHRyAHhK1VX">
               <button className="bg-[#5EB4EA] text-sm text-white p-2 rounded-md m1">
                 CSV for custom mail validation
               </button>
             </Link>
-            <Link href="https://drive.google.com/uc?id=1QbM5GmIGVg_ZJCdcE2etWX55qKj2UU7L&export=download">
+            <Link href="https://drive.google.com/uc?export=download&id=1IhOATPL-GJNORxOh-FBQwKLGFzLtOED-">
               <button className="bg-[#5EB4EA] text-sm text-white p-2 rounded-md m-1">
                 CSV for custom integer validation
               </button>
