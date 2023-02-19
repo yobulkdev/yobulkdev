@@ -5,157 +5,143 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 
 const templateLibraries = [
     {
-        title: "Custom error validation Messaging:",
+        title: "Custom Validation Function",
         code: `{
     "type":"object",
     "properties":{
-        "id":{
-            "type":"integer"
-        },
-
-        "first_name":{
-            "type":"string",
-            "format": "first_name",
-            "validate": "(x) => {\r\n let regex = new RegExp(\"([A-Z][a-zA-Z]*)\");\r\n return regex.test(x);\r\n }"
-        },
-        "email":{
-            "type":"string"
-        }
-    },
-    "required":[
-        "id",
-        "first_name",
-        "email"
-    ],
-    "errorMessage":{
-        "properties":{
-            "first_name":"custom error",
-            "id":"custom error",
-            "email":"custom error"
-        }
-    }
-}`
-    },
-    {
-        title: "Custom Gmail and Yahoo validation:",
-        code: `{
-    "type":"object",
-    "properties":{
-        "id":{
-            "type":"integer"
-        },
-        "first_name":{
-            "type":"string"
-        },
-        "email":{
-            "type":"string",
-            "format":"email",
-            "pattern":"^((?!(gmail|yahoo)\\..$).)$",
-            "minLength":1
-        }
-    },
-    "required":[
-        "id",
-        "first_name",
-        "email"
-    ],
-    "errorMessage":{
-        "properties":{
-            "first_name":"custom error",
-            "id":"custom error",
-            "email":"GMAIL AND yahoo not accepted"
-        }
-    }
-}`
-    },
-    {
-        title: "Custom Date validation: Regex has to be JSON escaped",
-        code: `{
-    "type":"object",
-    "properties":{
-        "id":{
-            "type":"integer"
-        },
-        "first_name":{
-            "type":"string"
-        },
-        "email":{
-            "type":"string",
-            "format":"email",
-            "pattern":"^((?!(gmail|yahoo)\\..$).)$",
-            "minLength":1
-        },
-        "date":{
-            "type":"string",
-            "format":"custom-date-time",
-            "pattern":"^([0-2][0-9]|(3)[0-1])(\\\/)(((0)[0-9])|((1)[0-2]))(\\\/)\\d{4}$",
-            "minLength":1
-        }
-    },
-    "required":[
-        "id",
-        "first_name",
-        "email",
-        "custom-date-time"
-    ],
-    "errorMessage":{
-        "properties":{
-            "first_name":"custom error",
-            "id":"custom error",
-            "email":"GMAIL AND yahoo not accepted",
-            "date":"Only dd/mm/yyyy is accepted"
-        }
-    }
-}
-`
-    },
-    {
-        title: "Integer range validation:validation function has to be json escaped,Adding a format keyword is crashing AJV lib",
-        code: `{
-    "type":"object",
-    "properties":{
-        "id":{
+        "age":{
             "type":"integer",
-            "minimum": 10,
-            "maximum": 20
-    
+            "maximum":999
         },
-        "first_name":{
+        "Name":{
             "type":"string",
-            "format": "first_name",
-            "validate": "(x) => (x.startsWith('yo') ? true : false)"
+            "format":"first_name",
+            "validate":"(x) => {let regex = new RegExp('([A-Z][a-zA-Z]*)');return regex.test(x);}"
         },
+        "email":{
+            "type":"string",
+            "format":"email"
+        }
+    },
+    "required":[
+        "age",
+        "Name",
+        "email"
+    ],
+    "errorMessage":{
+        "properties":{
+            "age":"Age should not be more than 3 digit",
+            "Name":"Should be a set of character ",
+            "email":"Should be a valid email"
+        }
+    }
+}`
+    },
+    {
+        title: "Yahoo & GMail Validation",
+        code: `{
+    "type":"object",
+    "properties":{
+        "age":{
+            "type":"integer"
+        },
+        "Name":{
+            "type":"string"
+        },
+        "email": {
+        "type": "string",
+        "format": "email",
+        "pattern": "^((?!yahoo|gmail).)*$"
+        }
+    },
+    "required":[
+        "age",
+        "Name",
+        "email"
+    ],
+    "errorMessage":{
+        "properties":{
     
-        
+            "age":"Age should be an integer",
+            "Name":"Should be a set of character ",
+            "email":"Should not include yahoo and gmail IDs"
+        }
+    }
+}`
+    },
+    {
+        title: "Custom Date validation",
+        code: `{
+    "type":"object",
+    "properties":{
+        "age":{
+            "type":"integer"
+        },
+        "Name":{
+            "type":"string"
+        },
+        "date":{
+            "type":"string",
+            "format":"custom-date-time",
+            "pattern":"^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\\\\d{4}$",
+            "minLength":1
+        }
+    },
+    "required":[
+        "age",
+        "Name",
+        "custom-date-time"
+    ],
+    "errorMessage":{
+        "properties":{
+            "Name":"Should be a set of characters",
+            "age":"Should be a number",
+            "date":"Only dd/mm/yyyy format is accepted"
+        }
+    }
+}`
+    },
+    {
+        title: "Custom String Validation",
+        code: `{
+    "type":"object",
+    "properties":{
+        "age":{
+            "type":"integer"
+        },
+        "Name":{
+            "type":"string",
+            "format":"first_name",
+            "validate":"(x) => (x.startsWith('yo') ? true : false)"
+        },
         "email":{
             "type":"string",
             "format":"email",
-            "pattern":"^((?!(gmail|yahoo)\\..$).)$",
+            "pattern":"^((?!yahoo|gmail).)*$",
             "minLength":1
         },
         "date":{
             "type":"string",
             "format":"custom-date-time",
-            "pattern":"^([0-2][0-9]|(3)[0-1])(\\\/)(((0)[0-9])|((1)[0-2]))(\\\/)\\d{4}$",
+            "pattern":"^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\\\\d{4}$",
             "minLength":1
         }
     },
     "required":[
-        "id",
-        "first_name",
+        "age",
+        "Name",
         "email",
         "custom-date-time"
     ],
     "errorMessage":{
         "properties":{
-            "first_name":"custom error",
-            "id":"custom error",
-            "email":"GMAIL AND yahoo not accepted",
+            "Name":"Should start with yo",
+            "age":"Should be an integer",
+            "email":"GMAIL AND yahoo mail ids are not accepted",
             "date":"Only dd/mm/yyyy is accepted"
         }
     }
-}`
-    }
+}`}
 ];
 
 const MainBar = () => {
