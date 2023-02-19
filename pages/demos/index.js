@@ -6,33 +6,33 @@ const listOfItems = [
     title: 'Integer Length Verification',
     description: 'Numerical value of a maximum of 3 digits in length.',
     downloadLink:
-      'https://drive.google.com/uc?id=1wzo1yVtYv9UyZUCNOZ2Fq4QITFDXKHVw&export=download',
-    importLink: '/templates/testtemplate/63d4ac4fc0e9bdb301ed5731',
-    templateId: '63ba9d3d045f129d55e27be1',
+      'https://drive.google.com/uc?export=download&id=1VCoLiqqX7aFUJp7dKmJoMMVcUJBtM6O_',
+    importLink: '/templates/testtemplate/63f1e1b4db835d47c31261b2',
+    templateId: '63f1e1b4db835d47c31261b2',
   },
   {
     title: 'Email Verification',
     description: 'Show errors for the emails with domain name Gmail & Yahoo.',
     downloadLink:
-      'https://drive.google.com/uc?id=1wzo1yVtYv9UyZUCNOZ2Fq4QITFDXKHVw&export=download',
-    importLink: '/templates/testtemplate/63d4ac4fc0e9bdb301ed5731',
-    templateId: '63d4ac4fc0e9bdb301ed5731',
+      'https://drive.google.com/uc?export=download&id=1ZcsINSt7EnDBDeH27BoWZl86rUEi2uoJ',
+    importLink: '/templates/testtemplate/63f1e1b4db835d47c31261b3',
+    templateId: '63f1e1b4db835d47c31261b3',
   },
   {
     title: 'Date Verification',
     description: 'Show errors for the dates which is not in DD-MM-YYYY format',
     downloadLink:
-      'https://drive.google.com/uc?id=1wzo1yVtYv9UyZUCNOZ2Fq4QITFDXKHVw&export=download',
-    importLink: '/templates/testtemplate/63d4ac4fc0e9bdb301ed5731',
-    templateId: '63d4ac4fc0e9bdb301ed5731',
+      'https://drive.google.com/uc?export=download&id=1Ka8pgbfDXivFFtfzW7WwGnz_FskHNH5m',
+    importLink: '/templates/testtemplate/63f1e1b4db835d47c31261b4',
+    templateId: '63f1e1b4db835d47c31261b4',
   },
   {
     title: 'String Verification',
     description: 'Show errors for the strings not starting with "YO" character',
     downloadLink:
-      'https://drive.google.com/uc?id=1wzo1yVtYv9UyZUCNOZ2Fq4QITFDXKHVw&export=download',
-    importLink: '/templates/testtemplate/63d4ac4fc0e9bdb301ed5731',
-    templateId: '63d4ac4fc0e9bdb301ed5731',
+      'https://drive.google.com/uc?export=download&id=1Qsm-zMq31eaKuhKeiiTZ0GqwUsCeU3DI',
+    importLink: '/templates/testtemplate/63f1e1b4db835d47c31261b1',
+    templateId: '63f1e1b4db835d47c31261b1',
   },
 ];
 
