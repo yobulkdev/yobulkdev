@@ -7,6 +7,7 @@ import {
   UsersIcon,
   FolderIcon,
   RocketLaunchIcon,
+  HomeIcon as HomeIconOutline,
 } from '@heroicons/react/24/outline/';
 
 import Logo from '../../public/yobulk_logo.png';
@@ -15,6 +16,12 @@ import Image from 'next/image';
 const menuItems = [
   /*   { id: 1, label: 'Importer', icon: HomeIcon, link: '/' },
    */
+  {
+    id: 0,
+    label: 'Home',
+    icon: HomeIconOutline,
+    link: '/',
+  },
   {
     id: 1,
     label: 'Demos',
