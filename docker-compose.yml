@@ -11,7 +11,7 @@ services:
   yobulk:
     image: yobulk/yobulk
     ports:
-      - 8000:3000
+      - 5050:5050
     environment:
       MONGODB_URI: mongodb://database:27017/yobulk
     depends_on:

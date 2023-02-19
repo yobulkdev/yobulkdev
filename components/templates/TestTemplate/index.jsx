@@ -6,7 +6,7 @@ function App({ templateId }) {
       <YoButton
         btnText="Import CSV"
         templateId={templateId}
-        yoHostUrl={'http://localhost:3000'}
+        yoHostUrl={'http://localhost:5050'}
       />
     </div>
   );

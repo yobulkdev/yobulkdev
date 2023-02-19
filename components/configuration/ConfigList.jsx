@@ -57,7 +57,7 @@ function App() {
         <br />
         <YoButton
             importId="63a28875cbc26427b0bc390e"
-            yoHostUrl={"http://localhost:3000"}
+            yoHostUrl={"http://localhost:5050"}
         />
     </div>
     );
@@ -108,7 +108,7 @@ function App() {
         <br />
         <YoButton
             importId="${configurationData.importerId}"
-            yoHostUrl={"http://localhost:3000"}
+            yoHostUrl={"http://localhost:5050"}
         />
     </div>
     );

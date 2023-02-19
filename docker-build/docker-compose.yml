@@ -13,7 +13,7 @@ services:
   yobulk:
     build: .
     ports:
-      - 8000:3000
+      - 5050:5050
     volumes:
       - .:/usr/src/app
     environment:
