@@ -105,7 +105,7 @@ const MainBar = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <h2 className="text-md text-blue-500 mt-2">
+                <h2 className="text-md text-gray-400 mt-2">
                   {obj.description}
                 </h2>
               </div>

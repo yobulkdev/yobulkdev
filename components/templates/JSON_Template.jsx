@@ -209,18 +209,23 @@ const JSON_Template = () => {
         <div className="w-full px-2 py-3 sm:px-0">
           <Tab.Group>
             <Tab.List className="flex space-x-1 justify-between rounded-xl bg-blue-900/20 p-3">
-              <Tab
-                className={({ selected }) =>
-                  classNames(
-                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                    selected
-                      ? 'bg-white shadow'
-                      : 'text-black hover:bg-white/[0.12] hover:text-white'
-                  )
-                }
-              >
-                With YoBulkAI
-              </Tab>
+              <>
+                <Tab
+                  className={({ selected }) =>
+                    classNames(
+                      'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5',
+                      selected
+                        ? 'bg-white shadow'
+                        : 'text-black hover:bg-white/[0.12] hover:text-white'
+                    )
+                  }
+                >
+                  With YoBulkAI{' '}
+                  <div class="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
+                    BETA
+                  </div>
+                </Tab>
+              </>
 
               <Tab
                 className={({ selected }) =>

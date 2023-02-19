@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useMemo } from 'react';
 import { ArticleIcon, CollapsIcon, HomeIcon, ConfigIcon } from './icons';
-import { UsersIcon, FolderIcon } from '@heroicons/react/24/outline/';
+import {
+  UsersIcon,
+  FolderIcon,
+  RocketLaunchIcon,
+} from '@heroicons/react/24/outline/';
 
 import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
@@ -13,45 +17,39 @@ const menuItems = [
    */
   {
     id: 1,
+    label: 'Demos',
+    icon: RocketLaunchIcon,
+    link: '/demos',
+  },
+  {
+    id: 2,
     label: 'Template Configuration',
     icon: ArticleIcon,
     link: '/templates',
   },
   {
-    id: 2,
+    id: 3,
     label: 'Collaborate',
     icon: UsersIcon,
     link: '/collaborate',
   },
   {
-    id: 3,
+    id: 4,
     label: 'Importer Configuration',
     icon: ConfigIcon,
     link: '/configuration',
   },
   {
-    id: 4,
+    id: 5,
     label: 'Imports',
     icon: HomeIcon,
     link: '/imports',
   },
   {
-    id: 5,
-    label: 'CSV Libraries',
-    icon: FolderIcon,
-    link: '/csvlibraries',
-  },
-  {
     id: 6,
-    label: 'Template Libraries',
+    label: 'Libraries',
     icon: FolderIcon,
-    link: '/templatelibraries',
-  },
-  {
-    id: 7,
-    label: 'Regex Library',
-    icon: FolderIcon,
-    link: '/regexlibraries',
+    link: '/libraries',
   },
 ];
 
