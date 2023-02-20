@@ -88,7 +88,6 @@ YoBulk dashboard is ready to go at [http://localhost:5050/](http://localhost:505
 
 ## Building locally.
 If you are a devevloper and want to build locally,you should have installed MongoDB and it should be running locally.  
-- Prerequisites:<b>You should have installed mongo on your local machine and it's running.</b>
 
 YoBulk is a fullstack next.js application which uses MongoDB as it's primary Database.
 ```bash
@@ -106,11 +105,11 @@ The dashboard is ready to experiment at [http://localhost:5050/](http://localhos
 
 ## Built With
 
-- [Next.js](https://nextjs.org/)
+- [Next.js](https://nextjs.org/),[Tailwind CSS](https://tailwindcss.com/),
 
-## Getting a quick start
+## Quick start
 
-Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) create import buttons and try data importing.
+Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to explore CSV importing flow.
 
 ## Roadmap
 
@@ -128,19 +127,20 @@ Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) cr
 - ⚡ &nbsp;GPT3 Integration
 - ⚡ &nbsp;Template creation through JSON
 - ⚡ &nbsp;Regex creation and addition in custom validation
+- ⚡ &nbsp;Collaboration & workspace creation.
 
 
 
 ## Why are we building this?
 
-More than 70% of the business data shared, is in the form of CSVs and Excel files.Less than 10% have truly adopted API integrations for data exchange.
+More than 70% of the business data shared, is in the form of CSVs and Excel files. Less than 10% have truly adopted API integrations for data exchange.
 
 As a developer and product manager, we have gone through the pain of building a scalable CSV importer and maintaining it in-house.Everyday thousand of developers go through the same pain and hundreds of companies have to get spreadsheet and CSV data into a database.
 YoBulk is building an OSS standard for CSV and flatfile data onboarding where it can help you to build a data importing solution in-house.
 
-Enterprises like Flatfile.com are addressing the problem but it has constraints like weak data security and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that it is not very possible to come up with a one-size fits all solution in such a fragmented market and sector.
+Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data security and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that it is not very possible to come up with a one-size fits all solution in such a fragmented market and sector.
 
-All these restrictions necessitate our mission - to make it possible for anyone to create an data import solution that suit their needs well.
+All these <b>restrictions necessitate</b> our mission - to make it possible for anyone to create an data import solution that suit their needs well.
 
 To Developers, we would like to offer a bring your own validation rule and bring your own database experience. You can design and modify validations rules on your own way using YoBulk.
 
@@ -148,7 +148,7 @@ To enterprises , YoBulk is dedicated to bring data security. Moreover, you have 
 
 To be honest, we do not claim to outperform flatfile.com in terms of functionality and design, at least for now. Besides, our priority is to add more functionality at the moment. we would like to cultivate a community to democratise the knowledge and bring all CSV and flatfile open source projects under a single framework.
 
-Read more[Open vs Closed Data Onboarding](https://doc.yobulk.dev/#yobulk-positioning-open-source-vs-closed-source-data-onboarding-platforms)
+Read more [Open vs Closed Data Onboarding](https://doc.yobulk.dev/#yobulk-positioning-open-source-vs-closed-source-data-onboarding-platforms)
 
 # Our Mission
 
