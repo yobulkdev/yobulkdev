@@ -105,7 +105,7 @@ The dashboard is ready to experiment at [http://localhost:5050/](http://localhos
 
 ## Built With
 
-- [Next.js](https://nextjs.org/),[Tailwind CSS](https://tailwindcss.com/),
+- [Next.js](https://nextjs.org/),[Tailwind CSS](https://tailwindcss.com/)
 
 ## Quick start
 
@@ -135,10 +135,10 @@ Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to
 
 More than 70% of the business data shared, is in the form of CSVs and Excel files. Less than 10% have truly adopted API integrations for data exchange.
 
-As a developer and product manager, we have gone through the pain of building a scalable CSV importer and maintaining it in-house.Everyday thousand of developers go through the same pain and hundreds of companies have to get spreadsheet and CSV data into a database.
+As a developer and product manager, we have gone through the pain of building a scalable CSV importer.Everyday thousand of developers go through the same pain and hundreds of companies have to get spreadsheet and CSV data into a database.
 YoBulk is building an OSS standard for CSV and flatfile data onboarding where it can help you to build a data importing solution in-house.
 
-Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data security and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that it is not very possible to come up with a one-size fits all solution in such a fragmented market and sector.
+Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data securit and high pricing . While developers want an embeddable/scalable CSV importer for SaaS, the truth is that it is not very possible to come up with a one-size fits all solution in such a fragmented market and sector.
 
 All these <b>restrictions necessitate</b> our mission - to make it possible for anyone to create an data import solution that suit their needs well.
 
