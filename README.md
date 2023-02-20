@@ -2,12 +2,12 @@
     <b>
         <a href="https://www.YoBulk.dev">YoBulk.dev</a><br>
     </b>
-    ⭐️ Data exchange platform for all businesses that run on CSV files <br>
+    ⭐️ Data exchange platform for all businesses that run on CSV files. <br>
         The Open Source Alternative To https://flatfile.com/ ⭐️ <br>
 </h1>
 
 <p align="center">
-Fastest & Simplest way to Import CSV data into your application through a smart spreadsheet<br>
+Fastest & Simplest way to import CSV data through a smart spreadsheet.<br>
 Create YoBulk CSV Import button and make CSV importing <b>10x</b> faster.
 </p>
 
