@@ -1,13 +1,14 @@
 <h1 align="center" style="border-bottom: none">
     <b>
-        <a href="https://www.YoBulk.dev">YoBulk.dev</a><br>
+        <a href="https://www.YoBulk.dev">YoBulk</a><br>
     </b>
-    ⭐️ Data exchange platform for all businesses that run on CSV files. <br>
-        The Open Source Alternative To https://flatfile.com/ ⭐️ <br>
+    ⭐️ Open Source Alternative To https://flatfile.com/ ⭐️ <br>
+        
 </h1>
 
 <p align="center">
-Fastest & Simplest way to import CSV data through a smart spreadsheet.<br>
+<br>
+A <b>Data exchange platform</b> for all businesses that run on <b>CSV files</b>.
 Create YoBulk CSV Import button and make CSV importing <b>10x</b> faster.
 </p>
 
