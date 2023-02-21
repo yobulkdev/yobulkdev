@@ -104,10 +104,6 @@ yarn start
 
 The dashboard is ready to experiment at [http://localhost:5050/](http://localhost:5050/).
 
-## Built With
-
-- [Next.js](https://nextjs.org/),[Tailwind CSS](https://tailwindcss.com/)
-
 ## Quick start
 
 Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to explore CSV importing flow.
@@ -130,6 +126,19 @@ Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to
 - ⚡ &nbsp;Regex creation and addition in custom validation
 - ⚡ &nbsp;Collaboration & workspace creation.
 
+## Demos
+
+### NoCode Template Creation Demo
+https://user-images.githubusercontent.com/118799976/220317753-8e540eb0-af1a-47fe-b384-72081674d14e.mp4
+
+### All DataType Validation Demo
+https://user-images.githubusercontent.com/118799976/220321287-8cc38555-51ef-412b-885a-b84cba3e5571.mp4
+
+### String Validation Demo
+https://user-images.githubusercontent.com/118799976/220321602-6beebf43-b97e-486b-9aa6-aae9b3f68eca.mp4
+
+### GPT Demo
+https://user-images.githubusercontent.com/118799976/220322196-38bc6db3-0b4c-4343-9648-3958ab720c8b.mp4
 
 
 ## Why are we building this?
