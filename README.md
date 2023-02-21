@@ -60,16 +60,16 @@ Create YoBulk CSV Import button and make CSV importing <b>10x</b> faster.
 
 ## Docker
 ### Option:1 Through Docker Compose
-The docker image comes with a combined <b>YoBulk backend image and MongoImage</b>.
-We provide docker-compose.yml file under yobulkdev
+The docker compose brings both <b>YoBulk Image and Mongodb Image</b>.
+We provide docker-compose.yml file under yobulkdev code repository.
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev.git
 cd yobulkdev 
 docker-compose up -d
 ```
-- To make use of <b>YoBulk Open AI</b> feature,please make the below change.
+- To make use of <b>YoBulk Open AI</b> feature, please follow the guidelines as below.
 
-> Please open `docker-compose.yml` file and update the `OPENAI_SECRET_KEY` variable with the key generated from [OpenAI API site](https://platform.openai.com/account/api-keys).
+> Please open the `docker-compose.yml` file and update the `OPENAI_SECRET_KEY` variable with the key generated from [OpenAI API site](https://platform.openai.com/account/api-keys).
   
 
 The YoBulk dashboard is ready to go at [http://localhost:5050/](http://localhost:5050/).
@@ -77,11 +77,11 @@ The YoBulk dashboard is ready to go at [http://localhost:5050/](http://localhost
 ### Option:2 Through Docker Run
 
 If you are a Docker user, you may try this way!   
-- Prerequisites:<b>You should have installed mongo on your local machine and it's running.</b>
+- Prerequisites:<b>You should have installed mongodb on your local machine and it's running.</b>
 ```bash
 docker run --rm -it -p 5050:5050/tcp  yobulk/yobulk
 ```
-- To make use of <b>YoBulk Open AI</b> feature,please make the below change.  
+- To make use of <b>YoBulk Open AI</b> feature, please follow the guidelines as below.  
 
 > Please pass the Open AI key generated from [OpenAI API site](https://platform.openai.com/account/api-keys)
 in --env to explore YoBulk AI features.
@@ -93,20 +93,22 @@ docker run --rm -it -p 5050:5050/tcp  --env="OPENAI_SECRET_KEY=****" yobulk/yobu
 YoBulk dashboard is ready to go at [http://localhost:5050/](http://localhost:5050/).
 
 ## Building locally.
-If you are a devevloper and want to build locally,you should have installed MongoDB and it should be running locally.  
 
-YoBulk is a fullstack next.js application which uses MongoDB as it's primary Database.
+If you are a devevloper and want to build the system locally, you should have Mongodb running locally.  
+
+YoBulk is a fullstack next.js application which uses Mongodb as it's primary Database.
+
 ```bash
 git clone https://github.com/yobulkdev/yobulkdev
 cd yobulkdev
 yarn install
 yarn run dev
 ```
-- To make use of <b>YoBulk Open AI</b> feature,please make the below change.
+- To make use of <b>YoBulk Open AI</b> feature, please follow the guidelines as below.
 
 > Please update `OPENAI_SECRET_KEY` variable in .env file with the Open AI key generated from [OpenAI API site](https://platform.openai.com/account/api-keys)
 
-The dashboard is ready to experiment at [http://localhost:5050/](http://localhost:5050/).
+The dashboard is ready to view at [http://localhost:5050/](http://localhost:5050/).
 
 ## Quick start
 
@@ -147,26 +149,27 @@ https://user-images.githubusercontent.com/118799976/220322196-38bc6db3-0b4c-4343
 
 ## Why are we building this?
 
-More than 70% of the business data shared, is in the form of CSVs and Excel files. Less than 10% have truly adopted API integrations for data exchange.
+More than 70% of the business data is shared in the form of CSVs and Excel files. Less than 10% have truly adopted API integrations for data exchange.
 
-As a developer and product manager, we have gone through the pain of building a scalable CSV importer.Everyday thousand of developers go through the same pain and hundreds of companies have to get spreadsheet and CSV data into a database.
+As a developer and product manager, we have gone through the pain of building a scalable CSV importer. Everyday thousands of developers go through the same pain and hundreds of companies have to get enormous amount of spreadsheet and CSV data into a database.
+
 YoBulk is building an OSS standard for CSV and flatfile data onboarding where it can help you to build a data importing solution in-house.
 
-Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data securit and high pricing . While developers want an embeddable/scalable CSV importer for SaaS, the truth is that it is not very possible to come up with a one-size fits all solution in such a fragmented market and sector.
+Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data securit and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that, it is not possible to come up with an "one-size fits all solution" within such fragmented market.
 
-All these <b>restrictions necessitate</b> our mission - to make it possible for anyone to create an data import solution that suit their needs well.
+All these <b>restrictions necessitate</b> our mission, to make it possible for anyone to create an data import solution that suits their needs well.
 
-To Developers, we would like to offer a bring your own validation rule and bring your own database experience. You can design and modify validations rules on your own way using YoBulk.
+To Developers, we would like to offer a "bring your own validations"(BYOV)  and "bring your own database"(BYOD) experience. You can design and modify validations rules on your own way using YoBulk.
 
 To enterprises , YoBulk is dedicated to bring data security. Moreover, you have 100% control of your data armed with long-term maintainability.
 
-To be honest, we do not claim to outperform flatfile.com in terms of functionality and design, at least for now. Besides, our priority is to add more functionality at the moment. we would like to cultivate a community to democratise the knowledge and bring all CSV and flatfile open source projects under a single framework.
+To be honest, we do not claim to outperform flatfile.com in terms of functionality and design, at least for now. Besides, our priority is to add more functionality at the moment. We would like to cultivate a community to democratise the knowledge and bring all CSV and flatfile open source projects under a single framework.
 
 Read more [Open vs Closed Data Onboarding](https://doc.yobulk.dev/#yobulk-positioning-open-source-vs-closed-source-data-onboarding-platforms)
 
 # Our Mission
 
-Our mission is to provide the most powerful flatfile(CSV,Spreadsheet)importer which is open source to every single internet business in the world.
+Our mission is to provide the most powerful flatfile(CSV,Spreadsheet) importer which is open source to every single internet business in the world.
 An AI first data exchange for businesses to share flatfiles where you are in-charge of your customer’s data onboarding, validation & transformation.
 
 ## Support
