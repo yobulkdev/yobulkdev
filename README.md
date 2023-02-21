@@ -95,8 +95,7 @@ YoBulk is a fullstack next.js application which uses MongoDB as it's primary Dat
 git clone https://github.com/yobulkdev/yobulkdev
 cd yobulkdev
 yarn install
-yarn build 
-yarn start
+yarn run dev
 ```
 - To make use of <b>YoBulk Open AI</b> feature,please make the below change.
 
