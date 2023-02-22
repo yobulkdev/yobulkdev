@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <div id="home" className="w-full text-center">
-      <div className="max-w-[1240px] mx-auto px-28 py-20 flex flex-col justify-center items-center">
+      <div className="max-w-[1240px] mx-auto px-28 py-14 flex flex-col justify-center items-center">
         <div>
           <p className="uppercase text-5xl font-extrabold tracking-widest text-gray-600">
             Welcome to YoBulk!
