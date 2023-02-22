@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+
 const regexes = [
   {
     title: 'Master Card',
@@ -58,8 +61,11 @@ const regexes = [
 const MainBar = () => {
   return (
     <div>
-      <div className="flex align-middle justify-between">
-        <h1 className="text-2xl font-bold mb-2 text-gray-500">Regex Library</h1>
+      <div className="flex align-middle items-center gap-4 mb-2">
+        <Link href="/libraries">
+            <ArrowLeftIcon className="h-5 cursor-pointer" />
+        </Link>
+        <h1 className="text-2xl font-bold text-gray-500">Regex Library</h1>
       </div>
 
       <div className="p-4">

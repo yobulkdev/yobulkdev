@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 import { FaAtlassian, FaShopify, FaHubspot } from 'react-icons/fa';
 import { SiAsana, SiWoocommerce } from "react-icons/si";
@@ -52,7 +53,10 @@ const MainBar = () => {
 
     return (
         <div>
-            <div className="flex align-middle justify-between">
+            <div className="flex align-middle items-center gap-4 mb-2">
+                <Link href="/libraries">
+                    <ArrowLeftIcon className="h-5 cursor-pointer" />
+                </Link>
                 <h1 className="text-2xl font-bold mb-2 text-gray-500">CSV Libraries</h1>
             </div>
 

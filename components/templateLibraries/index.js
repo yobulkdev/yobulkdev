@@ -2,6 +2,8 @@ import { ClipboardDocumentIcon } from '@heroicons/react/24/outline';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { googlecode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Link from 'next/link';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 const templateLibraries = [
     {
@@ -148,8 +150,11 @@ const MainBar = () => {
 
     return (
         <div>
-            <div className="flex align-middle justify-between">
-                <h1 className="text-2xl font-bold mb-2 text-gray-500">Template Libraries</h1>
+            <div className="flex align-middle items-center gap-4 mb-2">
+                <Link href="/libraries">
+                    <ArrowLeftIcon className="h-5 cursor-pointer" />
+                </Link>
+                <h1 className="text-2xl font-bold text-gray-500">Template Libraries</h1>
             </div>
 
             <div className="p-4">
