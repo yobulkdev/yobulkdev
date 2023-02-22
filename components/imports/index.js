@@ -46,7 +46,7 @@ const ImportsComponent = () => {
     setShowWarning(false);
   };
   return (
-    <div className="overflow-x-auto mx-4 relative mt-10">
+    <div>
       <div className="flex align-middle justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-500">
           List of CSVs Imported
