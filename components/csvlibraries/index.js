@@ -57,7 +57,7 @@ const MainBar = () => {
                 <Link href="/libraries">
                     <ArrowLeftIcon className="h-5 cursor-pointer" />
                 </Link>
-                <h1 className="text-2xl font-bold mb-2 text-gray-500">CSV Libraries</h1>
+                <h1 className="text-2xl font-bold text-gray-500">CSV Libraries</h1>
             </div>
 
             <div className="p-4">
