@@ -53,7 +53,7 @@ const Configuration = () => {
                     <Link href={`/configuration/testconfig/${obj._id}`}>
                       <button
                         type="button"
-                        className="text-white border-2 border-blue-500 bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded-full text-sm mr-2"
                       >
                         Preview
                       </button>
@@ -61,7 +61,7 @@ const Configuration = () => {
                     <Link href={`/configuration/${obj._id}`}>
                       <button
                         type="button"
-                        className="bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-full text-sm px-3 py-1 text-center mr-2"
+                        className="py-1 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-blue-300 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                       >
                         View
                       </button>
