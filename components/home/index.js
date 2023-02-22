@@ -63,16 +63,16 @@ const Home = () => {
             </div>
 
             <div className="w-full flex flex-col gap-1 mt-2 shadow-md rounded-md text-left py-2 px-4 bg-white">
-              <div className='flex justify-between items-center'>
+              <div className='flex gap-4 items-center'>
                 <h1 className="text-xl flex items-center gap-2">
                   Step 2
                 </h1>
-                <Popover className="z-10">
+                <Popover className="z-10 flex ">
                   <Popover.Button>
                     <InformationCircleIcon className="h-5 w-5 text-gray-400" />
                   </Popover.Button>
 
-                  <Popover.Panel className="absolute z-10 bg-white rounded border-2 p-2 -translate-x-1/2 transition ease-in-out delay-300">
+                  <Popover.Panel className="absolute z-10 mt-6 ml-24 bg-white rounded border-2 p-2 -translate-x-1/2 transition ease-in-out delay-300">
                     <p>
                       Create a template with the same schema as the CSV.
                     </p>
