@@ -8,12 +8,20 @@ import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 import SuccessModal from './SuccessModal';
 
-const ReviewCsv = ({ collectionName, fileName, fileMetaData, setIsErrorFree, showOnlyErrors, selectErrorType }) => {
+const ReviewCsv = ({
+  collectionName,
+  fileName,
+  fileMetaData,
+  setIsErrorFree,
+  showOnlyErrors,
+  selectErrorType,
+}) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
-  const [isDownloadWarningModalVisible, setDownloadWarningModalVisible] = useState(false);
+  const [isDownloadWarningModalVisible, setDownloadWarningModalVisible] =
+    useState(false);
   const [showWarning, setShowWarning] = useState(true);
   const [onlyError, setOnlyError] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
@@ -57,32 +65,29 @@ const ReviewCsv = ({ collectionName, fileName, fileMetaData, setIsErrorFree, sho
     [showWarning]
   );
 
-  const onBtnSubmit = useCallback(
-    () => {
-      if (showWarning) {
-        setWarningModalVisible(true);
-        return;
-      } else{
-        setShowResultModal(true);
-        return;
-      }
-    },
-    [showWarning]
-  );
+  const onBtnSubmit = useCallback(() => {
+    if (showWarning) {
+      setWarningModalVisible(true);
+      return;
+    } else {
+      setShowResultModal(true);
+      return;
+    }
+  }, [showWarning]);
 
   const submitFirstModal = () => {
     setWarningModalVisible(false);
     setShowResultModal(true);
-  }
+  };
 
-  const onFinalSubmit = () =>{
+  const onFinalSubmit = () => {
     setShowResultModal(false);
-  }
-  
-  const handleSwitch = () =>{
+  };
+
+  const handleSwitch = () => {
     setOnlyError(!onlyError);
     showOnlyErrors(!onlyError);
-  }
+  };
 
   return (
     <div className="flex flex-nowrap justify-between">
@@ -111,38 +116,55 @@ const ReviewCsv = ({ collectionName, fileName, fileMetaData, setIsErrorFree, sho
         </div>{' '}
         <div className="flex items-center w-auto text-gray-500 font-semibold mb-1">
           Only Errors
-          <Switch checked={onlyError} onChange={handleSwitch} className="ml-2 mt-1">
-            <button className={`${onlyError ? 'bg-blue-500' : 'bg-gray-200'} relative inline-flex items-center h-6 w-11 items-center rounded-full`}>
-              <span className={`${onlyError ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition`}/>
+          <Switch
+            checked={onlyError}
+            onChange={handleSwitch}
+            className="ml-2 mt-1"
+          >
+            <button
+              className={`${
+                onlyError ? 'bg-blue-500' : 'bg-gray-200'
+              } relative inline-flex items-center h-6 w-11 items-center rounded-full`}
+            >
+              <span
+                className={`${
+                  onlyError ? 'translate-x-6' : 'translate-x-1'
+                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+              />
             </button>
           </Switch>
         </div>{' '}
         <div className="flex-auto w-auto font-semibold">
-          <ErrorTypeDropDown errData={metaData} selectErrorType={selectErrorType}/>
+          <ErrorTypeDropDown
+            errData={metaData}
+            selectErrorType={selectErrorType}
+          />
         </div>
       </div>
-      <div className='flex justify-flex-end gap-3'>
-      {!downloadig ? (<button
-          onClick={() => onBtnExport(false)}
-          className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
-        >
-          <CloudArrowDownIcon className="w-5 mr-1" />
-          Download
-      </button>) : (
-        <div class="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mr-3">
-          <svg
-            class="w-6 h-6 text-violet-500"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div className="flex justify-flex-end gap-3">
+        {!downloadig ? (
+          <button
+            onClick={() => onBtnExport(false)}
+            className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
           >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
-      )}
+            <CloudArrowDownIcon className="w-5 mr-1" />
+            Download
+          </button>
+        ) : (
+          <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mr-3">
+            <svg
+              className="w-6 h-6 text-violet-500"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
+        )}
         <button
           onClick={() => onBtnSubmit()}
           className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
@@ -150,24 +172,25 @@ const ReviewCsv = ({ collectionName, fileName, fileMetaData, setIsErrorFree, sho
           {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
           Submit
         </button>
-      
       </div>
 
-      {showResultModal && <SuccessModal submit={onFinalSubmit} message={fileMetaData}/>}
+      {showResultModal && (
+        <SuccessModal submit={onFinalSubmit} message={fileMetaData} />
+      )}
       <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
       <WarningModal
         isVisible={isDownloadWarningModalVisible}
         setIsVisible={setDownloadWarningModalVisible}
-        submit={()=> onBtnExport(true)}
+        submit={() => onBtnExport(true)}
         metaData={fileMetaData}
-        type='Download'
+        type="Download"
       />
       <WarningModal
         isVisible={isWarningModalVisible}
         setIsVisible={setWarningModalVisible}
         submit={submitFirstModal}
         metaData={fileMetaData}
-        type='Submit'
+        type="Submit"
       />
     </div>
   );

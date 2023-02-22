@@ -5,8 +5,8 @@ import SuccessModal from '../common/SuccessModal';
 import WarningModal from '../common/WarningModal';
 
 const CollaborateComponent = () => {
-  const [orgName, setOrgName] = useState(undefined);
-  const [workspaceName, setWorkspaceName] = useState(null);
+  const [orgName, setOrgName] = useState('');
+  const [workspaceName, setWorkspaceName] = useState('');
   const [collaborators, setCollaborators] = useState([]);
   const [name, setName] = useState('');
   const [isVisible, setVisible] = useState(false);
