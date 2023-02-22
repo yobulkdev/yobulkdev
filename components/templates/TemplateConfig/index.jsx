@@ -60,6 +60,9 @@ const AdminComponent = ({ templateId, type }) => {
   };
 
   const saveTemplate = () => {
+    if(!templateData.template_name){
+      return;
+    }
     axios
       .post('/api/templates', templateData)
       .then((result) => {
@@ -211,17 +214,20 @@ const AdminComponent = ({ templateId, type }) => {
               {type === 'view' && templateData ? (
                   <span> {templateData.template_name}</span>
                 ) : (
+                  <>
+                  {(!templateData.template_name) && <p className='text-xs text-red-700'>* Template name is manadatory</p>}
                   <input
                     type="text"
                     id="default-input"
                     className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                       focus:ring-blue-500 focus:border-blue-500 block w-full
                       p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                      dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                      dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${(!templateData.template_name) && 'border-red-700'}`}
                     value={templateData.template_name}
                     disabled={type === 'view'}
                     onChange={(e) => handleTemplateName(e)}
                   />
+                  </>
                 )}
             </div> }
           </div>

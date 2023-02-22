@@ -47,6 +47,9 @@ const JSON_Template = () => {
   }
 
   const saveTemplate = () => {
+    if(!templateName){
+      return;
+    }
     try {
       JSON.parse(value);
     } catch (e) {
@@ -123,16 +126,19 @@ const JSON_Template = () => {
               </div>
               <div className="flex flex-col justify-center w-full">
                 <div className="mb-2">
+                <>
+                  {(!templateName) && <p className='text-xs text-red-700'>* Template name is manadatory</p>}
                   <input
                     type="text"
                     id="default-input"
                     className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-full
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${!templateName && 'border-red-700'}`}
                     value={templateName}
                     onChange={(e) => setTemplateName(e.target.value)}
                   />
+                </>
                 </div>
               </div>
             </div>
