@@ -5,7 +5,7 @@ export default function WarningModal({
   setIsVisible,
   submit,
   metaData,
-  type
+  type,
 }) {
   return (
     <>
@@ -34,7 +34,7 @@ export default function WarningModal({
                       Go Back
                     </button>
                   </div>
-                  <div class="absolute left-1/2 -ml-0.5 w-0.5 h-32 mt-4 bg-gray-200"></div>
+                  <div className="absolute left-1/2 -ml-0.5 w-0.5 h-32 mt-4 bg-gray-200"></div>
                   <div className="flex flex-col mx-2 my-4 w-1/2">
                     <div className="flex h-20 text-center text-sm">
                       Discard {metaData.totalRecords - metaData.validRecords}{' '}

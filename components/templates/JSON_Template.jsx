@@ -47,7 +47,7 @@ const JSON_Template = () => {
   }
 
   const saveTemplate = () => {
-    if(!templateName){
+    if (!templateName) {
       return;
     }
     try {
@@ -126,36 +126,42 @@ const JSON_Template = () => {
               </div>
               <div className="flex flex-col justify-center w-full">
                 <div className="mb-2">
-                <>
-                  {(!templateName) && <p className='text-xs text-red-700'>* Template name is manadatory</p>}
-                  <input
-                    type="text"
-                    id="default-input"
-                    className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                  <>
+                    {!templateName && (
+                      <p className="text-xs text-red-700">
+                        * Template name is manadatory
+                      </p>
+                    )}
+                    <input
+                      type="text"
+                      id="default-input"
+                      className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-full
                    p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${!templateName && 'border-red-700'}`}
-                    value={templateName}
-                    onChange={(e) => setTemplateName(e.target.value)}
-                  />
-                </>
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                      !templateName && 'border-red-700'
+                    }`}
+                      value={templateName}
+                      onChange={(e) => setTemplateName(e.target.value)}
+                    />
+                  </>
                 </div>
               </div>
             </div>
           </div>
           {!isValidJson && (
             <div
-              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative"
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative"
               role="alert"
             >
-              <strong class="font-bold">Error: </strong>
-              <ol class="block sm:inline">
+              <strong className="font-bold">Error: </strong>
+              <ol className="block sm:inline">
                 <li>
                   {' '}
                   1. Please check if the JSON formatting is proper using{' '}
                   <a
                     href="https://jsonformatter.curiousconcept.com/"
-                    class="underline"
+                    className="underline"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -169,7 +175,7 @@ const JSON_Template = () => {
                   verfied by using{' '}
                   <a
                     href="https://regex101.com/"
-                    class="underline"
+                    className="underline"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -182,7 +188,7 @@ const JSON_Template = () => {
                   3. Please make the regex JSON escaped. You can use{' '}
                   <a
                     href="https://www.freeformatter.com/json-escape.html#before-output"
-                    class="underline"
+                    className="underline"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -191,7 +197,7 @@ const JSON_Template = () => {
                   .
                 </li>
               </ol>
-              <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+              <span className="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
             </div>
           )}
           <Editor
@@ -227,7 +233,7 @@ const JSON_Template = () => {
                   }
                 >
                   With YoBulkAI{' '}
-                  <div class="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
+                  <div className="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
                     BETA
                   </div>
                 </Tab>

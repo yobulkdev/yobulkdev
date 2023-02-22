@@ -142,6 +142,7 @@ const CollaborateComponent = () => {
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   placeholder="Enter Collaborator Email Here ..."
                   onChange={(evt) => setName(evt.target.value)}
+                  required
                 />
                 <button
                   type="submit"

@@ -345,7 +345,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                     <>
                                       <p className="my-2 font-semibold text-center">
                                         Using YoBulkAI
-                                        <div class="ml-2 inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full dark:border-gray-900">
+                                        <div className="ml-2 inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full dark:border-gray-900">
                                           BETA
                                         </div>
                                       </p>
