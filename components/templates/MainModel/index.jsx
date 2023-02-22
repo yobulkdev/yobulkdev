@@ -17,6 +17,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   const [regexModal, setRegexModal] = useState(false);
   const [isCustomRegex, setIsCustomRegex] = useState(false);
   const [selectedOption, setSelectedOption] = useState(false);
+  const [requiredError, setRequiredError] = useState(false);
 
   const [regex, setRegex] = useState('');
 
@@ -35,6 +36,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   }
 
   function openSubModal() {
+    setRequiredError(false);
     setIsOpenValidation(true);
   }
 
@@ -52,6 +54,12 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   };
 
   const handleSaveMainModalData = (e) => {
+    let requiredValues = modalData.filter((e) => (e.key === 'label' || e.key === 'data_type'))
+    if(requiredValues.length < 2) {
+      setRequiredError(true)
+      return
+    }
+    
     setTemplateData((prev) => {
       let colObj = {};
       colObj['is_required'] = enabled;
@@ -209,6 +217,8 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       desc="Input the column name exactly as in your CSV or Excel file."
                       setModalData={setModalData}
                       columnData={'label'}
+                      required
+                      clearRequired={setRequiredError}
                     />
 
                     <InputField
@@ -217,6 +227,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       desc="Enter the example of the data like 'John Doe' or 123456 "
                       setModalData={setModalData} // setModalData was saving exmaple as column name in template -> fix this
                       columnData={'example'}
+                      clearRequired={setRequiredError}
                     />
 
                     <div className="flex py-4">
@@ -229,10 +240,10 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                         />
                         <div
                           onClick={handleRequired}
-                          className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-blue-400  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                          className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-blue-400  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"
                         ></div>
                         <span className="ml-2 text-sm font-medium text-gray-900">
-                          Is Required
+                          Is Required 
                         </span>
                       </label>
                     </div>
@@ -240,11 +251,11 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                     <div className="pb-4">
                       <label
                         htmlFor="default-input"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 required"
                       >
-                        Column Format
+                        Column Format <span className='text-sm text-red-700'>*</span>
                       </label>{' '}
-                      <div className="border-2 rounded p-2 flex items-center justify-between pr-4 h-18">
+                      <div className="border border-gray-300 bg-gray-50 rounded-lg py-1 px-4 flex items-center justify-between pr-4 h-18">
                         <div className="flex">
                           <p className="flex  text-blue-400">
                             {modalData.find((el) => el.key === 'data_type')
@@ -267,7 +278,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                           <button
                             type="button"
                             onClick={openSubModal}
-                            className="rounded-md bg-white px-4 py-2 text-sm font-medium text-[#2c71b2] items-center"
+                            className="rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-[#2c71b2] items-center"
                           >
                             Change
                           </button>
@@ -415,12 +426,20 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       desc="Custom error to show when column doesn't meet the validation format."
                       setModalData={setModalData}
                       columnData={'custom_message'}
+                      clearRequired={setRequiredError}
                     />
-
+                    {requiredError && (
+                      <div
+                        className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-1 relative"
+                        role="alert"
+                      >
+                        * Please fill all the required fields
+                      </div>
+                    )}
                     <div className="mt-4 float-right">
                       <button
                         type="button"
-                        className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
+                        className="flex bg-white border-2 mt-1 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-1 text-center mb-2"
                         onClick={handleSaveMainModalData}
                       >
                         Add
