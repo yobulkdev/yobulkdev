@@ -5,7 +5,7 @@ export default function WarningModal({
   setIsVisible,
   submit,
   metaData,
-  type
+  type,
 }) {
   return (
     <>
@@ -16,7 +16,7 @@ export default function WarningModal({
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-full bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex p-4 items-start justify-between p-3 mx-4 border-b border-solid border-slate-200 rounded-t">
+                <div className="flex items-start justify-between p-3 mx-4 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-sm font-semibold">
                     You have {metaData.totalRecords - metaData.validRecords}{' '}
                     rows with unresolved format issues !
@@ -34,7 +34,7 @@ export default function WarningModal({
                       Go Back
                     </button>
                   </div>
-                  <div class="absolute left-1/2 -ml-0.5 w-0.5 h-32 mt-4 bg-gray-200"></div>
+                  <div className="absolute left-1/2 -ml-0.5 w-0.5 h-32 mt-4 bg-gray-200"></div>
                   <div className="flex flex-col mx-2 my-4 w-1/2">
                     <div className="flex h-20 text-center text-sm">
                       Discard {metaData.totalRecords - metaData.validRecords}{' '}

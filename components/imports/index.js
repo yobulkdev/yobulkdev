@@ -46,7 +46,7 @@ const ImportsComponent = () => {
     setShowWarning(false);
   };
   return (
-    <div className="overflow-x-auto mx-4 relative mt-10">
+    <div>
       <div className="flex align-middle justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-500">
           List of CSVs Imported
@@ -63,7 +63,7 @@ const ImportsComponent = () => {
       {showWarning && (
         <span className="text-red-700">Please select a file to download</span>
       )}
-      <table className="w-full bg-white rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-20 border-2">
+      <table className="w-full bg-white rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-10 border-2">
         <thead className="text-xs text-white uppercase h-10 bg-blue-500">
           <tr>
             <th>Select</th>

@@ -5,8 +5,8 @@ import SuccessModal from '../common/SuccessModal';
 import WarningModal from '../common/WarningModal';
 
 const CollaborateComponent = () => {
-  const [orgName, setOrgName] = useState(undefined);
-  const [workspaceName, setWorkspaceName] = useState(null);
+  const [orgName, setOrgName] = useState('');
+  const [workspaceName, setWorkspaceName] = useState('');
   const [collaborators, setCollaborators] = useState([]);
   const [name, setName] = useState('');
   const [isVisible, setVisible] = useState(false);
@@ -138,14 +138,15 @@ const CollaborateComponent = () => {
                   value={name}
                   className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-full
-                   p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   placeholder="Enter Collaborator Email Here ..."
                   onChange={(evt) => setName(evt.target.value)}
+                  required
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center"
+                  className=" bg-white border-2 mt-1  border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-1 text-center mb-2"
                   onClick={handleAdd}
                 >
                   ADD
@@ -156,7 +157,7 @@ const CollaborateComponent = () => {
 
           <button
             type="submit"
-            className="mt-10 bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center float-right"
+            className="mt-10 bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium px-6 py-2 text-center float-right"
             onClick={handleClick}
           >
             SUBMIT
@@ -164,7 +165,7 @@ const CollaborateComponent = () => {
         </form>
       </div>
 
-      <div className="flex w-1/3 flex-col mt-4 bg-white shadow-sm rounded-md py-1 px-2 ">
+      <div className="flex flex-col mt-4 bg-white shadow-sm rounded-md py-4 px-12 ">
         <h1 className="text-base text-center font-bold text-gray-500">
           Collaborators
         </h1>

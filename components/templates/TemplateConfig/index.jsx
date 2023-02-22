@@ -60,7 +60,7 @@ const AdminComponent = ({ templateId, type }) => {
   };
 
   const saveTemplate = () => {
-    if(!templateData.template_name){
+    if (!templateData.template_name) {
       return;
     }
     axios
@@ -130,27 +130,30 @@ const AdminComponent = ({ templateId, type }) => {
 
       <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
         {type === 'view' && (
-          <div class="grid grid-cols-3 gap-4">
-              <div>
-                <h2 className="text-lg w-full font-bold text-gray-500">Key</h2>
-                <p className="text-gray-400 text-sm">The unique key used to identify this Template</p>
-              </div>
-              <span className="text-blue-500 w-full">{templateData._id}</span>
-              <div className='inline-flex justify-end'>
-                <button type="button"
-                  className="w-2/5 h-8 rounded-md border border-transparent bg-blue-100 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  onClick={()=>setIsSchemaMenuOpen(true)}
-                >
-                  View Schema
-                </button>
-              </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <h2 className="text-lg w-full font-bold text-gray-500">Key</h2>
+              <p className="text-gray-400 text-sm">
+                The unique key used to identify this Template
+              </p>
+            </div>
+            <span className="text-blue-500 w-full">{templateData._id}</span>
+            <div className="inline-flex justify-end">
+              <button
+                type="button"
+                className="w-2/5 h-8 rounded-md border border-transparent bg-blue-100 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                onClick={() => setIsSchemaMenuOpen(true)}
+              >
+                View Schema
+              </button>
+            </div>
           </div>
         )}
         <Transition appear show={isSchemaMenuOpen} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-10"
-            onClose={()=>setIsSchemaMenuOpen(false)}
+            onClose={() => setIsSchemaMenuOpen(false)}
           >
             <Transition.Child
               as={Fragment}
@@ -187,14 +190,18 @@ const AdminComponent = ({ templateId, type }) => {
                         height="65vh"
                         width="100%"
                         language="json"
-                        defaultValue={JSON.stringify(templateData.schema, null, "  ")}
+                        defaultValue={JSON.stringify(
+                          templateData.schema,
+                          null,
+                          '  '
+                        )}
                       />
                     </div>
                     <div className="mt-4">
                       <button
                         type="button"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={()=>setIsSchemaMenuOpen(false)}
+                        onClick={() => setIsSchemaMenuOpen(false)}
                       >
                         Close
                       </button>
@@ -205,33 +212,41 @@ const AdminComponent = ({ templateId, type }) => {
             </div>
           </Dialog>
         </Transition>
-          <div class="grid grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-3 gap-4 mt-4">
+          <div>
+            <h2 className="text-lg w-full font-bold text-gray-500">Name</h2>
+            <p className="text-gray-400 text-sm">Name of the template</p>
+          </div>
+          {
             <div>
-              <h2 className="text-lg w-full font-bold text-gray-500">Name</h2>
-              <p className="text-gray-400 text-sm">Name of the template</p>
-            </div>
-            { <div>
               {type === 'view' && templateData ? (
-                  <span> {templateData.template_name}</span>
-                ) : (
-                  <>
-                  {(!templateData.template_name) && <p className='text-xs text-red-700'>* Template name is manadatory</p>}
+                <span> {templateData.template_name}</span>
+              ) : (
+                <>
+                  {!templateData.template_name && (
+                    <p className="text-xs text-red-700">
+                      * Template name is manadatory
+                    </p>
+                  )}
                   <input
                     type="text"
                     id="default-input"
                     className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                       focus:ring-blue-500 focus:border-blue-500 block w-full
                       p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                      dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${(!templateData.template_name) && 'border-red-700'}`}
+                      dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                        !templateData.template_name && 'border-red-700'
+                      }`}
                     value={templateData.template_name}
                     disabled={type === 'view'}
                     onChange={(e) => handleTemplateName(e)}
                   />
-                  </>
-                )}
-            </div> }
-          </div>
+                </>
+              )}
+            </div>
+          }
         </div>
+      </div>
 
       {/*       <div className="p-4">{JSON.stringify(templateData)}</div>
        */}

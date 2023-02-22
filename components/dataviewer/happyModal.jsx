@@ -1,6 +1,5 @@
 import React from 'react';
 export default function SuccessModal({ isVisible, setIsVisible }) {
-
   return (
     <>
       {isVisible && (
@@ -16,7 +15,7 @@ export default function SuccessModal({ isVisible, setIsVisible }) {
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                   >
                     <path
                       stroke-linecap="round"
@@ -27,7 +26,10 @@ export default function SuccessModal({ isVisible, setIsVisible }) {
                   <div className="text-lg font-semibold leading-tight text-blue-700 mb-1">
                     Yay, You did it!
                   </div>
-                  <p className="text-sm text-center font-normal leading-tight text-gray-800 mb-10">You have successfully fixed all the errors. You can proceed to submit the csv.</p>
+                  <p className="text-sm text-center font-normal leading-tight text-gray-800 mb-10">
+                    You have successfully fixed all the errors. You can proceed
+                    to submit the csv.
+                  </p>
                 </div>
                 <button
                   onClick={() => setIsVisible(false)}

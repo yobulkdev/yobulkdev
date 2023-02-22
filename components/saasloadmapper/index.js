@@ -78,21 +78,21 @@ const SassLoadMapper = () => {
   useEffect(() => {
     selectedTab === 0
       ? columnMatcherAi({
-        saasTemplate: state.saasTemplateColumns,
-        validationTemplate: state.validationTemplate,
-      }).then((payload) => {
-        dispatch({
-          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-          payload,
-        });
-      })
-      : dispatch({
-        type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-        payload: columnMatcher({
           saasTemplate: state.saasTemplateColumns,
           validationTemplate: state.validationTemplate,
-        }),
-      });
+        }).then((payload) => {
+          dispatch({
+            type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+            payload,
+          });
+        })
+      : dispatch({
+          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+          payload: columnMatcher({
+            saasTemplate: state.saasTemplateColumns,
+            validationTemplate: state.validationTemplate,
+          }),
+        });
   }, [selectedTab]);
 
   const uploadFile = ({ target, template_id }) => {
@@ -258,7 +258,7 @@ const SassLoadMapper = () => {
                   }
                 >
                   With YoBulkAI{' '}
-                  <div class="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
+                  <div className="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
                     BETA
                   </div>
                 </Tab>
