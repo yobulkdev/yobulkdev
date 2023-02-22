@@ -39,20 +39,20 @@ const DemoCard = ({ item }) => {
         </div>
         <div className="flex items-center gap-2">
           <Link href={item.downloadLink}>
-            <button className="bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md">
+            <button className="bg-[#5EB4EA] w-[160px] h-[36px]  text-sm text-white p-2 rounded-md">
               Download CSV
             </button>
           </Link>
           <ArrowRightIcon className="h-6 w-6 text-[#5EB4EA]" />
           <Link href={item.importLink}>
-            <button className="bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md">
+            <button className="bg-[#5EB4EA] w-[160px] h-[36px]  text-sm text-white p-2 rounded-md">
               Import CSV
             </button>
           </Link>
 
           <div>
             <button
-              className="bg-blue-700 w-[160px] h-[40px]  text-sm text-white p-2 ml-12 rounded-md hover:bg-white hover:text-blue-700 hover:border hover:border-blue-700"
+              className="bg-blue-700 w-[160px] h-[36px]  text-sm text-white p-2 ml-12 rounded-md hover:bg-white hover:text-blue-700 hover:border hover:border-blue-700"
               onClick={() => setIsSchemaMenuOpen(true)}
             >
               View Schema
