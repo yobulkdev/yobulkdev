@@ -145,7 +145,7 @@ const CollaborateComponent = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center"
+                  className="bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium  px-6 py-2 text-center"
                   onClick={handleAdd}
                 >
                   ADD
@@ -156,7 +156,7 @@ const CollaborateComponent = () => {
 
           <button
             type="submit"
-            className="mt-10 bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center float-right"
+            className="mt-10 bg-blue-500 text-sm border border-blue-500 text-white rounded-md hover:bg-transparent hover:text-blue-500 focus:outline-none font-medium px-6 py-2 text-center float-right"
             onClick={handleClick}
           >
             SUBMIT
@@ -164,7 +164,7 @@ const CollaborateComponent = () => {
         </form>
       </div>
 
-      <div className="flex w-1/3 flex-col mt-4 bg-white shadow-sm rounded-md py-1 px-2 ">
+      <div className="flex flex-col mt-4 bg-white shadow-sm rounded-md py-4 px-12 ">
         <h1 className="text-base text-center font-bold text-gray-500">
           Collaborators
         </h1>
