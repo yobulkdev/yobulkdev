@@ -124,7 +124,7 @@ const ReviewCsv = ({
             <button
               className={`${
                 onlyError ? 'bg-blue-500' : 'bg-gray-200'
-              } relative inline-flex items-center h-6 w-11 items-center rounded-full`}
+              } relative inline-flex h-6 w-11 items-center rounded-full`}
             >
               <span
                 className={`${
