@@ -34,10 +34,8 @@ const DemoCard = ({ item }) => {
     <>
       <div className="mx-16 flex gap-1 shadow-md rounded-md text-left p-4 bg-white justify-between">
         <div className="flex flex-col">
-          <h1 className="text-xl">{item.title}</h1>
-          <div className="flex justify-between text-center items-center">
-            <p className="text-md text-gray-700">{item.description}</p>
-          </div>
+          <h1 className="text-lg">{item.title}</h1>
+          <p className="text-sm text-gray-700">{item.description}</p>
         </div>
         <div className="flex items-center gap-2">
           <Link href={item.downloadLink}>

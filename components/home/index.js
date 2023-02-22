@@ -52,7 +52,7 @@ const Home = () => {
               <h1 className="text-xl">Step 1 </h1>
               <div className="flex justify-between text-center items-center">
                 <p className="text-md text-gray-700">
-                  The template is pre-configured with the field values:id,name,email,date,status.
+                  The template is pre-configured with the field values: id, name, email, date, status.
                 </p>
                 <Link href="https://drive.google.com/uc?export=download&id=1iYSU8CswQz8e_3wRCMpWARz8fXnAzBJR">
                   <button className="bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md">
@@ -72,9 +72,9 @@ const Home = () => {
                     <InformationCircleIcon className="h-5 w-5 text-gray-400" />
                   </Popover.Button>
 
-                  <Popover.Panel className="absolute z-10 bg-white rounded border-2 p-2 -translate-x-1/2 ">
+                  <Popover.Panel className="absolute z-10 bg-white rounded border-2 p-2 -translate-x-1/2 transition ease-in-out delay-300">
                     <p>
-                      Create a template with the same schema as the CSV. You can
+                      Create a template with the same schema as the CSV.
                     </p>
 
                     <img src="/solutions.jpg" alt="" />
@@ -98,7 +98,7 @@ const Home = () => {
               <h1 className="text-xl">Step 3 </h1>
               <div className="flex justify-between text-center items-center">
                 <p className="text-left text-md text-gray-700">
-                  Go To Imports Section and check the Status. <br /> CSV Data is
+                  Go To Imports Section and check the status. <br /> CSV Data is
                   imported successfully to your MongoDB.
                 </p>
                 <Link href="/imports">

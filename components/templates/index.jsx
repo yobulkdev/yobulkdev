@@ -22,7 +22,7 @@ const MainBar = () => {
         <Link href={`/templatecreate`}>
           <button
             type="button"
-            className="flex bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-lg text-sm px-6 py-2 text-center mb-2"
+            className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
           >
             <PlusIcon className="w-5 mr-1" />
             Create Template
