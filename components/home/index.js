@@ -29,10 +29,18 @@ const Home = () => {
             Welcome to YoBulk!
           </p>
           <h1 className="py-3 text-gray-500 text-2xl font-medium tracking-wider">
-            Open Source <b className="text-[#3B2EC9] ">Flatfile.com</b>{' '}
+            Open Source{' '}
+            <a
+              href="https://flatfile.com/"
+              class="no-underline hover:underline text-blue-400"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              flatfile.com{' '}
+            </a>
             Alternative
             <br />
-            <span className="text-blue-500 normal-case">
+            <span className="text-blue-400 normal-case">
               An Open source platform for exchanging data between businesses.
             </span>
           </h1>
@@ -44,7 +52,8 @@ const Home = () => {
             <br />
           </h1>
           <p className="mt-1 text-gray-500 text-center">
-            Demo of importing and validating a CSV with a pre-configured template.
+            Demo of importing and validating a CSV with a pre-configured
+            template.
           </p>
 
           <div className="p-4">
@@ -52,7 +61,8 @@ const Home = () => {
               <h1 className="text-xl">Step 1 </h1>
               <div className="flex justify-between text-center items-center">
                 <p className="text-md text-gray-700">
-                  The template is pre-configured with the field values: id, name, email, date, status.
+                  The template is pre-configured with the field values: id,
+                  name, email, date, status.
                 </p>
                 <Link href="https://drive.google.com/uc?export=download&id=1iYSU8CswQz8e_3wRCMpWARz8fXnAzBJR">
                   <button className="bg-[#5EB4EA] w-[160px] h-[40px]  text-sm text-white p-2 rounded-md">
@@ -63,19 +73,15 @@ const Home = () => {
             </div>
 
             <div className="w-full flex flex-col gap-1 mt-2 shadow-md rounded-md text-left py-2 px-4 bg-white">
-              <div className='flex gap-4 items-center'>
-                <h1 className="text-xl flex items-center gap-2">
-                  Step 2
-                </h1>
+              <div className="flex gap-4 items-center">
+                <h1 className="text-xl flex items-center gap-2">Step 2</h1>
                 <Popover className="z-10 flex ">
                   <Popover.Button>
                     <InformationCircleIcon className="h-5 w-5 text-gray-400" />
                   </Popover.Button>
 
                   <Popover.Panel className="absolute z-10 mt-6 ml-24 bg-white rounded border-2 p-2 -translate-x-1/2 transition ease-in-out delay-300">
-                    <p>
-                      Create a template with the same schema as the CSV.
-                    </p>
+                    <p>Create a template with the same schema as the CSV.</p>
 
                     <img src="/solutions.jpg" alt="" />
                   </Popover.Panel>
@@ -140,7 +146,7 @@ const Home = () => {
       <footer className="p-4 justify-center">
         <p className="text-center text-gray-700">Made With ❤️ by YoBulk Team</p>
       </footer>
-    </div >
+    </div>
   );
 };
 
