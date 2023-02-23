@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Context } from '../../../context';
 
-const InputField = ({ colKey, name, desc, setModalData, placeholder }) => {
+const InputField = ({ colKey, name, desc, setModalData, placeholder, clearRequired, required }) => {
   const [inputValue, setInputValue] = useState();
   const { state, dispatch } = useContext(Context);
 
@@ -16,6 +16,7 @@ const InputField = ({ colKey, name, desc, setModalData, placeholder }) => {
   };
 
   const handleChange = (e) => {
+    clearRequired(false)
     if (state.isTemplateEditing) {
       dispatch({
         type: 'SET_CUR_TEMPLATE_EDIT_COLUMN',
@@ -32,7 +33,7 @@ const InputField = ({ colKey, name, desc, setModalData, placeholder }) => {
         htmlFor="default-input"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
       >
-        {name}
+        {name} {required && <span className='text-sm text-red-700'>*</span>}
       </label>
       <input
         type="text"
