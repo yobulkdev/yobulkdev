@@ -94,7 +94,7 @@ YoBulk dashboard is ready to go at [http://localhost:5050/](http://localhost:505
 
 ## Building locally.
 
-If you are a devevloper and want to build the system locally, you should have Mongodb running locally.  
+If you are a developer and want to build the system locally, you should have Mongodb running locally.  
 
 YoBulk is a fullstack next.js application which uses Mongodb as it's primary Database.
 
