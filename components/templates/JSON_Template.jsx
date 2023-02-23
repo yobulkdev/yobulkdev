@@ -277,7 +277,7 @@ const JSON_Template = () => {
                 />
                 <button
                   type="button"
-                  className="flex mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
+                  className="flex mt-2 bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
                   onClick={generateAJV}
                 >
                   Generate
@@ -296,7 +296,7 @@ const JSON_Template = () => {
                     {defaultCode}
                   </SyntaxHighlighter>
                   <div
-                    className="mt-4 flex items-center bg-white justify-center rounded-md px-2 py-4 text-center cursor-pointer shadow-sm"
+                    className="mt-2 flex items-center bg-white justify-center rounded-md px-2 py-3 hover:bg-blue-500 hover:text-white text-center cursor-pointer shadow-sm"
                     onClick={() => setValue(defaultCode)}
                   >
                     COPY TO THE EDITOR
