@@ -384,7 +384,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
                                       <button
                                         type="button"
-                                        className="flex float-right mt-2 bg-white border-2 border-black text-black hover:text-white hover:bg-black focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
+                                        className="flex float-right mt-2 bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
                                         onClick={generateRegex}
                                       >
                                         Generate

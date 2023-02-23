@@ -95,11 +95,7 @@ const MainBar = () => {
 
                     <button
                       type="button"
-                      className="bg-white border-2 border-black text-black 
-                      hover:text-white hover:bg-black 
-                      focus:outline-none w-auto h-8
-                      font-medium rounded-full
-                      text-sm px-3 py-1 mr-2"
+                      className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold h-8 hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded-full text-sm mx-2"
                       onClick={() => {
                         navigator.clipboard.writeText(regex);
                       }}
