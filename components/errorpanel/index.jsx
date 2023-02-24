@@ -16,7 +16,9 @@ const Modal = ({ isOpen, setIsOpen, data }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-3 border-b border-solid border-gray-300 rounded-t ">
                   <h3 className="text-2xl text-gray-600">
-                    {data.length>0 ? data.map((x) => x.errorcount).reduce((a, b) => a + b)}
+                    {data.length > 0
+                      ? data.map((x) => x.errorcount).reduce((a, b) => a + b)
+                      : 0}
                     Errors!
                   </h3>
                   <button
