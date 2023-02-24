@@ -94,7 +94,7 @@ YoBulk dashboard is ready to go at [http://localhost:5050/](http://localhost:505
 
 ## Building locally.
 
-If you are a devevloper and want to build the system locally, you should have Mongodb running locally.  
+If you are a developer and want to build the system locally, you should have Mongodb running locally.  
 
 YoBulk is a fullstack next.js application which uses Mongodb as it's primary Database.
 
@@ -155,7 +155,7 @@ As a developer and product manager, we have gone through the pain of building a 
 
 YoBulk is building an OSS standard for CSV and flatfile data onboarding where it can help you to build a data importing solution in-house.
 
-Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data securit and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that, it is not possible to come up with an "one-size fits all solution" within such fragmented market.
+Enterprises like Flatfile.com are addressing this problem but it has constraints like weak data security and high pricing. While developers want an embeddable/scalable CSV importer for SaaS, the truth is that, it is not possible to come up with an "one-size fits all solution" within such fragmented market.
 
 All these <b>restrictions necessitate</b> our mission, to make it possible for anyone to create an data import solution that suits their needs well.
 
