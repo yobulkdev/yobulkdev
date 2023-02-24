@@ -11,6 +11,7 @@ const CollaborateComponent = () => {
   const [name, setName] = useState('');
   const [isVisible, setVisible] = useState(false);
   const [warning, setWarning] = useState(false);
+  const [alreadyPresentError, setAlreadyPresentError] = useState(false);
   // const [collaborateData, setCollaborateData] = useState();
 
   function validateEmail(email) {
@@ -22,7 +23,13 @@ const CollaborateComponent = () => {
     e.preventDefault();
     if (!validateEmail(name)) {
       alert('Please enter a valid email');
-    } else setCollaborators([...collaborators, name]);
+    } else {
+      if(collaborators.includes(name)){
+        setAlreadyPresentError(true);
+        return
+      }
+      setCollaborators([...collaborators, name])
+    };
     setName('');
   };
 
@@ -141,7 +148,7 @@ const CollaborateComponent = () => {
                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   placeholder="Enter Collaborator Email Here ..."
-                  onChange={(evt) => setName(evt.target.value)}
+                  onChange={(evt) => {setAlreadyPresentError(false); setName(evt.target.value)}}
                   required
                 />
                 <button
@@ -152,6 +159,7 @@ const CollaborateComponent = () => {
                   ADD
                 </button>
               </div>
+              {alreadyPresentError && <span className='text-sm text-red-500'>Error : This user is already a collaborator</span>}
             </div>
           </div>
 
