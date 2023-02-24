@@ -41,7 +41,8 @@ const Home = () => {
             Alternative
             <br />
             <span className="text-blue-400 normal-case">
-              An Open source platform for exchanging data between businesses.
+              An Embeddable Open source platform for exchanging data between
+              businesses.
             </span>
           </h1>
         </div>
