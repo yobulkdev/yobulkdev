@@ -32,7 +32,7 @@ const Home = () => {
             Open Source{' '}
             <a
               href="https://flatfile.com/"
-              class="no-underline hover:underline text-blue-400"
+              className="no-underline hover:underline text-blue-400"
               target="_blank"
               rel="noopener noreferrer"
             >
