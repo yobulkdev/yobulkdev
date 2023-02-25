@@ -118,9 +118,13 @@ const ImportsComponent = () => {
                 </td>
                 <td>
                   {col.status === 'Complete' ? (
-                    <span className="text-green-700">Complete</span>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 uppercase last:mr-0 mr-1">
+                    Complete
+                    </span>
                   ) : (
-                    <span className="text-red-700">Incomplete</span>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-600 bg-red-200 uppercase last:mr-0 mr-1">
+                    Incomplete
+                    </span>
                   )}
                 </td>
               </tr>
