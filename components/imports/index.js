@@ -61,7 +61,12 @@ const ImportsComponent = () => {
         </button>
       </div>
       {showWarning && (
-        <span className="text-red-700">Please select a file to download</span>
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mt-2 relative"
+          role="alert"
+        >
+          * Please select a file to download
+        </div>
       )}
       <table className="w-full bg-white rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-10 border-2">
         <thead className="text-xs text-white uppercase h-10 bg-blue-500">
