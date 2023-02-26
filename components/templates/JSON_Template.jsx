@@ -128,6 +128,11 @@ const JSON_Template = () => {
               <div className="flex flex-col justify-center w-full">
                 <div className="mb-2">
                   <>
+                    {!templateName && (
+                      <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
+                        <InformationCircleIcon className="w-3 inline" /> This field is required
+                      </div>
+                    )}
                     <input
                       type="text"
                       id="default-input"
@@ -140,11 +145,6 @@ const JSON_Template = () => {
                       value={templateName}
                       onChange={(e) => setTemplateName(e.target.value)}
                     />
-                    {!templateName && (
-                      <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
-                        <InformationCircleIcon className="w-3 mt-1" /> This field is required
-                      </div>
-                    )}
                   </>
                 </div>
               </div>
