@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TrashIcon } from '@heroicons/react/24/solid';
+import { TrashIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import SuccessModal from '../common/SuccessModal';
 import WarningModal from '../common/WarningModal';
@@ -24,12 +24,12 @@ const CollaborateComponent = () => {
     if (!validateEmail(name)) {
       alert('Please enter a valid email');
     } else {
-      if(collaborators.includes(name)){
+      if (collaborators.includes(name)) {
         setAlreadyPresentError(true);
-        return
+        return;
       }
-      setCollaborators([...collaborators, name])
-    };
+      setCollaborators([...collaborators, name]);
+    }
     setName('');
   };
 
@@ -82,7 +82,7 @@ const CollaborateComponent = () => {
           <div className="flex mt-7 align-middle items-center">
             <div className="flex flex-col w-5/12">
               <h2 className="text-base font-bold text-gray-500">
-                Create an Organization{' '}
+                Create an Organization{' '}<span className='text-red-400'>*</span>
               </h2>
               <p className="text-gray-400 text-sm">
                 The Organization Name to identify your organization
@@ -100,13 +100,19 @@ const CollaborateComponent = () => {
                 onChange={(evt) => setOrgName(evt.target.value)}
                 required
               />
+              {!orgName && (
+                <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
+                  <InformationCircleIcon className="w-3 mt-1" /> This field is
+                  required
+                </div>
+              )}
             </div>
           </div>
 
           <div className="flex mt-7 align-middle items-center">
             <div className="flex flex-col w-5/12">
               <h2 className="text-base font-bold text-gray-500">
-                Create a Workspace
+                Create a Workspace <span className='text-red-400'>*</span>
               </h2>
               <p className="text-gray-400 text-sm">
                 The Workspace Name to identify your workspace
@@ -124,6 +130,12 @@ const CollaborateComponent = () => {
                 onChange={(evt) => setWorkspaceName(evt.target.value)}
                 required
               />
+              {!workspaceName && (
+                <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
+                  <InformationCircleIcon className="w-3 mt-1" /> This field is
+                  required
+                </div>
+              )}
             </div>
           </div>
 
@@ -148,7 +160,10 @@ const CollaborateComponent = () => {
                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   placeholder="Enter Collaborator Email Here ..."
-                  onChange={(evt) => {setAlreadyPresentError(false); setName(evt.target.value)}}
+                  onChange={(evt) => {
+                    setAlreadyPresentError(false);
+                    setName(evt.target.value);
+                  }}
                   required
                 />
                 <button
@@ -159,7 +174,11 @@ const CollaborateComponent = () => {
                   ADD
                 </button>
               </div>
-              {alreadyPresentError && <span className='text-sm text-red-500'>Error : This user is already a collaborator</span>}
+              {alreadyPresentError && (
+                <span className="text-sm text-red-500">
+                  Error : This user is already a collaborator
+                </span>
+              )}
             </div>
           </div>
 
