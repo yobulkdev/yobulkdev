@@ -10,11 +10,11 @@ const AttachToJSONOBJ = ({
   return (
     <div
       className={`flex flex-col border-2 rounded-md ${
-        !availiable ? 'cursor-no-drop border-black' : 'border-[#64B6EB]'
+        !availiable ? 'cursor-no-drop border-blue-500' : 'border-[#64B6EB]'
       } `}
     >
       {availiable ? null : (
-        <div className="rounded-t-sm bg-black text-center text-white">
+        <div className="rounded-t-sm bg-blue-500 text-center text-white">
           COMING SOON
         </div>
       )}
