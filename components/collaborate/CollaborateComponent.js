@@ -82,6 +82,12 @@ const CollaborateComponent = () => {
               </p>
             </div>
             <div className="flex flex-col justify-center w-1/2">
+              {!orgName && (
+                <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
+                  <InformationCircleIcon className="w-3 mt-1" /> This field is
+                  required
+                </div>
+              )}
               <input
                 type="text"
                 className={`border border-gray-300 text-gray-400  text-sm rounded-lg
@@ -93,12 +99,6 @@ const CollaborateComponent = () => {
                 onChange={(evt) => {setWarning(false); setOrgName(evt.target.value)}}
                 required
               />
-              {!orgName && (
-                <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
-                  <InformationCircleIcon className="w-3 mt-1" /> This field is
-                  required
-                </div>
-              )}
             </div>
           </div>
 
@@ -112,6 +112,12 @@ const CollaborateComponent = () => {
               </p>
             </div>
             <div className="flex flex-col justify-center w-1/2">
+              {!workspaceName && (
+                <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 mb-1 justify-end">
+                  <InformationCircleIcon className="w-3 mt-1" /> This field is
+                  required
+                </div>
+              )}
               <input
                 type="text"
                 className={`border border-gray-300 text-gray-400  text-sm rounded-lg
@@ -123,12 +129,6 @@ const CollaborateComponent = () => {
                 onChange={(evt) => {setWarning(false); setWorkspaceName(evt.target.value)}}
                 required
               />
-              {!workspaceName && (
-                <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
-                  <InformationCircleIcon className="w-3 mt-1" /> This field is
-                  required
-                </div>
-              )}
             </div>
           </div>
 
@@ -144,6 +144,11 @@ const CollaborateComponent = () => {
               </p>
             </div>
             <div className="flex flex-col justify-center w-1/2">
+              {(collaborators.length < 1) && (
+                  <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
+                    <InformationCircleIcon className="w-3 mt-1" /> Please add at least one collaborator
+                  </div>
+                )}
               <div className="flex gap-2">
                 <input
                   type="email"
@@ -168,11 +173,6 @@ const CollaborateComponent = () => {
                   ADD
                 </button>
               </div>
-              {(collaborators.length < 1) && (
-                  <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
-                    <InformationCircleIcon className="w-3 mt-1" /> Please add at least one collaborator
-                  </div>
-                )}
               {alreadyPresentError && (
                 <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200">
                   <InformationCircleIcon className="w-3 mt-1" /> This user is already a collaborator
