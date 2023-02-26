@@ -7,6 +7,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import cuid from 'cuid';
 import Select from 'react-tailwindcss-select';
 import Link from 'next/link';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
+
 
 const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   let [isOpenValidation, setIsOpenValidation] = useState(false);
@@ -251,11 +253,11 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                     <div className="pb-4">
                       <label
                         htmlFor="default-input"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 required"
+                        className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 required flex justify-between"
                       >
-                        Column Format <span className='text-sm text-red-700'>*</span>
+                        <span>Column Format <span className='text-base font-semibold text-red-500'>*</span></span> {!modalData.find((el) => el.key === 'data_type') && <span className="text-sm text-red-400 mt-1"><InformationCircleIcon className="w-3 inline mb-1 mr-1" />This field is required</span>}
                       </label>{' '}
-                      <div className="border border-gray-300 bg-gray-50 rounded-lg py-1 px-4 flex items-center justify-between pr-4 h-18">
+                      <div className={`border border-gray-300 bg-gray-50 rounded-lg py-1 px-4 flex items-center justify-between pr-4 h-18 ${!modalData.find((el) => el.key === 'data_type') && 'border-red-400'}`}>
                         <div className="flex">
                           <p className="flex  text-blue-400">
                             {modalData.find((el) => el.key === 'data_type')
