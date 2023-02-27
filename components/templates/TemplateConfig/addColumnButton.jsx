@@ -8,7 +8,9 @@ export default function addColumnButton({
 }) {
   return (
     <div className="rounded-md mt-10 flex align-middle items-center justify-between">
-      <h1 className="text-xl font-bold items-center  text-gray-500">Columns</h1>
+      <h1 className="text-xl font-bold items-center text-gray-500 dark:text-gray-200">
+        Columns
+      </h1>
       <button
         type="button"
         onClick={openModal}

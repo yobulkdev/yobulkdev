@@ -9,7 +9,6 @@ import Select from 'react-tailwindcss-select';
 import Link from 'next/link';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
 
-
 const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   let [isOpenValidation, setIsOpenValidation] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -56,12 +55,14 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   };
 
   const handleSaveMainModalData = (e) => {
-    let requiredValues = modalData.filter((e) => (e.key === 'label' || e.key === 'data_type'))
-    if(requiredValues.length < 2) {
-      setRequiredError(true)
-      return
+    let requiredValues = modalData.filter(
+      (e) => e.key === 'label' || e.key === 'data_type'
+    );
+    if (requiredValues.length < 2) {
+      setRequiredError(true);
+      return;
     }
-    
+
     setTemplateData((prev) => {
       let colObj = {};
       colObj['is_required'] = enabled;
@@ -195,10 +196,10 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-md bg-white p-4 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-md bg-white p-4 text-left align-middle shadow-xl transition-all dark:bg-gray-900">
                 <Dialog.Title
                   as="h2"
-                  className="text-lg flex items-center font-medium leading-6 text-gray-900"
+                  className="text-lg flex items-center font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   Add Column{' '}
                   <button
@@ -245,7 +246,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                           className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-blue-400  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"
                         ></div>
                         <span className="ml-2 text-sm font-medium text-gray-900">
-                          Is Required 
+                          Is Required
                         </span>
                       </label>
                     </div>
@@ -255,11 +256,27 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                         htmlFor="default-input"
                         className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 required flex justify-between"
                       >
-                        <span>Column Format <span className='text-base font-semibold text-red-500'>*</span></span> {!modalData.find((el) => el.key === 'data_type') && <span className="text-sm text-red-400 mt-1"><InformationCircleIcon className="w-3 inline mb-1 mr-1" />This field is required</span>}
+                        <span>
+                          Column Format{' '}
+                          <span className="text-base font-semibold text-red-500">
+                            *
+                          </span>
+                        </span>{' '}
+                        {!modalData.find((el) => el.key === 'data_type') && (
+                          <span className="text-sm text-red-400 mt-1">
+                            <InformationCircleIcon className="w-3 inline mb-1 mr-1" />
+                            This field is required
+                          </span>
+                        )}
                       </label>{' '}
-                      <div className={`border border-gray-300 bg-gray-50 rounded-lg py-1 px-4 flex items-center justify-between pr-4 h-18 ${!modalData.find((el) => el.key === 'data_type') && 'border-red-400'}`}>
+                      <div
+                        className={`border border-gray-300 bg-gray-50 rounded-lg py-1 px-4 flex items-center justify-between pr-4 h-18 ${
+                          !modalData.find((el) => el.key === 'data_type') &&
+                          'border-red-400'
+                        }`}
+                      >
                         <div className="flex">
-                          <p className="flex  text-blue-400">
+                          <p className="flex text-blue-400 dark:text-black">
                             {modalData.find((el) => el.key === 'data_type')
                               ? modalData.find((el) => el.key === 'data_type')
                                   .value
@@ -280,7 +297,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                           <button
                             type="button"
                             onClick={openSubModal}
-                            className="rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-[#2c71b2] items-center"
+                            className="rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-[#2c71b2] items-center dark:text-black"
                           >
                             Change
                           </button>
@@ -297,7 +314,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                       <button
                         type="button"
                         onClick={openRegexModal}
-                        className="rounded-md w-full border bg-white px-4 py-2 text-sm font-medium text-[#2c71b2] items-center"
+                        className="rounded-md w-full border bg-white px-4 py-2 text-sm font-medium text-[#2c71b2] items-center dark:bg-gray-800 dark:text-white"
                       >
                         GENERATE REGEX
                       </button>
