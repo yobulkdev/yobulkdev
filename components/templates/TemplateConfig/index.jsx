@@ -293,7 +293,7 @@ const AdminComponent = ({ templateId, type }) => {
             templateData.columns.map((col, idx) => (
               <tr
                 key={idx}
-                className="h-10 text-center border-b-2 border-gray-700"
+                className="h-10 text-center border-b-2 dark:border-gray-700"
               >
                 {/*   <td className="w-8">{col.key}</td> */}
                 <td>{col.label}</td>

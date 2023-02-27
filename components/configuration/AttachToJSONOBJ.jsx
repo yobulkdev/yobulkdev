@@ -20,7 +20,9 @@ const AttachToJSONOBJ = ({
       )}
       <div className="flex p-4 align-middle items-center">
         <div className="flex flex-col w-5/12">
-          <h2 className="text-lg font-bold text-gray-500">Attach A Theme</h2>
+          <h2 className="text-lg font-bold text-gray-500 dark:text-gray-200">
+            Attach A Theme
+          </h2>
           <p className="text-gray-400">
             Attach A Theme To the Importer JSON Object
           </p>

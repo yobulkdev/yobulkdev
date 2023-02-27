@@ -23,29 +23,35 @@ const ConfigurationConfig = ({ configId }) => {
             <ArrowLeftIcon className="h-5 cursor-pointer" />
           </Link>
 
-          <h1 className="text-2xl font-bold text-gray-500">
+          <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">
             {importerData.name}
           </h1>
         </div>
       </div>
-      <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
+      <div className="mt-4 bg-white dark:bg-gray-900 rounded-md p-6 flex flex-col align-middle shadow-sm">
         <div className="flex">
           <div className="flex flex-col w-5/12">
-            <h2 className="text-lg font-bold text-gray-500">Key</h2>
+            <h2 className="text-lg font-bold text-gray-500 dark:text-gray-200">
+              Key
+            </h2>
             <p className="text-gray-400">
               The unique key used to identify this Importer
             </p>
           </div>
           <div className="ml-10 flex flex-col justify-center w-72">
             <div className="mb-2">
-              <span className="text-blue-500">{importerData._id}</span>
+              <span className="text-blue-500 dark:text-blue-300">
+                {importerData._id}
+              </span>
             </div>
           </div>
         </div>
 
         <div className="flex mt-4">
           <div className="flex flex-col w-5/12">
-            <h2 className="text-lg font-bold text-gray-500">Name</h2>
+            <h2 className="text-lg font-bold text-gray-500 dark:text-gray-200">
+              Name
+            </h2>
             <p className="text-gray-400">Name of the importer</p>
           </div>
           <div className="ml-10 flex flex-col justify-center w-72">
@@ -57,7 +63,7 @@ const ConfigurationConfig = ({ configId }) => {
       </div>
 
       <div className="overflow-x-auto relative mt-3">
-        <table className="w-full bg-white  text-sm text-gray-500 dark:text-gray-400 table shadow-md border-2">
+        <table className="w-full bg-white text-sm text-gray-500 dark:bg-gray-800 dark:text-gray-400 table shadow-md border-2 dark:border-gray-700">
           <thead className="text-xs text-white uppercase h-10 bg-blue-500">
             <tr>
               <th scope="col" className="py-3">
@@ -76,7 +82,10 @@ const ConfigurationConfig = ({ configId }) => {
             </tr>
           </thead>
           {importerData ? (
-            <tr key={importerData._id} className="h-10 text-center border-b-2">
+            <tr
+              key={importerData._id}
+              className="h-10 text-center border-b-2 dark:border-gray-700"
+            >
               <td>{importerData.name}</td>
               <td>{importerData._id}</td>
               <td>
