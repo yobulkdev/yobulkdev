@@ -14,6 +14,7 @@ import handleEdit from './handleEdit';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
 import Editor from '@monaco-editor/react';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
 
 const AdminComponent = ({ templateId, type }) => {
   let [isOpen, setIsOpen] = useState(false);
@@ -214,7 +215,7 @@ const AdminComponent = ({ templateId, type }) => {
         </Transition>
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div>
-            <h2 className="text-lg w-full font-bold text-gray-500">Name</h2>
+            <h2 className="text-lg w-full font-bold text-gray-500">Name <span className='text-red-400'>*</span></h2>
             <p className="text-gray-400 text-sm">Name of the template</p>
           </div>
           {
@@ -224,9 +225,9 @@ const AdminComponent = ({ templateId, type }) => {
               ) : (
                 <>
                   {!templateData.template_name && (
-                    <p className="text-xs text-red-700">
-                      * Template name is manadatory
-                    </p>
+                      <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
+                        <InformationCircleIcon className="w-3 mt-1" /> This field is required
+                      </div>
                   )}
                   <input
                     type="text"
@@ -235,7 +236,7 @@ const AdminComponent = ({ templateId, type }) => {
                       focus:ring-blue-500 focus:border-blue-500 block w-full
                       p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                        !templateData.template_name && 'border-red-700'
+                        !templateData.template_name && 'border-red-400'
                       }`}
                     value={templateData.template_name}
                     disabled={type === 'view'}
