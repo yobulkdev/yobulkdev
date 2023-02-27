@@ -60,7 +60,7 @@ const index = () => {
                                             <Link href={obj.link}>
                                                 <button
                                                     type="button"
-                                                    className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded-full text-sm mr-2"
+                                                    className="bg-transparent dark:bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white dark:hover:text-blue-500 py-1 px-4 border border-blue-500 hover:border-transparent rounded-full text-sm mr-2"
                                                 >
                                                     View Libraries
                                                 </button>

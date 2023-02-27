@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <div id="home" className="w-full text-center dark:bg-gray-800">
-      <div className="max-w-[1240px] mx-auto px-28 py-14 flex flex-col justify-center items-center">
+      <div className="max-w-[1240px] mx-auto px-28 pt-14 flex flex-col justify-center items-center">
         <div>
           <p className="uppercase text-5xl font-extrabold tracking-widest text-gray-600 dark:text-gray-200">
             Welcome to YoBulk!
@@ -32,7 +32,7 @@ const Home = () => {
             Open Source{' '}
             <a
               href="https://flatfile.com/"
-              className="no-underline hover:underline text-blue-400 dark:text-blue-200"
+              className="no-underline hover:underline text-blue-400"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -40,7 +40,7 @@ const Home = () => {
             </a>
             Alternative
             <br />
-            <span className="text-blue-400 normal-case dark:text-blue-200">
+            <span className="text-blue-400 normal-case">
               An Embeddable Open source platform for exchanging data between
               businesses.
             </span>
