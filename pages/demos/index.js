@@ -39,15 +39,17 @@ const listOfItems = [
 const index = () => {
   return (
     <Layout>
-      <div className="overflow-x-auto mx-4">
-        <h1 className="py-2 text-gray-500 text-2xl font-medium tracking-wider text-center">
-          YoBulk Quick Demos 🚀
-          <br />
-        </h1>
-        <div className="p-6 flex flex-col gap-4">
-          {listOfItems.map((item, index) => (
-            <DemoCard key={index} item={item} />
-          ))}
+      <div className="overflow-x-auto h-screen dark:bg-gray-800">
+        <div className="mx-4">
+          <h1 className="py-2 text-gray-500 text-2xl font-medium tracking-wider text-center dark:text-gray-200">
+            YoBulk Quick Demos 🚀
+            <br />
+          </h1>
+          <div className="p-6 flex flex-col gap-4">
+            {listOfItems.map((item, index) => (
+              <DemoCard key={index} item={item} />
+            ))}
+          </div>
         </div>
       </div>
     </Layout>

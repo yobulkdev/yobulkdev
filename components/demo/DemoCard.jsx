@@ -32,20 +32,22 @@ const DemoCard = ({ item }) => {
 
   return (
     <>
-      <div className="mx-16 flex gap-1 shadow-md rounded-md text-left p-4 bg-white justify-between">
+      <div className="mx-16 flex gap-1 shadow-md rounded-md text-left p-4 bg-white justify-between dark:bg-gray-900">
         <div className="flex flex-col">
           <h1 className="text-lg">{item.title}</h1>
-          <p className="text-sm text-gray-700">{item.description}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-400">
+            {item.description}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Link href={item.downloadLink}>
-            <button className="bg-[#5EB4EA] w-[160px] h-[36px]  text-sm text-white p-2 rounded-md">
+            <button className="bg-[#5EB4EA] w-[160px] h-[36px]  text-sm text-white p-2 rounded-md dark:bg-white dark:text-black">
               Download CSV
             </button>
           </Link>
           <ArrowRightIcon className="h-6 w-6 text-[#5EB4EA]" />
           <Link href={item.importLink}>
-            <button className="bg-[#5EB4EA] w-[160px] h-[36px]  text-sm text-white p-2 rounded-md">
+            <button className="bg-[#5EB4EA] w-[160px] h-[36px]  text-sm text-white p-2 rounded-md dark:bg-white dark:text-black">
               Import CSV
             </button>
           </Link>
