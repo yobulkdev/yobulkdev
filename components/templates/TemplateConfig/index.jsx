@@ -23,6 +23,18 @@ const AdminComponent = ({ templateId, type }) => {
   const { dispatch } = useContext(Context);
   const [isRegexMenuOpen, setIsRegexMenuOpen] = useState(false);
   const [isSchemaMenuOpen, setIsSchemaMenuOpen] = useState(false);
+  const [mode, setMode] = useState('light');
+
+  function beforeMount(monaco) {
+    monaco.editor.defineTheme('yobulkdark', {
+      base: 'vs-dark',
+      inherit: true,
+      rules: [],
+      colors: {
+        'editor.background': '#1F2937',
+      },
+    });
+  }
 
   function closeREGEXModal() {
     setIsRegexMenuOpen(false);
@@ -45,6 +57,22 @@ const AdminComponent = ({ templateId, type }) => {
         .catch((err) => console.log(err));
     }
   }, [templateId]);
+
+  useEffect(() => {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => setMode(e.matches ? 'dark' : 'light'));
+    setMode(
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+    );
+    return () => {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', () => {});
+    };
+  }, []);
 
   function closeModal() {
     setIsOpen(false);
@@ -181,10 +209,10 @@ const AdminComponent = ({ templateId, type }) => {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-900">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg font-medium leading-6 text-gray-900"
+                      className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                     >
                       Template Schema
                     </Dialog.Title>
@@ -192,7 +220,9 @@ const AdminComponent = ({ templateId, type }) => {
                       <Editor
                         height="65vh"
                         width="100%"
+                        theme={mode === 'dark' ? 'yobulkdark' : 'vs'}
                         language="json"
+                        beforeMount={beforeMount}
                         defaultValue={JSON.stringify(
                           templateData.schema,
                           null,
