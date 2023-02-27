@@ -36,7 +36,7 @@ const Templates = () => {
   return (
     <>
       <Layout>
-        <div className="p-2 ">
+        <div className="p-2 dark:bg-gray-800 h-screen">
           <Tab.Group
             defaultIndex={defaultTab}
             selectedIndex={defaultTab}
@@ -50,7 +50,7 @@ const Templates = () => {
                     classNames(
                       'w-full  py-2.5 text-sm font-medium leading-5 dark:text-white',
                       selected
-                        ? 'border-b-2 text-blue-900 outline-none border-blue-900'
+                        ? 'border-b-2 text-blue-900 outline-none border-blue-900 dark:border-blue-500 dark:text-blue-500'
                         : 'text-black hover:bg-white/[0.12] hover:text-blue-500'
                     )
                   }

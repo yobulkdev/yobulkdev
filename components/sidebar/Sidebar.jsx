@@ -72,7 +72,7 @@ const Sidebar = () => {
   );
 
   const wrapperClasses = classNames(
-    'min-h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200',
+    'min-h-screen bg-[#F7FAFC] flex justify-between flex-col border-r ease-out delay-150 duration-200 dark:bg-gray-900 dark:border-gray-800',
     {
       ['w-60']: !toggleCollapse,
       ['w-16']: toggleCollapse,
@@ -137,14 +137,14 @@ const Sidebar = () => {
               <div key={idx}>
                 <div className={classes}>
                   <Link href={menu.link}>
-                    <a className="flex py-4 px-3 items-center w-full h-full">
+                    <a className="flex py-4 px-3 items-center w-full h-full gap-1">
                       <div style={{ width: '1.5rem' }}>
                         <Icon />
                       </div>
                       {!toggleCollapse && (
                         <span
                           className={classNames(
-                            'text-md font-medium text-light text-gray-500'
+                            'text-md font-medium text-light text-gray-500 dark:text-gray-200'
                           )}
                         >
                           {menu.label}

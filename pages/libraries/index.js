@@ -31,7 +31,7 @@ const index = () => {
                 <div className="overflow-x-auto mx-4">
                     <div className="p-6">
                         <div className="mx-auto px-28 py-20 flex flex-col justify-center items-center">
-                            <p className="uppercase text-3xl font-extrabold tracking-widest text-gray-600">
+                            <p className="uppercase text-3xl font-extrabold tracking-widest text-gray-600  dark:text-gray-200">
                                 Welcome to YoBulk! Libraries
                             </p>
                         </div>
@@ -39,19 +39,19 @@ const index = () => {
                             <div className="grid grid-cols-3">
                                 {librariesList.map((obj, idx) => (
                                     <div
-                                        className="mt-4 bg-white rounded-md flex flex-col align-middle justify-between p-4 mx-2 shadow-sm"
+                                        className="mt-4 bg-white dark:bg-gray-900 rounded-md flex flex-col align-middle justify-between p-4 mx-2 shadow-sm"
                                         key={idx}
                                     >
                                         <div className="flex flex-col">
                                             <Link href={obj.link}>
-                                                <h2 className="text-lg text-blue-500 cursor-pointer">
+                                                <h2 className="text-lg text-blue-500 dark:text-white cursor-pointer">
                                                     {obj.template_name}
                                                 </h2>
                                             </Link>
                                         </div>
 
                                         <div className="mt-4">
-                                            <p className="text-gray-600">
+                                            <p className="text-gray-600 dark:text-gray-400">
                                                 {obj.template_description}
                                             </p>
                                         </div>

@@ -102,14 +102,14 @@ const AdminComponent = ({ templateId, type }) => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 dark:bg-gray-800 h-screen">
       <div className="flex align-middle justify-between ">
         <div className="flex align-middle items-center gap-2 ">
           <Link href="/templates">
             <ArrowLeftIcon className="h-5 cursor-pointer" />
           </Link>
 
-          <h1 className="text-2xl font-bold text-gray-500">
+          <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">
             {templateData &&
               `${
                 templateData.template_name
@@ -124,16 +124,18 @@ const AdminComponent = ({ templateId, type }) => {
             onClick={saveTemplate}
             className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
           >
-            <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
+            <ArrowDownTrayIcon className="h-4 mr-1 " /> Save Template
           </button>
         )}
       </div>
 
-      <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm">
+      <div className="mt-4 bg-white rounded-md p-6 flex flex-col align-middle shadow-sm  dark:bg-gray-900">
         {type === 'view' && (
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <h2 className="text-lg w-full font-bold text-gray-500">Key</h2>
+              <h2 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">
+                Key
+              </h2>
               <p className="text-gray-400 text-sm">
                 The unique key used to identify this Template
               </p>
@@ -215,7 +217,9 @@ const AdminComponent = ({ templateId, type }) => {
         </Transition>
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div>
-            <h2 className="text-lg w-full font-bold text-gray-500">Name <span className='text-red-400'>*</span></h2>
+            <h2 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">
+              Name <span className="text-red-400">*</span>
+            </h2>
             <p className="text-gray-400 text-sm">Name of the template</p>
           </div>
           {
@@ -225,9 +229,10 @@ const AdminComponent = ({ templateId, type }) => {
               ) : (
                 <>
                   {!templateData.template_name && (
-                      <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
-                        <InformationCircleIcon className="w-3 mt-1" /> This field is required
-                      </div>
+                    <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
+                      <InformationCircleIcon className="w-3 mt-1" /> This field
+                      is required
+                    </div>
                   )}
                   <input
                     type="text"
@@ -255,7 +260,7 @@ const AdminComponent = ({ templateId, type }) => {
         addColumnButton({ openModal, isOpen, closeModal, setTemplateData })}
 
       <div className="overflow-x-auto relative mt-3">
-        <table className="w-full bg-white  text-sm text-gray-500 dark:text-gray-400 table shadow-md border-2">
+        <table className="w-full bg-white text-sm text-gray-500 dark:bg-gray-800 dark:text-gray-400 table shadow-md border-2 dark:border-gray-700">
           <thead className="text-xs text-white uppercase h-10 bg-blue-500">
             <tr>
               {/*  <th scope="col" className="py-3">
@@ -286,7 +291,10 @@ const AdminComponent = ({ templateId, type }) => {
           </thead>
           {templateData.columns ? (
             templateData.columns.map((col, idx) => (
-              <tr key={idx} className="h-10 text-center border-b-2">
+              <tr
+                key={idx}
+                className="h-10 text-center border-b-2 dark:border-gray-700"
+              >
                 {/*   <td className="w-8">{col.key}</td> */}
                 <td>{col.label}</td>
                 <td>{col.data_type}</td>

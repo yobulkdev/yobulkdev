@@ -48,7 +48,7 @@ const ImportsComponent = () => {
   return (
     <div>
       <div className="flex align-middle justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-500">
+        <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">
           List of CSVs Imported
         </h1>
         <button
@@ -68,7 +68,7 @@ const ImportsComponent = () => {
           * Please select a file to download
         </div>
       )}
-      <table className="w-full bg-white rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-10 border-2">
+      <table className="w-full bg-white dark:bg-gray-900 rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-10 border-2 dark:border-gray-900">
         <thead className="text-xs text-white uppercase h-10 bg-blue-500">
           <tr>
             <th>Select</th>
@@ -119,11 +119,11 @@ const ImportsComponent = () => {
                 <td>
                   {col.status === 'Complete' ? (
                     <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 uppercase last:mr-0 mr-1">
-                    Complete
+                      Complete
                     </span>
                   ) : (
                     <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-600 bg-red-200 uppercase last:mr-0 mr-1">
-                    Incomplete
+                      Incomplete
                     </span>
                   )}
                 </td>

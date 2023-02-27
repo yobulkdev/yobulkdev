@@ -111,10 +111,10 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform  rounded-md bg-white p-6 text-left align-middle transition-all">
+              <Dialog.Panel className="w-full max-w-md transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
                 <Dialog.Title
                   as="h2"
-                  className="text-lg flex items-center font-medium leading-6 text-gray-900"
+                  className="text-lg flex items-center font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   Choose Validation Format
                   <button
@@ -140,12 +140,8 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                                 ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
                                 : ''
                             }
-                                                      ${
-                                                        checked
-                                                          ? 'bg-white'
-                                                          : 'bg-white'
-                                                      }
-                                                      relative flex cursor-pointer rounded-lg px-5 py-4 border shadow-sm focus:outline-none`
+                            bg-white dark:bg-gray-900
+                            relative flex cursor-pointer rounded-lg px-5 py-4 border shadow-sm focus:outline-none`
                           }
                         >
                           {({ active, checked }) => (
