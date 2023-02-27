@@ -102,7 +102,7 @@ const AdminComponent = ({ templateId, type }) => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 dark:bg-gray-800 h-screen">
       <div className="flex align-middle justify-between ">
         <div className="flex align-middle items-center gap-2 ">
           <Link href="/templates">
@@ -133,7 +133,9 @@ const AdminComponent = ({ templateId, type }) => {
         {type === 'view' && (
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <h2 className="text-lg w-full font-bold text-gray-500">Key</h2>
+              <h2 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">
+                Key
+              </h2>
               <p className="text-gray-400 text-sm">
                 The unique key used to identify this Template
               </p>

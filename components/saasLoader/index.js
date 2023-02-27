@@ -30,27 +30,29 @@ const SaasLoader = ({ templateId }) => {
   }, []);
 
   return (
-    <div className="flex items-center mx-20">
-      <div className="w-72 border p-4">
-        <div className="flex mb-4 rounded bg-blue-500/25 p-2">
-          <p className="text-sm">
-            Make sure your file includes the following required columns:
+    <div className='dark:bg-gray-800 h-screen'>
+      <div className="flex mx-20 items-center">
+        <div className="w-72 p-4 rounded dark:bg-gray-900">
+          <div className="flex mb-4 rounded bg-blue-500/25 dark:bg-gray-800 p-2">
+            <p className="text-sm text-gray-500 dark:text-gray-200">
+              Make sure your file includes the following required columns:
+            </p>
+          </div>
+          <p className="text-md uppercase font-bold text-gray-700 dark:text-gray-200">
+            Expected Columns
           </p>
+          <hr className="my-2" />
+          {state.saasTemplateColumns &&
+            state.saasTemplateColumns?.map((column, idx) => (
+              <div key={idx} className="flex items-center justify-between">
+                <p className="text-gray-700 dark:text-gray-200 py-2">{column.label}</p>
+                {/* <AiOutlineInfoCircle className='w-4 h-4' /> */}
+              </div>
+            ))}
         </div>
-        <p className="text-md uppercase font-bold text-gray-700">
-          Expected Columns
-        </p>
-        <hr className="my-2" />
-        {state.saasTemplateColumns &&
-          state.saasTemplateColumns?.map((column, idx) => (
-            <div key={idx} className="flex items-center justify-between">
-              <p className="text-gray-700 py-2">{column.label}</p>
-              {/* <AiOutlineInfoCircle className='w-4 h-4' /> */}
-            </div>
-          ))}
-      </div>
-      <div className="w-screen">
-        <CsvUploader nextPageRoute={'/saasloadmatcher'} />
+        <div className="w-screen">
+          <CsvUploader nextPageRoute={'/saasloadmatcher'} />
+        </div>
       </div>
     </div>
   );
