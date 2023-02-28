@@ -98,7 +98,7 @@ const JSON_Template = () => {
       <div className="flex align-middle justify-between ">
         <div className="flex align-middle items-center gap-2 ">
           <Link href="/templates">
-            <ArrowLeftIcon className="h-5 cursor-pointer" />
+            <ArrowLeftIcon className="h-5 cursor-pointer dark:text-white" />
           </Link>
 
           {/*      <h1 className="text-2xl font-bold text-gray-500">
@@ -231,8 +231,8 @@ const JSON_Template = () => {
                     classNames(
                       'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5',
                       selected
-                        ? 'bg-white shadow dark:bg-gray-900'
-                        : 'text-black hover:bg-white/[0.12] hover:text-white dark:hover:bg-gray-900/50'
+                        ? 'bg-white shadow dark:bg-gray-900 dark:text-white'
+                        : 'text-black hover:bg-white/[0.12]  hover:text-white dark:hover:bg-gray-900/50'
                     )
                   }
                 >
@@ -248,7 +248,7 @@ const JSON_Template = () => {
                   classNames(
                     'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
                     selected
-                      ? 'bg-white shadow dark:bg-gray-900'
+                      ? 'bg-white shadow dark:bg-gray-900 dark:text-white'
                       : 'text-black hover:bg-white/[0.12] hover:text-white dark:hover:bg-gray-900/50'
                   )
                 }

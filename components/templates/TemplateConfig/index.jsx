@@ -134,7 +134,7 @@ const AdminComponent = ({ templateId, type }) => {
       <div className="flex align-middle justify-between ">
         <div className="flex align-middle items-center gap-2 ">
           <Link href="/templates">
-            <ArrowLeftIcon className="h-5 cursor-pointer" />
+            <ArrowLeftIcon className="h-5 cursor-pointer dark:text-white" />
           </Link>
 
           <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">
