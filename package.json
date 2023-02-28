@@ -49,6 +49,7 @@
     "react-icons": "^4.7.1",
     "react-syntax-highlighter": "^15.5.0",
     "react-tailwindcss-select": "^1.6.0",
+    "react-toggle-dark-mode": "^1.1.1",
     "react-use": "^17.4.0",
     "sharp": "^0.31.3",
     "string-similarity": "^4.0.4",
