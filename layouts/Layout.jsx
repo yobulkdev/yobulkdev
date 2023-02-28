@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="text-gray-800 hover:underline cursor-pointer dark:text-gray-200 font-semibold">
+            <h2 className="text-gray-800 hover:underline cursor-pointer text-lg dark:text-gray-200 font-semibold">
               Help
             </h2>
           </a>

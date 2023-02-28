@@ -33,7 +33,7 @@ const DemoCard = ({ item }) => {
   return (
     <>
       <div className="mx-16 flex gap-1 shadow-md rounded-md text-left p-4 bg-white justify-between dark:bg-gray-900">
-        <div className="flex flex-col">
+        <div className="flex flex-col text-black dark:text-white">
           <h1 className="text-lg">{item.title}</h1>
           <p className="text-sm text-gray-700 dark:text-gray-400">
             {item.description}

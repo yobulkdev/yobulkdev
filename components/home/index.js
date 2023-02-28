@@ -57,7 +57,7 @@ const Home = () => {
             template.
           </p>
 
-          <div className="p-4">
+          <div className="p-4 text-black dark:text-white">
             <div className="w-full flex flex-col gap-1 shadow-md rounded-md text-left py-2 px-4 bg-white dark:bg-gray-800">
               <h1 className="text-xl">Step 1 </h1>
               <div className="flex justify-between text-center items-center">
