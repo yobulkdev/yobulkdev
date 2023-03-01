@@ -10,7 +10,6 @@ const Layout = ({ children }) => {
         <div className="bg-gray-100 dark:bg-gray-800 flex items-center gap-2 justify-end px-4 py-2">
           <a
             href="https://yobulkdev.slack.com/join/shared_invite/zt-1kiutrmhx-6z_Mvq17dW0pPYePrwPocg#/shared-invite/email"
-            passHref
             target="_blank"
             rel="noopener noreferrer"
           >

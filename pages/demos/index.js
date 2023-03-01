@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout';
 
 const listOfItems = [
   {
-    title: 'Integer Length Verification',
+    title: 'Integer length verification',
     description: 'Numerical value of a maximum of 3 digits in length.',
     downloadLink:
       'https://drive.google.com/uc?export=download&id=1VCoLiqqX7aFUJp7dKmJoMMVcUJBtM6O_',
@@ -11,7 +11,7 @@ const listOfItems = [
     templateId: '63f1e1b4db835d47c31261b2',
   },
   {
-    title: 'Email Verification',
+    title: 'Email verification',
     description: 'Show errors for the emails with domain name Gmail & Yahoo.',
     downloadLink:
       'https://drive.google.com/uc?export=download&id=1ZcsINSt7EnDBDeH27BoWZl86rUEi2uoJ',
@@ -19,7 +19,7 @@ const listOfItems = [
     templateId: '63f1e1b4db835d47c31261b3',
   },
   {
-    title: 'Date Verification',
+    title: 'Date verification',
     description: 'Show errors for the dates which is not in DD-MM-YYYY format',
     downloadLink:
       'https://drive.google.com/uc?export=download&id=1Ka8pgbfDXivFFtfzW7WwGnz_FskHNH5m',
@@ -27,7 +27,7 @@ const listOfItems = [
     templateId: '63f1e1b4db835d47c31261b4',
   },
   {
-    title: 'String Verification',
+    title: 'String verification',
     description: 'Show errors for the strings not starting with "YO" character',
     downloadLink:
       'https://drive.google.com/uc?export=download&id=1Qsm-zMq31eaKuhKeiiTZ0GqwUsCeU3DI',
