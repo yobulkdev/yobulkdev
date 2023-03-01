@@ -132,6 +132,11 @@ Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to
 - ⚡ &nbsp;Regex creation and addition in custom validation
 - ⚡ &nbsp;Collaboration & workspace creation.
 
+Coming Soon:
+- ⚡ &nbsp;Custom LLM models for Auto suggestion and Auto Cleaning of CSV errors
+
+
+
 ## Demos
 
 ### NoCode Template Creation Demo
@@ -171,6 +176,9 @@ Read more [Open vs Closed Data Onboarding](https://doc.yobulk.dev/#yobulk-positi
 
 Our mission is to provide the most powerful flatfile(CSV,Spreadsheet) importer which is open source to every single internet business in the world.
 An AI first data exchange for businesses to share flatfiles where you are in-charge of your customer’s data onboarding, validation & transformation.
+We stongly support Anderz's vision.
+<p align="center"><img src="https://user-images.githubusercontent.com/118799976/222167945-01d5f60b-b5d6-4a7e-aac5-b3265721745d.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
+
 
 ## Support
 
