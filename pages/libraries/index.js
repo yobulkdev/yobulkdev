@@ -14,14 +14,14 @@ const librariesList = [
     id: 2,
     template_name: 'Template Libraries',
     template_description:
-      'We have prepared a list of popular template libraries that you can use to prepare your CSV file.',
+      'List of popular template libraries that you can use to prepare your CSV file.',
     link: '/templatelibraries',
   },
   {
     id: 3,
     template_name: 'Regex Libraries',
     template_description:
-      'We have prepared a list of popular regex libraries that you can use to prepare your CSV file.',
+      'List of popular regex libraries that you can use to prepare your CSV file.',
     link: '/regexlibraries',
   },
 ];
