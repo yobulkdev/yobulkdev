@@ -68,7 +68,7 @@ const ImportsComponent = () => {
           * Please select a file to download
         </div>
       )}
-      <table className="w-full bg-white dark:bg-gray-900 rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-10 border-2 dark:border-gray-900">
+      <table className="w-full bg-white dark:bg-gray-900 rounded-2xl text-sm text-gray-500 dark:text-gray-400 table shadow-md mt-5 border-2 dark:border-gray-900">
         <thead className="text-xs text-white uppercase h-10 bg-blue-500">
           <tr>
             <th>Select</th>
