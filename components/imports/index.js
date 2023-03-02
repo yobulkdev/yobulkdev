@@ -54,7 +54,7 @@ const ImportsComponent = () => {
         <button
           onClick={onBtnExport}
           type="button"
-          className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2 float-right"
+          className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2 float-right dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white dark:hover:border-white"
         >
           Download Imported CSV
           <DocumentArrowDownIcon className="h-5 w-5 ml-2" aria-hidden="true" />
