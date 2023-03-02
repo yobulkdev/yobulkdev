@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <div id="home" className="w-full text-center dark:bg-gray-800">
-      <div className="max-w-[1240px] mx-auto px-28 pt-14 flex flex-col justify-center items-center">
+      <div className="max-w-[1240px] mx-auto px-28 pt-7 flex flex-col justify-center items-center">
         <div>
           <p className="uppercase text-5xl font-extrabold tracking-widest text-gray-600 dark:text-gray-200">
             Welcome to YoBulk!
@@ -47,7 +47,7 @@ const Home = () => {
           </h1>
         </div>
 
-        <div className="w-full flex flex-col gap-1 mt-4 rounded-md shadow-md bg-gray-50 text-left py-2 px-4 dark:bg-gray-900">
+        <div className="w-full flex flex-col gap-1 mt-4 bg-gray-50 text-left py-2 px-4 dark:bg-gray-900">
           <h1 className="py-2 text-gray-500 dark:text-gray-200 text-2xl font-medium tracking-wider text-center">
             YoBulk Quick Walkthrough 🚀
             <br />
@@ -58,7 +58,7 @@ const Home = () => {
           </p>
 
           <div className="p-4 text-black dark:text-white">
-            <div className="w-full flex flex-col gap-1 shadow-md rounded-md text-left py-2 px-4 bg-white dark:bg-gray-800">
+            <div className="w-full flex flex-col gap-1 shadow-sm text-left py-2 px-4 bg-white dark:bg-gray-800">
               <h1 className="text-xl">Step 1 </h1>
               <div className="flex justify-between text-center items-center">
                 <p className="text-md text-gray-700 dark:text-gray-300">
@@ -73,7 +73,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="w-full flex flex-col gap-1 mt-2 shadow-md rounded-md text-left py-2 px-4 bg-white dark:bg-gray-800">
+            <div className="w-full flex flex-col gap-1 mt-2 shadow-sm text-left py-2 px-4 bg-white dark:bg-gray-800">
               <div className="flex gap-4 items-center">
                 <h1 className="text-xl flex items-center gap-2">Step 2</h1>
                 <Popover className="z-10 flex ">
@@ -101,7 +101,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="w-full flex flex-col gap-1 mt-2 shadow-md rounded-md text-left py-2 px-4 bg-white dark:bg-gray-800">
+            <div className="w-full flex flex-col gap-1 mt-2 text-left py-2 px-4 bg-white dark:bg-gray-800">
               <h1 className="text-xl">Step 3 </h1>
               <div className="flex justify-between text-center items-center">
                 <p className="text-left text-md text-gray-700 dark:text-gray-300">
@@ -145,7 +145,9 @@ const Home = () => {
       </div>
 
       <footer className="p-4 justify-center">
-        <p className="text-center text-gray-700 dark:text-gray-300">Made With ❤️ by YoBulk Team</p>
+        <p className="text-center text-gray-700 dark:text-gray-300">
+          Made With ❤️ by YoBulk Team
+        </p>
       </footer>
     </div>
   );
