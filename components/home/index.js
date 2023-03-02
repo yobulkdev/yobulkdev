@@ -118,7 +118,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-full flex flex-col gap-1 shadow-2xl rounded-md text-left py-2 px-4 mt-4 bg-white dark:bg-gray-900">
+        <div className="w-full flex flex-col gap-1 shadow-sm text-left py-2 px-4 mt-4 border bg-slate-50 dark:bg-gray-900">
           <h1 className="py-2 text-gray-500 text-2xl font-medium tracking-wider text-center dark:text-gray-200">
             Sample CSVs to Try 👨🏻‍💻
             <br />
