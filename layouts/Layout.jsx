@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Sidebar from '../components/sidebar/Sidebar';
 import Switcher from '../hooks/Switcher';
 
+import { BsSlack } from 'react-icons/bs';
+
 const Layout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-nowrap">
@@ -13,9 +15,10 @@ const Layout = ({ children }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="text-gray-800 hover:underline cursor-pointer text-lg dark:text-gray-200 font-semibold">
-              Help
-            </h2>
+            <button className="flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Connect
+              <BsSlack />
+            </button>
           </a>
           <Switcher />
         </div>
