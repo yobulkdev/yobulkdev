@@ -1,11 +1,20 @@
 import React from 'react';
-import { useSession } from 'next-auth/react';
-import Login from '../../components/login';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { useRouter } from 'next/router';
 
 const AuthGuard = ({ children }) => {
-  const { data: session } = useSession();
+  const router = useRouter();
 
-  return session ? <>{children}</> : <Login />;
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div></div>;
+
+  if (error) return <div>{error.message}</div>;
+
+  if (!user) {
+    router.push('/api/auth/login');
+  }
+  return <>{children}</>;
 };
 
 export default AuthGuard;

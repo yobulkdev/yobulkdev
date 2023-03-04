@@ -6,7 +6,7 @@ import getUserDataUsage from '../../../lib/usageLimit';
 export default async function getUsage(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.DATABASE_NAME | 'yobulk');
-  const userData = await getUserInfo(req)
+  const userData = await getUserInfo(req, res)
 
   switch (req.method) {
     case 'GET':

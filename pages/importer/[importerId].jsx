@@ -10,10 +10,12 @@ export default function ImporterPage({ templateId }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ req, res, params }) {
   const importerId = params.importerId.replace(/\-/g, '+');
   let data = await axios
-    .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/importer/${importerId}`)
+    .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/importer/${importerId}`, {
+      headers: { Cookie: req.headers.cookie },
+    } )
     .then((res) => {
       console.log(res.data);
       return res.data;

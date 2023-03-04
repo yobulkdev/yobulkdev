@@ -3,27 +3,27 @@ import { Provider } from '../context';
 import '../styles/globals.css';
 import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
-import { SessionProvider } from "next-auth/react"
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import AuthGuard from '../components/authguard';
 class MyApp extends App {
   render() {
-    const { Component, pageProps: { session, ...pageProps } } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
-      <SessionProvider session={session}>
       <ThemeProvider attribute="class">
         <Provider>
           <Head>
             <title>yobulk</title>
           </Head>
-          <AuthGuard>
-            <div className="main_container">
-              <Component {...pageProps} />
-            </div>
-          </AuthGuard>
+          <UserProvider>
+            <AuthGuard>
+              <div className="main_container">
+                <Component {...pageProps} />
+              </div>
+            </AuthGuard>
+          </UserProvider>
         </Provider>
       </ThemeProvider>
-      </SessionProvider>
     );
   }
 }

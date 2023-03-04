@@ -9,7 +9,7 @@ import {
   RocketLaunchIcon,
   HomeIcon as HomeIconOutline,
 } from '@heroicons/react/24/outline/';
-import { useSession, signOut } from 'next-auth/react';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
 
@@ -64,8 +64,7 @@ const Sidebar = () => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [isCollapsible, setIsCollapsible] = useState(false);
   const [usage, setUsage] = useState(0);
-  const { data: session } = useSession();
-
+  const { user, error, isLoading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -108,6 +107,10 @@ const Sidebar = () => {
     setToggleCollapse(!toggleCollapse);
   };
 
+  const handleSignOut = () => {
+    router.push('/api/auth/logout')
+  }
+
   return (
     <div
       className={wrapperClasses}
@@ -140,15 +143,15 @@ const Sidebar = () => {
         {!toggleCollapse && (
           <div className="mt-4 flex flex-col justify-center items-center hover:cursor-pointer w-full">
             <Image
-              src={session?.user?.image}
-              alt={session?.user?.name}
+              src={user?.picture}
+              alt={user?.email}
               className="rounded-full"
               height={80}
               width={80}
             />
 
             <p className="text-base m-2 text-light text-gray-500 dark:text-gray-200 font-semibold">
-              {session?.user?.name}
+              {user?.name}
             </p>
             <div className='h-3 w-[90%] bg-gray-300 mb-10'>
               <div
@@ -158,7 +161,7 @@ const Sidebar = () => {
               <p className='w-full flex justify-center mt-2 text-sm font-semibold text-gray-700 dark:text-white'>Used: {(usage < 1024) ? `${usage} KB` : `${Math.round(usage/1024)} MB` } out of 50 MB</p>
             </div>
             <button
-              onClick={signOut}
+              onClick={handleSignOut}
               className="flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
             >
               Logout
