@@ -11,7 +11,7 @@ export default async function fetchTemplateRecords(req, res) {
     case 'GET':
       let query = {};
       if (req.headers.template_id) {
-        query = { _id: ObjectId(req.headers.template_id) };
+        query = { $and: [{$or:[{user: 'all'}, {user: userData.email}]}, { _id: ObjectId(req.headers.template_id) }]}
         try {
           let result = await db.collection('templates').findOne(query);
           res.send(result);
@@ -68,7 +68,7 @@ export default async function fetchTemplateRecords(req, res) {
         let result = await db
           .collection('templates')
           .updateOne(
-            { _id: ObjectId(req.query.template_id) },
+            { $and: [{user: userData.email},{ _id: ObjectId(req.query.template_id) }]},
             { $set: data },
             { upsert: false }
           );
@@ -82,7 +82,8 @@ export default async function fetchTemplateRecords(req, res) {
       try {
         let result = await db
           .collection('templates')
-          .deleteOne({ _id: ObjectId(req.query.template_id) });
+          
+          .deleteOne({ $and: [{user: userData.email},{ _id: ObjectId(req.query.template_id) }]});
         res.send(result);
       } catch (err) {
         console.error(err);
