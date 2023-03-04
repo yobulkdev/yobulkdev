@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ArticleIcon, CollapsIcon, HomeIcon, ConfigIcon } from './icons';
 import {
   UsersIcon,
@@ -9,7 +9,7 @@ import {
   RocketLaunchIcon,
   HomeIcon as HomeIconOutline,
 } from '@heroicons/react/24/outline/';
-
+import { useSession, signOut } from 'next-auth/react';
 import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
 
@@ -63,6 +63,7 @@ const menuItems = [
 const Sidebar = () => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [isCollapsible, setIsCollapsible] = useState(false);
+  const { data: session } = useSession();
 
   const router = useRouter();
 
@@ -100,6 +101,11 @@ const Sidebar = () => {
     setToggleCollapse(!toggleCollapse);
   };
 
+  useEffect(() => {
+    if (!router) return;
+    if (!session) router.push('/login');
+  }, [router, session]);
+
   return (
     <div
       className={wrapperClasses}
@@ -129,7 +135,27 @@ const Sidebar = () => {
             </button>
           )}
         </div>
+        {!toggleCollapse && (
+          <div className="mt-4 flex flex-col justify-center items-center hover:cursor-pointer w-full">
+            <Image
+              src={session?.user?.image}
+              alt={session?.user?.name}
+              className="rounded-full"
+              height={80}
+              width={80}
+            />
 
+            <p className="text-base m-2 text-light text-gray-500 dark:text-gray-200 font-semibold">
+              {session?.user?.name}
+            </p>
+            <button
+              onClick={signOut}
+              className="flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+            >
+              Logout
+            </button>
+          </div>
+        )}
         <div className="flex flex-col items-start mt-12">
           {menuItems.map(({ icon: Icon, ...menu }, idx) => {
             const classes = getNavItemClasses(menu);
