@@ -4,7 +4,7 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
 import { SessionProvider } from "next-auth/react"
-
+import AuthGuard from '../components/authguard';
 class MyApp extends App {
   render() {
     const { Component, pageProps: { session, ...pageProps } } = this.props;
@@ -16,9 +16,11 @@ class MyApp extends App {
           <Head>
             <title>yobulk</title>
           </Head>
-          <div className="main_container">
-            <Component {...pageProps} />
-          </div>
+          <AuthGuard>
+            <div className="main_container">
+              <Component {...pageProps} />
+            </div>
+          </AuthGuard>
         </Provider>
       </ThemeProvider>
       </SessionProvider>

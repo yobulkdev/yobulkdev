@@ -101,11 +101,6 @@ const Sidebar = () => {
     setToggleCollapse(!toggleCollapse);
   };
 
-  useEffect(() => {
-    if (!router) return;
-    if (!session) router.push('/login');
-  }, [router, session]);
-
   return (
     <div
       className={wrapperClasses}
