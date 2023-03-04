@@ -7,6 +7,7 @@ import ErrorTypeDropDown from './errorTypeSelector';
 import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 import SuccessModal from './SuccessModal';
+import SlidePanel from '../slidepanel';
 
 const ReviewCsv = ({
   collectionName,
@@ -143,13 +144,16 @@ const ReviewCsv = ({
       </div>
       <div className="flex justify-flex-end gap-3">
         {!downloadig ? (
-          <button
-            onClick={() => onBtnExport(false)}
-            className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
-          >
-            <CloudArrowDownIcon className="w-5 mr-1" />
-            Download
-          </button>
+          <>
+            <SlidePanel />
+            <button
+              onClick={() => onBtnExport(false)}
+              className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
+            >
+              <CloudArrowDownIcon className="w-5 mr-1" />
+              Download
+            </button>
+          </>
         ) : (
           <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mr-3">
             <svg
