@@ -1,9 +1,11 @@
 import clientPromise from '../../../lib/mongodb';
 let ObjectId = require('mongodb').ObjectId;
+import getUserInfo from '../../../lib/auth';
 
 export default async function importer(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.DATABASE_NAME | 'yobulk');
+  const userData = await getUserInfo(req)
 
   switch (req.method) {
     case 'POST':
@@ -17,6 +19,7 @@ export default async function importer(req, res) {
           workspaceId: workspaceId,
           templateName: templateName,
           date: new Date(),
+          user: [userData.email]
         };
         let result = await db.collection('importers').insertOne(newImporter);
         res.status(201).send(result);
@@ -27,7 +30,9 @@ export default async function importer(req, res) {
       break;
     case 'GET':
       try {
-        let result = await db.collection('importers').find({}).toArray();
+        let result = await db.collection('importers').find({ $or: 
+          [{user: 'all'}, {user: userData.email}]
+        }).toArray();
         res.status(200).send(result);
       } catch (err) {
         console.error(err.message);

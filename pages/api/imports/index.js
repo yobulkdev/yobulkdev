@@ -1,15 +1,20 @@
 import clientPromise from '../../../lib/mongodb';
 let ObjectId = require('mongodb').ObjectId;
+import getUserInfo from '../../../lib/auth';
+import getUserDataUsage from '../../../lib/usageLimit';
 
 export default async function fetchTemplateRecords(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.DATABASE_NAME | 'yobulk');
+  const userData = await getUserInfo(req)
+
   switch (req.method) {
     case 'GET':
       try {
+        const usage = await getUserDataUsage(userData.email);
         let results = await db
           .collection('templates')
-          .find({ template_name: { $exists: false } })
+          .find({$and: [{ template_name: { $exists: false }}, {user: userData.email}]})
           .toArray();
         for (const item of results) {
           const recordsCount = await db

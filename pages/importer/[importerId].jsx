@@ -13,7 +13,7 @@ export default function ImporterPage({ templateId }) {
 export async function getServerSideProps({ params }) {
   const importerId = params.importerId.replace(/\-/g, '+');
   let data = await axios
-    .get(`${process.env.BACKEND_SERVER_HOST}/api/importer/${importerId}`)
+    .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/importer/${importerId}`)
     .then((res) => {
       console.log(res.data);
       return res.data;

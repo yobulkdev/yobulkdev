@@ -1,10 +1,13 @@
 import clientPromise from '../../../../lib/mongodb';
 import { schemaToColumn } from '../../../../lib/validation_util/schemaColumn';
 import { schemaGenerator } from '../../../../lib/validation_util/yovalidator';
+import getUserInfo from '../../../../lib/auth';
 
 export default async function handler(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.DATABASE_NAME | 'yobulk');
+  const userData = await getUserInfo(req)
+
   switch (req.method) {
     case 'GET':
       //some code...
@@ -21,6 +24,7 @@ export default async function handler(req, res) {
         let template = schemaGenerator({ clonedSchema: JSON.parse(schema) });
         template['template_name'] = templateName;
         template['columns'] = schemaToColumn({ schema: JSON.parse(schema) });
+        template.user = [userData.email]
         let result = await db.collection('templates').insertOne(template);
         res.status(201).json(result);
       } catch (err) {

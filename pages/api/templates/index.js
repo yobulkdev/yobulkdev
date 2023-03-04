@@ -1,3 +1,4 @@
+import getUserInfo from '../../../lib/auth';
 import clientPromise from '../../../lib/mongodb';
 import generateSchema from '../../../lib/template-engine';
 let ObjectId = require('mongodb').ObjectId;
@@ -5,6 +6,7 @@ let ObjectId = require('mongodb').ObjectId;
 export default async function fetchTemplateRecords(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.DATABASE_NAME | 'yobulk');
+  const userData = await getUserInfo(req)
   switch (req.method) {
     case 'GET':
       let query = {};
@@ -18,7 +20,9 @@ export default async function fetchTemplateRecords(req, res) {
         }
       } else {
         try {
-          let result = await db.collection('templates').find({}).toArray();
+          let result = await db.collection('templates').find({ $or: 
+            [{user: 'all'}, {user: userData.email}]
+          }).toArray();
           res.send(result);
         } catch (err) {
           console.error(err.message);
@@ -46,6 +50,8 @@ export default async function fetchTemplateRecords(req, res) {
           templateBody.schema = generatedSchema;
         }
         templateBody.created_date = new Date();
+        templateBody.user = [userData.email]
+        console.log(templateBody)
         let result = await db.collection('templates').insertOne(templateBody);
         res.send(result);
       } catch (err) {
