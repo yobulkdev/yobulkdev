@@ -13,6 +13,7 @@ const AuthGuard = ({ children }) => {
 
   if (!user) {
     router.push('/api/auth/login');
+    return <></>;
   }
   return <>{children}</>;
 };
