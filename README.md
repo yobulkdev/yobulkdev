@@ -181,6 +181,11 @@ An AI first data exchange for businesses to share flatfiles where you are in-cha
 We stongly support Anderz's vision.
 <p align="center"><img src="https://user-images.githubusercontent.com/118799976/222167945-01d5f60b-b5d6-4a7e-aac5-b3265721745d.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
 
+# Our Vision
+
+YoBulk's vision is to create an AI first knowledge graph for carrying out over billions of data mapping decisions while exchanging data between businesses across various sectors through flat files such as CSV and Excel.
+
+
 
 ## Support
 
