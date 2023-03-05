@@ -1,11 +1,7 @@
-import clientPromise from '../../../lib/mongodb';
-let ObjectId = require('mongodb').ObjectId;
 import getUserInfo from '../../../lib/auth';
 import getUserDataUsage from '../../../lib/usageLimit';
 
 export default async function getUsage(req, res) {
-  const client = await clientPromise;
-  const db = client.db(process.env.DATABASE_NAME | 'yobulk');
   const userData = await getUserInfo(req, res)
 
   switch (req.method) {

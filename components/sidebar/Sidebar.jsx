@@ -63,14 +63,16 @@ const menuItems = [
 const Sidebar = () => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [isCollapsible, setIsCollapsible] = useState(false);
-  const [usage, setUsage] = useState(0);
+  const [usage, setUsage] = useState({memoryUsage: 0, openApiHits: 0});
   const { user, error, isLoading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
     fetch('/api/usage')
       .then((res) => res.json())
-      .then((data) => setUsage(data.usage));
+      .then((data) => {
+        setUsage(data.usage)
+      });
   }, []);
 
   const activeMenu = useMemo(
@@ -155,10 +157,17 @@ const Sidebar = () => {
             </p>
             <div className='h-3 w-[90%] bg-gray-300 mb-10'>
               <div
-                  style={{ width: `${Math.round((usage*100)/(50*1024))}%`}}
-                  className={`h-full ${Math.round((usage*100)/(50*1024)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
+                  style={{ width: `${Math.round((usage.memoryUsage*100)/(50*1024))}%`}}
+                  className={`h-full ${Math.round((usage.memoryUsage*100)/(50*1024)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
               </div>
-              <p className='w-full flex justify-center mt-2 text-sm font-semibold text-gray-700 dark:text-white'>Used: {(usage < 1024) ? `${usage} KB` : `${Math.round(usage/1024)} MB` } out of 50 MB</p>
+              <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>Storage Used: {(usage.memoryUsage < 1024) ? `${usage.memoryUsage} KB` : `${Math.round(usage.memoryUsage/1024)} MB` } / 50 MB</p>
+            </div>
+            <div className='h-3 w-[90%] bg-gray-300 mb-10'>
+              <div
+                  style={{ width: `${Math.round((usage.openApiHits*100)/(50))}%`}}
+                  className={`h-full ${Math.round((usage.openApiHits*100)/(50)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
+              </div>
+              <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>Open API Hits: {usage.openApiHits} / 25 </p>
             </div>
             <button
               onClick={handleSignOut}
