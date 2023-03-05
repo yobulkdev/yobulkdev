@@ -131,9 +131,11 @@ Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to
 - ⚡ &nbsp;Template creation through JSON
 - ⚡ &nbsp;Regex creation and addition in custom validation
 - ⚡ &nbsp;Collaboration & workspace creation.
+- ⚡ &nbsp;AI based auto suggestion for correcting errors
 
 Coming Soon:
 - ⚡ &nbsp;Custom LLM models for Auto suggestion and Auto Cleaning of CSV errors
+- ⚡ &nbsp;Data mapping decission knowledge graph for different sectors
 
 
 
