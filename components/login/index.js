@@ -1,5 +1,4 @@
 import React from 'react';
-import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Logo from '../../public/yobulk_logo.png';
@@ -22,7 +21,7 @@ const Login = () => {
               <Image src={Logo} alt="" className="cursor-pointer" />
             </div>
             <div className='mt-40'>
-              <button onClick={signIn} className='w-[400px] h-[50px] rounded-lg px-10 py-4 flex items-center justify-center bg-black text-white font-semibold hover:bg-gray-900'>
+              <button className='w-[400px] h-[50px] rounded-lg px-10 py-4 flex items-center justify-center bg-black text-white font-semibold hover:bg-gray-900'>
                 <BsGithub /> <span className='px-4'>Sign in with Github</span>
               </button>
             </div>
