@@ -157,15 +157,15 @@ const Sidebar = () => {
             </p>
             <div className='h-3 w-[90%] bg-gray-300 mb-10'>
               <div
-                  style={{ width: `${Math.round((usage.memoryUsage*100)/(50*1024))}%`}}
-                  className={`h-full ${Math.round((usage.memoryUsage*100)/(50*1024)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
+                  style={{ width: `${Math.round((usage.memoryUsage*100)/(25*1024))}%`}}
+                  className={`h-full ${Math.round((usage.memoryUsage*100)/(25*1024)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
               </div>
-              <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>Storage Used: {(usage.memoryUsage < 1024) ? `${usage.memoryUsage} KB` : `${Math.round(usage.memoryUsage/1024)} MB` } / 50 MB</p>
+              <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>Storage Used: {(usage.memoryUsage < 1024) ? `${usage.memoryUsage} KB` : `${Math.round(usage.memoryUsage/1024)} MB` } / 25 MB</p>
             </div>
             <div className='h-3 w-[90%] bg-gray-300 mb-10'>
               <div
-                  style={{ width: `${Math.round((usage.openApiHits*100)/(50))}%`}}
-                  className={`h-full ${Math.round((usage.openApiHits*100)/(50)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
+                  style={{ width: `${Math.round((usage.openApiHits*100)/(25))}%`}}
+                  className={`h-full ${Math.round((usage.openApiHits*100)/(25)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
               </div>
               <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>Open API Hits: {usage.openApiHits} / 25 </p>
             </div>
