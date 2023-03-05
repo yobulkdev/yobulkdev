@@ -201,3 +201,11 @@ If you have any questions or problems, please visit our GitHub discussions page,
 ## License
 
 YoBulk is an open-source software with the [AGPL 3.0 license](https://github.com/yobulkdev/yobulkdev/blob/main/LICENSE.md).
+
+## Contributors
+We welcome contributions to YoBulk.
+
+<a href="https://github.com/yobulkdev/yobulkdev/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=yobulkdev/yobulkdev" />
+</a>
+
