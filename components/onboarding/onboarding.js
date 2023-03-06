@@ -33,8 +33,8 @@ const Onboarding = ({ children }) => {
       },
       body: JSON.stringify({
         company: company,
-        role: role,
-        reason: reason,
+        role: role.value,
+        reason: reason.value,
       }),
     })
       .then((res) => res.json())
@@ -77,7 +77,7 @@ const Onboarding = ({ children }) => {
                   </div>
                   <Select
                     value={role}
-                    onChange={(e) => setRole(e.value)}
+                    onChange={(e) => setRole(e)}
                     options={[
                       { value: 'Developer', label: 'Developer' },
                       { value: 'Sales', label: 'Sales' },
@@ -97,7 +97,7 @@ const Onboarding = ({ children }) => {
                   </div>
                   <Select
                     value={reason}
-                    onChange={(e) => setReason(e.value)}
+                    onChange={(e) => setReason(e)}
                     options={[
                       {
                         value:
