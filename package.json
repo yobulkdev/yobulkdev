@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@ag-grid-community/infinite-row-model": "^28.2.0",
+    "@auth0/nextjs-auth0": "^2.2.2",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@monaco-editor/react": "^4.4.6",

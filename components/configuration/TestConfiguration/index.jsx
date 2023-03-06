@@ -6,7 +6,7 @@ const TestConfiguration = ({ configId }) => {
       <YoButton
         btnText="Import CSV"
         importerId={configId}
-        yoHostUrl={'http://localhost:5050'}
+        yoHostUrl={process.env.NEXT_PUBLIC_SERVER_HOST}
       />
     </div>
   );

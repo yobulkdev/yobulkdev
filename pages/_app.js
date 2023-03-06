@@ -3,7 +3,8 @@ import { Provider } from '../context';
 import '../styles/globals.css';
 import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
-
+import { UserProvider } from '@auth0/nextjs-auth0/client';
+import AuthGuard from '../components/authguard';
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
@@ -14,9 +15,13 @@ class MyApp extends App {
           <Head>
             <title>yobulk</title>
           </Head>
-          <div className="main_container">
-            <Component {...pageProps} />
-          </div>
+          <UserProvider>
+            <AuthGuard>
+              <div className="main_container">
+                <Component {...pageProps} />
+              </div>
+            </AuthGuard>
+          </UserProvider>
         </Provider>
       </ThemeProvider>
     );

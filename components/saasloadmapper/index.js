@@ -74,6 +74,7 @@ const SassLoadMapper = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duplicate, setDuplicate] = useState(false);
+  const [memoryLimitExceeded, setMemoryLimitExceeded] = useState(false);
 
   useEffect(() => {
     selectedTab === 0
@@ -128,7 +129,27 @@ const SassLoadMapper = () => {
       .catch((err) => console.log(err));
   };
 
-  const saveTemplate = () => {
+  const memoryLimitHandler = async (fileSize) => {
+    console.log(fileSize, 'LLLLLL')
+    const resp = await fetch('/api/usage', {
+      method: 'PUT',
+      body: JSON.stringify({ fileSize: fileSize }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (resp.status !== 200) {
+      return false;
+    }
+    return true;
+  };
+
+  const saveTemplate = async () => {
+    let allow = await memoryLimitHandler(state.curFile.size);
+    if (!allow) {
+      setMemoryLimitExceeded(true);
+      return;
+    }
     let labels = state.curSaasLoadMapperTemplate
       .filter((el) => el.is_imported)
       .map((el) => el.label);
@@ -343,6 +364,14 @@ const SassLoadMapper = () => {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
+            {memoryLimitExceeded && (
+              <div className='flex flex-col justify-center items-center'>
+                <div className="font-semibold text-red-500 text-lg">
+                  Memory Limit Exceeded
+                </div>
+                <p className="text-center text-red-500 text-sm">You do not have enough memory quota left to upload this file. Please upload a smaller file.</p>
+              </div>
+            )}
           </div>
           {/*  <div className="gap-1">
         <span className="break-all">{JSON.stringify(state)}</span>
