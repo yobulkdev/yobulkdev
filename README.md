@@ -110,6 +110,11 @@ yarn run dev
 
 The dashboard is ready to view at [http://localhost:5050/](http://localhost:5050/).
 
+## YoBulk Cloud
+YoBulk Cloud is the fastest and most reliable way to run YoBulk. You can get started with free credits in minutes.
+
+Sign up for [YoBulk Cloud](https://docs.google.com/forms/d/e/1FAIpQLSfpznd0nsnL5IGWIO1f4O4SBJugxAjI8bI12QqhDP_hqYvJ-A/viewform).
+
 ## Quick start
 
 Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to explore CSV importing flow.
@@ -131,9 +136,11 @@ Please view the [documentation](https://doc.yobulk.dev/GetStarted/Quickstart) to
 - ⚡ &nbsp;Template creation through JSON
 - ⚡ &nbsp;Regex creation and addition in custom validation
 - ⚡ &nbsp;Collaboration & workspace creation.
+- ⚡ &nbsp;AI based auto suggestion for correcting errors
 
 Coming Soon:
 - ⚡ &nbsp;Custom LLM models for Auto suggestion and Auto Cleaning of CSV errors
+- ⚡ &nbsp;Data mapping decission knowledge graph for different sectors
 
 
 
@@ -179,6 +186,11 @@ An AI first data exchange for businesses to share flatfiles where you are in-cha
 We stongly support Anderz's vision.
 <p align="center"><img src="https://user-images.githubusercontent.com/118799976/222167945-01d5f60b-b5d6-4a7e-aac5-b3265721745d.png" alt="The Open Source Alternative To Flatfile.com." width="1000px" /></p>
 
+# Our Vision
+
+YoBulk's vision is to create an AI first knowledge graph for carrying out over billions of data mapping decisions while exchanging data between businesses across various sectors through flat files such as CSV and Excel.
+
+
 
 ## Support
 
@@ -189,3 +201,11 @@ If you have any questions or problems, please visit our GitHub discussions page,
 ## License
 
 YoBulk is an open-source software with the [AGPL 3.0 license](https://github.com/yobulkdev/yobulkdev/blob/main/LICENSE.md).
+
+## Contributors
+We welcome contributions to YoBulk.
+
+<a href="https://github.com/yobulkdev/yobulkdev/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=yobulkdev/yobulkdev" />
+</a>
+
