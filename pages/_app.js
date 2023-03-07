@@ -12,27 +12,28 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <>
-    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-TGTCY02LKR"/>
-    <Script
-      id='google-analytics'
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-TGTCY02LKR', {
-            page_path: window.location.pathname,
-          });
-        `,
-        }}
-    />
-
       <ThemeProvider attribute="class">
         <Provider>
           <Head>
             <title>yobulk</title>
+         <Script
+                    strategy="afterInteractive"
+                    src="https://www.googletagmanager.com/gtag/js?id=G-TGTCY02LKR"
+                  />
+
+                  <Script
+                    id="google-analytics"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                      __html: `
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', 'G-TGTCY02LKR', {
+                      page_path: window.location.pathname,
+                      });`,
+                    }}
+                  />
           </Head>
           <UserProvider>
             <AuthGuard>
@@ -43,7 +44,6 @@ class MyApp extends App {
           </UserProvider>
         </Provider>
       </ThemeProvider>
-    </> 
     );
   }
 }
