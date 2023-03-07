@@ -9,7 +9,7 @@
 <p align="center">
 <br>
 A <b>Data exchange platform</b> for all businesses that run on <b>CSV files</b>.
-Create YoBulk CSV Import button and make CSV importing <b>10x</b> faster.
+Create YoBulk CSV Import Embeddable button and make CSV importing <b>10x</b> faster.
 </p>
 
 <p align="center">
