@@ -12,11 +12,8 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <ThemeProvider attribute="class">
-        <Provider>
-          <Head>
-            <title>yobulk</title>
-         <Script
+      <>
+           <Script
                     strategy="afterInteractive"
                     src="https://www.googletagmanager.com/gtag/js?id=G-TGTCY02LKR"
                   />
@@ -34,6 +31,10 @@ class MyApp extends App {
                       });`,
                     }}
                   />
+      <ThemeProvider attribute="class">
+        <Provider>
+          <Head>
+            <title>yobulk</title>
           </Head>
           <UserProvider>
             <AuthGuard>
@@ -44,6 +45,7 @@ class MyApp extends App {
           </UserProvider>
         </Provider>
       </ThemeProvider>
+</>
     );
   }
 }
