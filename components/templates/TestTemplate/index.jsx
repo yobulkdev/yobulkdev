@@ -22,7 +22,7 @@ function App({ templateId }) {
           </div>
           <YoButton
             btnText="Import CSV"
-            importerId={templateId}
+            templateId={templateId}
             yoHostUrl={process.env.NEXT_PUBLIC_SERVER_HOST}
           />
         </div>

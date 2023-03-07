@@ -11,6 +11,7 @@ export default function ImporterPage({ templateId }) {
 }
 
 export async function getServerSideProps({ req, res, params }) {
+  console.log(params.importerId, 'LLLLLLLLLLLLLLLLLLll')
   const importerId = params.importerId.replace(/\-/g, '+');
   let data = await axios
     .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/importer/${importerId}`, {
