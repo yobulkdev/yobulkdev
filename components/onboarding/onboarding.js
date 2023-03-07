@@ -59,23 +59,24 @@ const Onboarding = ({ children }) => {
             children
           ) : (
             <div className="w-screen h-screen flex justify-center items-center">
-              <form className="w-[50vw] h-[50vh] flex flex-col justify-center items-center gap-10">
-                <h1 className="text-xl text-gray-700 font-bold">ONBOARDING</h1>
+              <form className="w-[80vw] h-[50vh] flex flex-col justify-center items-center gap-10">
+                <h1 className="text-xl text-gray-700 font-bold dark:text-white">ONBOARDING</h1>
                 <div>
-                  <div className="text-base text-gray-700 my-2">
+                  <div className="text-base text-gray-700 my-2 dark:text-white">
                     Which company do you work for?
                   </div>
                   <input
-                    className="h-10 w-[260px] border rounded border-gray-400 active:outline-none focus:outline-none px-2 text-sm"
+                    className="h-10 w-[600px] border rounded border-gray-400 active:outline-none focus:outline-none px-2 text-sm"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                   />
                 </div>
-                <div class="inline-block relative w-64">
-                  <div className="text-base text-gray-700 my-2">
+                <div class="inline-block relative w-[600px]">
+                  <div className="text-base text-gray-700 my-2 dark:text-white">
                     Your role at company
                   </div>
                   <Select
+                  classNames={{list: () => (`w-[600px] dark:text-white`)}}
                     value={role}
                     onChange={(e) => setRole(e)}
                     options={[
@@ -91,12 +92,13 @@ const Onboarding = ({ children }) => {
                     ]}
                   />
                 </div>
-                <div class="inline-block relative w-64">
-                  <div className="text-base text-gray-700 my-2">
+                <div class="inline-block relative w-[600px]">
+                  <div className="text-base text-gray-700 my-2 dark:text-white">
                     Reason for using YoBulk
                   </div>
                   <Select
                     value={reason}
+                    classNames= {{list: () => (`w-[600px] dark:text-white`)}}
                     onChange={(e) => setReason(e)}
                     options={[
                       {

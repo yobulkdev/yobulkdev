@@ -16,7 +16,7 @@ export default async function ajvSchemaGenerator(req, res) {
       Return the value as a json object`;
       const usage = await getUserDataUsage(userData.email);
       if(usage.openApiHits > process.env.OPEN_API_LIMIT){
-        return res.json({status: 400, data: 'You have exhausted your open api limit.'})
+        return res.json({status: 400, data: 'You have exhausted your yobulk ai api limit.'})
       } else{
         console.log(userData.email)
         await db.collection('users').updateOne({email: userData.email}, {$inc: {openApiHits: 1}})

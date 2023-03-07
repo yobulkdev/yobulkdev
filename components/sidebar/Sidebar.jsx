@@ -169,7 +169,7 @@ const Sidebar = () => {
                   style={{ width: `${Math.round((usage?.openApiHits*100)/(25))}%`}}
                   className={`h-full ${Math.round((usage?.openApiHits*100)/(25)) > 70 ? 'bg-red-600' : 'bg-green-600'}`}>
               </div>
-              <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>Open API Hits: {usage?.openApiHits} / 25 </p>
+              <p className='w-full flex justify-center mt-1 text-xs font-semibold text-gray-700 dark:text-white'>YoBulk AI API Hits: {usage?.openApiHits} / 25 </p>
             </div>
             <button
               onClick={handleSignOut}
