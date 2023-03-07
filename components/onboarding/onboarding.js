@@ -22,10 +22,10 @@ const Onboarding = ({ children }) => {
   }, []);
 
   const onboardUser = () => {
-    if (!company || !role || !reason) {
-      setError('Please select all the fields');
-      return;
-    }
+    // if (!company || !role || !reason) {
+    //   setError('Please select all the fields');
+    //   return;
+    // }
     fetch('/api/onboarding', {
       method: 'POST',
       headers: {
@@ -33,8 +33,8 @@ const Onboarding = ({ children }) => {
       },
       body: JSON.stringify({
         company: company,
-        role: role.value,
-        reason: reason.value,
+        role: role?.value,
+        reason: reason?.value,
       }),
     })
       .then((res) => res.json())

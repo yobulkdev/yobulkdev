@@ -12,7 +12,7 @@ export default async function fetchTemplateRecords(req, res) {
         let user = await db
           .collection('users')
           .findOne({ email: userData.email });
-        if (user && user.company && user.role && user.reason) {
+        if (user && user.onboarded) {
           res.status(200).json({ onboarded: true });
         } else {
           res.status(200).json({ onboarded: false });
@@ -29,7 +29,7 @@ export default async function fetchTemplateRecords(req, res) {
           .collection('users')
           .updateOne(
             { email: userData.email },
-            { $set: { company: company, role: role, reason: reason } }
+            { $set: { company: company, role: role, reason: reason, onboarded: true } }
           );
         res.status(200).json({ success: true });
       } catch (err) {
