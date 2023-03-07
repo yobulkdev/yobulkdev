@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 const Layout = ({ children }) => {
   const [stars, setStars] = useState(0);
   useEffect(()=>{
-    fetch('http://api.github.com/repos/yobulkdev/yobulkdev')
+    fetch('https://api.github.com/repos/yobulkdev/yobulkdev')
     .then(res=> res.json())
     .then(data=>setStars(data?.stargazers_count))
     .catch((e)=>console.log(e))
