@@ -2,9 +2,18 @@ import Link from 'next/link';
 import Sidebar from '../components/sidebar/Sidebar';
 import Switcher from '../hooks/Switcher';
 
-import { BsSlack } from 'react-icons/bs';
+import { BsSlack, BsGithub } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
 
 const Layout = ({ children }) => {
+  const [stars, setStars] = useState(0);
+  useEffect(()=>{
+    fetch('http://api.github.com/repos/yobulkdev/yobulkdev')
+    .then(res=> res.json())
+    .then(data=>setStars(data?.stargazers_count))
+    .catch((e)=>console.log(e))
+  },[])
+
   return (
     <div className="min-h-screen flex flex-nowrap">
       <Sidebar />
@@ -18,6 +27,15 @@ const Layout = ({ children }) => {
             <button className="flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Connect
               <BsSlack />
+            </button>
+          </a>
+          <a
+            href="https://github.com/yobulkdev/yobulkdev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="flex items-center justify-center gap-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <BsGithub />{' '}Star us | {stars}
             </button>
           </a>
           <Switcher />
