@@ -28,6 +28,10 @@ const Home = () => {
           <p className="uppercase text-5xl font-extrabold tracking-widest text-gray-600 dark:text-gray-200">
             Welcome to YoBulk!
           </p>
+          <p className='underline flex gap-3 justify-center text-blue-600 hover:text-blue-800 visited:text-purple-600'>
+            <a href="https://yobulk.dev/" target='_blank' rel='noreferrer'>Site</a>
+            <a href="https://doc.yobulk.dev/" target='_blank' rel='noreferrer'>Docs</a>
+          </p>
           <h1 className="py-3 text-gray-500 text-2xl font-medium tracking-wider dark:text-gray-300">
             Open Source{' '}
             <a
