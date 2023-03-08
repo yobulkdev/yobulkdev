@@ -11,7 +11,7 @@ export default async function matchColumns(req, res) {
     case 'POST':
       const usage = await getUserDataUsage(userData.email);
       if(usage.openApiHits > process.env.OPEN_API_LIMIT){
-        return res.json({status: 400, data: 'You have exhausted your open api limit.'})
+        return res.json({status: 400, data: 'You have exhausted your yobulk ai api limit.'})
       } else{
         await db.collection('users').updateOne({email: userData.email}, {$inc: {openApiHits: 1}})
       }
