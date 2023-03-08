@@ -2,7 +2,7 @@ import React from 'react';
 import InputBox from './inputbox';
 
 const ValidatedCell = () => {
-  return <InputBox val="peter" />;
+  return <InputBox columnName="Employee age" val="peter" />;
 };
 
 export default ValidatedCell;

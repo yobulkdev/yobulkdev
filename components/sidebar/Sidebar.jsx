@@ -137,7 +137,7 @@ const Sidebar = () => {
               <div key={idx}>
                 <div className={classes}>
                   <Link href={menu.link}>
-                    <a className="flex py-4 px-3 items-center w-full h-full gap-1">
+                    <a className="flex py-2 px-3 items-center w-full h-full gap-1">
                       <div
                         className="text-black dark:text-white"
                         style={{ width: '1.5rem' }}
