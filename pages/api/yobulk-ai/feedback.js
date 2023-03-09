@@ -13,6 +13,18 @@ export default async function feedback(req, res) {
       console.log(resp);
       res.json({ status: 200, data: resp });
       break;
+
+    case 'POST':
+      console.log(req.body);
+      let csvPrompt = `you are a potential data error finder. Find semantic data errors in below json data. Send all the feedback for each key value pair as json object. \n
+        ${JSON.stringify(req.body)}
+      `;
+      console.log(csvPrompt);
+      let csvresp = await getGPTResponse(csvPrompt, 100, 0, 0);
+      console.log('Feedback', csvresp);
+      res.json({ status: 200, data: csvresp });
+      break;
+
     default:
       res.json({ status: 405, data: 'Method not found' });
       break;
