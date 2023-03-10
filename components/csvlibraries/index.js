@@ -55,13 +55,13 @@ const MainBar = () => {
         <div>
             <div className="flex align-middle items-center gap-4 mb-2">
                 <Link href="/libraries">
-                    <ArrowLeftIcon className="h-5 cursor-pointer" />
+                    <ArrowLeftIcon className="h-5 cursor-pointer dark:text-gray-200" />
                 </Link>
-                <h1 className="text-2xl font-bold text-gray-500">CSV Libraries</h1>
+                <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">CSV Libraries</h1>
             </div>
 
             <div className="p-4">
-                <p className="text-gray-500">
+                <p className="text-gray-500 dark:text-gray-300">
                     Prepare the CSVs and data then get it validated by creating a {""}
                     <Link href="/templatecreate#2">
                         <span className='font-semibold cursor-pointer underline underline-offset-4'>YoBulk template</span>
