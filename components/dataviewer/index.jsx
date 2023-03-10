@@ -68,7 +68,7 @@ const GridExample = ({ version }) => {
       .then((res) => res.json())
       .then((data) => {
         setFeedbackData(data.data);
-        console.log(data.data)
+        //console.log('Feedback Data with useeffect:', data.data);
       });
   }, []);
 
@@ -167,14 +167,24 @@ const GridExample = ({ version }) => {
                     cellRenderer: (props) => {
                       if (props.value !== undefined) {
                         let feedback;
-                        let feedbackObj = feedbackData[props.data._id]?.Feedback || feedbackData[props.data._id]?.feedback
-                        console.log(feedbackData, feedbackData[props.data._id], feedbackObj, props.data._id, props.colDef.headerName)
-                        if(feedbackObj){
-                          if(Object.keys(feedbackObj).length > 0){
-                            console.log(feedbackObj, props.colDef.headerName)
-                            feedback = feedbackObj[props.colDef.headerName]
-                          }
+                        let feedbackObj =
+                          feedbackData[props.data._id]?.Feedback ||
+                          feedbackData[props.data._id]?.feedback;
+
+                        if (
+                          feedbackObj &&
+                          Object.keys(feedbackObj).length > 0
+                        ) {
+                          /*   console.log(
+                            'Header:',
+                            props.colDef.headerName,
+                            'Feedback:',
+                            feedbackObj[props.colDef.headerName]
+                          ); */
+                          feedback =
+                            feedbackObj[props.colDef.headerName.trim()];
                         }
+
                         onLoadingHide();
                         return (
                           <span
@@ -398,9 +408,7 @@ const GridExample = ({ version }) => {
           </div>
         </div>
       ) : (
-        <div>
-          Loading....
-        </div>
+        <div>Loading....</div>
       )}
     </>
   );
