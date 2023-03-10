@@ -60,19 +60,19 @@ const Onboarding = ({ children }) => {
           ) : (
             <div className="w-screen h-screen flex justify-center items-center">
               <form className="w-[50vw] h-[50vh] flex flex-col justify-center items-center gap-10">
-                <h1 className="text-xl text-gray-700 font-bold">ONBOARDING</h1>
+                <h1 className="text-xl font-bold text-gray-200">ONBOARDING</h1>
                 <div>
-                  <div className="text-base text-gray-700 my-2">
+                  <div className="text-base text-gray-700 my-2 text-gray-200">
                     Which company do you work for?
                   </div>
                   <input
-                    className="h-10 w-[260px] border rounded border-gray-400 active:outline-none focus:outline-none px-2 text-sm"
+                    className="h-10 w-[260px] border rounded border-gray-400 active:outline-none focus:outline-none px-2 text-sm bg-white text-black"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                   />
                 </div>
                 <div class="inline-block relative w-64">
-                  <div className="text-base text-gray-700 my-2">
+                  <div className="text-base my-2 text-gray-200">
                     Your role at company
                   </div>
                   <Select
@@ -92,7 +92,7 @@ const Onboarding = ({ children }) => {
                   />
                 </div>
                 <div class="inline-block relative w-64">
-                  <div className="text-base text-gray-700 my-2">
+                  <div className="text-base my-2 dark:text-gray-200">
                     Reason for using YoBulk
                   </div>
                   <Select
