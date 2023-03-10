@@ -1,6 +1,7 @@
 import getGPTResponse from '../../../lib/gpt-engine';
 import clientPromise from '../../../lib/mongodb';
 
+
 export default async function feedback(req, res) {
   const queryParams = req.query;
   const { columnName, columnValue, collection } = queryParams;
@@ -23,16 +24,16 @@ export default async function feedback(req, res) {
       Input Array: ${JSON.stringify(parsedRows, 2, 0)}`;
       let originalResp = await getGPTResponse(actualPrompt, 1000, 0, 0);
       let resp = originalResp;
-      try{
-        resp = originalResp.split('Output Array: ')
-        resp = JSON.parse(resp[1])
-      }catch(e){
-        console.log(e)
+      try {
+        resp = originalResp.split('Output Array: ');
+        resp = JSON.parse(resp[1]);
+      } catch (e) {
+        console.log(e);
         resp = originalResp;
       }
       let rv = {};
-      for (const item of resp){
-        rv[item._id] = item
+      for (const item of resp) {
+        rv[item._id] = item;
       }
       res.json({ status: 200, data: rv });
       break;
