@@ -34,6 +34,7 @@ import {
 import ReviewCsv from './reviewCsv';
 import Confetti from '../confetti';
 import { ajvCompileCustomValidator } from '../../lib/validation_util/yovalidator';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
 
 ModuleRegistry.registerModules([InfiniteRowModelModule]);
 
@@ -52,6 +53,7 @@ const GridExample = ({ version }) => {
   const [originalDataSource, setOriginalDataSource] = useState();
   const [selectedErrorType, setSelectedErrorType] = useState();
   const [errorFilter, setErrorFilter] = useState(false);
+  const [feedbackData, setFeedbackData] = useState({});
 
   let templateColumns = [];
   let template = {};
@@ -59,6 +61,18 @@ const GridExample = ({ version }) => {
 
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
   let errorCountUri = `/api/meta/errorcount?collection_name=${state.collection}`;
+
+  useEffect(() => {
+    fetch(`/api/yobulk-ai/feedback?collection=${state.collection}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFeedbackData(data.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(feedbackData).length === 0) return;
+  }, [feedbackData]);
 
   const showOnlyErrors = useCallback(
     (enabled) => {
@@ -89,7 +103,7 @@ const GridExample = ({ version }) => {
         gridRef.current.api.setDatasource(originalDataSource);
       }
     },
-    [originalDataSource, selectedErrorType, state.collection]
+    [originalDataSource, selectedErrorType, state.collection, feedbackData]
   );
 
   useEffect(() => {
@@ -154,7 +168,28 @@ const GridExample = ({ version }) => {
                     cellRenderer: (props) => {
                       if (props.value !== undefined) {
                         onLoadingHide();
-                        return props.value;
+                        return (
+                          <span
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              width: '100%',
+                            }}
+                          >
+                            <span>{props.value}</span>
+                            {feedbackData[props.data.id]?.feedback && (
+                              <button
+                                class="text-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                                data-te-toggle="tooltip"
+                                title={`YoBulk AI Suggestion : ${JSON.stringify(
+                                  feedbackData[props.data._id]
+                                )}`}
+                              >
+                                <InformationCircleIcon className="w-4 h-4" />
+                              </button>
+                            )}
+                          </span>
+                        );
                       } else {
                         return onShowLoading();
                       }
@@ -203,7 +238,7 @@ const GridExample = ({ version }) => {
       params.api.setDatasource(dataSource);
       setOriginalDataSource(dataSource);
     },
-    [state.collection, selectedErrorType]
+    [state.collection, selectedErrorType, feedbackData]
   );
 
   const cellPassRules = {
