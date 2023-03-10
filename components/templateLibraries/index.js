@@ -152,7 +152,7 @@ const MainBar = () => {
         <div>
             <div className="flex align-middle items-center gap-4 mb-2">
                 <Link href="/libraries">
-                    <ArrowLeftIcon className="h-5 cursor-pointer dark:text-gray-200" />
+                    <ArrowLeftIcon className="h-5 cursor-pointer text-gray-900 dark:text-gray-200" />
                 </Link>
                 <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">Template Libraries</h1>
             </div>
