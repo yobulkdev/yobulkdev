@@ -410,7 +410,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                       </button>
 
                                       <textarea
-                                        className="w-full mt-2 rounded-md text-xs"
+                                        className="w-full mt-2 rounded-md text-xs text-black"
                                         placeholder="GENERATED REGEX / Enter your own Regex"
                                         value={regex}
                                         onChange={(e) => {

@@ -152,13 +152,13 @@ const MainBar = () => {
         <div>
             <div className="flex align-middle items-center gap-4 mb-2">
                 <Link href="/libraries">
-                    <ArrowLeftIcon className="h-5 cursor-pointer" />
+                    <ArrowLeftIcon className="h-5 cursor-pointer text-gray-900 dark:text-gray-200" />
                 </Link>
-                <h1 className="text-2xl font-bold text-gray-500">Template Libraries</h1>
+                <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">Template Libraries</h1>
             </div>
 
             <div className="p-4">
-                <p className="text-gray-500">
+                <p className="text-gray-500 dark:text-gray-300">
                     We have prepared a list of popular template libraries that you can use to prepare your CSV file.
                 </p>
             </div>
