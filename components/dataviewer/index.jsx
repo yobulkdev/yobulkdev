@@ -371,7 +371,6 @@ const GridExample = ({ version }) => {
     <>
       {version === 'norm' && <Stepper step={4} />}
       {isErrorFree && <Confetti />}
-      {/* {Object.keys(feedbackData).length > 0 ? ( */}
       <div className="grid grid-cols-1 gap-10">
         <ReviewCsv
           collectionName={state.collection}
@@ -413,11 +412,6 @@ const GridExample = ({ version }) => {
           </div>
         </div>
       </div>
-      {/* ) : (
-        <div>
-          Loading....
-        </div>
-      )} */}
     </>
   );
 };
