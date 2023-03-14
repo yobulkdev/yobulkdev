@@ -22,4 +22,4 @@ There are four types of Node.js streams, each of which serves a different purpos
 
 ## What is current architecture ?
 
-![Stream Flow](https://docs.google.com/drawings/d/152DR34X3sILYDCnCO6-KvPU1HPGGpLhkUXaF23APx1c/edit?usp=sharing)
+![Stream Flow](../../../public\import-flow.jpg)
