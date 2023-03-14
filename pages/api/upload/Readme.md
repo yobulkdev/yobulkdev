@@ -22,4 +22,4 @@ There are four types of Node.js streams, each of which serves a different purpos
 
 ## What is current architecture ?
 
-![Stream Flow](../../../public\import-flow.jpg)
+![Stream Flow](https://raw.githubusercontent.com/yobulkdev/yobulkdev/main/public/import-flow.jpg)
