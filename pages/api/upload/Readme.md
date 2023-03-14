@@ -21,3 +21,5 @@ There are four types of Node.js streams, each of which serves a different purpos
 - Transform: A Transform stream is a type of Duplex stream that can be used to transform data as it passes through the stream. A Transform stream provides a 'transform' method to modify the data, and the 'flush' method to signal the end of the stream.
 
 ## What is current architecture ?
+
+![Stream Flow](https://docs.google.com/drawings/d/152DR34X3sILYDCnCO6-KvPU1HPGGpLhkUXaF23APx1c/edit?usp=sharing)
