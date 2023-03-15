@@ -324,6 +324,7 @@ const GridExample = ({ version }) => {
           setIsErrorFree={setIsErrorFree}
           showOnlyErrors={showOnlyErrors}
           selectErrorType={setSelectedErrorType}
+          columnDefs={columnDefs}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div

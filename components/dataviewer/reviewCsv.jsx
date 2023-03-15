@@ -17,6 +17,7 @@ const ReviewCsv = ({
   setIsErrorFree,
   showOnlyErrors,
   selectErrorType,
+  columnDefs,
 }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
@@ -158,7 +159,11 @@ const ReviewCsv = ({
           Auto Fix
         </button>
 
-        <AutoFixModal isOpen={isOpen} closeModal={closeModal} />
+        <AutoFixModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          columnDefs={columnDefs}
+        />
 
         {!downloadig ? (
           <>

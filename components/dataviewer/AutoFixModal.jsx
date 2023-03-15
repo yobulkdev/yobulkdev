@@ -3,7 +3,10 @@ import { XMarkIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 import { ImMagicWand } from 'react-icons/im';
 
-const AutoFixModal = ({ isOpen, closeModal }) => {
+const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
+  console.log(columnDefs);
+  const columnNames = columnDefs.map((column) => column.headerName);
+
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
       <Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -76,25 +79,28 @@ const AutoFixModal = ({ isOpen, closeModal }) => {
                       </tr>
                     </thead>
                     <tbody className="bg-blue-100">
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <p className="text-sm text-gray-900">First Name</p>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <p className="text-sm text-gray-900">FIRSTNAME</p>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <p className="text-sm text-gray-900">
-                            Tanay <span className="text-red-500">|</span> Tanay
-                          </p>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
-                            <ImMagicWand />
-                            AutoFix
-                          </button>
-                        </td>
-                      </tr>
+                      {columnNames.map((item, _idx) => (
+                        <tr key={_idx}>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <p className="text-sm text-gray-900">{item}</p>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <p className="text-sm text-gray-900">FIRSTNAME</p>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <p className="text-sm text-gray-900">
+                              Tanay <span className="text-red-500">|</span>{' '}
+                              Tanay
+                            </p>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
+                              <ImMagicWand />
+                              AutoFix
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
