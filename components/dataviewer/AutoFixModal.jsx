@@ -1,11 +1,18 @@
 import { Transition, Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { ImMagicWand } from 'react-icons/im';
+import { Context } from '../../context';
 
 const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
-  console.log(columnDefs);
+  // console.log(columnDefs);
+
+  const { state } = useContext(Context);
+
   const columnNames = columnDefs.map((column) => column.headerName);
+  const templateColumnNames = state?.saasTemplateColumns?.map(
+    (column) => column.label
+  );
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
@@ -85,7 +92,9 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                             <p className="text-sm text-gray-900">{item}</p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <p className="text-sm text-gray-900">FIRSTNAME</p>
+                            <p className="text-sm text-gray-900">
+                              {templateColumnNames && templateColumnNames[_idx]}
+                            </p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <p className="text-sm text-gray-900">
