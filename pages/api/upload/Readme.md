@@ -23,3 +23,42 @@ There are four types of Node.js streams, each of which serves a different purpos
 ## What is current architecture ?
 
 ![Stream Flow](https://raw.githubusercontent.com/yobulkdev/yobulkdev/main/public/import-flow.jpg)
+
+#### Step 1
+
+A drop zone is created to provision a place for drag and drop of csv file.
+
+```
+const onDrop = useCallback((acceptedFiles) => {
+    setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+return(
+    <>
+        <div
+        className={`px-6 pt-5 pb-6 border-2 border-dashed rounded-lg ${
+          isDragActive ? "border-green-400" : "border-gray-400"
+        }`}
+        {...getRootProps()}
+      >
+        <input {...getInputProps()} />
+        <div className="flex flex-col items-center justify-center        text-center space-y-1">
+          <PlusIcon className="w-8 h-8 text-gray-400" />
+          <p className="text-sm font-medium text-gray-400">
+            Drop files here or click to upload
+          </p>
+        </div>
+      </div>
+      {files.map((file) => (
+        <p
+          key={file.name}
+          className="mt-2 text-sm font-medium text-gray-500 truncate"
+        >
+          {file.name} ({file.size} bytes)
+        </p>
+      ))}
+      </>)
+
+```
