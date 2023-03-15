@@ -47,6 +47,11 @@ const GridExample = ({ version }) => {
       valueGetter: 'node.rowIndex + 1',
       maxWidth: 100,
     },
+    {
+      headerName: 'feedback',
+      field: 'feedback',
+      hide: true,
+    },
   ]);
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
@@ -54,7 +59,7 @@ const GridExample = ({ version }) => {
   const [selectedErrorType, setSelectedErrorType] = useState();
   const [errorFilter, setErrorFilter] = useState(false);
   const [feedbackData, setFeedbackData] = useState({});
-  const [columnArray, setColumnArray] = useState([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
 
   let templateColumns = [];
   let template = {};
@@ -63,14 +68,23 @@ const GridExample = ({ version }) => {
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
   let errorCountUri = `/api/meta/errorcount?collection_name=${state.collection}`;
 
-  useEffect(() => {
+  const getAiRecommendations = useCallback(() => {
+    setLoadingSuggestions(true)
     fetch(`/api/yobulk-ai/feedback?collection=${state.collection}`)
       .then((res) => res.json())
       .then((data) => {
         setFeedbackData(data.data);
-        //console.log('Feedback Data with useeffect:', data.data);
+        const rowCount = gridRef.current.api.getDisplayedRowCount();
+        for (let i = 0; i < rowCount; i++) {
+          const rowNode = gridRef.current.api.getDisplayedRowAtIndex(i);
+          if (data.data[rowNode.data._id]) {
+            rowNode.setDataValue('feedback', JSON.stringify({ first_name: 'Should be an integer' }));
+          }
+        }
+        gridRef.current.api.refreshCells({ force: true })
+        setLoadingSuggestions(false)
       });
-  }, []);
+  },[state.collection, gridRef, setLoadingSuggestions])
 
   const showOnlyErrors = useCallback(
     (enabled) => {
@@ -151,7 +165,6 @@ const GridExample = ({ version }) => {
           .then((httpResponse) => httpResponse.json())
           .then((response) => {
             templateColumns = response.columns;
-            setColumnArray(templateColumns);
             template = response;
             userSchema = response.schema;
             setColumnDefs((prev) =>
@@ -166,25 +179,16 @@ const GridExample = ({ version }) => {
                     hide: false,
                     cellRenderer: (props) => {
                       if (props.value !== undefined) {
+                        console.log(props.data.feedback)
                         let feedback;
-                        let feedbackObj =
-                          feedbackData[props.data._id]?.Feedback ||
-                          feedbackData[props.data._id]?.feedback;
-
-                        if (
-                          feedbackObj &&
-                          Object.keys(feedbackObj).length > 0
-                        ) {
-                          /*   console.log(
-                            'Header:',
-                            props.colDef.headerName,
-                            'Feedback:',
-                            feedbackObj[props.colDef.headerName]
-                          ); */
-                          feedback =
-                            feedbackObj[props.colDef.headerName.trim()];
-                        }
-
+                        try {
+                          let feedbackObj = JSON.parse(props.data.feedback)
+                          if (feedbackObj) {
+                            if (Object.keys(feedbackObj).length > 0) {
+                              feedback = feedbackObj[props.colDef.headerName]
+                            }
+                          }
+                        } catch (e) { }
                         onLoadingHide();
                         return (
                           <span
@@ -367,49 +371,47 @@ const GridExample = ({ version }) => {
     <>
       {version === 'norm' && <Stepper step={4} />}
       {isErrorFree && <Confetti />}
-      {Object.keys(feedbackData).length > 0 ? (
-        <div className="grid grid-cols-1 gap-10">
-          <ReviewCsv
-            collectionName={state.collection}
-            fileName={state?.curFile?.path}
-            fileMetaData={fileMetaData}
-            setIsErrorFree={setIsErrorFree}
-            showOnlyErrors={showOnlyErrors}
-            selectErrorType={setSelectedErrorType}
-          />
-          <div className="flex flex-col flex-nowrap m-2">
-            <div
-              style={{ height: 420, width: 'auto' }}
-              className="ag-theme-alpine"
-            >
-              <AgGridReact
-                ref={gridRef}
-                columnDefs={columnDefs}
-                defaultColDef={defaultColDef}
-                rowBuffer={0}
-                rowSelection={'single'}
-                rowModelType={'infinite'}
-                cacheBlockSize={100}
-                cacheOverflowSize={2}
-                maxConcurrentDatasourceRequests={1}
-                infiniteInitialRowCount={1000}
-                maxBlocksInCache={10}
-                tooltipShowDelay={0}
-                tooltipHideDelay={2000}
-                onCellValueChanged={onCellValueChanged}
-                onGridReady={onGridReady}
-                rowHeight={30}
-                headerHeight={30}
-                overlayLoadingTemplate={
-                  '<span className="ag-overlay-loading-center"><b><center><svg aria-hidden="true" className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>           <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>        </svg> <p>Please wait while your rows are loading...</b></p></center></span>'
-                }
-              ></AgGridReact>
-            </div>
+      <div className="grid grid-cols-1 gap-10">
+        <ReviewCsv
+          collectionName={state.collection}
+          fileName={state?.curFile?.path}
+          fileMetaData={fileMetaData}
+          setIsErrorFree={setIsErrorFree}
+          showOnlyErrors={showOnlyErrors}
+          selectErrorType={setSelectedErrorType}
+          getAiRecommendations={getAiRecommendations}
+          loadingSuggestions={loadingSuggestions}
+        />
+        <div className="flex flex-col flex-nowrap m-2">
+          <div
+            style={{ height: 420, width: 'auto' }}
+            className="ag-theme-alpine"
+          >
+            <AgGridReact
+              ref={gridRef}
+              columnDefs={columnDefs}
+              defaultColDef={defaultColDef}
+              rowBuffer={0}
+              rowSelection={'single'}
+              rowModelType={'infinite'}
+              cacheBlockSize={100}
+              cacheOverflowSize={2}
+              maxConcurrentDatasourceRequests={1}
+              infiniteInitialRowCount={1000}
+              maxBlocksInCache={10}
+              tooltipShowDelay={0}
+              tooltipHideDelay={2000}
+              onCellValueChanged={onCellValueChanged}
+              onGridReady={onGridReady}
+              rowHeight={30}
+              headerHeight={30}
+              overlayLoadingTemplate={
+                '<span className="ag-overlay-loading-center"><b><center><svg aria-hidden="true" className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>           <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>        </svg> <p>Please wait while your rows are loading...</b></p></center></span>'
+              }
+            ></AgGridReact>
           </div>
         </div>
-      ) : (
-        <div>Loading....</div>
-      )}
+      </div>
     </>
   );
 };
