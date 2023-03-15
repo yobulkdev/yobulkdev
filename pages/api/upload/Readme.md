@@ -87,7 +87,6 @@ The pipeline function from node js stream will be used for giving a flow for the
                 file,
                 openCsvInputStream,
                 headers_changes,
-                datatype_validate,
                 dbClient.stream,
                 (err) => {
                   if (err) {
@@ -98,3 +97,57 @@ The pipeline function from node js stream will be used for giving a flow for the
                 }
               );
 ```
+
+#### Step 3
+
+Here the papaparse stream is the first stage on the pipeline. Papaparse is a high speed parsing library for parsing huge csvs into json format. But, we need stream of the huge csv data which will be passed to the next stages of the transformation.
+
+The following code creates a readable stream out of papaparse input stream.
+
+```
+const openCsvInputStream = (fileInputStream) => {
+  const csvInputStream = new Readable({ objectMode: true });
+  csvInputStream._read = () => {};
+  Papa.parse(fileInputStream, {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    step: (results) => {
+      csvInputStream.push(results.data);
+    },
+    complete: () => {
+      csvInputStream.push(null);
+    },
+    error: (err) => {
+      csvInputStream.emit('error', err);
+    },
+  });
+  return csvInputStream;
+};
+
+```
+
+#### Step 4
+
+This is where the transformation streams come into picture.
+
+```
+    var headers_changes = new Transform({
+          readableObjectMode: true,
+          writableObjectMode: true,
+        });
+
+        headers_changes._transform = async function (data, enc, cb) {
+          var newdata = await changeHeader({
+            oldColumns,
+           newColumns,
+          });
+          headers_changes.push(newdata);
+          cb();
+        };
+
+```
+
+This header change transformation changes the old column header names into new header name, the catch is , this is a transformer stream. Once the data is transformed, it is ready for insertion.
+
+#### <ins>Step 5 </ins>
