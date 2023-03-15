@@ -44,8 +44,57 @@ const AutoFixModal = ({ isOpen, closeModal }) => {
                     <span className="sr-only">Close modal</span>
                   </button>
                 </Dialog.Title>
-                <div className="mt-2">
-                  <table>{/* TOOD: Create a table here */}</table>
+                <div className="mt-4">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Column Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Template Column Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Preview
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          AutoFix
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-blue-100">
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <p className="text-sm text-gray-900">First Name</p>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <p className="text-sm text-gray-900">FIRSTNAME</p>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <p className="text-sm text-gray-900">
+                            Tanay <span className="text-red-500">|</span> Tanay
+                          </p>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          <button className="px-3 py-1 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
+                            AutoFix
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
