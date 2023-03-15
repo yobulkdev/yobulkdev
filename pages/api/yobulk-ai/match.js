@@ -1,6 +1,7 @@
 import getGPTResponse from "../../../lib/gpt-engine";
 import clientPromise from '../../../lib/mongodb';
 import getUserDataUsage from '../../../lib/usageLimit';
+import getUserInfo from '../../../lib/auth';
 
 export default async function matchColumns(req, res) {
   const userData = await getUserInfo(req, res);
