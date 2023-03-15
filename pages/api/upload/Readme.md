@@ -1,4 +1,4 @@
-# Insert millions of record into Mongodb through a webapp on your personal laptop using Nodejs Streams!
+# Insert millions of records into Mongodb through a NextJS app on your personal laptop using Nodejs Streams!
 
 Node.js streams are a powerful and flexible mechanism for reading and writing data in a streaming fashion. Streams provide an efficient way to handle large volumes of data by processing it in small chunks, rather than loading it all into memory at once.
 
@@ -61,4 +61,40 @@ return(
       ))}
       </>)
 
+```
+
+#### Step 2
+
+Create rest api for starting streaming.
+
+```
+ busboy.on(
+            'file',
+            async function (fieldname, file, filename, encoding, mimetype) {
+              console.log('The file details are', filename, encoding, mimetype);
+            }
+          pipeline(stream1, stream2)
+
+            )
+```
+
+Here we have used Busboy library so as to directly stream the data instead of copying it to a location on server and then moving into MongoDB.
+
+The pipeline function from node js stream will be used for giving a flow for the parsing, then transforming and inserting into Mongodb.
+
+```
+     pipeline(
+                file,
+                openCsvInputStream,
+                headers_changes,
+                datatype_validate,
+                dbClient.stream,
+                (err) => {
+                  if (err) {
+                    console.log('Pipeline failed with an error:', err);
+                  } else {
+                    console.log('Pipeline ended successfully');
+                  }
+                }
+              );
 ```
