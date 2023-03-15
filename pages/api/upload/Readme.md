@@ -24,7 +24,7 @@ There are four types of Node.js streams, each of which serves a different purpos
 
 ![Stream Flow](https://raw.githubusercontent.com/yobulkdev/yobulkdev/main/public/import-flow.jpg)
 
-#### Step 1
+#### <ins>Step 1</ins>
 
 A drop zone is created to provision a place for drag and drop of csv file.
 
@@ -63,7 +63,7 @@ return(
 
 ```
 
-#### Step 2
+#### <ins>Step 2</ins>
 
 Create rest api for starting streaming.
 
@@ -98,7 +98,7 @@ The pipeline function from node js stream will be used for giving a flow for the
               );
 ```
 
-#### Step 3
+#### <ins>Step 3</ins>
 
 Here the papaparse stream is the first stage on the pipeline. Papaparse is a high speed parsing library for parsing huge csvs into json format. But, we need stream of the huge csv data which will be passed to the next stages of the transformation.
 
@@ -127,7 +127,7 @@ const openCsvInputStream = (fileInputStream) => {
 
 ```
 
-#### Step 4
+#### <ins>Step 4</ins>
 
 This is where the transformation streams come into picture.
 
@@ -151,3 +151,48 @@ This is where the transformation streams come into picture.
 This header change transformation changes the old column header names into new header name, the catch is , this is a transformer stream. Once the data is transformed, it is ready for insertion.
 
 #### <ins>Step 5 </ins>
+
+Here comes the last stage of insertion into Mongo DB. But we need to have a batch insert into MongoDB. This is called as bulk insert.
+
+Here we have to create a batch of records and when the batch is full, insert into the mongodb. Empty the batch to enable it to give space for new records.
+
+```
+  async addToBatch(record) {
+    try {
+      this.batch.push(record);
+
+      if (this.batch.length === this.config.batchSize) {
+        await this.insertToMongo(this.batch);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+```
+
+```
+ const writable = new Writable({
+      objectMode: true,
+      write: async (record, encoding, next) => {
+        try {
+          if (this.dbConnection) {
+            await this.addToBatch(record);
+            next();
+          } else {
+            this.dbConnection = await this.connect();
+            await this.addToBatch(record);
+            next();
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    });
+
+```
+
+## Conclusion
+
+The stream is a powerful function of NodeJs. Even if you have a laptop with 8gb ram, you can use it to parse a big csv and stream it to a Mongodb with using a very minimal amount of RAM. But, can it take multiple requests parllely?
+Wait for our next write up!
