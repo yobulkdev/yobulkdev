@@ -149,10 +149,10 @@ const ReviewCsv = ({
           />
         </div>
       </div>
-      <div className="flex justify-flex-end gap-3">
+      <div className="flex justify-end">
         <button
           onClick={openModal}
-          className="flex items-center float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
+          className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
         >
           <FaMagic className="w-5 mr-1" />
           Auto Fix
@@ -164,14 +164,14 @@ const ReviewCsv = ({
           <>
             <button
               onClick={() => onBtnExport(false)}
-              className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
+              className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
             >
               <CloudArrowDownIcon className="w-5 mr-1" />
               Download
             </button>
           </>
         ) : (
-          <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mr-3">
+          <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
             <svg
               className="w-6 h-6 text-violet-500"
               fill="none"
@@ -187,7 +187,7 @@ const ReviewCsv = ({
         )}
         <button
           onClick={() => onBtnSubmit()}
-          className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded  ml-auto"
+          className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
         >
           {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
           Submit

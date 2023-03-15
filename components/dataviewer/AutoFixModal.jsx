@@ -1,6 +1,7 @@
 import { Transition, Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
+import { ImMagicWand } from 'react-icons/im';
 
 const AutoFixModal = ({ isOpen, closeModal }) => {
   return (
@@ -28,7 +29,7 @@ const AutoFixModal = ({ isOpen, closeModal }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-7xl transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
+              <Dialog.Panel className="w-full max-w-6xl transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
                 <Dialog.Title
                   as="h2"
                   className="text-lg flex items-center font-medium leading-6 text-gray-900 dark:text-white"
@@ -88,7 +89,8 @@ const AutoFixModal = ({ isOpen, closeModal }) => {
                           </p>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <button className="px-3 py-1 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
+                          <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
+                            <ImMagicWand />
                             AutoFix
                           </button>
                         </td>
