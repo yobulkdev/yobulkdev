@@ -21,7 +21,7 @@ const formats = [
   },
   {
     name: 'Date',
-    Description: 'Matches selected Format',
+    Description: 'Matches selected Date Format',
   },
   {
     name: 'Boolean',
@@ -150,7 +150,7 @@ const ValidationModel = ({ isOpen, closeModal, setModalData }) => {
                                 <div className="flex items-center">
                                   <div className="text-sm">
                                     <RadioGroup.Label className="flex justify-between items-center">
-                                      <p className="flex items-center">
+                                      <p className="flex items-center text-black dark:text-white">
                                         {plan.name}{' '}
                                         {customValidationDropdown({
                                           options: plan,
