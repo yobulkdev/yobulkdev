@@ -1,26 +1,28 @@
-# Insert millions of records into Mongodb through a NextJS app on your personal laptop using Nodejs Streams!
+# Inserting 1 millions of records into MongoDB in few seconds.
+
+
+Inserting large records from a spreadsheet (CSV file) to a database is a very common and hard engineering problem.
+
+
+Modern data stack ETL tools may solve it ..But 
+
+- You are a javascript (NodeJS )person..:)
+- You don't want to invest money on an ETL tool.
+- You are not a data engineer who create and maintain data pipeline.
 
 Node.js streams are a powerful and flexible mechanism for reading and writing data in a streaming fashion. Streams provide an efficient way to handle large volumes of data by processing it in small chunks, rather than loading it all into memory at once.
 
-### What are Node.js Streams?
+So we are going to solve this problem using Node Stream...
+
+![img](https://user-images.githubusercontent.com/118799976/225623695-d9e95b33-b446-4a67-9670-5eaf3690fd1c.gif)
+
+### How NodeJS stream is going to help us!!
 
 In Node.js, a stream is an abstract interface that represents a sequence of data. A stream can be thought of as a flow of data that is divided into chunks, and these chunks can be processed incrementally as they become available.
 
 Streams can be used to read or write data from various sources, such as files, network sockets, or even in-memory data structures. Streams in Node.js are implemented using event emitters, which means that they can be used asynchronously and in a non-blocking way.
 
-### Types of Node.js Streams
-
-There are four types of Node.js streams, each of which serves a different purpose:
-
-- Readable: A Readable stream is used to read data from a source, such as a file or network socket. A Readable stream emits the 'data' event whenever new data is available, and the 'end' event when the stream has reached its end.
-
-- Writable: A Writable stream is used to write data to a destination, such as a file or network socket. A Writable stream provides a 'write' method to write data to the stream, and the 'end' method to signal the end of the stream.
-
-- Duplex: A Duplex stream is both Readable and Writable. A Duplex stream can be used to read data from a source and write data to a destination at the same time. A Duplex stream emits the 'data' event when new data is available and provides a 'write' method to write data to the stream.
-
-- Transform: A Transform stream is a type of Duplex stream that can be used to transform data as it passes through the stream. A Transform stream provides a 'transform' method to modify the data, and the 'flush' method to signal the end of the stream.
-
-## What is current architecture ?
+## Current architecture used to solve this problem ?
 
 ![Stream Flow](https://raw.githubusercontent.com/yobulkdev/yobulkdev/main/public/import-flow.png)
 
@@ -192,7 +194,7 @@ Here we have to create a batch of records and when the batch is full, insert int
 
 ```
 
-## Conclusion
+## What did we achieve?
 
-The stream is a powerful function of NodeJs. Even if you have a laptop with 8gb ram, you can use it to parse a big csv and stream it to a Mongodb with using a very minimal amount of RAM. But, can it take multiple requests parllely?
+The stream is a powerful function of NodeJs. Even if you have a laptop with 8gb ram, you can use it to parse a big CSV and stream it to Mongodb with using a very minimal usage of CPU & RAM.But, can it take multiple requests in parallel?
 Wait for our next write up!
