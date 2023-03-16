@@ -1,4 +1,4 @@
-# Inserting 1 millions of records into MongoDB in few seconds.
+# Inserting 1 millions of records into MongoDB in 10 seconds.
 
 
 Inserting large records from a spreadsheet (CSV file) to a database is a very common and hard engineering problem.
@@ -9,6 +9,7 @@ Modern data stack ETL tools may solve it ..But
 - You are a javascript (NodeJS )person..:)
 - You don't want to invest money on an ETL tool.
 - You are not a data engineer who create and maintain data pipeline.
+![img](https://user-images.githubusercontent.com/118799976/225637302-7f8c7384-8e5f-4439-967d-1fae7be9f986.gif)
 
 Node.js streams are a powerful and flexible mechanism for reading and writing data in a streaming fashion. Streams provide an efficient way to handle large volumes of data by processing it in small chunks, rather than loading it all into memory at once.
 
