@@ -1,4 +1,4 @@
-# Inserting 1 million records into MongoDB in 10 seconds.
+# Uploading CSV with 1 Million rows to backend within 10 seconds
 
 
 Inserting large records from a spreadsheet (CSV file) to a database is a very common and hard engineering problem.
