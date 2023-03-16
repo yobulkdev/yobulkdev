@@ -1,4 +1,4 @@
-# Inserting 1 millions of records into MongoDB in 10 seconds.
+# Inserting 1 million records into MongoDB in 10 seconds.
 
 
 Inserting large records from a spreadsheet (CSV file) to a database is a very common and hard engineering problem.
@@ -199,3 +199,5 @@ Here we have to create a batch of records and when the batch is full, insert int
 
 The stream is a powerful function of NodeJs. Even if you have a laptop with 8gb ram, you can use it to parse a big CSV and stream it to Mongodb with using a very minimal usage of CPU & RAM.But, can it take multiple requests in parallel?
 Wait for our next write up!
+
+Note:This testing is done on a M1 MAC with 8GB RAM.
