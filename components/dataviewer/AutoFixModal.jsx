@@ -2,17 +2,13 @@ import { Transition, Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { Fragment, useContext } from 'react';
 import { ImMagicWand } from 'react-icons/im';
-import { Context } from '../../context';
 
 const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
   // console.log(columnDefs);
 
-  const { state } = useContext(Context);
-
-  const columnNames = columnDefs.map((column) => column.headerName);
-  const templateColumnNames = state?.saasTemplateColumns?.map(
-    (column) => column.label
-  );
+  const columnNames = columnDefs
+    .map((column) => column.headerName)
+    .filter((name) => name !== 'Row');
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
@@ -39,7 +35,7 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-6xl transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
+              <Dialog.Panel className="w-full max-w-5xl transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
                 <Dialog.Title
                   as="h2"
                   className="text-lg flex items-center font-medium leading-6 text-gray-900 dark:text-white"
@@ -69,12 +65,6 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
-                          Template Column Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
                           Preview
                         </th>
                         <th
@@ -90,11 +80,6 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                         <tr key={_idx}>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <p className="text-sm text-gray-900">{item}</p>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <p className="text-sm text-gray-900">
-                              {templateColumnNames && templateColumnNames[_idx]}
-                            </p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <p className="text-sm text-gray-900">
