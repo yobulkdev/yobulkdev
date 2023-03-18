@@ -381,6 +381,7 @@ const GridExample = ({ version }) => {
           selectErrorType={setSelectedErrorType}
           getAiRecommendations={getAiRecommendations}
           loadingSuggestions={loadingSuggestions}
+          columnDefs={columnDefs}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div

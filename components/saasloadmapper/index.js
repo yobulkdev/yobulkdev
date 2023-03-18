@@ -78,21 +78,21 @@ const SassLoadMapper = () => {
   useEffect(() => {
     selectedTab === 0
       ? columnMatcherAi({
+        saasTemplate: state.saasTemplateColumns,
+        validationTemplate: state.validationTemplate,
+      }).then((payload) => {
+        dispatch({
+          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+          payload,
+        });
+      })
+      : dispatch({
+        type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
+        payload: columnMatcher({
           saasTemplate: state.saasTemplateColumns,
           validationTemplate: state.validationTemplate,
-        }).then((payload) => {
-          dispatch({
-            type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-            payload,
-          });
-        })
-      : dispatch({
-          type: 'SET_SAAS_LOAD_MAPPER_TEMPLATE',
-          payload: columnMatcher({
-            saasTemplate: state.saasTemplateColumns,
-            validationTemplate: state.validationTemplate,
-          }),
-        });
+        }),
+      });
   }, [selectedTab]);
 
   const uploadFile = ({ target, template_id }) => {
@@ -250,9 +250,9 @@ const SassLoadMapper = () => {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5',
+                      'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5 text-black dark:text-white',
                       selected
-                        ? 'bg-white shadow'
+                        ? 'bg-white shadow dark:text-black'
                         : 'text-black hover:bg-white/[0.12] hover:text-white'
                     )
                   }
@@ -265,9 +265,9 @@ const SassLoadMapper = () => {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      'w-full rounded-lg py-2.5 text-sm font-medium leading-5 ',
+                      'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5 text-black dark:text-white',
                       selected
-                        ? 'bg-white shadow'
+                        ? 'bg-white shadow dark:text-black'
                         : 'text-black hover:bg-white/[0.12] hover:text-white'
                     )
                   }
