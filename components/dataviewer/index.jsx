@@ -74,17 +74,18 @@ const GridExample = ({ version }) => {
       .then((res) => res.json())
       .then((data) => {
         setFeedbackData(data.data);
+        console.log(data.data)
         const rowCount = gridRef.current.api.getDisplayedRowCount();
         for (let i = 0; i < rowCount; i++) {
           const rowNode = gridRef.current.api.getDisplayedRowAtIndex(i);
           if (data.data[rowNode.data._id]) {
-            rowNode.setDataValue('feedback', JSON.stringify({ first_name: 'Should be an integer' }));
+            rowNode.setDataValue('feedback', JSON.stringify(data.data[rowNode.data._id]?.feedback || data.data[rowNode.data._id]?.Feedback));
           }
         }
         gridRef.current.api.refreshCells({ force: true })
         setLoadingSuggestions(false)
       });
-  },[state.collection, gridRef, setLoadingSuggestions])
+  }, [state.collection, gridRef, setLoadingSuggestions])
 
   const showOnlyErrors = useCallback(
     (enabled) => {
@@ -117,6 +118,23 @@ const GridExample = ({ version }) => {
     },
     [originalDataSource, selectedErrorType, state.collection, feedbackData]
   );
+
+  const runAutofix = () => {
+    if (gridRef?.current) {
+      let autofixArray = []
+      gridRef.current.api.forEachNode((node) => {
+        let correctionList = Object.keys(node.data._corrections)
+        if (correctionList?.length > 0) {
+          for (const field of correctionList) {
+            console.log(field, node.data[field], node.data._corrections[field])
+            node.setDataValue(field, node.data._corrections[field] || "")
+          }
+        }
+      })
+
+    }
+  };
+
 
   useEffect(() => {
     if (!selectedErrorType) return;
@@ -382,6 +400,7 @@ const GridExample = ({ version }) => {
           getAiRecommendations={getAiRecommendations}
           loadingSuggestions={loadingSuggestions}
           columnDefs={columnDefs}
+          runAutofix={runAutofix}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div

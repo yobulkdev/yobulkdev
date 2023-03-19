@@ -1,4 +1,5 @@
 import clientPromise from '../../../lib/mongodb';
+import autofix from '../../../lib/autofix';
 
 export default async function fetchPaginatedRecords(req, res) {
   const queryParams = req.query;
@@ -22,13 +23,16 @@ export default async function fetchPaginatedRecords(req, res) {
         query = { $and: filterArray}
         filterArray.push({ 'validationData.0': { $exists: true } });
       }
+      const template = await db.collection('templates').findOne({collection_name: collection})
+      const schema = template.schema;
       const paginatedRows = await db
         .collection(collection)
         .find(query)
         .skip(parseInt(_start))
         .limit(parseInt(_end))
         .toArray();
-      res.json({ status: 200, data: paginatedRows });
+      const transformedRows = autofix(paginatedRows, schema)
+      res.json({ status: 200, data: transformedRows });
       break;
   }
 }

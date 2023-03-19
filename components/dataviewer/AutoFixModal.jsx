@@ -4,15 +4,13 @@ import { Fragment, useContext } from 'react';
 import { ImMagicWand } from 'react-icons/im';
 import { Context } from '../../context';
 
-const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
+const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix }) => {
   // console.log(columnDefs);
 
   const { state } = useContext(Context);
 
   const columnNames = columnDefs.map((column) => column.headerName);
-  const templateColumnNames = state?.saasTemplateColumns?.map(
-    (column) => column.label
-  );
+  const templateColumnNames = state?.curSaasLoadMapperTemplate;
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
@@ -86,14 +84,14 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                       </tr>
                     </thead>
                     <tbody className="bg-blue-100">
-                      {columnNames.map((item, _idx) => (
+                      {templateColumnNames.map((item, _idx) => (
                         <tr key={_idx}>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <p className="text-sm text-gray-900">{item}</p>
+                            <p className="text-sm text-gray-900">{item?.key}</p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <p className="text-sm text-gray-900">
-                              {templateColumnNames && templateColumnNames[_idx]}
+                              {item?.label}
                             </p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -103,7 +101,7 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                             </p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">
-                            <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
+                            <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md" onClick={runAutofix}>
                               <ImMagicWand />
                               AutoFix
                             </button>
