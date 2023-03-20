@@ -62,7 +62,7 @@ a {
   @apply bg-white;
 }
 .null-check {
-  @apply bg-red-400;
+  @apply bg-yellow-300;
 }
 .custom-tooltip {
   width: 250px;

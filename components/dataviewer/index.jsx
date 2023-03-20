@@ -344,7 +344,7 @@ const GridExample = ({ version }) => {
               infiniteInitialRowCount={1000}
               maxBlocksInCache={10}
               tooltipShowDelay={0}
-              tooltipHideDelay={2000}
+              tooltipHideDelay={999999}
               onCellValueChanged={onCellValueChanged}
               onGridReady={onGridReady}
               rowHeight={30}
