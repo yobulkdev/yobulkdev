@@ -20,7 +20,10 @@ const ReviewCsv = ({
   getAiRecommendations,
   loadingSuggestions,
   columnDefs,
-  runAutofix
+  runAutofix,
+  openAutofixModal,
+  autofixValues,
+  undoAutoFix
 }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
@@ -34,7 +37,10 @@ const ReviewCsv = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => setIsOpen(true);
+  const openModal = () => {
+    setIsOpen(true)
+    openAutofixModal()
+  };
   const closeModal = () => setIsOpen(false);
 
   useEffect(() => {
@@ -162,6 +168,14 @@ const ReviewCsv = ({
         </button>
         <div className="flex justify-end">
           <button
+            onClick={undoAutoFix}
+            className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
+          >
+            <FaMagic className="w-5 mr-1" />
+            Undo Auto Fix
+          </button>
+
+          <button
             onClick={openModal}
             className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
           >
@@ -174,6 +188,7 @@ const ReviewCsv = ({
             closeModal={closeModal}
             columnDefs={columnDefs}
             runAutofix={runAutofix}
+            autofixValues={autofixValues}
           />
 
           {!downloadig ? (

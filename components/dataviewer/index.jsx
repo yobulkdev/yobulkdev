@@ -52,6 +52,16 @@ const GridExample = ({ version }) => {
       field: 'feedback',
       hide: true,
     },
+    {
+      headerName: 'old',
+      field: '_old',
+      hide: true,
+    },
+    {
+      headerName: 'old',
+      field: '_corrections',
+      hide: true,
+    },
   ]);
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
@@ -60,11 +70,11 @@ const GridExample = ({ version }) => {
   const [errorFilter, setErrorFilter] = useState(false);
   const [feedbackData, setFeedbackData] = useState({});
   const [loadingSuggestions, setLoadingSuggestions] = useState(false);
-
+  const [autofixValues, setAutofixValues] = useState([]);
+  const [changedRowsIndex, setChangedRowsIndex] = useState([]);
   let templateColumns = [];
   let template = {};
   let userSchema = {};
-
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
   let errorCountUri = `/api/meta/errorcount?collection_name=${state.collection}`;
 
@@ -74,7 +84,6 @@ const GridExample = ({ version }) => {
       .then((res) => res.json())
       .then((data) => {
         setFeedbackData(data.data);
-        console.log(data.data)
         const rowCount = gridRef.current.api.getDisplayedRowCount();
         for (let i = 0; i < rowCount; i++) {
           const rowNode = gridRef.current.api.getDisplayedRowAtIndex(i);
@@ -119,22 +128,61 @@ const GridExample = ({ version }) => {
     [originalDataSource, selectedErrorType, state.collection, feedbackData]
   );
 
-  const runAutofix = () => {
+  const runAutofix = (label) => {
+    if (gridRef?.current) {
+      for (const row of autofixValues) {
+        if (row.field === label) {
+          const rowNode = gridRef.current.api.getDisplayedRowAtIndex(row.index);
+          rowNode.setDataValue(row.field, row.newValue || "")
+          let oldValuesObj = rowNode.data._old || {}
+          oldValuesObj[row.field] = row.oldValue
+          rowNode.setDataValue('_old', oldValuesObj)
+          let correctionsObj = rowNode.data._corrections || {}
+          delete correctionsObj[row.field]
+          rowNode.setDataValue('_corrections', correctionsObj)
+          setChangedRowsIndex((prev) => {
+            if (prev.includes(row.index)) {
+              return prev
+            } else {
+              return prev.concat(row.index)
+            }
+          })
+        }
+      }
+    }
+  };
+
+  const undoAutoFix = () => {
+    if (gridRef?.current) {
+      for (const index of changedRowsIndex) {
+        const rowNode = gridRef.current.api.getDisplayedRowAtIndex(index);
+        const changedFields = rowNode.data._old ? Object.keys(rowNode.data._old) : []
+        let correctionsObj = {}
+        for (const field of changedFields) {
+          correctionsObj[field] = rowNode.data[field] || ""
+          rowNode.setDataValue(field, rowNode.data._old[field] || "")
+        }
+        rowNode.setDataValue('_corrections', correctionsObj)
+      }
+      setChangedRowsIndex([])
+    }
+  }
+
+  const openAutofixModal = () => {
     if (gridRef?.current) {
       let autofixArray = []
       gridRef.current.api.forEachNode((node) => {
         let correctionList = Object.keys(node.data._corrections)
         if (correctionList?.length > 0) {
           for (const field of correctionList) {
-            console.log(field, node.data[field], node.data._corrections[field])
-            node.setDataValue(field, node.data._corrections[field] || "")
+            // node.setDataValue(field, node.data._corrections[field] || "")
+            autofixArray.push({ index: node.rowIndex, field: field, oldValue: node.data[field], newValue: node.data._corrections[field] || "" })
           }
         }
       })
-
+      setAutofixValues(autofixArray)
     }
-  };
-
+  }
 
   useEffect(() => {
     if (!selectedErrorType) return;
@@ -401,6 +449,9 @@ const GridExample = ({ version }) => {
           loadingSuggestions={loadingSuggestions}
           columnDefs={columnDefs}
           runAutofix={runAutofix}
+          openAutofixModal={openAutofixModal}
+          autofixValues={autofixValues}
+          undoAutoFix={undoAutoFix}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div
