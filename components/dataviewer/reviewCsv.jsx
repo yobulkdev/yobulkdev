@@ -17,7 +17,13 @@ const ReviewCsv = ({
   setIsErrorFree,
   showOnlyErrors,
   selectErrorType,
+  getAiRecommendations,
+  loadingSuggestions,
   columnDefs,
+  runAutofix,
+  openAutofixModal,
+  autofixValues,
+  undoAutoFix
 }) => {
   const [metaData, setMetaData] = useState();
   const [downloadig, setDownloadig] = useState(false);
@@ -31,7 +37,10 @@ const ReviewCsv = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => setIsOpen(true);
+  const openModal = () => {
+    setIsOpen(true)
+    openAutofixModal()
+  };
   const closeModal = () => setIsOpen(false);
 
   useEffect(() => {
@@ -131,14 +140,12 @@ const ReviewCsv = ({
             className="ml-2 mt-1"
           >
             <button
-              className={`${
-                onlyError ? 'bg-blue-500' : 'bg-gray-200'
-              } relative inline-flex h-6 w-11 items-center rounded-full`}
+              className={`${onlyError ? 'bg-blue-500' : 'bg-gray-200'
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
             >
               <span
-                className={`${
-                  onlyError ? 'translate-x-6' : 'translate-x-1'
-                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                className={`${onlyError ? 'translate-x-6' : 'translate-x-1'
+                  } inline-block h-4 w-4 transform rounded-full bg-white transition`}
               />
             </button>
           </Switch>
@@ -150,73 +157,93 @@ const ReviewCsv = ({
           />
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-flex-end gap-3">
         <button
-          onClick={openModal}
-          className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
-        >
-          <FaMagic className="w-5 mr-1" />
-          Auto Fix
-        </button>
-
-        <AutoFixModal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          columnDefs={columnDefs}
-        />
-
-        {!downloadig ? (
-          <>
-            <button
-              onClick={() => onBtnExport(false)}
-              className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
-            >
-              <CloudArrowDownIcon className="w-5 mr-1" />
-              Download
-            </button>
-          </>
-        ) : (
-          <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
-            <svg
-              className="w-6 h-6 text-violet-500"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </div>
-        )}
-        <button
-          onClick={() => onBtnSubmit()}
-          className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
+          onClick={getAiRecommendations}
+          className={`flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded ml-auto ${loadingSuggestions && 'text-white border-none bg-blue-200 hover:bg-blue-200'}`}
+          disabled={loadingSuggestions}
         >
           {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
-          Submit
+          {loadingSuggestions ? 'Getting suggestions...' : 'Get YoBulkAI Suggestions'}
         </button>
-      </div>
+        <div className="flex justify-end">
+          <button
+            onClick={undoAutoFix}
+            className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
+          >
+            <FaMagic className="w-5 mr-1" />
+            Undo Auto Fix
+          </button>
 
-      {showResultModal && (
-        <SuccessModal submit={onFinalSubmit} message={fileMetaData} />
-      )}
-      <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
-      <WarningModal
-        isVisible={isDownloadWarningModalVisible}
-        setIsVisible={setDownloadWarningModalVisible}
-        submit={() => onBtnExport(true)}
-        metaData={fileMetaData}
-        type="Download"
-      />
-      <WarningModal
-        isVisible={isWarningModalVisible}
-        setIsVisible={setWarningModalVisible}
-        submit={submitFirstModal}
-        metaData={fileMetaData}
-        type="Submit"
-      />
+          <button
+            onClick={openModal}
+            className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
+          >
+            <FaMagic className="w-5 mr-1" />
+            Auto Fix
+          </button>
+
+          <AutoFixModal
+            isOpen={isOpen}
+            closeModal={closeModal}
+            columnDefs={columnDefs}
+            runAutofix={runAutofix}
+            autofixValues={autofixValues}
+          />
+
+          {!downloadig ? (
+            <>
+              <button
+                onClick={() => onBtnExport(false)}
+                className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
+              >
+                <CloudArrowDownIcon className="w-5 mr-1" />
+                Download
+              </button>
+            </>
+          ) : (
+            <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
+              <svg
+                className="w-6 h-6 text-violet-500"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </div>
+          )}
+          <button
+            onClick={() => onBtnSubmit()}
+            className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
+          >
+            {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
+            Submit
+          </button>
+        </div>
+
+        {showResultModal && (
+          <SuccessModal submit={onFinalSubmit} message={fileMetaData} />
+        )}
+        <HappyModal isVisible={isVisible} setIsVisible={setIsVisible} />
+        <WarningModal
+          isVisible={isDownloadWarningModalVisible}
+          setIsVisible={setDownloadWarningModalVisible}
+          submit={() => onBtnExport(true)}
+          metaData={fileMetaData}
+          type="Download"
+        />
+        <WarningModal
+          isVisible={isWarningModalVisible}
+          setIsVisible={setWarningModalVisible}
+          submit={submitFirstModal}
+          metaData={fileMetaData}
+          type="Submit"
+        />
+      </div>
     </div>
   );
 };

@@ -4,15 +4,12 @@ import { Fragment, useContext } from 'react';
 import { ImMagicWand } from 'react-icons/im';
 import { Context } from '../../context';
 
-const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
-  // console.log(columnDefs);
+const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValues }) => {
 
   const { state } = useContext(Context);
 
   const columnNames = columnDefs.map((column) => column.headerName);
-  const templateColumnNames = state?.saasTemplateColumns?.map(
-    (column) => column.label
-  );
+  const templateColumnNames = state?.curSaasLoadMapperTemplate;
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
@@ -59,12 +56,12 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th
+                        {/* <th
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
                           Column Name
-                        </th>
+                        </th> */}
                         <th
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -86,30 +83,51 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs }) => {
                       </tr>
                     </thead>
                     <tbody className="bg-blue-100">
-                      {columnNames.map((item, _idx) => (
-                        <tr key={_idx}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <p className="text-sm text-gray-900">{item}</p>
-                          </td>
+                      {autofixValues.length > 0 ? templateColumnNames.map((item, _idx) => {
+                        if (autofixValues.filter(e => e.field === item.label).length > 0) {
+                          return (
+                            <tr key={_idx}>
+                              {/* <td className="px-6 py-4 whitespace-nowrap">
+                            <p className="text-sm text-gray-900">{item?.key}</p>
+                          </td> */}
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <p className="text-sm text-gray-900">
+                                  {item?.label}
+                                </p>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <p className="text-sm text-gray-900">
+                                  {autofixValues.map((e) => {
+                                    if (item?.label == e.field) {
+                                      return (
+                                        <div className='flex gap-3'>
+                                          <span>{e.oldValue}</span>
+                                          <span className="text-red-500">|</span>
+                                          <span>{e.newValue}</span>
+                                        </div>
+                                      )
+                                    }
+                                  })}
+                                </p>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md" onClick={() => {closeModal(); runAutofix(item.label);}}>
+                                  <ImMagicWand />
+                                  AutoFix
+                                </button>
+                              </td>
+                            </tr>)
+                        }
+                      }) : (
+                        <>
+                          <td className="px-6 py-4 whitespace-nowrap"></td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <p className="text-sm text-gray-900">
-                              {templateColumnNames && templateColumnNames[_idx]}
+                              No Autofix Suggestions
                             </p>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <p className="text-sm text-gray-900">
-                              Tanay <span className="text-red-500">|</span>{' '}
-                              Tanay
-                            </p>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm">
-                            <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md">
-                              <ImMagicWand />
-                              AutoFix
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
+                          <td className="px-6 py-4 whitespace-nowrap"></td>
+                        </>)}
                     </tbody>
                   </table>
                 </div>

@@ -34,6 +34,7 @@ import {
 import ReviewCsv from './reviewCsv';
 import Confetti from '../confetti';
 import { ajvCompileCustomValidator } from '../../lib/validation_util/yovalidator';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
 
 ModuleRegistry.registerModules([InfiniteRowModelModule]);
 
@@ -46,19 +47,54 @@ const GridExample = ({ version }) => {
       valueGetter: 'node.rowIndex + 1',
       maxWidth: 100,
     },
+    {
+      headerName: 'feedback',
+      field: 'feedback',
+      hide: true,
+    },
+    {
+      headerName: 'old',
+      field: '_old',
+      hide: true,
+    },
+    {
+      headerName: 'old',
+      field: '_corrections',
+      hide: true,
+    },
   ]);
   const [fileMetaData, setFileMetaData] = useState();
   const [isErrorFree, setIsErrorFree] = useState(false);
   const [originalDataSource, setOriginalDataSource] = useState();
   const [selectedErrorType, setSelectedErrorType] = useState();
   const [errorFilter, setErrorFilter] = useState(false);
-
+  const [feedbackData, setFeedbackData] = useState({});
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+  const [autofixValues, setAutofixValues] = useState([]);
+  const [changedRowsIndex, setChangedRowsIndex] = useState([]);
   let templateColumns = [];
   let template = {};
   let userSchema = {};
-
   let recordsUri = `/api/meta/count?collection_name=${state.collection}`;
   let errorCountUri = `/api/meta/errorcount?collection_name=${state.collection}`;
+
+  const getAiRecommendations = useCallback(() => {
+    setLoadingSuggestions(true)
+    fetch(`/api/yobulk-ai/feedback?collection=${state.collection}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFeedbackData(data.data);
+        const rowCount = gridRef.current.api.getDisplayedRowCount();
+        for (let i = 0; i < rowCount; i++) {
+          const rowNode = gridRef.current.api.getDisplayedRowAtIndex(i);
+          if (data.data[rowNode.data._id]) {
+            rowNode.setDataValue('feedback', JSON.stringify(data.data[rowNode.data._id]?.feedback || data.data[rowNode.data._id]?.Feedback));
+          }
+        }
+        gridRef.current.api.refreshCells({ force: true })
+        setLoadingSuggestions(false)
+      });
+  }, [state.collection, gridRef, setLoadingSuggestions])
 
   const showOnlyErrors = useCallback(
     (enabled) => {
@@ -89,8 +125,64 @@ const GridExample = ({ version }) => {
         gridRef.current.api.setDatasource(originalDataSource);
       }
     },
-    [originalDataSource, selectedErrorType, state.collection]
+    [originalDataSource, selectedErrorType, state.collection, feedbackData]
   );
+
+  const runAutofix = (label) => {
+    if (gridRef?.current) {
+      for (const row of autofixValues) {
+        if (row.field === label) {
+          const rowNode = gridRef.current.api.getDisplayedRowAtIndex(row.index);
+          rowNode.setDataValue(row.field, row.newValue || "")
+          let oldValuesObj = rowNode.data._old || {}
+          oldValuesObj[row.field] = row.oldValue
+          rowNode.setDataValue('_old', oldValuesObj)
+          let correctionsObj = rowNode.data._corrections || {}
+          delete correctionsObj[row.field]
+          rowNode.setDataValue('_corrections', correctionsObj)
+          setChangedRowsIndex((prev) => {
+            if (prev.includes(row.index)) {
+              return prev
+            } else {
+              return prev.concat(row.index)
+            }
+          })
+        }
+      }
+    }
+  };
+
+  const undoAutoFix = () => {
+    if (gridRef?.current) {
+      for (const index of changedRowsIndex) {
+        const rowNode = gridRef.current.api.getDisplayedRowAtIndex(index);
+        const changedFields = rowNode.data._old ? Object.keys(rowNode.data._old) : []
+        let correctionsObj = {}
+        for (const field of changedFields) {
+          correctionsObj[field] = rowNode.data[field] || ""
+          rowNode.setDataValue(field, rowNode.data._old[field] || "")
+        }
+        rowNode.setDataValue('_corrections', correctionsObj)
+      }
+      setChangedRowsIndex([])
+    }
+  }
+
+  const openAutofixModal = () => {
+    if (gridRef?.current) {
+      let autofixArray = []
+      gridRef.current.api.forEachNode((node) => {
+        let correctionList = Object.keys(node.data._corrections)
+        if (correctionList?.length > 0) {
+          for (const field of correctionList) {
+            // node.setDataValue(field, node.data._corrections[field] || "")
+            autofixArray.push({ index: node.rowIndex, field: field, oldValue: node.data[field], newValue: node.data._corrections[field] || "" })
+          }
+        }
+      })
+      setAutofixValues(autofixArray)
+    }
+  }
 
   useEffect(() => {
     if (!selectedErrorType) return;
@@ -153,8 +245,37 @@ const GridExample = ({ version }) => {
                     hide: false,
                     cellRenderer: (props) => {
                       if (props.value !== undefined) {
+                        console.log(props.data.feedback)
+                        let feedback;
+                        try {
+                          let feedbackObj = JSON.parse(props.data.feedback)
+                          if (feedbackObj) {
+                            if (Object.keys(feedbackObj).length > 0) {
+                              feedback = feedbackObj[props.colDef.headerName]
+                            }
+                          }
+                        } catch (e) { }
                         onLoadingHide();
-                        return props.value;
+                        return (
+                          <span
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              width: '100%',
+                            }}
+                          >
+                            <span>{props.value}</span>
+                            {feedback && (
+                              <button
+                                class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                                data-te-toggle="tooltip"
+                                title={`YoBulk AI Suggestion : ${feedback}`}
+                              >
+                                <InformationCircleIcon className="w-4 h-4" />
+                              </button>
+                            )}
+                          </span>
+                        );
                       } else {
                         return onShowLoading();
                       }
@@ -203,7 +324,7 @@ const GridExample = ({ version }) => {
       params.api.setDatasource(dataSource);
       setOriginalDataSource(dataSource);
     },
-    [state.collection, selectedErrorType]
+    [state.collection, selectedErrorType, feedbackData]
   );
 
   const cellPassRules = {
@@ -324,7 +445,13 @@ const GridExample = ({ version }) => {
           setIsErrorFree={setIsErrorFree}
           showOnlyErrors={showOnlyErrors}
           selectErrorType={setSelectedErrorType}
+          getAiRecommendations={getAiRecommendations}
+          loadingSuggestions={loadingSuggestions}
           columnDefs={columnDefs}
+          runAutofix={runAutofix}
+          openAutofixModal={openAutofixModal}
+          autofixValues={autofixValues}
+          undoAutoFix={undoAutoFix}
         />
         <div className="flex flex-col flex-nowrap m-2">
           <div
