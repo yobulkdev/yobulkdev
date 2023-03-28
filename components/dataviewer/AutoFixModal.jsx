@@ -2,14 +2,16 @@ import { Transition, Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { Fragment, useContext } from 'react';
 import { ImMagicWand } from 'react-icons/im';
-import { Context } from '../../context';
 
 const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValues }) => {
 
   const { state } = useContext(Context);
 
-  const columnNames = columnDefs.map((column) => column.headerName);
+  // const columnNames = columnDefs.map((column) => column.headerName);
   const templateColumnNames = state?.curSaasLoadMapperTemplate;
+  const columnNames = columnDefs
+    .map((column) => column.headerName)
+    .filter((name) => name !== 'Row');
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
@@ -36,7 +38,7 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-6xl transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
+              <Dialog.Panel className="w-full max-w-5xl transform  rounded-md bg-white p-6 text-left align-middle transition-all dark:bg-gray-900 dark:border-2 dark:border-white">
                 <Dialog.Title
                   as="h2"
                   className="text-lg flex items-center font-medium leading-6 text-gray-900 dark:text-white"
@@ -62,12 +64,6 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                         >
                           Column Name
                         </th> */}
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Template Column Name
-                        </th>
                         <th
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
