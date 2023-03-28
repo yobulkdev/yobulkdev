@@ -2,6 +2,7 @@ import { Transition, Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { Fragment, useContext } from 'react';
 import { ImMagicWand } from 'react-icons/im';
+import { Context } from '../../context';
 
 const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValues }) => {
 
