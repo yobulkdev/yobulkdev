@@ -20,7 +20,7 @@ const InputBox = ({ columnName, val }) => {
 
   return (
     <>
-      <div class="flex relative items-center text-gray-600 focus-within:text-gray-400 w-52">
+      <div className="flex relative items-center text-gray-600 focus-within:text-gray-400 w-52">
         <input
           value={value}
           onChange={onChange}
@@ -30,7 +30,7 @@ const InputBox = ({ columnName, val }) => {
 
         <button
           type="submit"
-          class="absolute focus:outline-none focus:shadow-outline inset-y-0 right-0"
+          className="absolute focus:outline-none focus:shadow-outline inset-y-0 right-0"
         >
           <ExclamationTriangleIcon
             className="w-9 h-9 text-red-300"
