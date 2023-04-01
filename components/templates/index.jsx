@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 const MainBar = () => {
   const [templates, setTemplates] = useState();
@@ -14,6 +14,17 @@ const MainBar = () => {
       })
       .catch((e) => console.log(e));
   }, []);
+
+  const handleDelete = (templateId) => {
+    axios
+      .delete(`/api/templates?template_id=${templateId}`)
+      .then((res) => {
+        axios.get('/api/templates').then((res) => {
+          setTemplates(res.data.filter((el) => el['template_name']));
+        });
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div>
@@ -39,12 +50,16 @@ const MainBar = () => {
               className="mt-4 bg-white rounded-md flex flex-col align-middle justify-between p-4 mx-2 shadow-sm dark:bg-gray-900"
               key={idx}
             >
-              <div className="flex flex-col">
+              <div className="flex flex-nowrap justify-between">
                 <Link href={`/templates/${obj._id}`}>
                   <h2 className="text-lg text-blue-500 cursor-pointer dark:text-white">
                     {obj.template_name}
                   </h2>
                 </Link>
+                <TrashIcon
+                  className="m-1 h-5 cursor-pointer text-red-400"
+                  onClick={() => handleDelete(obj._id)}
+                />
               </div>
 
               <div className="mt-4">
