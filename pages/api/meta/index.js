@@ -24,14 +24,13 @@ export default async function fetchPaginatedRecords(req, res) {
         filterArray.push({ 'validationData.0': { $exists: true } });
       }
       const template = await db.collection('templates').findOne({collection_name: collection})
-      const schema = template.schema;
       const paginatedRows = await db
         .collection(collection)
         .find(query)
         .skip(parseInt(_start))
         .limit(parseInt(_end))
         .toArray();
-      const transformedRows = autofix(paginatedRows, schema)
+      const transformedRows = autofix(paginatedRows, template)
       res.json({ status: 200, data: transformedRows });
       break;
   }

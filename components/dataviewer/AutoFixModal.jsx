@@ -13,6 +13,8 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
   const columnNames = columnDefs
     .map((column) => column.headerName)
     .filter((name) => name !== 'Row');
+  const finalColumns = Array.from(new Set(templateColumnNames.map((e)=> e.label)))
+  console.log(templateColumnNames, columnNames, finalColumns,'shsksl')
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
@@ -80,8 +82,8 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                       </tr>
                     </thead>
                     <tbody className="bg-blue-100">
-                      {autofixValues.length > 0 ? templateColumnNames.map((item, _idx) => {
-                        if (autofixValues.filter(e => e.field === item.label).length > 0) {
+                      {autofixValues.length > 0 ? finalColumns.map((item, _idx) => {
+                        if (autofixValues.filter(e => e.field === item).length > 0) {
                           return (
                             <tr key={_idx}>
                               {/* <td className="px-6 py-4 whitespace-nowrap">
@@ -89,13 +91,13 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                           </td> */}
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <p className="text-sm text-gray-900">
-                                  {item?.label}
+                                  {item}
                                 </p>
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <p className="text-sm text-gray-900">
                                   {autofixValues.map((e) => {
-                                    if (item?.label == e.field) {
+                                    if (item == e.field) {
                                       return (
                                         <div className='flex gap-3'>
                                           <span>{e.oldValue}</span>
@@ -108,7 +110,7 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                                 </p>
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md" onClick={() => {closeModal(); runAutofix(item.label);}}>
+                                <button className="px-3 py-1 flex items-center gap-2 border border-blue-500 hover:border-blue-600 text-blue-500 rounded-md" onClick={() => {closeModal(); runAutofix(item);}}>
                                   <ImMagicWand />
                                   AutoFix
                                 </button>
