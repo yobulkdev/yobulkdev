@@ -72,6 +72,8 @@ const GridExample = ({ version }) => {
   const [loadingSuggestions, setLoadingSuggestions] = useState(false);
   const [autofixValues, setAutofixValues] = useState([]);
   const [changedRowsIndex, setChangedRowsIndex] = useState([]);
+  const [schema, setSchema] = useState({})
+  const [autofixedlabels, setautofixedLabels] = useState([])
   let templateColumns = [];
   let template = {};
   let userSchema = {};
@@ -130,42 +132,97 @@ const GridExample = ({ version }) => {
 
   const runAutofix = (label) => {
     if (gridRef?.current) {
+      const itemsToUpdate = [];
       for (const row of autofixValues) {
         if (row.field === label) {
           const rowNode = gridRef.current.api.getDisplayedRowAtIndex(row.index);
-          rowNode.setDataValue(row.field, row.newValue || "")
+          const data = rowNode.data;
           let oldValuesObj = rowNode.data._old || {}
           oldValuesObj[row.field] = row.oldValue
-          rowNode.setDataValue('_old', oldValuesObj)
           let correctionsObj = rowNode.data._corrections || {}
           delete correctionsObj[row.field]
-          rowNode.setDataValue('_corrections', correctionsObj)
-          setChangedRowsIndex((prev) => {
-            if (prev.includes(row.index)) {
-              return prev
-            } else {
-              return prev.concat(row.index)
-            }
-          })
+          data._old = oldValuesObj
+          data._corrections = correctionsObj
+          data[row.field] = row.newValue || ""
+          itemsToUpdate.push(data)
+          // rowNode.setDataValue(row.field, row.newValue || "")
+          // rowNode.setDataValue('_old', oldValuesObj)
+          // rowNode.setDataValue('_corrections', correctionsObj)
+          setChangedRowsIndex((prev) => (prev.includes(row.index)) ? prev : prev.concat(row.index))
         }
       }
+      userSchema = schema;
+      autofixUpdateDb(itemsToUpdate, gridRef.current, label)
+      gridRef.current.api.applyTransaction({ update: itemsToUpdate });
+      gridRef.current.api.refreshCells({ force: true });
+      autofixedlabels.push(label)
+      setautofixedLabels([...autofixedlabels])
     }
   };
 
   const undoAutoFix = () => {
     if (gridRef?.current) {
+      const itemsToUpdate = [];
       for (const index of changedRowsIndex) {
         const rowNode = gridRef.current.api.getDisplayedRowAtIndex(index);
         const changedFields = rowNode.data._old ? Object.keys(rowNode.data._old) : []
         let correctionsObj = {}
+        let data = rowNode.data;
         for (const field of changedFields) {
           correctionsObj[field] = rowNode.data[field] || ""
-          rowNode.setDataValue(field, rowNode.data._old[field] || "")
+          data[field] = rowNode.data._old[field] || ""
         }
-        rowNode.setDataValue('_corrections', correctionsObj)
+        data._corrections = correctionsObj
+        itemsToUpdate.push(data)
       }
+      // autofixUpdateDb(itemsToUpdate, gridRef.current, label)
+      gridRef.current.api.applyTransaction({ update: itemsToUpdate });
+      gridRef.current.api.refreshCells({ force: true });
       setChangedRowsIndex([])
     }
+  }
+
+  const autofixUpdateDb = (itemsToUpdate, params, label) => {
+    let dataToBeUpdated = []
+
+    const removeByKey = (arr, key) => {
+      const requiredIndex = arr.findIndex((el) => {
+        return el.key === String(key);
+      });
+      if (requiredIndex === -1) {
+        return false;
+      }
+      return !!arr.splice(requiredIndex, 1);
+    };
+
+    for (let item of itemsToUpdate) {
+      let dbupdate = cellCheckBySchema(label, item[label]);
+      if (!dbupdate) {
+        let obj = {};
+        obj.collection_id = state.collection;
+        let validation_Arr = [];
+        if (item && item.validationData) {
+          validation_Arr = item.validationData;
+          removeByKey(validation_Arr, label);
+        }
+        delete item.validationData;
+        obj.data = item;
+        obj.data.validationData = validation_Arr;
+        obj.data._id = item._id;
+        dataToBeUpdated.push(obj)
+      }
+    }
+    let url = '/api/autofix';
+    axios
+      .post(url, dataToBeUpdated)
+      .then((res) => {
+        axios.get(errorCountUri).then((res) => {
+          setFileMetaData((prev) => {
+            return { ...prev, ...res.data };
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   const openAutofixModal = () => {
@@ -175,7 +232,6 @@ const GridExample = ({ version }) => {
         let correctionList = Object.keys(node.data._corrections)
         if (correctionList?.length > 0) {
           for (const field of correctionList) {
-            // node.setDataValue(field, node.data._corrections[field] || "")
             autofixArray.push({ index: node.rowIndex, field: field, oldValue: node.data[field], newValue: node.data._corrections[field] || "" })
           }
         }
@@ -233,6 +289,7 @@ const GridExample = ({ version }) => {
             templateColumns = response.columns;
             template = response;
             userSchema = response.schema;
+            setSchema(response.schema)
             setColumnDefs((prev) =>
               prev.concat(
                 templateColumns.map((x) => {
@@ -346,7 +403,7 @@ const GridExample = ({ version }) => {
         data = JSON.parse(value);
       }
 
-      let schemaProps = userSchema.properties;
+      let schemaProps = userSchema.properties || schema.properties;
 
       if (field in schemaProps) {
         let fieldSchema = schemaProps[field];
@@ -378,7 +435,7 @@ const GridExample = ({ version }) => {
       let column = params.column.colDef.field;
 
       dbupdate = cellCheckBySchema(column, params.newValue);
-
+      console.log(column, params.newValue, 'al')
       const removeByKey = (arr, key) => {
         const requiredIndex = arr.findIndex((el) => {
           return el.key === String(key);
