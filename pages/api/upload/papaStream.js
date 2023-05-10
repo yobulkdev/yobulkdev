@@ -9,6 +9,9 @@ const openCsvInputStream = (fileInputStream) => {
     dynamicTyping: true,
     skipEmptyLines: true,
     step: (results) => {
+      Object.keys(results.data).forEach((key) => {
+        if (results.data[key] instanceof Date) results.data[key] = results.data[key].toISOString()
+      })
       csvInputStream.push(results.data);
     },
     complete: () => {
