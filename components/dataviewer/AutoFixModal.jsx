@@ -14,7 +14,6 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
     .map((column) => column.headerName)
     .filter((name) => name !== 'Row');
   const finalColumns = Array.from(new Set(templateColumnNames.map((e)=> e.label)))
-  console.log(templateColumnNames, columnNames, finalColumns,'shsksl')
 
   return (
     <Transition appear show={isOpen} onClose={closeModal}>
