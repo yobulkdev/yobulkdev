@@ -58,7 +58,7 @@ const GridExample = ({ version }) => {
       hide: true,
     },
     {
-      headerName: 'old',
+      headerName: 'corrections',
       field: '_corrections',
       hide: true,
     },
@@ -189,7 +189,9 @@ const GridExample = ({ version }) => {
     let currentColumnDefs = gridRef?.current?.api?.getColumnDefs();
     if (Array.isArray(currentColumnDefs)) {
       let newColumnDefs = currentColumnDefs.map((elem) => {
-        if (selectedErrorType === 'No selection' || elem.headerName === 'Row') {
+        if(['feedback', 'corrections', 'old'].includes(elem.headerName)){
+          elem.hide = true;
+        } else if (selectedErrorType === 'No selection' || elem.headerName === 'Row') {
           elem.hide = false;
         } else {
           elem.hide = elem.headerName === selectedErrorType ? false : true;
