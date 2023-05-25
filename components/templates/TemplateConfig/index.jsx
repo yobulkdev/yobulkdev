@@ -133,8 +133,6 @@ const AdminComponent = ({ templateId, type }) => {
     });
   };
 
-  console.log(templateData.columns, 'aka')
-
   return (
     <div className="p-4 dark:bg-gray-800 h-screen">
       <div className="flex align-middle justify-between ">
