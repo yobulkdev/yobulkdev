@@ -46,6 +46,8 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
   }
 
   function closeRegexModal() {
+    setSelectedOption({ value: 'custom', label: 'Enter Custom Regex' })
+    setRegex('')
     setRegexModal(false);
   }
 
@@ -155,7 +157,6 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
   const handleRegexSelect = (e) => {
     setSelectedOption(e);
-    console.log(e.value);
     if (e.value === 'custom') {
       setRegex('');
       handleBlur({ key: 'pattern', value: undefined });
