@@ -21,7 +21,7 @@ const AdminComponent = ({ templateId, type }) => {
   const [templateData, setTemplateData] = useState({});
   const router = useRouter();
   const { dispatch } = useContext(Context);
-  const [isRegexMenuOpen, setIsRegexMenuOpen] = useState(false);
+  const [isRegexMenuOpen, setIsRegexMenuOpen] = useState([]);
   const [isSchemaMenuOpen, setIsSchemaMenuOpen] = useState(false);
   const [mode, setMode] = useState('light');
 
@@ -36,12 +36,16 @@ const AdminComponent = ({ templateId, type }) => {
     });
   }
 
-  function closeREGEXModal() {
-    setIsRegexMenuOpen(false);
+  function closeREGEXModal(idx) {
+    let newRegexMenu = isRegexMenuOpen
+    newRegexMenu[idx] = false
+    setIsRegexMenuOpen([...newRegexMenu]);
   }
 
-  function openREGEXModal() {
-    setIsRegexMenuOpen(true);
+  function openREGEXModal(idx) {
+    let newRegexMenu = isRegexMenuOpen
+    newRegexMenu[idx] = true
+    setIsRegexMenuOpen([...newRegexMenu]);
   }
 
   useEffect(() => {
@@ -333,16 +337,16 @@ const AdminComponent = ({ templateId, type }) => {
                 <td className="justify-center items-center">
                   <button
                     className="flex mx-auto items-center gap-1"
-                    onClick={openREGEXModal}
+                    onClick={() => openREGEXModal(idx)}
                   >
                     <span className="text-blue-500">Custom Validator</span>
                     <PencilSquareIcon className="w-4 h-4" />
                   </button>
-                  <Transition appear show={isRegexMenuOpen} as={Fragment}>
+                  <Transition appear show={isRegexMenuOpen[idx] ? true : false} as={Fragment}>
                     <Dialog
                       as="div"
                       className="relative z-10"
-                      onClose={closeREGEXModal}
+                      onClose={() => closeREGEXModal(idx)}
                     >
                       <Transition.Child
                         as={Fragment}
@@ -386,7 +390,7 @@ const AdminComponent = ({ templateId, type }) => {
                                 <button
                                   type="button"
                                   className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                  onClick={closeREGEXModal}
+                                  onClick={() => closeREGEXModal(idx)}
                                 >
                                   Got it, thanks!
                                 </button>
