@@ -1,0 +1,20 @@
+Index: .env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>MONGODB_URI=\"mongodb://localhost:27017/yobulk\"\nDATABASE_NAME=\"yobulk\"\n#MONGODB_URI=\"mongodb://host.docker.internal:27017/yobulk\"\nOPENAI_SECRET_KEY=\"your open api key\"\nBACKEND_SERVER_HOST=\"http://localhost:5050\"\nNEXT_PUBLIC_ELU_BUCKET_NAME=elucidate-co
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.env b/.env
+--- a/.env	(revision 739f6e78e7059776c0c9040937e486e27b7b3e5a)
++++ b/.env	(date 1687422921900)
+@@ -3,4 +3,6 @@
+ #MONGODB_URI="mongodb://host.docker.internal:27017/yobulk"
+ OPENAI_SECRET_KEY="your open api key"
+ BACKEND_SERVER_HOST="http://localhost:5050"
+-NEXT_PUBLIC_ELU_BUCKET_NAME=elucidate-co
+\ No newline at end of file
++NEXT_PUBLIC_HIDE_AI=true
++NEXT_PUBLIC_HIDE_UPLOADER_BUTTONS=true
++NEXT_PUBLIC_HIDE_ADMIN_REGEX_AI=true
+\ No newline at end of file
