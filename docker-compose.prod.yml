@@ -6,9 +6,13 @@ services:
     image: mongo
     volumes:
       - docker:/data/db
+    ports:
+      - 27017:27017
 
   yobulk:
-    image: yobulk/yobulk
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
     ports:
       - 5050:5050
     environment:
