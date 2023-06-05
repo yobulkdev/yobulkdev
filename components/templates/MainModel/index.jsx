@@ -367,22 +367,18 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                       </span>
                                     </button>
                                   </Dialog.Title>
-                                  {isCustomRegex && (
-                                    <>
-                                      <textarea
-                                        className="w-full mt-2 rounded-md text-xs"
-                                        placeholder="Enter regex"
-                                        value={regex}
-                                        onChange={(e) => {
-                                          handleBlur({
-                                            key: 'pattern',
-                                            value: e.target.value,
-                                          });
-                                          setRegex(e.target.value);
-                                        }}
-                                      />
-                                    </>
-                                  )}
+                                  <textarea
+                                    className="w-full mt-2 rounded-md text-xs"
+                                    placeholder="Enter regex"
+                                    value={regex}
+                                    onChange={(e) => {
+                                      handleBlur({
+                                        key: 'pattern',
+                                        value: e.target.value,
+                                      });
+                                      setRegex(e.target.value);
+                                    }}
+                                  />
 
                                   <button
                                     type="button"
