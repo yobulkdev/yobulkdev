@@ -229,7 +229,7 @@ const SassLoadMapper = () => {
         <div className="grid grid-cols-3 pt-1">
           <div></div>
           <div>
-            <div className="flex mb-3 mt-20 text-blue-700 font-semibold">
+            <div className="flex mb-3 mt-10 text-blue-700 font-semibold">
               {' '}
               Change or confirm column matches.{' '}
               <button
