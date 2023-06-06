@@ -8,7 +8,6 @@ import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 import SuccessModal from './SuccessModal';
 import { FaMagic } from 'react-icons/fa';
-import AutoFixModal from './AutoFixModal';
 
 const ReviewCsv = ({
   collectionName,
@@ -182,14 +181,6 @@ const ReviewCsv = ({
             <FaMagic className="w-5 mr-1" />
             Auto Fix
           </button>
-
-          <AutoFixModal
-            isOpen={isOpen}
-            closeModal={closeModal}
-            columnDefs={columnDefs}
-            runAutofix={runAutofix}
-            autofixValues={autofixValues}
-          />
 
           {!downloadig ? (
             <>
