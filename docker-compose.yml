@@ -12,7 +12,11 @@ services:
   yobulk:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
+    command: yarn dev
+    volumes:
+      - .:/app
+      - /app/node_modules
     ports:
       - 5050:5050
     environment:
