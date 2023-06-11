@@ -57,7 +57,7 @@ function App() {
         <hr />
         <br />
         <YoButton
-            importId="63a28875cbc26427b0bc390e"
+            importId="Generated when saving importer"
             yoHostUrl={"http://localhost:5050"}
         />
     </div>

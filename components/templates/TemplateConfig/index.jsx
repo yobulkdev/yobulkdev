@@ -56,6 +56,7 @@ const AdminComponent = ({ templateId, type }) => {
       axios
         .get('/api/templates', { headers })
         .then((res) => {
+          console.log({templateData: res.data})
           setTemplateData(res.data);
         })
         .catch((err) => console.log(err));
