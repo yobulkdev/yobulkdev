@@ -75,7 +75,7 @@ const SassLoadMapper = () => {
   const [progress, setProgress] = useState(0);
   const [duplicate, setDuplicate] = useState(false);
 
-  const hideAi = process.env.NEXT_PUBLIC_HIDE_AI;
+  const hideAi = process.env.NEXT_PUBLIC_HIDE_AI === 'true';
 
   useEffect(() => {
     selectedTab === 0
