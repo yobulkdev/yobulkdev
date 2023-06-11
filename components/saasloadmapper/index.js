@@ -75,6 +75,8 @@ const SassLoadMapper = () => {
   const [progress, setProgress] = useState(0);
   const [duplicate, setDuplicate] = useState(false);
 
+  const hideAi = process.env.NEXT_PUBLIC_HIDE_AI;
+
   useEffect(() => {
     selectedTab === 0
       ? columnMatcherAi({
@@ -239,30 +241,140 @@ const SassLoadMapper = () => {
                 Upload
               </button>
             </div>
-            <div className="flex saas-load-matcher mt-10">
-              <div
-                className="ag-theme-alpine"
-                style={{
-                  height:
-                    (state.curSaasLoadMapperTemplate?.length + 1) * 67,
-                  width: '90vw',
-                  border: 'none',
+
+            {!hideAi
+              ?
+              <Tab.Group
+                onChange={(index) => {
+                  setSelectedTab(index);
                 }}
+                defaultIndex={1}
               >
-                <AgGridReact
-                  ref={gridRef}
-                  columnDefs={columnDefs}
-                  rowData={state.curSaasLoadMapperTemplate} // from csv
-                  onGridReady={onGridReady}
-                  rowHeight={70}
-                  suppressHorizontalScroll={true}
-                  suppressRowClickSelection={true}
-                  rowSelection={'multiple'}
-                  onFirstDataRendered={onFirstDataRendered}
-                  components={frameworkComponents}
-                />
+                <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                  <Tab
+                    className={({ selected }) =>
+                      classNames(
+                        'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5 text-black dark:text-white',
+                        selected
+                          ? 'bg-white shadow dark:text-black'
+                          : 'text-black hover:bg-white/[0.12] hover:text-white'
+                      )
+                    }
+                  >
+                    With YoBulkAI{' '}
+                    <div className="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
+                      BETA
+                    </div>
+                  </Tab>
+                  <Tab
+                    className={({ selected }) =>
+                      classNames(
+                        'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5 text-black dark:text-white',
+                        selected
+                          ? 'bg-white shadow dark:text-black'
+                          : 'text-black hover:bg-white/[0.12] hover:text-white'
+                      )
+                    }
+                  >
+                    Without YoBulkAI
+                  </Tab>
+                </Tab.List>
+                <Tab.Panels className="mt-2">
+                  <Tab.Panel className={classNames('rounded-xl bg-white p-3')}>
+                    <>
+                      <h1 className="text-md flex text-sm items-center justify-center  text-gray-600">
+                        Ensure to add OpenAI Secret Key in .env file.
+                      </h1>
+                      <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600">
+                        Please Refer to{' '}
+                        <span className="ml-1 text-blue-700">
+                          <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
+                            Documentation
+                          </Link>
+                        </span>
+                      </h1>
+                      <div className="flex saas-load-matcher">
+                        <div
+                          className="ag-theme-alpine"
+                          style={{
+                            height:
+                              (state.curSaasLoadMapperTemplate?.length + 1) *
+                                67 || 0,
+                            width: '90vw',
+                            border: 'none',
+                          }}
+                        >
+                          <AgGridReact
+                            ref={gridRef}
+                            columnDefs={columnDefs}
+                            rowData={state.curSaasLoadMapperTemplate} // with yobulkAI prompt
+                            onGridReady={onGridReady}
+                            rowHeight={70}
+                            suppressHorizontalScroll={true}
+                            suppressRowClickSelection={true}
+                            rowSelection={'multiple'}
+                            onFirstDataRendered={onFirstDataRendered}
+                            components={frameworkComponents}
+                          />
+                        </div>
+                      </div>
+                    </>
+                  </Tab.Panel>
+                  <Tab.Panel className={classNames('rounded-xl bg-white p-3')}>
+                    <div className="flex saas-load-matcher">
+                      <div
+                        className="ag-theme-alpine"
+                        style={{
+                          height:
+                            (state.curSaasLoadMapperTemplate?.length + 1) * 67,
+                          width: '90vw',
+                          border: 'none',
+                        }}
+                      >
+                        <AgGridReact
+                          ref={gridRef}
+                          columnDefs={columnDefs}
+                          rowData={state.curSaasLoadMapperTemplate} // from csv
+                          onGridReady={onGridReady}
+                          rowHeight={70}
+                          suppressHorizontalScroll={true}
+                          suppressRowClickSelection={true}
+                          rowSelection={'multiple'}
+                          onFirstDataRendered={onFirstDataRendered}
+                          components={frameworkComponents}
+                        />
+                      </div>
+                    </div>
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
+              :
+              <div className="flex saas-load-matcher">
+                <div
+                  className="ag-theme-alpine"
+                  style={{
+                    height:
+                      (state.curSaasLoadMapperTemplate?.length + 1) *
+                      67 || 0,
+                    width: '90vw',
+                    border: 'none',
+                  }}
+                >
+                  <AgGridReact
+                    ref={gridRef}
+                    columnDefs={columnDefs}
+                    rowData={state.curSaasLoadMapperTemplate} // with yobulkAI prompt
+                    onGridReady={onGridReady}
+                    rowHeight={70}
+                    suppressHorizontalScroll={true}
+                    suppressRowClickSelection={true}
+                    rowSelection={'multiple'}
+                    onFirstDataRendered={onFirstDataRendered}
+                    components={frameworkComponents}
+                  />
+                </div>
               </div>
-            </div>
+            }
           </div>
           {/*  <div className="gap-1">
         <span className="break-all">{JSON.stringify(state)}</span>
