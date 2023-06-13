@@ -24,4 +24,4 @@ COPY --from=BUILD_IMAGE /app/lib/seeder.js ./lib/seeder.js
 EXPOSE 5050
 CMD ["yarn", "start"]
 
-#docker run --rm -it -p 5050:5050/tcp  --env="OPENAI_SECRET_KEY=zyudofadsfkj" yobulkdev:latest
+#docker run --rm -it -p 5050:5050/tcp  --env="OPENAI_SECRET_KEY=zyudofadsfkj" yobulkdev:latest 
