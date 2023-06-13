@@ -6,17 +6,9 @@ services:
     image: mongo
     volumes:
       - docker:/data/db
-    ports:
-      - 27017:27017
 
   yobulk:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: yarn dev
-    volumes:
-      - .:/app
-      - /app/node_modules
+    image: yobulk/yobulk
     ports:
       - 5050:5050
     environment:
