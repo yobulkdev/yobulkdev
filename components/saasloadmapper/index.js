@@ -362,7 +362,7 @@ const SassLoadMapper = () => {
                   <AgGridReact
                     ref={gridRef}
                     columnDefs={columnDefs}
-                    rowData={state.curSaasLoadMapperTemplate} // with yobulkAI prompt
+                    rowData={state.curSaasLoadMapperTemplate} // from csv
                     onGridReady={onGridReady}
                     rowHeight={70}
                     suppressHorizontalScroll={true}
