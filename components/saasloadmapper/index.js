@@ -298,8 +298,7 @@ const SassLoadMapper = () => {
                           className="ag-theme-alpine"
                           style={{
                             height:
-                              (state.curSaasLoadMapperTemplate?.length + 1) *
-                                67 || 0,
+                              (state.curSaasLoadMapperTemplate?.length + 1) * 67 || 0,
                             width: '90vw',
                             border: 'none',
                           }}
@@ -326,7 +325,7 @@ const SassLoadMapper = () => {
                         className="ag-theme-alpine"
                         style={{
                           height:
-                            (state.curSaasLoadMapperTemplate?.length + 1) * 67,
+                            (state.curSaasLoadMapperTemplate?.length + 1) * 67 || 0,
                           width: '90vw',
                           border: 'none',
                         }}

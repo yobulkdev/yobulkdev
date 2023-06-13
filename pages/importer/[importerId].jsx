@@ -15,7 +15,6 @@ export async function getServerSideProps({ params }) {
   let data = await axios
     .get(`${process.env.BACKEND_SERVER_HOST}/api/importer/${importerId}`)
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => console.log('Error fetching importer document', err));

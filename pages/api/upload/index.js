@@ -48,7 +48,6 @@ async function processUpload(req) {
           busboy.on(
             'file',
             async function (fieldname, file, filename, encoding, mimetype) {
-              console.log('The file details are', filename, encoding, mimetype);
 
               pipeline(
                 file,
@@ -73,8 +72,7 @@ async function processUpload(req) {
                     { upsert: true }
                   )
                   .then((result, err) => {
-                    console.log('---- collection name updateded ----');
-                    //resolve(collectionName);
+                    resolve(collectionName);
                   })
                   .catch((err) => {
                     console.log(err);
@@ -85,8 +83,7 @@ async function processUpload(req) {
           );
         }
         busboy.on('close', function () {
-          console.log('---- Done parsing form! ----');
-          // resolve(collectionName);
+          resolve(collectionName);
         });
 
         var headers_changes = new Transform({

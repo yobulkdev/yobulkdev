@@ -13,7 +13,6 @@ export default async function downloadFile(req, res) {
     case 'GET':
       try {
         let count = 0;
-        console.log('---- collection ----', req.headers.collection_name);
         let collection = await db.collection(req.headers.collection_name);
         var stream = await collection
           .find({ 'validationData.0': { $exists: false } })
@@ -46,7 +45,6 @@ export default async function downloadFile(req, res) {
         });
         res.setHeader('Content-Type', 'text/csv');
         stream.on('end', function (err) {
-          console.log('---- array data ----', count);
           if (err) res.send(err);
           res.end();
         });
