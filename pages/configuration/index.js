@@ -2,7 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Layout from '../../layouts/Layout';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 const Configuration = () => {
   const [configList, setConfigList] = useState([]);
@@ -15,6 +15,17 @@ const Configuration = () => {
       })
       .catch((e) => console.log(e));
   }, []);
+
+  const handleDelete = (importerId) => {
+    axios
+      .delete(`/api/importer/${importerId}`)
+      .then((res) => {
+        axios.get('/api/importer').then((res) => {
+          setConfigList(res.data);
+        });
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <Layout>
@@ -41,12 +52,16 @@ const Configuration = () => {
                   className="mt-4 bg-white dark:bg-gray-900 rounded-md flex flex-col align-middle justify-between p-4 mx-2 shadow-sm"
                   key={idx}
                 >
-                  <div className="flex flex-col">
+                  <div className="flex flex-nowrap justify-between">
                     <Link href={`/configuration/${obj._id}`}>
                       <h2 className="text-lg text-blue-500 dark:text-white cursor-pointer">
                         {obj.name}
                       </h2>
                     </Link>
+                    <TrashIcon
+                      className="m-1 h-5 cursor-pointer text-red-400"
+                      onClick={() => handleDelete(obj._id)}
+                    />
                   </div>
 
                   <div className="mt-4">
