@@ -8,6 +8,7 @@ import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 import SuccessModal from './SuccessModal';
 import { FaMagic } from 'react-icons/fa';
+import AutoFixModal from './AutoFixModal';
 
 const ReviewCsv = ({
   collectionName,
@@ -185,6 +186,16 @@ const ReviewCsv = ({
                 Auto Fix
               </button>
             </>
+          }
+
+          {!hideUploaderExtraButtons &&
+            <AutoFixModal
+              isOpen={isOpen}
+              closeModal={closeModal}
+              columnDefs={columnDefs}
+              runAutofix={runAutofix}
+              autofixValues={autofixValues}
+            />
           }
 
           {!downloadig ? (
