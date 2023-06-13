@@ -11,6 +11,11 @@ FROM node:16.17.0-bullseye-slim
 WORKDIR /app
 # copy from build image
 
+ENV MONGODB_URI=mongodb://host.docker.internal:27017/yobulk
+ENV DATABASE_NAME=yobulk
+ENV OPENAI_SECRET_KEY=YOUR_OPENAI_SECRET_KEY
+ENV BACKEND_SERVER_HOST="http://localhost:5050"
+
 COPY --from=BUILD_IMAGE /app/package.json ./package.json
 COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
 COPY --from=BUILD_IMAGE /app/.next ./.next
