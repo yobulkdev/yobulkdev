@@ -35,6 +35,7 @@ import ReviewCsv from './reviewCsv';
 import Confetti from '../confetti';
 import { ajvCompileCustomValidator } from '../../lib/validation_util/yovalidator';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
+import VideoCallGrid from './VideoCallGrid';
 
 ModuleRegistry.registerModules([InfiniteRowModelModule]);
 
@@ -540,6 +541,9 @@ const GridExample = ({ version }) => {
               }
             ></AgGridReact>
           </div>
+        </div>
+        <div className="flex flex-col flex-nowrap m-2">
+          <VideoCallGrid roomId={state.template}/>
         </div>
       </div>
     </>
