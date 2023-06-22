@@ -304,7 +304,6 @@ const GridExample = ({ version }) => {
                     hide: false,
                     cellRenderer: (props) => {
                       if (props.value !== undefined) {
-                        console.log(props.data.feedback)
                         let feedback;
                         try {
                           let feedbackObj = JSON.parse(props.data.feedback)
@@ -437,7 +436,6 @@ const GridExample = ({ version }) => {
       let column = params.column.colDef.field;
 
       dbupdate = cellCheckBySchema(column, params.newValue);
-      console.log(column, params.newValue, 'al')
       const removeByKey = (arr, key) => {
         const requiredIndex = arr.findIndex((el) => {
           return el.key === String(key);

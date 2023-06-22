@@ -95,10 +95,10 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <p className="text-sm text-gray-900">
-                                  {autofixValues.map((e) => {
+                                  {autofixValues.map((e, i) => {
                                     if (item == e.field) {
                                       return (
-                                        <div className='flex gap-3'>
+                                        <div className='flex gap-3' key={i}>
                                           <span>{e.oldValue}</span>
                                           <span className="text-red-500">|</span>
                                           <span>{e.newValue}</span>
