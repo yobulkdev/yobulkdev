@@ -164,7 +164,6 @@ const ReviewCsv = ({
           className={`flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded ml-auto ${loadingSuggestions && 'text-white border-none bg-blue-200 hover:bg-blue-200'}`}
           disabled={loadingSuggestions}
         >
-          {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
           {loadingSuggestions ? 'Getting suggestions...' : 'Get YoBulkAI Suggestions'}
         </button>}
         <div className="flex justify-end">
@@ -227,7 +226,6 @@ const ReviewCsv = ({
             onClick={() => onBtnSubmit()}
             className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
           >
-            {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
             Submit
           </button>
         </div>

@@ -60,12 +60,6 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        {/* <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Column Name
-                        </th> */}
                         <th
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -85,9 +79,6 @@ const AutoFixModal = ({ isOpen, closeModal, columnDefs, runAutofix, autofixValue
                         if (autofixValues.filter(e => e.field === item).length > 0) {
                           return (
                             <tr key={_idx}>
-                              {/* <td className="px-6 py-4 whitespace-nowrap">
-                            <p className="text-sm text-gray-900">{item?.key}</p>
-                          </td> */}
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <p className="text-sm text-gray-900">
                                   {item}

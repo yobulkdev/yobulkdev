@@ -56,7 +56,6 @@ const AdminComponent = ({ templateId, type }) => {
       axios
         .get('/api/templates', { headers })
         .then((res) => {
-          console.log({templateData: res.data})
           setTemplateData(res.data);
         })
         .catch((err) => console.log(err));
@@ -133,8 +132,6 @@ const AdminComponent = ({ templateId, type }) => {
       columnData,
     });
   };
-
-  console.log(templateData.columns, 'aka')
 
   return (
     <div className="p-4 dark:bg-gray-800 h-screen">
@@ -290,9 +287,6 @@ const AdminComponent = ({ templateId, type }) => {
           }
         </div>
       </div>
-
-      {/*       <div className="p-4">{JSON.stringify(templateData)}</div>
-       */}
       {type === 'create' &&
         addColumnButton({ openModal, isOpen, closeModal, setTemplateData })}
 
@@ -300,9 +294,6 @@ const AdminComponent = ({ templateId, type }) => {
         <table className="w-full bg-white text-sm text-gray-500 dark:bg-gray-800 dark:text-gray-400 table shadow-md border-2 dark:border-gray-700">
           <thead className="text-xs text-white uppercase h-10 bg-blue-500">
             <tr>
-              {/*  <th scope="col" className="py-3">
-                Column Key
-              </th> */}
               <th scope="col" className="py-3">
                 Column name
               </th>
@@ -332,7 +323,6 @@ const AdminComponent = ({ templateId, type }) => {
                 key={idx}
                 className="h-10 text-center border-b-2 dark:border-gray-700"
               >
-                {/*   <td className="w-8">{col.key}</td> */}
                 <td>{col.label}</td>
                 <td>{col.data_type}</td>
                 <td>{col.example}</td>

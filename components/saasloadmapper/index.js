@@ -375,9 +375,6 @@ const SassLoadMapper = () => {
               </div>
             }
           </div>
-          {/*  <div className="gap-1">
-        <span className="break-all">{JSON.stringify(state)}</span>
-      </div> */}
         </div>
       )}
       {loading && <UploadProgress progress={progress} />}

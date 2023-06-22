@@ -46,7 +46,6 @@ const SaasLoader = ({ templateId }) => {
             state.saasTemplateColumns?.map((column, idx) => (
               <div key={idx} className="flex items-center justify-between">
                 <p className="text-gray-700 dark:text-gray-200 py-2">{column.label}</p>
-                {/* <AiOutlineInfoCircle className='w-4 h-4' /> */}
               </div>
             ))}
         </div>
