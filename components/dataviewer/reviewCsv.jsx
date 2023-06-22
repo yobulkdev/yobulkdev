@@ -140,7 +140,7 @@ const ReviewCsv = ({
             onChange={handleSwitch}
             className="ml-2 mt-1"
           >
-            <button
+            <div
               className={`${onlyError ? 'bg-blue-500' : 'bg-gray-200'
                 } relative inline-flex h-6 w-11 items-center rounded-full`}
             >
@@ -148,7 +148,7 @@ const ReviewCsv = ({
                 className={`${onlyError ? 'translate-x-6' : 'translate-x-1'
                   } inline-block h-4 w-4 transform rounded-full bg-white transition`}
               />
-            </button>
+            </div>
           </Switch>
         </div>{' '}
         <div className="flex-auto w-auto font-semibold">
