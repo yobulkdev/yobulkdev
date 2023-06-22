@@ -56,6 +56,7 @@ const AdminComponent = ({ templateId, type }) => {
       axios
         .get('/api/templates', { headers })
         .then((res) => {
+          console.log({templateData: res.data})
           setTemplateData(res.data);
         })
         .catch((err) => console.log(err));
@@ -132,6 +133,8 @@ const AdminComponent = ({ templateId, type }) => {
       columnData,
     });
   };
+
+  console.log(templateData.columns, 'aka')
 
   return (
     <div className="p-4 dark:bg-gray-800 h-screen">

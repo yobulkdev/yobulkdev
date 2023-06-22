@@ -22,6 +22,8 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
 
   const [regex, setRegex] = useState('');
 
+  const hideRegexAi = process.env.NEXT_PUBLIC_HIDE_ADMIN_REGEX_AI === 'true';
+
   useEffect(() => {
     if (state.isTemplateEditing) {
       setModalData(
@@ -317,7 +319,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                         onClick={openRegexModal}
                         className="rounded-md w-full border bg-white px-4 py-2 text-sm font-medium text-[#2c71b2] items-center dark:bg-gray-800 dark:text-white"
                       >
-                        GENERATE REGEX
+                        Add Regex
                       </button>
 
                       <Transition appear show={regexModal} as={Fragment}>
@@ -354,7 +356,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                     as="h2"
                                     className="text-lg flex items-center font-medium leading-6 text-gray-900 mb-6"
                                   >
-                                    Generate Regex
+                                    Add Regex
                                     <button
                                       type="button"
                                       className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -367,52 +369,72 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                       </span>
                                     </button>
                                   </Dialog.Title>
-                                  <Select
-                                    value={selectedOption}
-                                    onChange={(e) => handleRegexSelect(e)}
-                                    options={regexOptions}
-                                  />
-                                  {isCustomRegex && (
-                                    <>
-                                      <p className="my-2 font-semibold text-center">
-                                        Using YoBulkAI
-                                        <div className="ml-2 inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full dark:border-gray-900">
-                                          BETA
-                                        </div>
-                                      </p>
-                                      <h1 className="text-md flex text-sm items-center justify-center  text-gray-600">
-                                        Ensure to add OpenAI Secret Key in .env
-                                        file.
-                                      </h1>
-                                      <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600">
-                                        Please Refer to{' '}
-                                        <span className="ml-1 text-blue-700">
-                                          <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
-                                            Documentation
-                                          </Link>
-                                        </span>
-                                      </h1>
+                                  {
+                                    !hideRegexAi
+                                      ?
+                                      <>
+                                        <Select
+                                          value={selectedOption}
+                                          onChange={(e) => handleRegexSelect(e)}
+                                          options={regexOptions}
+                                        />
+                                        {isCustomRegex && (
+                                          <>
+                                            <p className="my-2 font-semibold text-center">
+                                              Using YoBulkAI
+                                              <div className="ml-2 inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full dark:border-gray-900">
+                                                BETA
+                                              </div>
+                                            </p>
+                                            <h1 className="text-md flex text-sm items-center justify-center  text-gray-600">
+                                              Ensure to add OpenAI Secret Key in .env
+                                              file.
+                                            </h1>
+                                            <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600">
+                                              Please Refer to{' '}
+                                              <span className="ml-1 text-blue-700">
+                                            <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
+                                              Documentation
+                                            </Link>
+                                          </span>
+                                            </h1>
 
-                                      <textarea
-                                        rows="10"
-                                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Enter your prompt here for YoBulkAI"
-                                        onChange={(e) =>
-                                          setPrompt(e.target.value)
-                                        }
-                                      />
+                                            <textarea
+                                              rows="10"
+                                              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                              placeholder="Enter your prompt here for YoBulkAI"
+                                              onChange={(e) =>
+                                                setPrompt(e.target.value)
+                                              }
+                                            />
 
-                                      <button
-                                        type="button"
-                                        className="flex float-right mt-2 bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
-                                        onClick={generateRegex}
-                                      >
-                                        Generate
-                                      </button>
+                                            <button
+                                              type="button"
+                                              className="flex float-right mt-2 bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center"
+                                              onClick={generateRegex}
+                                            >
+                                              Generate
+                                            </button>
 
+                                            <textarea
+                                              className="w-full mt-2 rounded-md text-xs"
+                                              placeholder="GENERATED REGEX / Enter your own Regex"
+                                              value={regex}
+                                              onChange={(e) => {
+                                                handleBlur({
+                                                  key: 'pattern',
+                                                  value: e.target.value,
+                                                });
+                                                setRegex(e.target.value);
+                                              }}
+                                            />
+                                          </>
+                                        )}
+                                      </>
+                                      :
                                       <textarea
                                         className="w-full mt-2 rounded-md text-xs"
-                                        placeholder="GENERATED REGEX / Enter your own Regex"
+                                        placeholder="Enter regex"
                                         value={regex}
                                         onChange={(e) => {
                                           handleBlur({
@@ -422,9 +444,7 @@ const MainModel = ({ isOpen, closeModal, setTemplateData }) => {
                                           setRegex(e.target.value);
                                         }}
                                       />
-                                    </>
-                                  )}
-
+                                  }
                                   <button
                                     type="button"
                                     className="flex mt-4 w-full bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center justify-center mb-2"

@@ -15,7 +15,6 @@ export default async function updateRecord(req, res) {
           query = { $where: 'this.validationData.length == 0' };
         } else if (req.query.valid == 'false')
           query = { $where: 'this.validationData.length > 0' };
-        console.log(query);
         // execute query with page and limit values
         const data = await db
           .collection(collection_name)
@@ -24,11 +23,9 @@ export default async function updateRecord(req, res) {
           .limit(limit * 1)
           .skip((page - 1) * limit)
           .toArray();
-        // console.log('---- data ----', data.length);
 
         // get total documents in the Posts collection
         const count = await db.collection(collection_name).count();
-        // console.log('---- count ----', count);
 
         // return response with posts, total pages, and current page
         res.json({

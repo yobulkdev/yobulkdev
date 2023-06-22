@@ -8,6 +8,7 @@ import WarningModal from './warningModal';
 import { Switch } from '@headlessui/react';
 import SuccessModal from './SuccessModal';
 import { FaMagic } from 'react-icons/fa';
+import AutoFixModal from './AutoFixModal';
 
 const ReviewCsv = ({
   collectionName,
@@ -35,6 +36,7 @@ const ReviewCsv = ({
   const [showResultModal, setShowResultModal] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
+  const hideUploaderExtraButtons = process.env.NEXT_PUBLIC_HIDE_UPLOADER_BUTTONS === 'true';
 
   const openModal = () => {
     setIsOpen(true)
@@ -157,30 +159,44 @@ const ReviewCsv = ({
         </div>
       </div>
       <div className="flex justify-flex-end gap-3">
-        <button
+        {!hideUploaderExtraButtons && <button
           onClick={getAiRecommendations}
           className={`flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded ml-auto ${loadingSuggestions && 'text-white border-none bg-blue-200 hover:bg-blue-200'}`}
           disabled={loadingSuggestions}
         >
           {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
           {loadingSuggestions ? 'Getting suggestions...' : 'Get YoBulkAI Suggestions'}
-        </button>
+        </button>}
         <div className="flex justify-end">
-          <button
-            onClick={undoAutoFix}
-            className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
-          >
-            <FaMagic className="w-5 mr-1" />
-            Undo Auto Fix
-          </button>
+          {!hideUploaderExtraButtons &&
+            <>
+              <button
+                onClick={undoAutoFix}
+                className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
+              >
+                <FaMagic className="w-5 mr-1" />
+                Undo Auto Fix
+              </button>
 
-          <button
-            onClick={openModal}
-            className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
-          >
-            <FaMagic className="w-5 mr-1" />
-            Auto Fix
-          </button>
+              <button
+                onClick={openModal}
+                className="flex items-center bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded mr-3"
+              >
+                <FaMagic className="w-5 mr-1" />
+                Auto Fix
+              </button>
+            </>
+          }
+
+          {!hideUploaderExtraButtons &&
+            <AutoFixModal
+              isOpen={isOpen}
+              closeModal={closeModal}
+              columnDefs={columnDefs}
+              runAutofix={runAutofix}
+              autofixValues={autofixValues}
+            />
+          }
 
           {!downloadig ? (
             <>

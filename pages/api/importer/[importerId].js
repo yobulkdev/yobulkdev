@@ -18,6 +18,18 @@ export default async function importer(req, res) {
         res.status(500).json({ error: 'failed to load data' });
       }
       break;
+    case 'DELETE':
+        try {
+          let { importerId } = req.query;
+          let result = await db
+            .collection('importers')
+            .deleteOne({ _id: ObjectId(importerId) });
+          res.send(result);
+        } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: 'failed to delete data' });
+        }
+        break;
     default:
       res.status(405).json({ error: 'method not allowed' });
       break;
