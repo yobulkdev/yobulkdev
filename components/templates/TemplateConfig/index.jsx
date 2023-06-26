@@ -134,8 +134,6 @@ const AdminComponent = ({ templateId, type }) => {
     });
   };
 
-  console.log(templateData.columns, 'aka')
-
   return (
     <div className="p-4 dark:bg-gray-800 h-screen">
       <div className="flex align-middle justify-between ">
@@ -379,13 +377,13 @@ const AdminComponent = ({ templateId, type }) => {
                                 as="h3"
                                 className="text-lg font-medium leading-6 text-gray-900"
                               >
-                                REGULAR EXPRESSION
+                                {col.pattern ? 'REGULAR EXPRESSION' : (col.validate ? 'VALIDATOR FUNCTION' : 'REGULAR EXPRESSION')}
                               </Dialog.Title>
                               <div className="mt-2">
                                 <p className="text-sm text-gray-500">
                                   {col.pattern
                                     ? col.pattern
-                                    : 'Uhh! No Regex...'}
+                                    : (col.validate ? col.validate : 'Uhh! No Regex...')}
                                 </p>
                               </div>
 
