@@ -140,7 +140,7 @@ const ReviewCsv = ({
             onChange={handleSwitch}
             className="ml-2 mt-1"
           >
-            <button
+            <div
               className={`${onlyError ? 'bg-blue-500' : 'bg-gray-200'
                 } relative inline-flex h-6 w-11 items-center rounded-full`}
             >
@@ -148,7 +148,7 @@ const ReviewCsv = ({
                 className={`${onlyError ? 'translate-x-6' : 'translate-x-1'
                   } inline-block h-4 w-4 transform rounded-full bg-white transition`}
               />
-            </button>
+            </div>
           </Switch>
         </div>{' '}
         <div className="flex-auto w-auto font-semibold">
@@ -164,7 +164,6 @@ const ReviewCsv = ({
           className={`flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded ml-auto ${loadingSuggestions && 'text-white border-none bg-blue-200 hover:bg-blue-200'}`}
           disabled={loadingSuggestions}
         >
-          {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
           {loadingSuggestions ? 'Getting suggestions...' : 'Get YoBulkAI Suggestions'}
         </button>}
         <div className="flex justify-end">
@@ -227,7 +226,6 @@ const ReviewCsv = ({
             onClick={() => onBtnSubmit()}
             className="flex float-right bg-transparent h-8 px-2 py-1 m-2 text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white   border border-blue-500 hover:border-transparent rounded"
           >
-            {/* <CloudArrowDownIcon className="w-5 mr-1" /> */}
             Submit
           </button>
         </div>

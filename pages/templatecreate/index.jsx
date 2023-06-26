@@ -74,21 +74,7 @@ const Templates = () => {
                         <Link href="/templates">
                           <ArrowLeftIcon className="h-5 cursor-pointer text-black dark:text-white" />
                         </Link>
-
-                        {/* <h1 className="text-2xl font-bold text-gray-500">
-                          {`${
-                            templateName ? templateName : 'Name your'
-                          } template`}
-                        </h1> */}
                       </div>
-
-                      {/* <button
-                        type="button"
-                        onClick={saveTemplate}
-                        className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
-                      >
-                        <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
-                      </button> */}
                     </div>
                   </div>
 

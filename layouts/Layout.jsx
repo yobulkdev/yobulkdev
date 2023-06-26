@@ -24,11 +24,6 @@ const Layout = ({ children }) => {
         </div>
         <div className="flex-1 bg-gray-100 dark:bg-gray-800">
           {children}{' '}
-          {/*        <footer className="flex bottom-0 right-1/3 text-gray-400 ">
-          <p className="text-center tracking-tight">
-            Developed with &#10084;&#65039; by YoBulk Team!
-          </p>
-        </footer> */}
         </div>
       </div>
     </div>

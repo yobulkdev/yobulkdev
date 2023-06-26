@@ -100,10 +100,6 @@ const JSON_Template = () => {
           <Link href="/templates">
             <ArrowLeftIcon className="h-5 cursor-pointer text-black dark:text-white" />
           </Link>
-
-          {/*      <h1 className="text-2xl font-bold text-gray-500">
-            {`${templateName ? templateName : 'Name your'} template`}
-          </h1> */}
         </div>
 
         <button
