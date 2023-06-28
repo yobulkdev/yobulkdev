@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const MainBar = () => {
   const [templates, setTemplates] = useState();
+  const [templateId, setTemplateId] = useState();
 
   useEffect(() => {
     axios
@@ -15,9 +16,9 @@ const MainBar = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  const handleDelete = (templateId) => {
+  const handleDelete = (tId) => {
     axios
-      .delete(`/api/templates?template_id=${templateId}`)
+      .delete(`/api/templates?template_id=${tId}`)
       .then((res) => {
         axios.get('/api/templates').then((res) => {
           setTemplates(res.data.filter((el) => el['template_name']));
@@ -28,6 +29,23 @@ const MainBar = () => {
 
   return (
     <div>
+      <dialog id="confirmDeleteModal"
+        className="modal modal-bottom sm:modal-middle">
+        <form method="dialog" className="modal-box">
+          <button className="absolute top-0 right-0 m-6 btn btn-square btn-ghost btn-xs" data-dismiss="modal">
+            <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+          </button>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">Press Delete to delete the configration</p>
+          <div className="modal-action">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn"
+              onClick={() => handleDelete(templateId)}>
+              Delete
+            </button>
+          </div>
+        </form>
+      </dialog>
       <div className="flex align-middle justify-between">
         <h1 className="text-2xl font-bold text-gray-500 dark:text-gray-200">
           Templates
@@ -58,7 +76,10 @@ const MainBar = () => {
                 </Link>
                 <TrashIcon
                   className="m-1 h-5 cursor-pointer text-red-400"
-                  onClick={() => handleDelete(obj._id)}
+                  onClick={() => {
+                    window.confirmDeleteModal.showModal()
+                    setTemplateId(obj._id)
+                  }}
                 />
               </div>
 
