@@ -2,7 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Layout from '../../layouts/Layout';
-import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Configuration = () => {
   const [configList, setConfigList] = useState([]);
