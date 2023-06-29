@@ -7,6 +7,7 @@ import JSON_Template from '../../components/templates/JSON_Template.jsx';
 import CsvUploader from '../../components/csvuploader';
 import Link from 'next/link';
 import { ArrowDownTrayIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { ToastContainer, toast } from 'react-toastify';
 
 const tabList = ['No Code Template', 'JSON Template', 'CSV Template'];
 
@@ -26,7 +27,9 @@ const Templates = () => {
           shallow: true,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -35,6 +38,7 @@ const Templates = () => {
 
   return (
     <>
+      <ToastContainer />
       <Layout>
         <div className="p-2 dark:bg-gray-800 h-screen">
           <Tab.Group

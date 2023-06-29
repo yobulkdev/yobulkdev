@@ -3,6 +3,7 @@ import { Provider } from '../context';
 import '../styles/globals.css';
 import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MyApp extends App {
   render() {
