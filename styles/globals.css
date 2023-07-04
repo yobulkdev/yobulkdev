@@ -125,6 +125,7 @@ a {
 /* templates */
 .editable-grid-cell::after {
   content: '▼';
+  object-fit: contain;
   font-family: 'Font Awesome 5 Free';
   position: absolute;
   top: 25%;

@@ -23,7 +23,6 @@ export function fileDetails(state, action) {
           if (dataTypeObj[0].type === 'INT' || dataTypeObj[0].type === 'TIME')
             datatype_replace = INT_DATA_TYPE;
         }
-
         return {
           key: e,
           label: e,
