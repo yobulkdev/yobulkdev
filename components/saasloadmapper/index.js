@@ -18,6 +18,7 @@ import CheckboxComponent from './CheckboxComponent';
 import { Tab } from '@headlessui/react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import cuid from 'cuid';
 
 const columnMatcher = ({ saasTemplate, validationTemplate }) => {
   if (!saasTemplate || !validationTemplate) return;
@@ -145,7 +146,7 @@ const SassLoadMapper = () => {
         (el) => el.is_imported && el.label
       ),
       baseTemplateId: state.baseTemplateId,
-      fileName: state.curFile.name,
+      fileName: state.curFile.name + cuid(),
     };
     axios
       .post('/api/templates', data)
@@ -206,6 +207,12 @@ const SassLoadMapper = () => {
         dispatch({ type: 'SAAS_LOAD_MAPPER_TEMPLATE_UPDATE', payload: e.data });
       },
     },
+    {
+      headerName: 'Example',
+      resizable: true,
+      field: 'example',
+      cellStyle: { backgroundColor: '	#F5F5F5' },
+    }
   ];
 
   const onFirstDataRendered = useCallback((params) => {
@@ -224,12 +231,11 @@ const SassLoadMapper = () => {
   }, []);
 
   let frameworkComponents = { checkboxRenderer: CheckboxComponent };
-
+  { console.log('clg', state.initialRows) }
   return (
     <>
       {!loading && (
-        <div className="grid grid-cols-3 pt-1">
-          <div></div>
+        <div className="w-full">
           <div>
             <div className="flex mb-3 mt-10 text-blue-700 font-semibold">
               {' '}
