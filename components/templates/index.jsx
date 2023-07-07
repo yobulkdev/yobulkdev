@@ -11,7 +11,12 @@ const MainBar = () => {
     axios
       .get('/api/templates')
       .then((res) => {
-        setTemplates(res.data.filter((el) => el['template_name']));
+        setTemplates(
+          res.data.filter(
+            (el) =>
+              el['template_name'] && el['template_name'].split('.').length === 1
+          )
+        );
       })
       .catch((e) => console.log(e));
   }, []);
@@ -29,18 +34,22 @@ const MainBar = () => {
 
   return (
     <div>
-      <dialog id="confirmDeleteModal"
-        className="modal modal-bottom sm:modal-middle">
+      <dialog
+        id="confirmDeleteModal"
+        className="modal modal-bottom sm:modal-middle"
+      >
         <form method="dialog" className="modal-box">
-          <button className="absolute top-0 right-0 m-6 btn btn-square btn-ghost btn-xs" data-dismiss="modal">
+          <button
+            className="absolute top-0 right-0 m-6 btn btn-square btn-ghost btn-xs"
+            data-dismiss="modal"
+          >
             <XMarkIcon className="w-6 h-6" aria-hidden="true" />
           </button>
           <h3 className="font-bold text-lg">Hello!</h3>
           <p className="py-4">Press Delete to delete the configration</p>
           <div className="modal-action">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn"
-              onClick={() => handleDelete(templateId)}>
+            <button className="btn" onClick={() => handleDelete(templateId)}>
               Delete
             </button>
           </div>
@@ -77,8 +86,8 @@ const MainBar = () => {
                 <TrashIcon
                   className="m-1 h-5 cursor-pointer text-red-400"
                   onClick={() => {
-                    window.confirmDeleteModal.showModal()
-                    setTemplateId(obj._id)
+                    window.confirmDeleteModal.showModal();
+                    setTemplateId(obj._id);
                   }}
                 />
               </div>

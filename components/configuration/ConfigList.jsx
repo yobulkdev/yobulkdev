@@ -129,7 +129,10 @@ export default App;`);
       .get('/api/templates')
       .then((res) => {
         let listOfTemplates = res.data
-          .filter((el) => el['template_name'])
+          .filter(
+            (el) =>
+              el['template_name'] && el['template_name'].split('.').length === 1
+          )
           .map((el) => {
             return { value: el._id, label: el.template_name };
           });
@@ -235,7 +238,8 @@ export default App;`);
                   className={`border border-gray-200 text-gray-400  text-sm rounded-lg
                     focus:ring-blue-500 focus:border-blue-500 block w-full 
                     p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${!importerName && 'border-red-400'
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                      !importerName && 'border-red-400'
                     }`}
                   value={importerName}
                   placeholder={'Enter Your Importer Name'}
@@ -302,7 +306,10 @@ export default App;`);
 
               <CopyToClipboard text={code} onCopy={() => alert('Copied')}>
                 <div className="mt-4 flex items-center bg-white dark:bg-gray-900 justify-center rounded-md p-2 text-center cursor-pointer shadow-sm border-[0.4px]">
-                  <DocumentDuplicateIcon className="h-5 w-5" aria-hidden="true" />{' '}
+                  <DocumentDuplicateIcon
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />{' '}
                   COPY
                 </div>
               </CopyToClipboard>
