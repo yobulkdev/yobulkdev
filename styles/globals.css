@@ -134,3 +134,47 @@ a {
   font-weight: 900;
   z-index: -1; /* this will set it in background so when user click onit you will get cell-click event as if user would normally click on cell */
 }
+
+
+
+.column-header {
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px;
+  background-color: #f2f2f2;
+}
+
+.duplicate-cell {
+  background-color: #ffcccc;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.cell-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.cell-tooltip:hover .cell-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cell-tooltip-text {
+  position: absolute;
+  top: -14px;
+  left: 10%;
+  transform: translateX(-50%);
+  padding: 2px;
+  border-radius: 2px;
+  background-color: #6c0b0b;
+  color: #fff;
+  font-size: 12px;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+      visibility 0s,
+      opacity 0.3s ease-in-out;
+}
