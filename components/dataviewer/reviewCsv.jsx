@@ -167,7 +167,7 @@ const ReviewCsv = ({
           {loadingSuggestions ? 'Getting suggestions...' : 'Get YoBulkAI Suggestions'}
         </button>}
         <div className="flex justify-end">
-          {!hideUploaderExtraButtons &&
+          {/* {!hideUploaderExtraButtons && */}
             <>
               <button
                 onClick={undoAutoFix}
@@ -185,9 +185,9 @@ const ReviewCsv = ({
                 Auto Fix
               </button>
             </>
-          }
+          {/* } */}
 
-          {!hideUploaderExtraButtons &&
+          {/* {!hideUploaderExtraButtons && */}
             <AutoFixModal
               isOpen={isOpen}
               closeModal={closeModal}
@@ -195,7 +195,7 @@ const ReviewCsv = ({
               runAutofix={runAutofix}
               autofixValues={autofixValues}
             />
-          }
+          {/* } */}
 
           {!downloadig ? (
             <>
