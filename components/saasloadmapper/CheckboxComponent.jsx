@@ -5,7 +5,7 @@ const CheckboxComponent = (props) => {
     props.node.setDataValue(colId, checked);
   };
   return (
-    <input type="checkbox" onClick={checkboxHandler} checked={props.value} />
+    <input type="checkbox" onChange={checkboxHandler} checked={props.value} />
   );
 };
 

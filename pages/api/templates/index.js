@@ -32,6 +32,7 @@ export default async function fetchTemplateRecords(req, res) {
       break;
     case 'POST':
       try {
+        console.log(req.body);
         let templateBody = req.body;
         if (templateBody.baseTemplateId) {
           let baseTemplate = await db
@@ -52,6 +53,7 @@ export default async function fetchTemplateRecords(req, res) {
         templateBody.created_date = new Date();
         templateBody.user = [userData.email]
         console.log(templateBody)
+        templateBody.template_name = req.body.fileName
         let result = await db.collection('templates').insertOne(templateBody);
         res.send(result);
       } catch (err) {

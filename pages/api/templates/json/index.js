@@ -29,6 +29,10 @@ export default async function handler(req, res) {
         res.status(201).json(result);
       } catch (err) {
         console.error(err);
+        if (err.code === 11000) {
+          res.status(400).json({ error: 'Template with this name already exists !' });
+          break;
+        }
         res.status(500).json({ error: 'failed to create data' });
       }
 

@@ -62,7 +62,7 @@ a {
   @apply bg-white;
 }
 .null-check {
-  @apply bg-red-400;
+  @apply bg-yellow-300;
 }
 .custom-tooltip {
   width: 250px;
@@ -125,6 +125,7 @@ a {
 /* templates */
 .editable-grid-cell::after {
   content: '▼';
+  object-fit: contain;
   font-family: 'Font Awesome 5 Free';
   position: absolute;
   top: 25%;

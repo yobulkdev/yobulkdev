@@ -2,7 +2,7 @@
     <b>
         <a href="https://www.YoBulk.dev">YoBulk</a><br>
     </b>
-    ⭐️ Open Source Alternative To https://flatfile.com/ ⭐️ <br>
+    ⭐️ Open Source Alternative To  <a href="https://flatfile.com/">Flatfile.com</a> ⭐️ <br>
         
 </h1>
 
