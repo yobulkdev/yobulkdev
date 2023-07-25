@@ -14,8 +14,6 @@ import Logo from '../../public/yobulk_logo.png';
 import Image from 'next/image';
 
 const menuItems = [
-  /*   { id: 1, label: 'Importer', icon: HomeIcon, link: '/' },
-   */
   {
     id: 0,
     label: 'Home',
@@ -216,17 +214,6 @@ const Sidebar = () => {
           })}
         </div>
       </div>
-
-      {/*  <div className={`${getNavItemClasses({})} px-3 py-4`}>
-        <div style={{ width: '2.5rem' }}>
-          <LogoutIcon />
-        </div>
-        {!toggleCollapse && (
-          <span className={classNames('text-md font-medium text-text-light')}>
-            Logout
-          </span>
-        )}
-      </div> */}
     </div>
   );
 };

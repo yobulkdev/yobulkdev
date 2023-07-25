@@ -18,7 +18,6 @@ export async function getServerSideProps({ req, res, params }) {
       headers: { Cookie: req.headers.cookie },
     } )
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => console.log('Error fetching importer document', err));

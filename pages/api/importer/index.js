@@ -25,6 +25,10 @@ export default async function importer(req, res) {
         res.status(201).send(result);
       } catch (err) {
         console.error(err.message);
+        if (err.code === 11000) {
+          res.status(400).json({ error: 'Importer with this name already exists !' });
+          break;
+        }
         res.status(500).json({ error: 'failed to load data' });
       }
       break;

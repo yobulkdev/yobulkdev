@@ -6,6 +6,7 @@ import { ThemeProvider } from 'next-themes';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import AuthGuard from '../components/authguard';
 import Script from 'next/script';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MyApp extends App {
   render() {

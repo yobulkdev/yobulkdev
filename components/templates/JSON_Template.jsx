@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { ArrowDownTrayIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 import { Tab } from '@headlessui/react';
+import { ToastContainer, toast } from 'react-toastify';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -64,7 +65,10 @@ const JSON_Template = () => {
           shallow: true,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.error);
+      });
   };
 
   const handleEditorChange = (value) => {
@@ -94,224 +98,222 @@ const JSON_Template = () => {
       .catch((e) => console.log(e));
   };
   return (
-    <div className="p-4">
-      <div className="flex align-middle justify-between ">
-        <div className="flex align-middle items-center gap-2 ">
-          <Link href="/templates">
-            <ArrowLeftIcon className="h-5 cursor-pointer dark:text-white" />
-          </Link>
+    <>
+      <ToastContainer />
+      <div className="p-4">
+        <div className="flex align-middle justify-between ">
+          <div className="flex align-middle items-center gap-2 ">
+            <Link href="/templates">
+              <ArrowLeftIcon className="h-5 cursor-pointer text-black dark:text-white" />
+            </Link>
+          </div>
 
-          {/*      <h1 className="text-2xl font-bold text-gray-500">
-            {`${templateName ? templateName : 'Name your'} template`}
-          </h1> */}
+          <button
+            type="button"
+            onClick={saveTemplate}
+            className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
+          >
+            <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={saveTemplate}
-          className="flex bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center mb-2"
-        >
-          <ArrowDownTrayIcon className="h-4 mr-1" /> Save Template
-        </button>
-      </div>
-
-      <div className="flex gap-4">
-        <div>
-          <div className="bg-white rounded-md p-2 my-1 shadow-sm  dark:bg-gray-900">
-            <div className="flex">
-              <div className="flex flex-col w-5/12">
-                <div className="ml-2 p-2">
-                  <h2 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">
-                    Name <span className="text-red-400">*</span>{' '}
-                  </h2>
-                  <p className="text-gray-400 text-sm">Name of the template</p>
+        <div className="flex gap-4">
+          <div>
+            <div className="bg-white rounded-md p-2 my-1 shadow-sm  dark:bg-gray-900">
+              <div className="flex">
+                <div className="flex flex-col w-5/12">
+                  <div className="ml-2 p-2">
+                    <h2 className="text-lg w-full font-bold text-gray-500 dark:text-gray-200">
+                      Name <span className="text-red-400">*</span>{' '}
+                    </h2>
+                    <p className="text-gray-400 text-sm">Name of the template</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col justify-center w-full">
-                <div className="mb-2">
-                  <>
-                    {!templateName && (
-                      <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
-                        <InformationCircleIcon className="w-3 inline" /> This
-                        field is required
-                      </div>
-                    )}
-                    <input
-                      type="text"
-                      id="default-input"
-                      className={`border border-gray-300 text-gray-400  text-sm rounded-lg
+                <div className="flex flex-col justify-center w-full">
+                  <div className="mb-2">
+                    <>
+                      {!templateName && (
+                        <div className="flex gap-1 w-full text-sm text-red-400 dark:text-red-200 justify-end mb-1">
+                          <InformationCircleIcon className="w-3 inline" /> This
+                          field is required
+                        </div>
+                      )}
+                      <input
+                        type="text"
+                        id="default-input"
+                        className={`border border-gray-300 text-gray-400  text-sm rounded-lg
                         focus:ring-blue-500 focus:border-blue-500 block w-full
                         p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                          !templateName && 'border-red-400'
-                        }`}
-                      value={templateName}
-                      onChange={(e) => setTemplateName(e.target.value)}
-                    />
-                  </>
+                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${!templateName && 'border-red-400'
+                          }`}
+                        value={templateName}
+                        onChange={(e) => setTemplateName(e.target.value)}
+                      />
+                    </>
+                  </div>
                 </div>
               </div>
             </div>
+            {!isValidJson && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative"
+                role="alert"
+              >
+                <strong className="font-bold">Error: </strong>
+                <ol className="block sm:inline">
+                  <li>
+                    {' '}
+                    1. Please check if the JSON formatting is proper using{' '}
+                    <a
+                      href="https://jsonformatter.curiousconcept.com/"
+                      className="underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      https://jsonformatter.curiousconcept.com/
+                    </a>
+                    .
+                  </li>
+                  <li>
+                    {' '}
+                    2. There might be an issue with your Regex. Please get it
+                    verfied by using{' '}
+                    <a
+                      href="https://regex101.com/"
+                      className="underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      https://regex101.com/
+                    </a>
+                    .
+                  </li>
+                  <li>
+                    {' '}
+                    3. Please make the regex JSON escaped. You can use{' '}
+                    <a
+                      href="https://www.freeformatter.com/json-escape.html#before-output"
+                      className="underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      https://www.freeformatter.com/json-escape.html#before-output
+                    </a>
+                    .
+                  </li>
+                </ol>
+                <span className="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+              </div>
+            )}
+            <Editor
+              height="65vh"
+              width={`50vw`}
+              language="json"
+              value={value}
+              defaultValue={code}
+              theme="vs-dark"
+              onChange={handleEditorChange}
+              onMount={handleEditorDidMount}
+              options={{
+                minimap: { enabled: false },
+                fontSize: 13,
+                validate: false,
+                renderValidationDecorations: 'off',
+              }}
+            />
           </div>
-          {!isValidJson && (
-            <div
-              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-1 relative"
-              role="alert"
-            >
-              <strong className="font-bold">Error: </strong>
-              <ol className="block sm:inline">
-                <li>
-                  {' '}
-                  1. Please check if the JSON formatting is proper using{' '}
-                  <a
-                    href="https://jsonformatter.curiousconcept.com/"
-                    className="underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    https://jsonformatter.curiousconcept.com/
-                  </a>
-                  .
-                </li>
-                <li>
-                  {' '}
-                  2. There might be an issue with your Regex. Please get it
-                  verfied by using{' '}
-                  <a
-                    href="https://regex101.com/"
-                    className="underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    https://regex101.com/
-                  </a>
-                  .
-                </li>
-                <li>
-                  {' '}
-                  3. Please make the regex JSON escaped. You can use{' '}
-                  <a
-                    href="https://www.freeformatter.com/json-escape.html#before-output"
-                    className="underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    https://www.freeformatter.com/json-escape.html#before-output
-                  </a>
-                  .
-                </li>
-              </ol>
-              <span className="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
-            </div>
-          )}
-          <Editor
-            height="65vh"
-            width={`50vw`}
-            language="json"
-            value={value}
-            defaultValue={code}
-            theme="vs-dark"
-            onChange={handleEditorChange}
-            onMount={handleEditorDidMount}
-            options={{
-              minimap: { enabled: false },
-              fontSize: 13,
-              validate: false,
-              renderValidationDecorations: 'off',
-            }}
-          />
-        </div>
 
-        <div className="w-full px-2 py-3 sm:px-0">
-          <Tab.Group>
-            <Tab.List className="flex space-x-1 justify-between rounded-xl bg-blue-900/20 dark:bg-white p-1">
-              <>
+          <div className="w-full px-2 py-3 sm:px-0">
+            <Tab.Group>
+              <Tab.List className="flex space-x-1 justify-between rounded-xl bg-blue-900/20 dark:bg-white p-1">
+                <>
+                  <Tab
+                    className={({ selected }) =>
+                      classNames(
+                        'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5 text-black',
+                        selected
+                          ? 'bg-white shadow dark:bg-gray-900 dark:text-white'
+                          : 'text-black hover:bg-white/[0.12]  hover:text-white dark:hover:bg-gray-900/50'
+                      )
+                    }
+                  >
+                    With YoBulkAI{' '}
+                    <div className="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
+                      BETA
+                    </div>
+                  </Tab>
+                </>
+
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      'w-full relative rounded-lg py-2.5 text-sm font-medium leading-5',
+                      'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black',
                       selected
                         ? 'bg-white shadow dark:bg-gray-900 dark:text-white'
-                        : 'text-black hover:bg-white/[0.12]  hover:text-white dark:hover:bg-gray-900/50'
+                        : 'text-black hover:bg-white/[0.12] hover:text-white dark:hover:bg-gray-900/50'
                     )
                   }
                 >
-                  With YoBulkAI{' '}
-                  <div className="absolute inline-flex items-center px-1 justify-center text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2 dark:border-gray-900">
-                    BETA
-                  </div>
+                  Without YoBulkAI
                 </Tab>
-              </>
-
-              <Tab
-                className={({ selected }) =>
-                  classNames(
-                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                    selected
-                      ? 'bg-white shadow dark:bg-gray-900 dark:text-white'
-                      : 'text-black hover:bg-white/[0.12] hover:text-white dark:hover:bg-gray-900/50'
-                  )
-                }
-              >
-                Without YoBulkAI
-              </Tab>
-            </Tab.List>
-            <Tab.Panels className="mt-2">
-              <Tab.Panel
-                className={classNames(
-                  'flex flex-col rounded-xl bg-white min-h-fit p-3 dark:bg-gray-900'
-                )}
-              >
-                <h1 className="text-md flex text-sm items-center justify-center  text-gray-600 dark:text-gray-200">
-                  Ensure to add OpenAI Secret Key in .env file.
-                </h1>
-                <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600 dark:text-gray-200">
-                  Please Refer to{' '}
-                  <span className="ml-1 text-blue-700">
-                    <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
-                      Documentation
-                    </Link>
-                  </span>
-                </h1>
-                <textarea
-                  rows="20"
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Enter your prompt here for YoBulkAI"
-                  onChange={(e) => setPrompt(e.target.value)}
-                />
-                <button
-                  type="button"
-                  className="flex mt-2 bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
-                  onClick={generateAJV}
+              </Tab.List>
+              <Tab.Panels className="mt-2">
+                <Tab.Panel
+                  className={classNames(
+                    'flex flex-col rounded-xl bg-white min-h-fit p-3 dark:bg-gray-900'
+                  )}
                 >
-                  Generate
-                </button>
-              </Tab.Panel>
-              <Tab.Panel>
-                <div className="flex flex-col text-sm">
-                  <h1 className="text-md flex items-center justify-center my-2 text-gray-600">
-                    Sample Import Config Code Snippet
+                  <h1 className="text-md flex text-sm items-center justify-center  text-gray-600 dark:text-gray-200">
+                    Ensure to add OpenAI Secret Key in .env file.
                   </h1>
-                  <SyntaxHighlighter
-                    language="json"
-                    wrapLongLines={true}
-                    style={googlecode}
+                  <h1 className="text-md flex text-sm items-center justify-center my-2 text-gray-600 dark:text-gray-200">
+                    Please Refer to{' '}
+                    <span className="ml-1 text-blue-700">
+                      <Link href="https://doc.yobulk.dev/YoBulk%20AI/AI%20usecases">
+                        Documentation
+                      </Link>
+                    </span>
+                  </h1>
+                  <textarea
+                    rows="20"
+                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Enter your prompt here for YoBulkAI"
+                    onChange={(e) => setPrompt(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="flex mt-2 bg-white border-2 border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none font-medium rounded-md gap-1 text-sm px-6 py-2 text-center items-center justify-center"
+                    onClick={generateAJV}
                   >
-                    {defaultCode}
-                  </SyntaxHighlighter>
-                  <div
-                    className="mt-2 flex items-center bg-white justify-center rounded-md px-2 py-3 hover:bg-blue-500 hover:text-white text-center cursor-pointer shadow-sm"
-                    onClick={() => setValue(defaultCode)}
-                  >
-                    COPY TO THE EDITOR
+                    Generate
+                  </button>
+                </Tab.Panel>
+                <Tab.Panel>
+                  <div className="flex flex-col text-sm">
+                    <h1 className="text-md flex items-center justify-center my-2 text-gray-600">
+                      Sample Import Config Code Snippet
+                    </h1>
+                    <SyntaxHighlighter
+                      language="json"
+                      wrapLongLines={true}
+                      style={googlecode}
+                    >
+                      {defaultCode}
+                    </SyntaxHighlighter>
+                    <div
+                      className="mt-2 flex items-center bg-white justify-center rounded-md px-2 py-3 hover:bg-blue-500 hover:text-white text-center cursor-pointer shadow-sm"
+                      onClick={() => setValue(defaultCode)}
+                    >
+                      COPY TO THE EDITOR
+                    </div>
                   </div>
-                </div>
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

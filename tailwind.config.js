@@ -20,5 +20,9 @@ module.exports = {
       sans: ['Inter', ...fontFamily.sans],
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('./themes/index')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('./themes/index'),
+    require("daisyui")
+  ],
 };
