@@ -52,7 +52,6 @@ export default async function fetchTemplateRecords(req, res) {
         }
         templateBody.created_date = new Date();
         templateBody.user = [userData.email]
-        console.log(templateBody)
         templateBody.template_name = req.body.fileName
         let result = await db.collection('templates').insertOne(templateBody);
         res.send(result);
