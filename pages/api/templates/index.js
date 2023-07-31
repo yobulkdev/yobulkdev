@@ -47,7 +47,11 @@ export default async function fetchTemplateRecords(req, res) {
           templateBody.schema = generatedSchema;
         }
         templateBody.created_date = new Date();
-        templateBody.template_name = req.body.fileName
+        //In normal csv upload time, the template name will be used as filename.
+        // When we create template, template name is passed.
+        templateBody.template_name = req.body.template_name
+          ? req.body.template_name
+          : req.body.fileName;
         let result = await db.collection('templates').insertOne(templateBody);
         res.send(result);
       } catch (err) {
